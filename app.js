@@ -956,8 +956,9 @@ function switchAppTab(tabName) {
   document.querySelectorAll('.tab-viewport').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.dock-btn').forEach(el => el.classList.remove('active'));
 
-  const tabId = 'tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
-  const targetTab = document.getElementById(tabId);
+  let tabId = 'tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+  if (tabName.toLowerCase() === 'promptlab') tabId = 'tabPromptLab';
+  const targetTab = document.getElementById(tabId) || document.getElementById('tabPromptLab');
   const targetBtn = document.getElementById('dockNav-' + tabName);
 
   if (targetTab) targetTab.classList.add('active');

@@ -216,8 +216,7 @@ const QUIZ_DATA = {
       ],
       correctIndex: 1,
       explanation: "Korporativ yoki shaxsiy ma'lumotlar bilan ishlaganda har doim maxfiy ismlar va summalarni o'zgartirib (anonimlashtirib) kiritish eng xavfsiz qoidadir."
-    }
-  ],
+    },
 
     // --- 4. Uzum & Marketplace ---
     {

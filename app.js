@@ -1001,8 +1001,17 @@ function switchAppTab(tabName) {
   }
 }
 
-// Open Lesson Detail Modal
+// =============================================================================
+// 5-STEP INTERACTIVE STORY LESSON PLAYER ENGINE
+// =============================================================================
 let currentActiveLesson = null;
+let currentStoryStep = 1;
+let currentLegoState = {
+  slots: [],
+  filledSlots: {},
+  tokens: []
+};
+let aiSimTypingTimer = null;
 
 function openLessonModal(lessonId) {
   triggerHaptic('light');
@@ -1033,28 +1042,285 @@ function openLessonModal(lessonId) {
   const pracEl = document.getElementById('lessonDetailPracticalPrompt');
   if (pracEl) pracEl.textContent = lesson.practical_prompt || lesson.actionPrompt || lesson.good_prompt || "";
 
-  // Reset copy button
-  const copyBtn = document.getElementById('btnCopyLessonPrompt');
-  if (copyBtn) {
-    copyBtn.innerHTML = "📋 Nusxalash";
-    copyBtn.style.background = "#1e293b";
-    copyBtn.style.color = "#38bdf8";
-  }
+  openOverlay('viewLessonDetail');
+  setLessonStep(1);
+}
 
-  // Update completion button status
-  const compBtn = document.getElementById('btnCompleteLesson');
-  if (compBtn) {
-    const isDone = appState.completedLessons.includes(lesson.id);
-    if (isDone) {
-      compBtn.innerHTML = "✓ Yakunlangan (+20 XP olindi)";
-      compBtn.style.background = "linear-gradient(135deg, #059669 0%, #10b981 100%)";
-    } else {
-      compBtn.innerHTML = "✓ Darsni yakunladim (+20 XP)";
-      compBtn.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+function setLessonStep(stepNum) {
+  triggerHaptic('selection');
+  currentStoryStep = stepNum;
+
+  // 1. Update progress bar segments
+  for (let i = 1; i <= 5; i++) {
+    const seg = document.getElementById('progSeg' + i);
+    if (seg) {
+      seg.className = 'story-progress-seg' + (i < stepNum ? ' completed' : (i === stepNum ? ' active' : ''));
     }
   }
 
-  openOverlay('viewLessonDetail');
+  // 2. Update step badge
+  const stepBadge = document.getElementById('lessonStepBadge');
+  if (stepBadge) {
+    stepBadge.textContent = `${stepNum} / 5 QADAM`;
+  }
+
+  // 3. Switch active slide
+  for (let i = 1; i <= 5; i++) {
+    const slide = document.getElementById('lessonSlide' + i);
+    if (slide) {
+      if (i === stepNum) slide.classList.add('active');
+      else slide.classList.remove('active');
+    }
+  }
+
+  const viewport = document.querySelector('.story-slide-viewport');
+  if (viewport) viewport.scrollTop = 0;
+
+  // Step-specific initializers
+  if (stepNum === 3) {
+    initLegoConstructor();
+  } else if (stepNum === 4) {
+    initAiSimulator();
+  } else if (stepNum === 5) {
+    onEnterVictorySlide();
+  }
+}
+
+// 🧩 LEGO PROMPT CONSTRUCTOR
+function initLegoConstructor() {
+  if (!currentActiveLesson) return;
+
+  const puzzle = currentActiveLesson.legoPuzzle || {
+    slots: ["ROL", "KONTEKST", "FORMAT"],
+    tokens: [
+      { id: "t1", text: "Professional Maslahatchi", slot: "ROL" },
+      { id: "t2", text: "Biznes tahlili keysi", slot: "KONTEKST" },
+      { id: "t3", text: "3 ta amaliy qadam", slot: "FORMAT" },
+      { id: "t4", text: "Noto'g'ri taxmin", slot: "DISTRACTOR" }
+    ]
+  };
+
+  currentLegoState.slots = puzzle.slots;
+  currentLegoState.filledSlots = {};
+  currentLegoState.tokens = [...puzzle.tokens].sort(() => Math.random() - 0.5);
+
+  renderLegoSlots();
+  renderLegoChips();
+
+  const msgEl = document.getElementById('legoFeedbackMsg');
+  if (msgEl) {
+    msgEl.className = 'lego-feedback-msg';
+    msgEl.textContent = 'Bloklarni tanlab bo\'sh slotlarni to\'ldiring 👇';
+  }
+
+  const nextBtn = document.getElementById('btnNextFromLego');
+  if (nextBtn) nextBtn.disabled = true;
+}
+
+function renderLegoSlots() {
+  const container = document.getElementById('legoSlotsContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  currentLegoState.slots.forEach(slotName => {
+    const isFilled = !!currentLegoState.filledSlots[slotName];
+    const valText = isFilled ? currentLegoState.filledSlots[slotName].text : "Bo'sh slot (Tanlang)";
+    
+    const slotDiv = document.createElement('div');
+    slotDiv.className = `lego-slot ${isFilled ? 'filled' : 'empty'}`;
+    slotDiv.innerHTML = `
+      <span class="lego-slot-label">[${slotName}]</span>
+      <span class="lego-slot-val">${valText}</span>
+    `;
+
+    if (isFilled) {
+      slotDiv.style.cursor = 'pointer';
+      slotDiv.title = "O'chirish uchun bosing";
+      slotDiv.onclick = () => removeLegoSlot(slotName);
+    }
+    container.appendChild(slotDiv);
+  });
+}
+
+function renderLegoChips() {
+  const container = document.getElementById('legoChipsContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  currentLegoState.tokens.forEach(token => {
+    const isUsed = Object.values(currentLegoState.filledSlots).some(t => t.id === token.id);
+    const chip = document.createElement('button');
+    chip.className = `lego-chip ${isUsed ? 'used' : ''}`;
+    chip.textContent = token.text;
+    chip.onclick = () => handleLegoChipClick(token, chip);
+    container.appendChild(chip);
+  });
+}
+
+function handleLegoChipClick(token, chipEl) {
+  if (token.slot === 'DISTRACTOR') {
+    triggerHaptic('error');
+    chipEl.classList.add('shake');
+    setTimeout(() => chipEl.classList.remove('shake'), 400);
+
+    const msgEl = document.getElementById('legoFeedbackMsg');
+    if (msgEl) {
+      msgEl.className = 'lego-feedback-msg';
+      msgEl.textContent = '⚠️ Bu noto\'g\'ri blok, professional qolipga mos kelmaydi!';
+    }
+    return;
+  }
+
+  if (currentLegoState.filledSlots[token.slot]) {
+    triggerHaptic('warning');
+    return;
+  }
+
+  triggerHaptic('light');
+  currentLegoState.filledSlots[token.slot] = token;
+
+  renderLegoSlots();
+  renderLegoChips();
+
+  const allFilled = currentLegoState.slots.every(s => !!currentLegoState.filledSlots[s]);
+  const msgEl = document.getElementById('legoFeedbackMsg');
+  const nextBtn = document.getElementById('btnNextFromLego');
+
+  if (allFilled) {
+    triggerHaptic('success');
+    if (msgEl) {
+      msgEl.className = 'lego-feedback-msg success';
+      msgEl.textContent = '🎉 Barakalla! Prompt mukammal yig\'ildi! Endi uni AI da sinaymiz.';
+    }
+    if (nextBtn) nextBtn.disabled = false;
+  } else {
+    if (msgEl) {
+      const remaining = currentLegoState.slots.length - Object.keys(currentLegoState.filledSlots).length;
+      msgEl.className = 'lego-feedback-msg';
+      msgEl.textContent = `Ajoyib! Yana ${remaining} ta blokni tanlang.`;
+    }
+  }
+}
+
+function removeLegoSlot(slotName) {
+  triggerHaptic('selection');
+  delete currentLegoState.filledSlots[slotName];
+  renderLegoSlots();
+  renderLegoChips();
+
+  const nextBtn = document.getElementById('btnNextFromLego');
+  if (nextBtn) nextBtn.disabled = true;
+
+  const msgEl = document.getElementById('legoFeedbackMsg');
+  if (msgEl) {
+    msgEl.className = 'lego-feedback-msg';
+    msgEl.textContent = 'Blok olib tashlandi. Boshqasini tanlang.';
+  }
+}
+
+// 🤖 LIVE AI SIMULATOR
+function initAiSimulator() {
+  if (aiSimTypingTimer) clearInterval(aiSimTypingTimer);
+  const bubble = document.getElementById('simAiBubble');
+  const textEl = document.getElementById('simAiText');
+  const triggerBtn = document.getElementById('btnRunAiSim');
+
+  if (bubble) bubble.style.display = 'none';
+  if (textEl) textEl.innerHTML = '';
+  if (triggerBtn) {
+    triggerBtn.disabled = false;
+    triggerBtn.innerHTML = '<span>▶️ AI ga Yuborish (Sinab Ko\'rish)</span>';
+  }
+}
+
+function runSimulatedAiResponse() {
+  if (!currentActiveLesson) return;
+  triggerHaptic('medium');
+
+  const triggerBtn = document.getElementById('btnRunAiSim');
+  const bubble = document.getElementById('simAiBubble');
+  const textEl = document.getElementById('simAiText');
+
+  if (triggerBtn) {
+    triggerBtn.disabled = true;
+    triggerBtn.innerHTML = '<span>⏳ ChatGPT o\'ylamoqda...</span>';
+  }
+
+  if (bubble) bubble.style.display = 'block';
+  if (textEl) textEl.innerHTML = '<span class="typing-cursor">▊</span>';
+
+  const fullText = currentActiveLesson.simulatedAiResponse || 
+    "Assalomu alaykum! Sizning so'rovingiz bo'yicha eng samarali yechim tayyorlandi. AI tizimlari ushbu qoidalar asosida 5 barobar aniqroq natija beradi.";
+
+  let charIdx = 0;
+  if (aiSimTypingTimer) clearInterval(aiSimTypingTimer);
+
+  aiSimTypingTimer = setInterval(() => {
+    charIdx += 4;
+    if (charIdx >= fullText.length) {
+      charIdx = fullText.length;
+      clearInterval(aiSimTypingTimer);
+      aiSimTypingTimer = null;
+      if (textEl) textEl.innerText = fullText;
+      if (triggerBtn) {
+        triggerBtn.innerHTML = '<span>✓ Natija olindi (Qayta ishga tushirish)</span>';
+        triggerBtn.disabled = false;
+      }
+      triggerHaptic('success');
+    } else {
+      if (textEl) {
+        textEl.innerText = fullText.substring(0, charIdx) + ' ▊';
+      }
+    }
+  }, 20);
+}
+
+// 🏆 VICTORY & ADVANCEMENT
+function onEnterVictorySlide() {
+  triggerHaptic('success');
+  if (!currentActiveLesson) return;
+
+  const lessonId = currentActiveLesson.id;
+  const isNew = !appState.completedLessons.includes(lessonId);
+
+  if (isNew) {
+    appState.completedLessons.push(lessonId);
+    appState.stats.correct = (appState.stats.correct || 0) + 2;
+    appState.streakDays = Math.max((appState.streakDays || 1), 3);
+    saveState();
+  }
+
+  const titleEl = document.getElementById('victoryLessonTitle');
+  if (titleEl) titleEl.textContent = `${currentActiveLesson.num || currentActiveLesson.id}-Dars muvaffaqiyatli yakunlandi!`;
+
+  const streakEl = document.getElementById('vStreakCount');
+  if (streakEl) streakEl.textContent = appState.streakDays || 3;
+
+  updateDashboardUI();
+  showToast('🎉 +20 XP! Dars yakunlandi ✓');
+}
+
+function goToNextLessonFromVictory() {
+  if (!currentActiveLesson) {
+    closeOverlay('viewLessonDetail');
+    return;
+  }
+  const nextId = currentActiveLesson.id + 1;
+  const nextLesson = QUIZ_DATA.lessons.find(l => l.id === nextId);
+
+  if (!nextLesson) {
+    closeOverlay('viewLessonDetail');
+    showToast('🎉 Barcha darslarni tugatdingiz! Diplomingiz tayyor!');
+    return;
+  }
+
+  if (nextId >= 7 && !appState.isVip) {
+    closeOverlay('viewLessonDetail');
+    openPaywall(`${nextId}-Dars (PRO)`);
+    return;
+  }
+
+  openLessonModal(nextId);
 }
 
 function copyLessonPromptDetail(btn) {
@@ -1081,24 +1347,30 @@ function copyLessonPromptDetail(btn) {
 }
 
 function completeCurrentLessonDetail() {
-  triggerHaptic('success');
-  if (!currentActiveLesson) {
-    closeOverlay('viewLessonDetail');
-    return;
+  setLessonStep(5);
+}
+
+// Daily Quests Tracker
+function updateDailyQuestsUI() {
+  const quest1 = document.getElementById('questItem1');
+  const check1 = document.getElementById('questCheck1');
+  const progressPill = document.getElementById('questsProgressText');
+
+  const lessonDone = (appState.completedLessons && appState.completedLessons.length > 0);
+  if (quest1 && check1) {
+    if (lessonDone) {
+      quest1.classList.add('completed');
+      check1.textContent = '✓';
+    } else {
+      quest1.classList.remove('completed');
+      check1.textContent = '○';
+    }
   }
 
-  const lessonId = currentActiveLesson.id;
-  const wasAlreadyCompleted = appState.completedLessons.includes(lessonId);
-
-  if (!wasAlreadyCompleted) {
-    appState.completedLessons.push(lessonId);
-    appState.stats.correct = (appState.stats.correct || 0) + 2;
-    saveState();
+  if (progressPill) {
+    const doneCount = lessonDone ? 1 : 0;
+    progressPill.textContent = `${doneCount} / 3 Bajarildi`;
   }
-
-  updateDashboardUI();
-  closeOverlay('viewLessonDetail');
-  showToast('🎉 +20 XP! Dars muvaffaqiyatli yakunlandi ✓');
 }
 
 // Prompt Lab Tab Filtering

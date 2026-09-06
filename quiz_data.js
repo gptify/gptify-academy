@@ -282,7 +282,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Menga ishda yordam ber.",
         "good_prompt": "Sen tajribali biznes-maslahatchisan. Men kichik biznes egasiman. Menga bugun vaqtimni tejash uchun AI dan foydalanish mumkin bo'lgan 3 ta aniq jarayonni misollar bilan ko'rsat.",
         "practical_prompt": "Sen mening sabrli biznes-maslahatchisimsan. Mening soham: [Sohangizni yozing, masalan: Kiyim do'koni / Logistika]. Menga kundalik ishimda har kuni eng ko'p vaqt oladigan 3 ta jarayonni AI yordamida qanday tezlashtirish mumkinligini oddiy qadamlar bilan tushuntir.",
-        "actionPrompt": "Sen mening sabrli maslahatchisimsan. Menga sun'iy intellekt mening kasbimda qanday 3 ta amaliy yordam bera olishini oddiy tilda aytib ber."
+        "actionPrompt": "Sen mening sabrli maslahatchisimsan. Menga sun'iy intellekt mening kasbimda qanday 3 ta amaliy yordam bera olishini oddiy tilda aytib ber.",
+        "legoPuzzle": {
+            "slots": [
+                "ROL",
+                "KONTEKST",
+                "FORMAT"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Biznes-maslahatchi",
+                    "slot": "ROL"
+                },
+                {
+                    "id": "t2",
+                    "text": "Kichik biznes egasiman",
+                    "slot": "KONTEKST"
+                },
+                {
+                    "id": "t3",
+                    "text": "3 ta amaliy qadam",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t4",
+                    "text": "She'r yozib ber",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Salom! Sizning biznesingizda AI bugunoq quyidagi 3 ta jarayonda yordam bera oladi:\n\n1. 📱 **Mijozlar savollariga avto-javob:** Telegramdagi 'Narxi qancha?' va 'Yetkazib berish bormi?' degan 80% bir xil savollarga 1 soniyada xushmuomala javob skriptlari.\n2. 📝 **Instagram postlari va sarlavhalar:** 1 haftalik mahsulotlar tavsifi va diqqatni tortuvchi sarlavhalarni 15 daqiqada tayyorlash.\n3. 📦 **Kechikkan tovarlar bo'yicha xat:** Ta'minotchilarga rasmiy va qat'iy talabnoma xatini tuzish."
     },
     {
         "id": 2,
@@ -296,7 +326,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Qaysi AI eng zo'r?",
         "good_prompt": "Men 25 sahifalik B2B shartnomani tahlil qilib, undagi xatarli shartlarni topmoqchiman. Buning uchun Claude 3.5 Sonnet menga qanday yordam bera oladi va so'rovni qanday berishim kerak?",
         "practical_prompt": "Quyidagi 3 ta vazifam bor: 1) [1-vazifangiz]; 2) [2-vazifangiz]; 3) [3-vazifangiz]. Menga qaysi AI modelidan (ChatGPT, Claude, Gemini, Perplexity) foydalanish eng samarali ekanligini va har biriga qanday so'rov kiritishim kerakligini tavsiya qil.",
-        "actionPrompt": "Quyidagi 3 ta vazifam bor: 1) Internetdan yangi xabar topish; 2) Katta shartnoma o'qish; 3) Ijodiy post yozish. Qaysi modelni tanlashim kerak?"
+        "actionPrompt": "Quyidagi 3 ta vazifam bor: 1) Internetdan yangi xabar topish; 2) Katta shartnoma o'qish; 3) Ijodiy post yozish. Qaysi modelni tanlashim kerak?",
+        "legoPuzzle": {
+            "slots": [
+                "MODEL",
+                "VAZIFA",
+                "FORMAT"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Claude 3.5 Sonnet",
+                    "slot": "MODEL"
+                },
+                {
+                    "id": "t2",
+                    "text": "25 sahifalik shartnoma tahlili",
+                    "slot": "VAZIFA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Xatarlar jadvali",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t4",
+                    "text": "Rasm chizib ber",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "🔍 **Shartnoma tahlili natijalari (Claude 3.5 Sonnet):**\n\nHujjat to'liq o'rganildi. Siz uchun 3 ta asosiy xatarli band aniqlandi:\n\n| Band | Xatar darajasi | Izoh va Tavsiya |\n| :--- | :---: | :--- |\n| **7.2-band** | 🔴 Yuqori | To'lov kechikkan har bir kun uchun **kunlik 0.5% penya** belgilangan. Tavsiya: 0.1% ga tushiring. |\n| **11.4-band** | 🟡 O'rta | Shartnoma faqat ijara beruvchi xohishi bilan bir tomonlama bekor qilinishi mumkin. |\n| **14.1-band** | 🟢 Past | Nizolar faqat Toshkent tumanlararo iqtisodiy sudida ko'riladi. |"
     },
     {
         "id": 3,
@@ -310,7 +370,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Menga marketing rejasi tuzib ber.",
         "good_prompt": "Sen Toshkentdagi 10 yillik tajribaga ega B2B marketing direktorsan. Yangi konsalting xizmati uchun diqqatni tortuvchi 3 ta amaliy strategiya taklif qil.",
         "practical_prompt": "Sen [Kasb/Mutaxassislik, masalan: 10 yillik tajribali bosh buxgalter / professional HR direktor]san. Menga [Vazifangiz] bo'yicha eng muhim 3 ta xatoni va ularning amaliy yechimini professional tilda tushuntirib ber.",
-        "actionPrompt": "Sen Toshkentdagi 10 yillik tajribaga ega marketing rahbarisan. Menga yangi do'kon ochilishi uchun diqqatni tortuvchi 3 ta g'oya taklif qil."
+        "actionPrompt": "Sen Toshkentdagi 10 yillik tajribaga ega marketing rahbarisan. Menga yangi do'kon ochilishi uchun diqqatni tortuvchi 3 ta g'oya taklif qil.",
+        "legoPuzzle": {
+            "slots": [
+                "ROL",
+                "SOHA",
+                "MAQSAD"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "10 yillik B2B marketolog",
+                    "slot": "ROL"
+                },
+                {
+                    "id": "t2",
+                    "text": "Toshkent kiyim bozori",
+                    "slot": "SOHA"
+                },
+                {
+                    "id": "t3",
+                    "text": "3 ta aksiya g'oyasi",
+                    "slot": "MAQSAD"
+                },
+                {
+                    "id": "t4",
+                    "text": "Oddiy talaba",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Assalomu alaykum! Toshkent kiyim bozoridagi 10 yillik tajribamga tayanib, yangi do'koningiz uchun 3 ta daromad keltiruvchi aksiya taklif qilaman:\n\n1. 🎁 **'Eskisini olib kel — 30% chegirma ol'**: Mijozlar eski kiyimlarini topshirib, yangi kolleksiyaga vaucher oladi.\n2. 📸 **'Ko'zgu selfisi kvesti'**: Do'kon stendida rasmga tushib Stories'ga qo'yganlarga 50,000 so'mlik sovg'a kuponi.\n3. ⏱ **'Faqat 2 soat: Baxtli oqshom'**: Har payshanba soat 18:00 dan 20:00 gacha maxsus tanlangan 20 xil mahsulotga 40% chegirma."
     },
     {
         "id": 4,
@@ -324,7 +414,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Mijozga xat yoz.",
         "good_prompt": "[ROL]: B2B savdo menejeri. [KONTEKST]: Mijoz 3 kundan beri hisob-fakturaga javob bermayapti. [FORMAT]: 3 banddan iborat, xushmuomala, 50 so'zdan oshmaydigan Telegram xabari.",
         "practical_prompt": "[ROL]: Sen [Mutaxassislik]san.\n[KONTEKST]: [Vaziyatingizni 2 gapda tushuntiring].\n[CHЕKLOV]: [Ortiqcha gaplarsiz, faqat amaliy].\n[FORMAT]: [Jadval ko'rinishida: 1) Muammo, 2) Yechim, 3) Birinchi qadam].",
-        "actionPrompt": "[ROL]: Yurist. [KONTEKST]: B2B ijara shartnomasi tuzilmoqda. [FORMAT]: Faqat 3 ta asosiy xatarli bandni jadvalda chiqar."
+        "actionPrompt": "[ROL]: Yurist. [KONTEKST]: B2B ijara shartnomasi tuzilmoqda. [FORMAT]: Faqat 3 ta asosiy xatarli bandni jadvalda chiqar.",
+        "legoPuzzle": {
+            "slots": [
+                "ROL",
+                "KONTEKST",
+                "FORMAT"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "B2B savdo menejeri",
+                    "slot": "ROL"
+                },
+                {
+                    "id": "t2",
+                    "text": "Mijoz 3 kundan beri to'lamayapti",
+                    "slot": "KONTEKST"
+                },
+                {
+                    "id": "t3",
+                    "text": "Xushmuomala Telegram xabar",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t4",
+                    "text": "Qo'pol talabnoma",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Assalomu alaykum, Akmal aka! Ishlaringiz yaxshimi?\n\nO'tgan seshanba kuni yuborilgan hisob-fakturani ko'rishga imkon bo'ldimi? Mahsulotlarni omboringizga ertaga 1-navbatda yetkazib berishimiz uchun to'lov holatini aniqlashtirib olmoqchi edik.\n\nAgar to'lovda biror texnik qiyinchilik bo'lsa, ayting, yordam berishga tayyorman. Rahmat!"
     },
     {
         "id": 5,
@@ -338,7 +458,37 @@ const QUIZ_DATA = {
         "bad_prompt": "EBITDA nima?",
         "good_prompt": "EBITDA moliyaviy tushunchasini 10 yoshli bolaga tushuntirgandek, oddiy nonvoyxona misolida sodda va qiziqarli tilda tushuntirib ber.",
         "practical_prompt": "Menga [Murakkab atama yoki tushuncha]ni 10 yoshli bolaga tushuntirgandek, kundalik hayotiy misol (analogiya) bilan 3 ta qisqa bandda tushuntirib ber.",
-        "actionPrompt": "Ushbu murakkab mavzuni 10 yoshli bolaga tushuntirgandek, kundalik hayotiy misollar bilan juda sodda tilda tushuntirib ber."
+        "actionPrompt": "Ushbu murakkab mavzuni 10 yoshli bolaga tushuntirgandek, kundalik hayotiy misollar bilan juda sodda tilda tushuntirib ber.",
+        "legoPuzzle": {
+            "slots": [
+                "USUL",
+                "TUSHUNCHA",
+                "ANALOGIYA"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "10 yoshli bolaga tushuntirish",
+                    "slot": "USUL"
+                },
+                {
+                    "id": "t2",
+                    "text": "EBITDA moliyaviy atamasi",
+                    "slot": "TUSHUNCHA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Muzqaymoq do'koni misoli",
+                    "slot": "ANALOGIYA"
+                },
+                {
+                    "id": "t4",
+                    "text": "Murakkab formula",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Tasavvur qil, sen maktab yonida **muzqaymoq do'koni** ochding:\n\n1. 🍦 **Daromad:** Kuniga 100,000 so'mlik muzqaymoq sotding.\n2. 🥛 **Xarajat:** Sut va muzga 40,000 so'm sarflading.\n3. 💰 **EBITDA:** Cho'ntagingda qolgan 60,000 so'm — bu do'koning o'z kuchi bilan ishlab topgan sof operatsion puli!\n\nHali bu puldan davlatga soliq to'lamagansan. EBITDA — biznesing qanchalik kuchli ishlayotganini ko'rsatadigan ko'rsatkichdir!"
     },
     {
         "id": 6,
@@ -352,7 +502,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Let's speak English.",
         "good_prompt": "Sen sabrli ingliz tili repetitorisan. Men bilan A2 darajasida ish va kundalik mavzularda suhbatlash. Har bir javobimda grammatik xato bo'lsa, uni tuzatib, keyin savol ber.",
         "practical_prompt": "Act as a patient English tutor. Let's have a friendly conversation about [Mavzu, masalan: my work / business / daily habits]. Keep your answers at [A2 / B1] level, correct my grammar mistakes politely after each message, and suggest 1 better phrase.",
-        "actionPrompt": "Sen mening sabrli ingliz tili o'qituvchisisan. Men bilan A2 darajasida suhbatlash, xatolarimni muloyim tuzat va yangi so'zlarni eslat."
+        "actionPrompt": "Sen mening sabrli ingliz tili o'qituvchisisan. Men bilan A2 darajasida suhbatlash, xatolarimni muloyim tuzat va yangi so'zlarni eslat.",
+        "legoPuzzle": {
+            "slots": [
+                "ROL",
+                "DARAJA",
+                "QOIDA"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Patient English Tutor",
+                    "slot": "ROL"
+                },
+                {
+                    "id": "t2",
+                    "text": "A2 Elementary level",
+                    "slot": "DARAJA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Correct mistakes politely",
+                    "slot": "QOIDA"
+                },
+                {
+                    "id": "t4",
+                    "text": "Only IELTS 9.0 vocabulary",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Hello! I am very happy to chat with you today! 😊\n\nLet's talk about your daily morning routine. What is the first thing you do after you wake up in the morning?\n\n*(Tip: Write your answer in simple English. If you make any mistakes, don't worry, I will gently help you correct them!)*"
     },
     {
         "id": 7,
@@ -366,7 +546,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Mening rezyumemni chiroyli qilib ber.",
         "good_prompt": "Men savdo menejeriman. Mening quyidagi 2 yillik tajribamni raqamlar va yutuqlar bilan kuchaytirib, xalqaro kompaniya uchun 3 ta professional bullet-pointga aylantir.",
         "practical_prompt": "Mening kasbim: [Kasbingiz]. Mening hozirgi tajribam: [Tajribangizni 2-3 gapda yozing]. Ushbu tajribani xalqaro XYZ formatida (Vazifa + Harakat + Raqamli Natija) 3 ta kuchli bullet-point ko'rinishida qayta yozib ber.",
-        "actionPrompt": "Mening tajribam quyidagicha... Ushbu vakansiya talablarini hisobga olib, rezyumemdagi yutuqlarimni kuchli natijalar bilan qayta tahrirlab ber."
+        "actionPrompt": "Mening tajribam quyidagicha... Ushbu vakansiya talablarini hisobga olib, rezyumemdagi yutuqlarimni kuchli natijalar bilan qayta tahrirlab ber.",
+        "legoPuzzle": {
+            "slots": [
+                "FORMAT",
+                "SOHA",
+                "NATIJA"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "XYZ formulasi (Vazifa + Natija)",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t2",
+                    "text": "Savdo bo'limi boshlig'i",
+                    "slot": "SOHA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Savdoni 35% ga oshirish",
+                    "slot": "NATIJA"
+                },
+                {
+                    "id": "t4",
+                    "text": "Quruq majburiyatlar ro'yxati",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Sizning rezyumeingiz uchun xalqaro standartdagi 3 ta kuchli punkt:\n\n• **B2B savdo hajmini 6 oyda 35% ga oshirdi**: 12 ta yangi yirik korporativ mijoz bilan shartnoma imzolandi (Jami 480 mln so'm).\n• **Mijozlar bilan qayta aloqa tizimini (CRM) joriy etdi**: Natijada takroriy xaridlar ulushi 18% dan 42% ga yetkazildi.\n• **5 kishilik savdo jamoasini boshqardi**: Haftalik o'quv treninglari orqali yangi xodimlarning savdoga kirishish muddatini 2 haftaga qisqartirdi."
     },
     {
         "id": 8,
@@ -380,7 +590,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Excelda qanday hisoblayman?",
         "good_prompt": "Excel jadvalimda A ustunda Sana, B ustunda Mahsulot, C ustunda Summa bor. Menga 'Telefon' mahsulotining jami savdosini hisoblovchi SUMIFS formulasini yozib ber.",
         "practical_prompt": "Excel jadvalimda quyidagi ustunlar bor: [Ustun nomlari: A, B, C...]. Men [Qanday natija olmoqchisiz]ni xohlayman. Menga eng sodda va samarali Excel formulasini va uni qanday kiritishni tushuntirib ber.",
-        "actionPrompt": "Excelda 3 ta ustun bor: Sana, Bo'lim, Xarajat. Menga 'Marketing' bo'limining jami xarajatini hisoblovchi formulani va qanday kiritishni ko'rsat."
+        "actionPrompt": "Excelda 3 ta ustun bor: Sana, Bo'lim, Xarajat. Menga 'Marketing' bo'limining jami xarajatini hisoblovchi formulani va qanday kiritishni ko'rsat.",
+        "legoPuzzle": {
+            "slots": [
+                "DASTUR",
+                "USTUNLAR",
+                "MAQSAD"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "SUMIFS formulasi",
+                    "slot": "DASTUR"
+                },
+                {
+                    "id": "t2",
+                    "text": "A:Sana, B:Bo'lim, C:Summa",
+                    "slot": "USTUNLAR"
+                },
+                {
+                    "id": "t3",
+                    "text": "Marketing xarajatini hisoblash",
+                    "slot": "MAQSAD"
+                },
+                {
+                    "id": "t4",
+                    "text": "Qo'lda hisoblagich",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Sizga kerakli eng aniq va tezkor Excel formulasi:\n\n```excel\n=SUMIFS(C:C, B:B, \"Marketing\")\n```\n\n**Qanday kiritish kerak:**\n1. Natija chiqishi kerak bo'lgan istalgan bo'sh katakka (masalan, `E2`) ushbu formulani qo'ying.\n2. `Enter` tugmasini bosing.\n3. Excel avtomatik tarzda faqat B ustunida 'Marketing' deb yozilgan qatorlarning C ustunidagi summalarini qo'shib beradi. 3 soatlik hisobot 5 soniyada tayyor!"
     },
     {
         "id": 9,
@@ -394,7 +634,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Telegram uchun post yoz.",
         "good_prompt": "Ayollar liboslari do'koni uchun Telegram kanalga 3 ta post ssenariysi tuz: 1) Foydali maslahat; 2) Mijoz sharhi; 3) Chegirma taklifi. Har birida kuchli Hook va CTA bo'lsin.",
         "practical_prompt": "Mening biznesim: [Biznesingiz yoki loyihangiz]. Maqsadli auditoriya: [Kimlar uchun]. Menga 1 haftalik (5 kunlik) Instagram/Telegram kontent rejasini jadval ko'rinishida ber: Kuni, Format, Sarlavha (Hook), Asosiy Fikr, Harakatga Chaqiruv (CTA).",
-        "actionPrompt": "Mening soham: Ayollar kiyimlari do'koni. 1 haftalik Instagram karusel postlar rejasini: Sarlavha, Asosiy fikr va CTA bilan jadvalda ber."
+        "actionPrompt": "Mening soham: Ayollar kiyimlari do'koni. 1 haftalik Instagram karusel postlar rejasini: Sarlavha, Asosiy fikr va CTA bilan jadvalda ber.",
+        "legoPuzzle": {
+            "slots": [
+                "PLATFORMA",
+                "AUDITORIYA",
+                "STRUKTURA"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Instagram Reels & Telegram",
+                    "slot": "PLATFORMA"
+                },
+                {
+                    "id": "t2",
+                    "text": "Ayollar kiyimlari do'koni",
+                    "slot": "AUDITORIYA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Hook + Fikr + CTA",
+                    "slot": "STRUKTURA"
+                },
+                {
+                    "id": "t4",
+                    "text": "Faqat narxlar ro'yxati",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Instagram va Telegram uchun tayyor 1 kunlik viral post loyihasi:\n\n🎯 **Hook (Birinchi 3 soniya):** 'Ko'ylak tanlashda 90% ayollar yo'l qo'yadigan 1 ta katta xato!'\n💡 **Asosiy qism:** 'Rang mos kelgandek tuyuladi, lekin mato kunduzgi quyoshda o'zgaradi. Bugun biz paxta va ipak aralashmali matolarning 3 ta sirini ochamiz...'\n📢 **CTA (Harakatga chaqiruv):** 'O'zingizga mos razmerni bilish uchun izohlarda \"RAZMER\" deb yozing, katalogimizni yuboramiz!'"
     },
     {
         "id": 10,
@@ -408,7 +678,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Qimmat degan mijozga nima dey?",
         "good_prompt": "Biznes trening sotamiz. Narxi 1.5 mln so'm. Mijoz 'qimmat ekan' dedi. Unga narxni tushirmasdan, kurs o'zini qanday oqlashini ko'rsatuvchi 3 ta xushmuomala javob varianti yoz.",
         "practical_prompt": "Mening mahsulotim/xizmatim: [Mahsulot nomi] (Narxi: [Summa]). Mijoz menga: 'Juda qimmat, boshqa joyda arzonroq ekan' dedi. Unga mijozni hurmat qilgan holda qiymatni ko'rsatuvchi va savol bilan yakunlanuvchi 3 ta variant yozib ber.",
-        "actionPrompt": "Mijoz xizmatimizga 'Qimmat ekan' dedi. Unga narxni tushirmasdan qiymat ko'rsatuvchi 3 ta muloyim va ishonchli javob varianti yozib ber."
+        "actionPrompt": "Mijoz xizmatimizga 'Qimmat ekan' dedi. Unga narxni tushirmasdan qiymat ko'rsatuvchi 3 ta muloyim va ishonchli javob varianti yozib ber.",
+        "legoPuzzle": {
+            "slots": [
+                "E'TIROZ",
+                "USLUB",
+                "FORMAT"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Juda qimmat degan e'tiroz",
+                    "slot": "E'TIROZ"
+                },
+                {
+                    "id": "t2",
+                    "text": "Chegirmasiz qiymat ko'rsatish",
+                    "slot": "USLUB"
+                },
+                {
+                    "id": "t3",
+                    "text": "3 ta yopuvchi skript",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t4",
+                    "text": "Narxni 50% tushirish",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "Mijoz 'Qimmat' deganda chegirmasiz savdoni yopish skriptlari:\n\n1. 💎 **Kafolat bilan yopish:**\n*'Javohir aka, to'g'ri aytasiz, narx birinchi qarashda yuqoriroq ko'rinishi mumkin. Lekin bizning xizmatimiz 1 yillik bepul texnik kafolatni va xodimlaringizni to'liq o'qitishni o'z ichiga oladi.'*\n\n2. 📊 **Kunlik tejamkorlik hisobi:**\n*'Agar 1.5 mln so'mni 30 kunga bo'lsak, kuniga atigi 50,000 so'mga to'g'ri keladi. Bu esa xodimingiz yo'qotayotgan 3 soatlik qimmatli vaqtini to'liq tejaydi.'*\n\n3. 🤝 **Yumshoq savol bilan boshqaruvni olish:**\n*'Siz uchun aynan qaysi qismi qimmatlik qilyapti: boshlang'ich to'lovmi yoki xizmat hajmi? Keling, moslab ko'ramiz.'*"
     },
     {
         "id": 11,
@@ -422,7 +722,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Shartnomani o'qib ber.",
         "good_prompt": "Ushbu ijara shartnomasi matnidan faqat ijarachi uchun xavfli bo'lgan bandlarni: penya miqdori, muddatdan oldin bekor qilish shartlari va javobgarlikni alohida ajratib ber.",
         "practical_prompt": "Quyidagi shartnoma matnini tahlil qil. Undagi biz uchun xatarli bo'lgan barcha bandlarni (ayniqsa penya foizi, jarimalar, bir tomonlama bekor qilish huquqi) aniq ko'rsatib ber:\n[Shartnoma matnini bu yerga qo'ying]",
-        "actionPrompt": "Ushbu shartnoma matnidan faqat biz uchun xatarli bo'lgan bandlarni (penya, javobgarlik, to'lov muddati) jadval qilib chiqarib ber."
+        "actionPrompt": "Ushbu shartnoma matnidan faqat biz uchun xatarli bo'lgan bandlarni (penya, javobgarlik, to'lov muddati) jadval qilib chiqarib ber.",
+        "legoPuzzle": {
+            "slots": [
+                "HUJJAT",
+                "DIQQAT_MARKAZI",
+                "FORMAT"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Didox B2B shartnomasi",
+                    "slot": "HUJJAT"
+                },
+                {
+                    "id": "t2",
+                    "text": "Penya va jarimalar",
+                    "slot": "DIQQAT_MARKAZI"
+                },
+                {
+                    "id": "t3",
+                    "text": "Xatarlar xulosasi jadvali",
+                    "slot": "FORMAT"
+                },
+                {
+                    "id": "t4",
+                    "text": "Barcha matnni tarjima qilish",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "⚠️ **Shartnomadagi yashirin moliyaviy xatarlar:**\n\n1. **9.1-band:** Yetkazib berish 1 kunga kechiksa, jami shartnoma summasining 1% miqdorida penya hisoblanadi (Standart 0.1% bo'lishi kerak, 10 barobar oshirilgan!).\n2. **12.3-band:** Buyurtmachi to'lovni 30 kungacha kechiktirsa, unga nisbatan hech qanday jarima belgilanmagan (Bir tomonlama tengsiz shart!).\n\n**Tavsiya:** Ushbu shartnomani imzolamasdan, penya miqdorini o'zaro tenglashtirish (har ikki tomonga kunlik 0.1%) talabi bilan qaytaring."
     },
     {
         "id": 12,
@@ -436,7 +766,37 @@ const QUIZ_DATA = {
         "bad_prompt": "O'zbekistondagi 2025-yilgi qonun haqida ayt.",
         "good_prompt": "Faqat quyida keltirilgan rasmiy manba matniga asoslanib javob ber. Agar manbada ma'lumot bo'lmasa, o'zingdan taxmin qilma, 'Manbada keltirilmagan' deb aniq yoz.",
         "practical_prompt": "Quyidagi matn asosida savolimga javob ber. QAT'IY QOIDA: Faqat berilgan matndan foydalan. Agar javob matnda bo'lmasa, o'zingdan hech narsa to'qima, faqat 'Matnda bu ma'lumot yo'q' deb javob qaytar.\nMatn: [Matningiz]\nSavol: [Savolingiz]",
-        "actionPrompt": "Faqat quyidagi manbaga tayan. Agar matnda javob bo'lmasa, o'zingdan qo'shma, 'Manbada ma'lumot yo'q' deb ochiq ayt."
+        "actionPrompt": "Faqat quyidagi manbaga tayan. Agar matnda javob bo'lmasa, o'zingdan qo'shma, 'Manbada ma'lumot yo'q' deb ochiq ayt.",
+        "legoPuzzle": {
+            "slots": [
+                "QOIDA",
+                "MANBA",
+                "CHЕKLOV"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Faqat berilgan matndan foydalan",
+                    "slot": "QOIDA"
+                },
+                {
+                    "id": "t2",
+                    "text": "Rasmiy qonun hujjati",
+                    "slot": "MANBA"
+                },
+                {
+                    "id": "t3",
+                    "text": "Bilmasang to'qima deb ayt",
+                    "slot": "CHЕKLOV"
+                },
+                {
+                    "id": "t4",
+                    "text": "Erkin ijodiy taxmin qil",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "✅ **Faktik tahlil natijasi:**\n\nSiz taqdim etgan hujjat matnini to'liq ko'rib chiqdim.\n\n• **Savol:** 2026-yilgi yangi bojxona imtiyozlari.\n• **Javob:** Siz taqdim etgan manbada ushbu imtiyozlar haqida hech qanday ma'lumot keltirilmagan.\n\n*Qoidangizga binoan men o'zimdan hech qanday taxmin yoki uydirma fakt qo'shmadim. Iltimos, tegishli bojxona qarori matnini ilova qiling.*"
     },
     {
         "id": 13,
@@ -450,7 +810,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Kompaniyamizning 12456 raqamli maxfiy shartnomasini tekshir.",
         "good_prompt": "Men B2B shartnoma loyihasini tahlil qilmoqchiman. Barcha kompaniya nomlari va hisob raqamlari anonimlashtirilgan. Faqat yuridik mantig'ini tekshir.",
         "practical_prompt": "Ushbu matndagi barcha shaxsiy ismlarni [Mijoz 1], summalarni [X summa], kompaniya nomlarini [Kompaniya A] deb almashtirib, mantiqan to'g'rilab ber:\n[Matningiz]",
-        "actionPrompt": "Ushbu matndagi barcha shaxsiy ismlar va raqamlarni umumiy belgilarga almashtirib, xavfsiz holatga keltir."
+        "actionPrompt": "Ushbu matndagi barcha shaxsiy ismlar va raqamlarni umumiy belgilarga almashtirib, xavfsiz holatga keltir.",
+        "legoPuzzle": {
+            "slots": [
+                "XAVFSIZLIK",
+                "ALMASHTIRISH",
+                "MAQSAD"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Maxfiy ma'lumotlarni tozalash",
+                    "slot": "XAVFSIZLIK"
+                },
+                {
+                    "id": "t2",
+                    "text": "Ismlarni [Mijoz A] deb o'zgartirish",
+                    "slot": "ALMASHTIRISH"
+                },
+                {
+                    "id": "t3",
+                    "text": "Yuridik mantiqni tekshirish",
+                    "slot": "MAQSAD"
+                },
+                {
+                    "id": "t4",
+                    "text": "Bank kartasi parolini yozish",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "🔒 **Anonimlashtirilgan xavfsiz shartnoma loyihasi:**\n\n'[Kompaniya 1]' (Ijara beruvchi) va '[Kompaniya 2]' (Ijarachi) o'rtasida tuzilgan shartnoma tahlil qilindi:\n\n• Barcha bank rekvizitlari, hisob raqamlari va shaxsiy telefonlar muvaffaqiyatli anonimlashtirildi.\n• Kompaniyangiz tijorat siri OpenAI/Claude serverlariga tushib qolish xavfi 0% ga tushirildi.\n• Endi ushbu matnni xohlagan AI modelida xavfsiz tahlil qilishingiz mumkin."
     },
     {
         "id": 14,
@@ -464,7 +854,37 @@ const QUIZ_DATA = {
         "bad_prompt": "Menga maslahat ber.",
         "good_prompt": "Men buxgalterman. Keyingi 30 kun davomida har kuni 10 daqiqa sarflab AIdan professional foydalanish bo'yicha kundalik 30 kunlik reja tuzib ber.",
         "practical_prompt": "Mening kasbim: [Kasbingiz]. Menga keyingi 14 kun uchun har kuni 10 daqiqada bajariladigan, amaliy natija beruvchi kundalik AI mashg'ulotlari rejasi (Daily AI Habit Tracker) tuzib ber.",
-        "actionPrompt": "Men bugun AI ni kundalik ishimda qanday qo'lladim? 30 kunlik unumdorlik odatini shakllantirish bo'yicha menga shaxsiy chek-list tuz."
+        "actionPrompt": "Men bugun AI ni kundalik ishimda qanday qo'lladim? 30 kunlik unumdorlik odatini shakllantirish bo'yicha menga shaxsiy chek-list tuz.",
+        "legoPuzzle": {
+            "slots": [
+                "ODAT",
+                "VAQT",
+                "NATIJA"
+            ],
+            "tokens": [
+                {
+                    "id": "t1",
+                    "text": "Har kuni 1 ta amaliy vazifa",
+                    "slot": "ODAT"
+                },
+                {
+                    "id": "t2",
+                    "text": "Kuniga atigi 10 daqiqa",
+                    "slot": "VAQT"
+                },
+                {
+                    "id": "t3",
+                    "text": "30 kunda 2x ish unumdorligi",
+                    "slot": "NATIJA"
+                },
+                {
+                    "id": "t4",
+                    "text": "Haftada 1 marta ko'rib qo'yish",
+                    "slot": "DISTRACTOR"
+                }
+            ]
+        },
+        "simulatedAiResponse": "🎉 **30 Kunlik Shaxsiy AI Odat Tracker (GPTify Habit System):**\n\n• **1-Hafta:** Kunlik xatlar va Telegram xabarlarni ChatGPT orqali 3 barobar tezroq yozish.\n• **2-Hafta:** Exceldagi barcha qiyin formulalarni AIdan so'rab 1 daqiqada olish.\n• **3-Hafta:** B2B mijozlar e'tirozlariga tayyor savdo skriptlarini qo'llash.\n• **4-Hafta:** Katta shartnomalarni 10 soniyada xatarlarga tekshirish.\n\n🏆 Siz **AI Master** darajasiga yetdingiz! Rasmiy diplomga loyiqsiz!"
     }
 ],
 

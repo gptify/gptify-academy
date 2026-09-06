@@ -83,6 +83,42 @@
         </div>
       </section>
 
+      <!-- Bugungi 3 ta Kvest (Daily Quests) -->
+      <section class="daily-quests-card" id="dailyQuestsCard">
+        <div class="quests-header">
+          <div class="quests-title">
+            <span>🎯</span> <span>Bugungi 3 ta Kvest</span>
+          </div>
+          <span class="quests-progress-pill" id="questsProgressText">1 / 3 Bajarildi</span>
+        </div>
+        <div class="quests-list">
+          <div class="quest-item completed" id="questItem1" onclick="openLessonModal(2)">
+            <div class="quest-check" id="questCheck1">✓</div>
+            <div class="quest-info">
+              <div class="quest-name">Bugungi AI darsini o'rganish</div>
+              <div class="quest-reward">+20 XP</div>
+            </div>
+            <span class="quest-arrow">➔</span>
+          </div>
+          <div class="quest-item" id="questItem2" onclick="switchAppTab('practice')">
+            <div class="quest-check" id="questCheck2">○</div>
+            <div class="quest-info">
+              <div class="quest-name">Trenajyorda Blitz test yechish</div>
+              <div class="quest-reward">+15 XP</div>
+            </div>
+            <span class="quest-arrow">➔</span>
+          </div>
+          <div class="quest-item" id="questItem3" onclick="switchAppTab('promptlab')">
+            <div class="quest-check" id="questCheck3">○</div>
+            <div class="quest-info">
+              <div class="quest-name">Prompt Lab'dan 1 ta prompt nusxalash</div>
+              <div class="quest-reward">+15 XP</div>
+            </div>
+            <span class="quest-arrow">➔</span>
+          </div>
+        </div>
+      </section>
+
       <!-- Roadmap Header -->
       <div class="section-header-row">
         <div class="section-title">
@@ -463,60 +499,194 @@
     </div>
   </div>
 
-  <!-- View B: Dars Tafsiloti (Lesson Reader) -->
-  <div id="viewLessonDetail" class="view-overlay">
-    <div class="view-header">
-      <div class="view-header-title" id="lessonDetailTitle">Dars Mavzusi</div>
+  <!-- View B: 5-Step Interactive Stories Lesson Player -->
+  <div id="viewLessonDetail" class="view-overlay story-lesson-overlay">
+    
+    <!-- Top Progress Bar (5 segments) -->
+    <div class="story-progress-container">
+      <div class="story-progress-seg active" id="progSeg1"></div>
+      <div class="story-progress-seg" id="progSeg2"></div>
+      <div class="story-progress-seg" id="progSeg3"></div>
+      <div class="story-progress-seg" id="progSeg4"></div>
+      <div class="story-progress-seg" id="progSeg5"></div>
+    </div>
+
+    <!-- Story Header -->
+    <div class="view-header story-header">
+      <div class="story-header-left">
+        <span class="story-step-badge" id="lessonStepBadge">1 / 5 QADAM</span>
+        <span class="story-title-sub" id="lessonDetailCategory">1-Bosqich · Boshlash</span>
+      </div>
       <button class="close-btn" onclick="closeOverlay('viewLessonDetail')">✕</button>
     </div>
-    
-    <div style="font-size:11.5px; color:#10b981; font-weight:800; text-transform:uppercase; margin-bottom:4px;" id="lessonDetailCategory">
-      1-Bosqich · Boshlash
-    </div>
-    <div style="font-size:18px; font-weight:900; color:#fff; line-height:1.3; margin-bottom:12px;" id="lessonDetailHeading">
-      AI Nima va Qaysi Biri Yaxshiroq?
-    </div>
 
-    <!-- Takeaway -->
-    <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:14px; padding:12px; margin-bottom:12px;">
-      <div style="font-size:11px; font-weight:800; color:#facc15; margin-bottom:3px;">🎯 Asosiy Xulosa (Takeaway):</div>
-      <div style="font-size:12.5px; color:#fef08a; line-height:1.45;" id="lessonDetailTakeaway"></div>
-    </div>
+    <div class="story-slide-viewport">
+      
+      <!-- SLIDE 1: Nazariya & Asosiy Xulosa -->
+      <div class="story-slide active" id="lessonSlide1">
+        <div class="slide-badge-pill">🎯 1-QADAM: ASOSIY QOIDA</div>
+        <h2 class="slide-main-title" id="lessonDetailHeading">Asboblar tanlovi</h2>
 
-    <!-- Core Concept -->
-    <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:14px; margin-bottom:12px;">
-      <div style="font-size:12px; font-weight:800; color:#38bdf8; margin-bottom:6px;">📖 Oddiy Tushuntirish:</div>
-      <div style="font-size:12.5px; color:#e2e8f0; line-height:1.6; white-space:pre-wrap;" id="lessonDetailConcept"></div>
-    </div>
+        <div class="takeaway-hero-card">
+          <div class="card-icon-title">💡 Asosiy Oltin Qoida (Takeaway):</div>
+          <div class="card-body-text" id="lessonDetailTakeaway"></div>
+        </div>
 
-    <!-- Comparison: Bad vs Good -->
-    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
-      <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); border-radius:12px; padding:10px 12px;">
-        <div style="font-size:11px; font-weight:800; color:#ef4444; margin-bottom:3px;">❌ Oddiy / Xato so'rov:</div>
-        <div style="font-size:12px; color:#fca5a5; font-style:italic;" id="lessonDetailBadPrompt"></div>
+        <div class="concept-card">
+          <div class="card-icon-title">📖 Qanday ishlaydi? (Oddiy tilda):</div>
+          <div class="card-body-text" id="lessonDetailConcept"></div>
+        </div>
+
+        <div class="slide-footer-nav">
+          <button class="btn-primary" onclick="setLessonStep(2)">
+            Xato vs To'g'ri Misol ➔
+          </button>
+        </div>
       </div>
 
-      <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:10px 12px;">
-        <div style="font-size:11px; font-weight:800; color:#10b981; margin-bottom:3px;">✅ Professional GPTify usuli:</div>
-        <div style="font-size:12px; color:#a7f3d0; font-family:'JetBrains Mono', monospace; line-height:1.5; white-space:pre-wrap;" id="lessonDetailGoodPrompt"></div>
-      </div>
-    </div>
+      <!-- SLIDE 2: Xato vs To'g'ri Taqqoslash (Battle) -->
+      <div class="story-slide" id="lessonSlide2">
+        <div class="slide-badge-pill" style="background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">
+          ⚖️ 2-QADAM: TAQQOSLASH (BEFORE & AFTER)
+        </div>
+        <h3 class="slide-sub-title">Oddiy so'rov nega samarasiz va qanday to'g'rilash kerak?</h3>
 
-    <!-- Copyable Prompt Template -->
-    <div style="background:#0b0f19; border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:12px; margin-bottom:16px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <span style="font-size:11px; font-weight:800; color:#facc15;">⚡ Nusxalab ishlatish uchun:</span>
-        <button id="btnCopyLessonPrompt" onclick="copyLessonPromptDetail(this)" style="background:#1e293b; border:1px solid rgba(56,189,248,0.3); color:#38bdf8; font-size:11px; font-weight:700; padding:5px 12px; border-radius:8px; cursor:pointer; transition:all 0.2s;">
-          📋 Nusxalash
-        </button>
-      </div>
-      <div style="font-size:11.5px; color:#cbd5e1; font-family:'JetBrains Mono', monospace; line-height:1.5; white-space:pre-wrap;" id="lessonDetailPracticalPrompt"></div>
-    </div>
+        <!-- Bad prompt card -->
+        <div class="battle-card bad-card">
+          <div class="battle-header">
+            <span class="battle-icon">❌</span>
+            <span class="battle-title">Oddiy / Xato so'rov:</span>
+          </div>
+          <div class="battle-content" id="lessonDetailBadPrompt"></div>
+          <div class="battle-critique">⚠️ Muammo: Aniq rol va kontekst yo'q, shuning uchun AI o'rtacha javob beradi.</div>
+        </div>
 
-    <div style="margin-top:auto; display:flex; flex-direction:column; gap:8px;">
-      <button class="btn-primary" id="btnCompleteLesson" onclick="completeCurrentLessonDetail()" style="width:100%; font-size:14px; font-weight:800; padding:14px; border-radius:14px;">
-        ✓ Darsni yakunladim (+20 XP)
-      </button>
+        <!-- Good prompt card -->
+        <div class="battle-card good-card">
+          <div class="battle-header">
+            <span class="battle-icon">✅</span>
+            <span class="battle-title">Professional GPTify usuli:</span>
+          </div>
+          <div class="battle-content" id="lessonDetailGoodPrompt"></div>
+          <div class="battle-praise">🌟 Siri: [Rol] + [Kontekst] + [Format] qoidasi bilan natija 5 barobar chuqurlashadi!</div>
+        </div>
+
+        <div class="slide-footer-nav dual-nav">
+          <button class="btn-secondary" onclick="setLessonStep(1)">⬅ Ortga</button>
+          <button class="btn-primary" onclick="setLessonStep(3)">Promptni Terish 🧩 ➔</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Lego Prompt Konstruktori -->
+      <div class="story-slide" id="lessonSlide3">
+        <div class="slide-badge-pill" style="background:rgba(56,189,248,0.15); color:#38bdf8; border-color:rgba(56,189,248,0.3);">
+          🧩 3-QADAM: LEGO PROMPT KONSTRUKTORI
+        </div>
+        <p class="slide-hint-text">
+          Pastdagi bloklarni bosib, bo'sh slotlarni to'g'ri ketma-ketlikda to'ldiring:
+        </p>
+
+        <!-- Slots Container -->
+        <div class="lego-slots-wrapper" id="legoSlotsContainer">
+          <!-- Dynamic slots injected by JS -->
+        </div>
+
+        <!-- Feedback message -->
+        <div class="lego-feedback-msg" id="legoFeedbackMsg">
+          Bloklarni tanlang 👇
+        </div>
+
+        <!-- Available Chips Container -->
+        <div class="lego-chips-wrapper" id="legoChipsContainer">
+          <!-- Dynamic chips injected by JS -->
+        </div>
+
+        <div class="slide-footer-nav dual-nav">
+          <button class="btn-secondary" onclick="setLessonStep(2)">⬅ Ortga</button>
+          <button class="btn-primary" id="btnNextFromLego" onclick="setLessonStep(4)" disabled>
+            AI da Sinab Ko'rish 🚀 ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Jonli AI Simulyatori (Try It Live) -->
+      <div class="story-slide" id="lessonSlide4">
+        <div class="slide-badge-pill" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:rgba(16,185,129,0.3);">
+          🤖 4-QADAM: JONLI AI SIMULYATORI (TRY IT LIVE)
+        </div>
+
+        <!-- Terminal / ChatGPT Simulator Card -->
+        <div class="ai-simulator-box">
+          <div class="sim-header">
+            <div class="sim-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="sim-model-name">🟢 GPT-4o / Claude 3.5 AI</div>
+            <button class="sim-copy-btn" id="btnCopySimPrompt" onclick="copyLessonPromptDetail(this)">
+              📋 Nusxalash
+            </button>
+          </div>
+
+          <!-- User Bubble -->
+          <div class="sim-bubble sim-user-bubble">
+            <div class="sim-bubble-author">👤 Sizning So'rovingiz:</div>
+            <div class="sim-bubble-text" id="lessonDetailPracticalPrompt"></div>
+          </div>
+
+          <!-- Action trigger -->
+          <button class="sim-run-trigger-btn" id="btnRunAiSim" onclick="runSimulatedAiResponse()">
+            <span>▶️ AI ga Yuborish (Sinab Ko'rish)</span>
+          </button>
+
+          <!-- AI Response Bubble -->
+          <div class="sim-bubble sim-ai-bubble" id="simAiBubble" style="display:none;">
+            <div class="sim-bubble-author">🤖 AI Javobi:</div>
+            <div class="sim-bubble-text" id="simAiText"></div>
+          </div>
+        </div>
+
+        <div class="slide-footer-nav dual-nav">
+          <button class="btn-secondary" onclick="setLessonStep(3)">⬅ Ortga</button>
+          <button class="btn-primary" id="btnCompleteFromSim" onclick="completeCurrentLessonDetail()">
+            Darsni Yakunlash (+20 XP) 🏆 ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: G'alaba, XP & Streak Ekrani -->
+      <div class="story-slide victory-slide" id="lessonSlide5">
+        <div class="victory-trophy-icon">🏆</div>
+        <h2 class="victory-title">Ajoyib Natija!</h2>
+        <p class="victory-sub" id="victoryLessonTitle">1.2-Dars muvaffaqiyatli yakunlandi</p>
+
+        <div class="victory-stats-card">
+          <div class="v-stat-box">
+            <div class="v-stat-val text-emerald">+20 XP</div>
+            <div class="v-stat-lbl">Bilim Balli</div>
+          </div>
+          <div class="v-stat-divider"></div>
+          <div class="v-stat-box">
+            <div class="v-stat-val text-amber">🔥 <span id="vStreakCount">3</span> Kun</div>
+            <div class="v-stat-lbl">Faol Streak</div>
+          </div>
+        </div>
+
+        <div class="victory-tip-box">
+          💡 <b>Oltin qoida:</b> Har kuni 10 daqiqa AI bilan amaliyot qilsangiz, 1 oyda ish unumdorligingiz 2 barobar oshadi!
+        </div>
+
+        <div class="slide-footer-nav" style="flex-direction:column; gap:10px;">
+          <button class="btn-primary" onclick="goToNextLessonFromVictory()" style="width:100%; padding:14px; font-weight:800;">
+            Keyingi Darsga O'tish ➔
+          </button>
+          <button class="btn-secondary" onclick="closeOverlay('viewLessonDetail')" style="width:100%;">
+            Bosh Sahifaga Qaytish
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 

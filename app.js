@@ -25,7 +25,7 @@ let appState = {
   targetFriendsCount: 3,
   mistakeIds: [3, 8, 13, 14, 15],
   bookmarkedIds: [8, 13],
-  completedLessons: [1, 2, 3],
+  completedLessons: [1],
   currentQuiz: null
 };
 
@@ -223,12 +223,44 @@ function showToast(text) {
 
 // Nusxa olish
 function copyText(txt) {
+  if (!txt) {
+    showToast("Nusxalash uchun matn topilmadi!");
+    return;
+  }
   triggerHaptic("medium");
-  navigator.clipboard.writeText(txt).then(() => {
-    showToast("Prompt nusxalandi!");
-  }).catch(() => {
-    showToast("Nusxalandi!");
-  });
+
+  function fallbackCopy(text) {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      ta.style.top = "0";
+      ta.setAttribute("readonly", "");
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if (ok) {
+        showToast("Prompt nusxalandi! 📋");
+      } else {
+        showToast("Nusxalandi! 📋");
+      }
+    } catch (e) {
+      showToast("Nusxalandi! 📋");
+    }
+  }
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(txt).then(() => {
+      showToast("Prompt nusxalandi! 📋");
+    }).catch(() => {
+      fallbackCopy(txt);
+    });
+  } else {
+    fallbackCopy(txt);
+  }
 }
 
 // =============================================================================
@@ -978,46 +1010,95 @@ function openLessonModal(lessonId) {
   currentActiveLesson = lesson;
 
   const titleEl = document.getElementById('lessonDetailTitle');
-  if (titleEl) titleEl.textContent = `${lesson.id}-Dars`;
+  if (titleEl) titleEl.textContent = `${lesson.num || lesson.id}-Dars`;
 
   const catEl = document.getElementById('lessonDetailCategory');
-  if (catEl) catEl.textContent = `${lesson.category || 'AI Ta\'lim'} · ${lesson.duration || '10 daqiqa'}`;
+  if (catEl) catEl.textContent = `${lesson.category || 'AI Ta\'lim'} · ⏱ ${lesson.duration || '10 daqiqa'}`;
 
   const headEl = document.getElementById('lessonDetailHeading');
   if (headEl) headEl.textContent = lesson.title;
 
   const takeEl = document.getElementById('lessonDetailTakeaway');
-  if (takeEl) takeEl.textContent = lesson.takeaway || lesson.desc;
+  if (takeEl) takeEl.textContent = lesson.takeaway || lesson.summary || lesson.desc || "";
 
   const concEl = document.getElementById('lessonDetailConcept');
-  if (concEl) concEl.textContent = lesson.concept || lesson.desc;
+  if (concEl) concEl.textContent = lesson.concept || lesson.summary || "";
 
   const badEl = document.getElementById('lessonDetailBadPrompt');
-  if (badEl) badEl.textContent = lesson.bad_prompt || "Oddiy so'rov";
+  if (badEl) badEl.textContent = lesson.bad_prompt || "Menga yordam ber (oddiy / noaniq so'rov)";
 
   const goodEl = document.getElementById('lessonDetailGoodPrompt');
-  if (goodEl) goodEl.textContent = lesson.good_prompt || "Mukammal so'rov";
+  if (goodEl) goodEl.textContent = lesson.good_prompt || lesson.actionPrompt || "";
 
   const pracEl = document.getElementById('lessonDetailPracticalPrompt');
-  if (pracEl) pracEl.textContent = lesson.practical_prompt || lesson.promptTemplate;
+  if (pracEl) pracEl.textContent = lesson.practical_prompt || lesson.actionPrompt || lesson.good_prompt || "";
+
+  // Reset copy button
+  const copyBtn = document.getElementById('btnCopyLessonPrompt');
+  if (copyBtn) {
+    copyBtn.innerHTML = "📋 Nusxalash";
+    copyBtn.style.background = "#1e293b";
+    copyBtn.style.color = "#38bdf8";
+  }
+
+  // Update completion button status
+  const compBtn = document.getElementById('btnCompleteLesson');
+  if (compBtn) {
+    const isDone = appState.completedLessons.includes(lesson.id);
+    if (isDone) {
+      compBtn.innerHTML = "✓ Yakunlangan (+20 XP olindi)";
+      compBtn.style.background = "linear-gradient(135deg, #059669 0%, #10b981 100%)";
+    } else {
+      compBtn.innerHTML = "✓ Darsni yakunladim (+20 XP)";
+      compBtn.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+    }
+  }
 
   openOverlay('viewLessonDetail');
 }
 
-function copyLessonPromptDetail() {
+function copyLessonPromptDetail(btn) {
   if (!currentActiveLesson) return;
-  const text = currentActiveLesson.practical_prompt || currentActiveLesson.promptTemplate;
+  const text = currentActiveLesson.practical_prompt || currentActiveLesson.good_prompt || currentActiveLesson.actionPrompt || "";
+  if (!text) {
+    showToast("Nusxalash uchun matn topilmadi!");
+    return;
+  }
   copyText(text);
+
+  const targetBtn = btn || document.getElementById('btnCopyLessonPrompt');
+  if (targetBtn) {
+    const origHtml = targetBtn.innerHTML;
+    targetBtn.innerHTML = "✓ Nusxalandi!";
+    targetBtn.style.background = "#059669";
+    targetBtn.style.color = "#ffffff";
+    setTimeout(() => {
+      targetBtn.innerHTML = origHtml;
+      targetBtn.style.background = "#1e293b";
+      targetBtn.style.color = "#38bdf8";
+    }, 1800);
+  }
 }
 
 function completeCurrentLessonDetail() {
-  if (currentActiveLesson && !appState.completedLessons.includes(currentActiveLesson.id)) {
-    appState.completedLessons.push(currentActiveLesson.id);
-    appState.stats.correct += 2;
+  triggerHaptic('success');
+  if (!currentActiveLesson) {
+    closeOverlay('viewLessonDetail');
+    return;
+  }
+
+  const lessonId = currentActiveLesson.id;
+  const wasAlreadyCompleted = appState.completedLessons.includes(lessonId);
+
+  if (!wasAlreadyCompleted) {
+    appState.completedLessons.push(lessonId);
+    appState.stats.correct = (appState.stats.correct || 0) + 2;
     saveState();
   }
+
+  updateDashboardUI();
   closeOverlay('viewLessonDetail');
-  showToast('+20 XP! Dars yakunlandi ✓');
+  showToast('🎉 +20 XP! Dars muvaffaqiyatli yakunlandi ✓');
 }
 
 // Prompt Lab Tab Filtering

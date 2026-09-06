@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>GPTify Uzbekistan — Gamified AI Learning Academy</title>
+  
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- App Styles -->
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         1. TOP BAR CLUSTER & BRANDING
+         ==================================================================== -->
+    <header class="top-header">
+      <div class="profile-cluster" onclick="openProfile()">
+        <div class="avatar-box">
+          <div class="avatar-img" id="userAvatar">👨‍💻</div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="user-meta">
+          <div class="user-name" id="userName">Shuhrat</div>
+          <div class="role-badge" id="userRole">
+            <span>🎓 INSTRUKTOR</span>
+            <span class="arrow">&gt;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Streak Indicator -->
+        <div class="header-streak-pill" id="headerStreakPill">
+          <span>🔥</span> <span id="streakDaysCount">3 kun</span>
+        </div>
+
+        <!-- VIP PRO Badge -->
+        <button id="topVipBadge" class="pro-badge-btn" onclick="openPaywall('Bosh sahifa')">
+          <span>👑</span> <span id="topVipText">VIP</span>
+        </button>
+
+        <button class="icon-btn" onclick="openLeaderboard()" title="Reyting">
+          🏆
+        </button>
+        <button class="icon-btn" onclick="openSettings()" title="Sozlamalar">
+          ⚙️
+        </button>
+      </div>
+    </header>
+
+
+    <!-- ====================================================================
+         2. TAB 1: O'RGANISH (LEARNING ROADMAP & DAILY MISSION)
+         ==================================================================== -->
+    <main id="tabLearn" class="tab-viewport active">
+
+      <!-- Bugungi AI Missiyasi Hero Card -->
+      <section class="hero-mission-card">
+        <div class="mission-badge-row">
+          <span class="mission-tag">🎯 BUGUNGI MISSIYA</span>
+          <span class="mission-time">⏱ 10 daqiqa</span>
+        </div>
+        <div class="mission-title">2-Modul: Prompt Muhandisligi — Aniq Natija Olish San'ati</div>
+        <div class="mission-desc">AI ga oddiy gap emas, aniq topshiriq berishning 3 ta oltin qoidasi (Rol, Kontekst va Natija formati).</div>
+        <div class="mission-footer">
+          <div class="mission-reward">
+            <span class="reward-xp">+50 XP</span>
+            <span class="reward-progress">· 3/14 yakunlandi</span>
+          </div>
+          <button class="mission-start-btn" onclick="openLessonModal(2)">
+            <span>Boshlash</span> <span>➔</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Roadmap Header -->
+      <div class="section-header-row">
+        <div class="section-title">
+          <span>🗺️</span> <span>AI Ta'lim Xaritasi</span>
+        </div>
+        <div class="section-subtext">6 Bosqich · 16 Modul</div>
+      </div>
+
+      <!-- Roadmap Stages List -->
+      <section class="roadmap-list" id="roadmapContainer">
+        <!-- 1-Bosqich -->
+        <div class="roadmap-stage-card completed" onclick="openLessonModal(1)">
+          <div class="stage-status-icon">✓</div>
+          <div class="stage-info">
+            <div class="stage-label">1-Bosqich · Boshlash</div>
+            <div class="stage-name">AI Bilan Tanishuv & Vositalar</div>
+            <div class="stage-desc">ChatGPT, Gemini, Claude va Perplexity qanday ishlaydi?</div>
+          </div>
+          <div class="stage-fraction">3/3 ✓</div>
+        </div>
+
+        <!-- 2-Bosqich -->
+        <div class="roadmap-stage-card active" onclick="openLessonModal(2)">
+          <div class="stage-status-icon current">⚡</div>
+          <div class="stage-info">
+            <div class="stage-label highlight">2-Bosqich · Hozirgi bosqich</div>
+            <div class="stage-name">Professional Prompt Muhandisligi</div>
+            <div class="stage-desc">Rol, Kontekst, Qoliplar va AI bilan muloqot san'ati</div>
+          </div>
+          <div class="stage-fraction in-progress">0/3</div>
+        </div>
+
+        <!-- 3-Bosqich: Hayot va Ishda Qo'llash (Real Keyslar) -->
+        <div class="roadmap-stage-card" onclick="openLessonModal(4)">
+          <div class="stage-status-icon" style="background:rgba(6,182,212,0.18); border:1.5px solid #06b6d4; color:#38bdf8;">💡</div>
+          <div class="stage-info">
+            <div class="stage-label" style="color:#38bdf8;">3-Bosqich · Real Keyslar</div>
+            <div class="stage-name">Hayot va Ishda Qo'llash</div>
+            <div class="stage-desc">Hujjat xulosasi, rasmiy xatlar va oddiy Excel</div>
+          </div>
+          <div class="stage-fraction" style="color:#38bdf8;">0/3</div>
+        </div>
+
+        <!-- 4-Bosqich: Vizual AI — Rasm & Video Yaratish -->
+        <div id="stageCard4" class="roadmap-stage-card locked" onclick="handleStageClick(4, '4-Bosqich: Vizual AI (Rasm va Video)', 7)">
+          <div id="stageIcon4" class="stage-status-icon locked-icon" style="color:#fb7185;">🎨</div>
+          <div class="stage-info">
+            <div id="stageBadge4" class="stage-label" style="color:#fb7185;">4-Bosqich · PRO</div>
+            <div class="stage-name">Vizual AI: Rasm & Video Yaratish</div>
+            <div class="stage-desc">Midjourney, Kling AI va so'zlovchi avatarlar</div>
+          </div>
+          <span id="stagePill4" class="pro-tag-pill">PRO</span>
+        </div>
+
+        <!-- 5-Bosqich -->
+        <div id="stageCard5" class="roadmap-stage-card locked" onclick="handleStageClick(5, '5-Bosqich: Biznes & Daromad', 10)">
+          <div id="stageIcon5" class="stage-status-icon locked-icon">💰</div>
+          <div class="stage-info">
+            <div id="stageBadge5" class="stage-label">5-Bosqich · PRO</div>
+            <div class="stage-name">AI Bilan Biznes & Daromad</div>
+            <div class="stage-desc">Frilans, mijozlarga AI xizmatlar ko'rsatish, savdo botlar</div>
+          </div>
+          <span id="stagePill5" class="pro-tag-pill">PRO</span>
+        </div>
+
+        <!-- 6-Bosqich -->
+        <div id="stageCard6" class="roadmap-stage-card locked" onclick="handleStageClick(6, '6-Bosqich: Master & Diplom', 'exam')">
+          <div id="stageIcon6" class="stage-status-icon locked-icon">🎓</div>
+          <div class="stage-info">
+            <div id="stageBadge6" class="stage-label">6-Bosqich · Final</div>
+            <div class="stage-name">AI Master & Rasmiy Imtihon</div>
+            <div class="stage-desc">Katta imtihon va Shuhrat imzosi bilan rasmiy diplom</div>
+          </div>
+          <span id="stagePill6" class="pro-tag-pill">PRO</span>
+        </div>
+      </section>
+
+      <!-- B2B Consulting Banner -->
+      <div class="cta-banner-card" onclick="openB2BInfo()" style="margin-top:14px;">
+        <div>
+          <div style="font-size:10.5px; font-weight:800; color:#38bdf8; text-transform:uppercase;">💼 Korxona va Biznes uchun</div>
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-top:2px;">AI Trening va Konsalting</div>
+          <div style="font-size:11.5px; color:#94a3b8; margin-top:2px;">Kompaniyangiz jarayonlarini 90% avtomatlashtiring</div>
+        </div>
+        <div style="font-size:20px; color:#38bdf8; font-weight:800; padding-left:10px; flex-shrink:0;">➔</div>
+      </div>
+
+    </main>
+
+
+    <!-- ====================================================================
+         3. TAB 2: TRENAJYOR (PRACTICE, TICKETS, QUIZ & OCTAGON)
+         ==================================================================== -->
+    <main id="tabPractice" class="tab-viewport">
+
+      <!-- Practice Stats Header -->
+      <section class="practice-stats-card">
+        <div class="practice-stats-top">
+          <span style="font-size:13px; font-weight:800; color:#fff;">🎯 Mening Natijalarim</span>
+          <span style="font-size:12px; font-weight:800; color:#10b981;">95% Muvaffaqiyat</span>
+        </div>
+        <div class="practice-stats-grid">
+          <div class="pstat-item">
+            <div class="pstat-label">To'g'ri</div>
+            <div class="pstat-value green" id="statCorrect">1240</div>
+          </div>
+          <div class="pstat-item">
+            <div class="pstat-label">Xato</div>
+            <div class="pstat-value red" id="statWrong">10</div>
+          </div>
+          <div class="pstat-item">
+            <div class="pstat-label">Biletlar</div>
+            <div class="pstat-value gold">8/10</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Practice Modes Grid (Blitz & Duel) -->
+      <div class="section-header-row" style="margin-top:10px;">
+        <div class="section-title">
+          <span>⚡</span> <span>Tezkor Rejimlar</span>
+        </div>
+      </div>
+
+      <div class="quick-modes-grid">
+        <!-- Blitz Quiz -->
+        <div class="mode-card blitz" onclick="startQuickQuiz()">
+          <div class="mode-icon-circle">▶</div>
+          <div class="mode-card-title">Blitz Test</div>
+          <div class="mode-card-sub">2 daqiqada 5 ta savol</div>
+        </div>
+
+        <!-- 1v1 Oktagon Battle -->
+        <div class="mode-card octagon" onclick="openOctagon()">
+          <div class="mode-icon-circle">⚔️</div>
+          <div class="mode-card-title">Oktagon Duel</div>
+          <div class="mode-card-sub">AI bilan 1v1 jang</div>
+        </div>
+      </div>
+
+      <!-- Real Exam Banner -->
+      <div class="real-exam-card" onclick="startRealExam()">
+        <div>
+          <div class="exam-badge">Rasmiy Test</div>
+          <div class="exam-title">🏆 Real AI Imtihon (AI Prava)</div>
+          <div class="exam-sub">20 ta savol · 80% to'plang va rasmiy diplom oling</div>
+        </div>
+        <span class="exam-arrow">➔</span>
+      </div>
+
+      <!-- Mistakes & Bookmarks Chips -->
+      <div class="bank-chips-grid">
+        <div class="bank-chip mistakes" onclick="openMistakes()">
+          <span style="font-size:20px;">💔</span>
+          <div>
+            <div style="font-size:12.5px; font-weight:800; color:#fff;">Xatolar Banki</div>
+            <div style="font-size:11px; color:#ef4444;" id="mistakesCountPractice">10 ta savol</div>
+          </div>
+        </div>
+
+        <div class="bank-chip bookmarks" onclick="openBookmarks()">
+          <span style="font-size:20px;">🔖</span>
+          <div>
+            <div style="font-size:12.5px; font-weight:800; color:#fff;">Saqlanganlar</div>
+            <div style="font-size:11px; color:#facc15;">2 ta belgilangan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biletlar Ro'yxati (1-10 with Star Ratings) -->
+      <div class="section-header-row" style="margin-top:12px;">
+        <div class="section-title">
+          <span>🎫</span> <span>Imtihon Biletlari (1–10)</span>
+        </div>
+        <div class="section-subtext">10 ta savoldan</div>
+      </div>
+
+      <div class="tickets-grid" id="ticketsGridContainer">
+        <!-- 10 Tickets rendered dynamically via app.js -->
+      </div>
+
+    </main>
+
+
+    <!-- ====================================================================
+         4. TAB 3: PROMPT LAB (HIGH-VALUE TOOLBOX)
+         ==================================================================== -->
+    <main id="tabPromptLab" class="tab-viewport">
+
+      <div class="promptlab-header">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:18px; font-weight:900; color:#fff; display:flex; align-items:center; gap:6px;">
+            <span>🤖</span> <span>Prompt Lab</span>
+          </div>
+          <span style="font-size:11px; background:rgba(6,182,212,0.15); color:#38bdf8; font-weight:800; padding:2px 8px; border-radius:99px; border:1px solid rgba(6,182,212,0.3);">
+            Tayyor AI Qoliplari
+          </span>
+        </div>
+        <div style="font-size:11.5px; color:#94a3b8; margin-top:2px;">
+          Ish, o'qish va biznes uchun 1-bosishda nusxalash mumkin bo'lgan professional promptlar to'plami.
+        </div>
+      </div>
+
+      <!-- Horizontal Filter Chips -->
+      <div class="filter-chips-bar" id="promptFilterChips">
+        <button class="filter-chip active" onclick="filterPromptsTab('all', this)">Barchasi (10)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('visual', this)">🎨 Rasm & Video</button>
+        <button class="filter-chip" onclick="filterPromptsTab('office', this)">📝 Ofis & Xatlar</button>
+        <button class="filter-chip" onclick="filterPromptsTab('sales', this)">💰 Savdo & Mijoz</button>
+        <button class="filter-chip" onclick="filterPromptsTab('smm', this)">📱 SMM & Post</button>
+        <button class="filter-chip" onclick="filterPromptsTab('legal', this)">⚖️ Huquq & Soliq</button>
+        <button class="filter-chip" onclick="filterPromptsTab('study', this)">🌍 Til & O'qish</button>
+      </div>
+
+      <!-- Prompt Cards List -->
+      <div class="prompt-cards-list" id="promptTabCardsContainer">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+
+    </main>
+
+
+    <!-- ====================================================================
+         5. TAB 4: PROFIL (VIP, CERTIFICATE, FAQ, LEADERBOARD)
+         ==================================================================== -->
+    <main id="tabProfile" class="tab-viewport">
+
+      <!-- Profile Card -->
+      <section class="profile-card">
+        <div class="profile-top-row">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar-circle" id="profAvatarBig">👨‍💻</div>
+            <div class="profile-online-badge"></div>
+          </div>
+          <div class="profile-info-block">
+            <div class="profile-name" id="profNameBig">Shuhrat</div>
+            <div class="profile-badge-role">🎓 GPTify Asoschisi & Instruktor</div>
+            <div class="profile-user-id">ID: #UZ-883492 · Toshkent</div>
+          </div>
+          <button class="profile-edit-btn" onclick="openSettings()">
+            Tahrirlash ✏️
+          </button>
+        </div>
+
+        <!-- Level Bar -->
+        <div class="profile-xp-box">
+          <div class="xp-meta-row">
+            <span class="xp-level-title">⚡ 4-Daraja: AI Amaliyotchi</span>
+            <span class="xp-numbers">1,450 / 2,000 XP</span>
+          </div>
+          <div class="xp-bar-track">
+            <div class="xp-bar-fill" style="width: 72%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rasmiy Sertifikat Generator & Preview -->
+      <section class="cert-card-preview">
+        <div class="cert-card-head">
+          <div>
+            <div class="cert-kicker">Rasmiy Hujjat</div>
+            <div class="cert-title">🎓 GPTify AI Diplomi & Sertifikat</div>
+            <div class="cert-subtitle">Imtihondan 80% to'planganda beriladi</div>
+          </div>
+          <span style="font-size:24px;">🎖️</span>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="certCanvasProfile" width="700" height="420"></canvas>
+        </div>
+
+        <button class="cert-download-btn" onclick="downloadCertificate()">
+          <span>📥 Rasmiy Sertifikatni Yuklab Olish (HD PNG)</span>
+        </button>
+      </section>
+
+      <!-- Leaderboard Preview -->
+      <section class="leaderboard-mini-card">
+        <div class="card-head-between">
+          <div class="card-head-title">
+            <span>🏆</span> <span>Haftalik Reyting (Top O'quvchilar)</span>
+          </div>
+          <button class="link-btn" onclick="openLeaderboard()">Barchasi ➔</button>
+        </div>
+        <div class="leaderboard-mini-list" id="miniLeaderboardContainer">
+          <!-- Filled dynamically -->
+        </div>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section class="faq-section">
+        <div class="section-title" style="margin-bottom:8px;">
+          <span>❓</span> <span>Ko'p So'raladigan Savollar (FAQ)</span>
+        </div>
+        <div id="faqAccordionContainerTab">
+          <!-- Filled dynamically -->
+        </div>
+      </section>
+
+      <!-- Community Links -->
+      <div class="community-links-block">
+        <a href="https://t.me/GPTify_UZ" target="_blank" class="community-btn telegram-admin">
+          <span>💬</span> <span>Adminga Savol Yozish (@GPTify_UZ)</span>
+        </a>
+        <a href="https://t.me/gptifyuz" target="_blank" class="community-btn telegram-channel">
+          <span>📢</span> <span>Rasmiy Kanalimiz (@gptifyuz)</span>
+        </a>
+      </div>
+
+    </main>
+
+
+    <!-- ====================================================================
+         6. FLOATING 4-TAB BOTTOM DOCK
+         ==================================================================== -->
+    <nav class="bottom-dock">
+      <button class="dock-btn active" id="dockNav-learn" onclick="switchAppTab('learn')">
+        <span class="dock-icon">📚</span>
+        <span class="dock-label">O'rganish</span>
+      </button>
+
+      <button class="dock-btn" id="dockNav-practice" onclick="switchAppTab('practice')">
+        <span class="dock-icon">🎯</span>
+        <span class="dock-label">Trenajyor</span>
+      </button>
+
+      <button class="dock-btn" id="dockNav-promptlab" onclick="switchAppTab('promptlab')">
+        <span class="dock-icon">💡</span>
+        <span class="dock-label">Prompt Lab</span>
+      </button>
+
+      <button class="dock-btn" id="dockNav-profile" onclick="switchAppTab('profile')">
+        <span class="dock-icon">👤</span>
+        <span class="dock-label">Profil</span>
+      </button>
+    </nav>
+
+  </div><!-- /app-container -->
+
+
+  <!-- ====================================================================
+       7. FULLSCREEN MODAL VIEWS
+       ==================================================================== -->
+
+  <!-- View A: Quiz Player -->
+  <div id="viewQuiz" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">
+        <span id="quizModeTitle">▶ Test Yechish</span>
+      </div>
+      <button class="close-btn" onclick="exitQuiz()">✕</button>
+    </div>
+
+    <div class="quiz-topbar">
+      <div class="quiz-progress-text" id="quizCounterText">Savol 1 / 10</div>
+      <div class="quiz-timer" id="quizTimerBox" style="display:none;">⏱ 20:00</div>
+      <button class="icon-btn" id="bookmarkBtn" onclick="toggleBookmarkCurrentQuestion()" title="Saqlash">
+        🔖
+      </button>
+    </div>
+
+    <div class="quiz-card">
+      <div class="question-text" id="quizQuestionText">Yuklanmoqda...</div>
+    </div>
+
+    <div class="options-list" id="quizOptionsList"></div>
+
+    <div class="explanation-box" id="quizExplanationBox">
+      <div style="font-weight:700; color:#38bdf8; margin-bottom:4px;">💡 AI Tushuntirish & Qoida:</div>
+      <div id="quizExplanationText"></div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-secondary" onclick="exitQuiz()">Chiqish</button>
+      <button class="btn-primary" id="quizNextBtn" onclick="nextQuestion()" disabled>
+        Keyingisi ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- View B: Dars Tafsiloti (Lesson Reader) -->
+  <div id="viewLessonDetail" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title" id="lessonDetailTitle">Dars Mavzusi</div>
+      <button class="close-btn" onclick="closeOverlay('viewLessonDetail')">✕</button>
+    </div>
+    
+    <div style="font-size:11.5px; color:#10b981; font-weight:800; text-transform:uppercase; margin-bottom:4px;" id="lessonDetailCategory">
+      1-Bosqich · Boshlash
+    </div>
+    <div style="font-size:18px; font-weight:900; color:#fff; line-height:1.3; margin-bottom:12px;" id="lessonDetailHeading">
+      AI Nima va Qaysi Biri Yaxshiroq?
+    </div>
+
+    <!-- Takeaway -->
+    <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:14px; padding:12px; margin-bottom:12px;">
+      <div style="font-size:11px; font-weight:800; color:#facc15; margin-bottom:3px;">🎯 Asosiy Xulosa (Takeaway):</div>
+      <div style="font-size:12.5px; color:#fef08a; line-height:1.45;" id="lessonDetailTakeaway"></div>
+    </div>
+
+    <!-- Core Concept -->
+    <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:14px; margin-bottom:12px;">
+      <div style="font-size:12px; font-weight:800; color:#38bdf8; margin-bottom:6px;">📖 Oddiy Tushuntirish:</div>
+      <div style="font-size:12.5px; color:#e2e8f0; line-height:1.6;" id="lessonDetailConcept"></div>
+    </div>
+
+    <!-- Comparison: Bad vs Good -->
+    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+      <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); border-radius:12px; padding:10px 12px;">
+        <div style="font-size:11px; font-weight:800; color:#ef4444; margin-bottom:3px;">❌ Oddiy / Xato so'rov:</div>
+        <div style="font-size:12px; color:#fca5a5; font-style:italic;" id="lessonDetailBadPrompt"></div>
+      </div>
+
+      <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:10px 12px;">
+        <div style="font-size:11px; font-weight:800; color:#10b981; margin-bottom:3px;">✅ Professional GPTify usuli:</div>
+        <div style="font-size:12px; color:#a7f3d0; font-family:'JetBrains Mono', monospace;" id="lessonDetailGoodPrompt"></div>
+      </div>
+    </div>
+
+    <!-- Copyable Prompt Template -->
+    <div style="background:#0b0f19; border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:12px; margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <span style="font-size:11px; font-weight:800; color:#facc15;">⚡ Nusxalab ishlatish uchun:</span>
+        <button onclick="copyLessonPromptDetail()" style="background:#1e293b; border:none; color:#38bdf8; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; cursor:pointer;">
+          📋 Nusxalash
+        </button>
+      </div>
+      <div style="font-size:11.5px; color:#cbd5e1; font-family:'JetBrains Mono', monospace; line-height:1.5;" id="lessonDetailPracticalPrompt"></div>
+    </div>
+
+    <div style="margin-top:auto; display:flex; gap:10px;">
+      <button class="btn-primary" onclick="completeCurrentLessonDetail()" style="width:100%;">
+        ✓ Darsni yakunladim (+20 XP)
+      </button>
+    </div>
+  </div>
+
+  <!-- View C: Imtihon Natijasi -->
+  <div id="viewResult" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">🏁 Natija & Sertifikat</div>
+      <button class="close-btn" onclick="closeOverlay('viewResult')">✕</button>
+    </div>
+
+    <div class="results-card">
+      <div class="results-badge-icon" id="resultIcon">🏆</div>
+      <div class="results-title" id="resultStatus">Ajoyib natija!</div>
+      <div class="results-percent" id="resultPercent">90%</div>
+
+      <div class="results-stats-row">
+        <span class="stat-correct">✓ <span id="resCorrect">18</span> to'g'ri</span>
+        <span class="stat-wrong">✗ <span id="resWrong">2</span> xato</span>
+      </div>
+
+      <div id="certWrapper" style="display:none; margin-top:16px;">
+        <div style="font-size:13px; font-weight:700; color:#38bdf8; margin-bottom:8px;">
+          🎓 Sizning Rasmiy GPTify AI Sertifikatingiz:
+        </div>
+        <canvas id="certCanvas" width="800" height="500"></canvas>
+        <button class="btn-primary" onclick="downloadCertificate()" style="margin-top:10px; width:100%;">
+          📥 Sertifikatni Yuklab Olish (HD)
+        </button>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:16px;">
+        <button class="btn-secondary" onclick="closeOverlay('viewResult')" style="flex:1;">
+          Asosiy menyu
+        </button>
+        <button class="btn-primary" onclick="retryLastQuiz()" style="flex:1;">
+          Qayta topshirish
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View D: Oktagon Duel -->
+  <div id="viewOctagon" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">⚔️ Oktagon AI Dueli</div>
+      <button class="close-btn" onclick="closeOverlay('viewOctagon')">✕</button>
+    </div>
+    <div class="results-card">
+      <div class="results-badge-icon">🤺</div>
+      <div class="results-title">Birga bir AI Jang</div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">
+        5 ta tezkor AI savolida virtual opponent yoki do'stingiz bilan bilim sinash!
+      </p>
+      <div style="display:flex; justify-content:space-around; align-items:center; background:#0b0f19; padding:14px; border-radius:14px; margin-bottom:16px;">
+        <div>
+          <div style="font-size:24px;">👨‍💻</div>
+          <div style="font-size:14px; font-weight:800; color:#fff;" id="duelUser">Shuhrat</div>
+          <div style="font-size:11px; color:#22c55e;">Ball: <span id="duelUserScore">0</span></div>
+        </div>
+        <div style="font-size:20px; font-weight:900; color:#facc15;">VS</div>
+        <div>
+          <div style="font-size:24px;" id="duelBotAvatar">🤖</div>
+          <div style="font-size:14px; font-weight:800; color:#fff;" id="duelBotName">GPTify Bot</div>
+          <div style="font-size:11px; color:#ef4444;">Ball: <span id="duelBotScore">0</span></div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="startOctagonDuel()" style="width:100%;">
+        ⚔️ Duelni Boshlash
+      </button>
+    </div>
+  </div>
+
+  <!-- View E: Xatolarni Tuzatish -->
+  <div id="viewMistakes" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">💔 Xatolarni Tuzatish Banki</div>
+      <button class="close-btn" onclick="closeOverlay('viewMistakes')">✕</button>
+    </div>
+    <div id="mistakesListContainer"></div>
+    <button class="btn-primary" id="solveMistakesBtn" onclick="solveAllMistakes()" style="margin-top:auto;">
+      🔄 Barcha xatolarni qayta yechish
+    </button>
+  </div>
+
+  <!-- View F: Saqlanganlar (Bookmarks) -->
+  <div id="viewBookmarks" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">🔖 Saqlangan Savollar</div>
+      <button class="close-btn" onclick="closeOverlay('viewBookmarks')">✕</button>
+    </div>
+    <div id="bookmarksListContainer"></div>
+  </div>
+
+  <!-- View G: Reyting (Leaderboard) -->
+  <div id="viewLeaderboard" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">🏆 Haftalik Top O'quvchilar</div>
+      <button class="close-btn" onclick="closeOverlay('viewLeaderboard')">✕</button>
+    </div>
+    <div id="leaderboardListContainer"></div>
+  </div>
+
+  <!-- View H: B2B Trening & Konsalting -->
+  <div id="viewB2B" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title">💼 B2B AI Konsalting & Trening</div>
+      <button class="close-btn" onclick="closeOverlay('viewB2B')">✕</button>
+    </div>
+    <div class="quiz-card" style="margin-bottom:12px;">
+      <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:6px;">Biznesingizni AI bilan 10x Tezlashtiring</div>
+      <div style="font-size:13px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+        O'zbekistondagi kompaniyalar uchun sun'iy intellekt auditi, xodimlar uchun amaliy treninglar va maxsus AI avtomatlashtirish yechimlari.
+      </div>
+      <div style="font-size:12.5px; color:#34d399; font-weight:700; margin-bottom:4px;">Biz taklif etamiz:</div>
+      <ul style="font-size:12px; color:#94a3b8; line-height:1.6; padding-left:16px; margin-bottom:12px;">
+        <li>24/7 AI Savdo Operatorlari (Telegram & Instagram)</li>
+        <li>Didox va Soliq.uz B2B shartnomalar auditi</li>
+        <li>Xodimlar unumdorligini 90% ga oshirish</li>
+      </ul>
+    </div>
+    <div style="margin-top:auto;">
+      <a href="https://t.me/GPTify_UZ" target="_blank" class="btn-primary" style="text-decoration:none; text-align:center;">
+        📩 B2B Bo'yicha Adminga Murojaat Qilish
+      </a>
+    </div>
+  </div>
+
+  <!-- View I: Freemium VIP Paywall (Viral Quest: Telegram Channel + 3 Friends) -->
+  <div id="viewPaywall" class="view-overlay">
+    <div class="view-header">
+      <div class="view-header-title" style="color:#facc15;">👑 GPTify VIP & Bepul Ochish</div>
+      <button class="close-btn" onclick="closeOverlay('viewPaywall')">✕</button>
+    </div>
+    <div style="text-align:center; padding:4px 0 16px 0;">
+      <div style="font-size:38px; margin-bottom:4px;">🎁</div>
+      <div style="font-size:19px; font-weight:900; color:#fff;">VIP Bosqichlarni Bepul Ochish</div>
+      <div style="font-size:12px; color:#94a3b8; margin:4px 0 14px 0;" id="paywallContextText">0 UZS evaziga to'liq kirish huquqi</div>
+
+      <!-- Free Promo Hero Banner -->
+      <div style="background:linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,95,70,0.3)); border:1.5px solid #10b981; border-radius:16px; padding:12px 14px; margin-bottom:14px; text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <span style="background:#10b981; color:#042f1f; font-size:9.5px; font-weight:900; padding:2px 8px; border-radius:99px;">
+            ⚡ 100% BEPUL AKSİYA
+          </span>
+          <span style="text-decoration:line-through; color:#94a3b8; font-size:12px; font-weight:700;">49,000 UZS</span>
+        </div>
+        <div style="font-size:12.5px; color:#e2e8f0; line-height:1.45;">
+          VIP darslarni ochish uchun pul to'lash shart emas! Quyidagi <b>2 ta oddiy shartni</b> bajaring va VIP statusni umrbod bepul oling:
+        </div>
+      </div>
+
+      <!-- TASK 1: TELEGRAM CHANNEL -->
+      <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:13px; margin-bottom:12px; text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">📢</span>
+            <div>
+              <div style="font-size:12.5px; font-weight:800; color:#fff;">1-vazifa: Telegram kanalimiz</div>
+              <div style="font-size:11px; color:#94a3b8;">@GPTifyUZ kanaliga a'zo bo'ling</div>
+            </div>
+          </div>
+          <span id="channelStatusBadge" style="font-size:10px; font-weight:800; padding:3px 8px; border-radius:99px; background:rgba(255,255,255,0.08); color:#94a3b8;">Kutilmoqda</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="https://t.me/GPTifyUZ" target="_blank" onclick="handleChannelSubscribeClick()" style="flex:1; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); color:#38bdf8; font-size:12px; font-weight:800; padding:8px; border-radius:10px; text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center; gap:5px;">
+            <span>✈️ Kanalga A'zo Bo'lish</span>
+          </a>
+          <button id="btnVerifyChannel" onclick="verifyChannelSubscription()" style="background:#1e293b; border:1px solid rgba(255,255,255,0.12); color:#cbd5e1; font-size:11px; font-weight:700; padding:8px 12px; border-radius:10px; cursor:pointer;">
+            Tekshirish
+          </button>
+        </div>
+      </div>
+
+      <!-- TASK 2: 3 FRIENDS REFERRAL -->
+      <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:13px; margin-bottom:14px; text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">👥</span>
+            <div>
+              <div style="font-size:12.5px; font-weight:800; color:#fff;">2-vazifa: 3 ta do'stni taklif qiling</div>
+              <div style="font-size:11px; color:#94a3b8;">Do'stlaringiz ham AI o'rganishsin</div>
+            </div>
+          </div>
+          <span id="referralProgressBadge" style="font-size:11px; font-weight:900; color:#facc15; background:rgba(245,158,11,0.15); padding:3px 8px; border-radius:99px;">0 / 3 ta</span>
+        </div>
+
+        <!-- Progress bar -->
+        <div style="width:100%; height:8px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; margin:10px 0 10px 0;">
+          <div id="referralProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, #f59e0b, #10b981); transition:width 0.3s ease; border-radius:99px;"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex; gap:8px;">
+          <button onclick="shareInviteLink()" style="flex:1; background:linear-gradient(135deg, #0284c7, #0369a1); border:none; color:#fff; font-size:12px; font-weight:800; padding:9px 10px; border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; box-shadow:0 4px 12px rgba(2,132,199,0.3);">
+            <span>📲 Do'stlarga Ulashish</span>
+          </button>
+          <button onclick="simulateAddFriend()" style="background:rgba(255,255,255,0.08); border:1px dashed rgba(255,255,255,0.25); color:#94a3b8; font-size:11px; font-weight:700; padding:9px 10px; border-radius:10px; cursor:pointer;" title="Sinov uchun: 1 ta do'st qo'shish">
+            +1 Do'st (Test)
+          </button>
+        </div>
+      </div>
+
+      <!-- Benefits checklist -->
+      <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:11px; margin-bottom:16px; text-align:left;">
+        <div style="font-size:11.5px; font-weight:800; color:#38bdf8; margin-bottom:5px;">Sizga nimalar ochiladi:</div>
+        <div style="font-size:11px; color:#cbd5e1; line-height:1.5;">
+          ✓ 4-Bosqich: Midjourney, Kling AI & Vizual kontent<br>
+          ✓ 5-Bosqich: AI bilan Biznes & Daromad<br>
+          ✓ 6-Bosqich: Master imtihon & Shuhrat imzosi bilan Sertifikat
+        </div>
+      </div>
+
+      <!-- Claim button -->
+      <button id="btnClaimPro" onclick="claimProReward()" disabled style="width:100%; background:#1e293b; border:1px solid rgba(255,255,255,0.1); color:#64748b; font-size:13.5px; font-weight:900; padding:13px; border-radius:15px; cursor:not-allowed; transition:all 0.25s ease;">
+        🔒 Shartlarni bajaring (0/2)
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastMsg" class="toast-msg">
+    <span>✅</span>
+    <span id="toastText">Nusxalandi!</span>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="quiz_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

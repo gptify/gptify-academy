@@ -1,0 +1,1834 @@
+/* =============================================================================
+   GPTIFY UZBEKISTAN — GAMIFIED AI LEARNING TELEGRAM MINI APP (TMA)
+   Modeled after Driver School Test UI ("Oson Prava" / "Avto Test")
+   ============================================================================= */
+
+:root {
+  --bg-main: #0c1017;
+  --bg-card: #131926;
+  --bg-card-hover: #1b2336;
+  --bg-card-elev: #1a2235;
+  --bg-pill: #131926;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(34, 197, 94, 0.35);
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-green: #22c55e;
+  --accent-green-dark: #15803d;
+  --accent-green-glow: rgba(34, 197, 94, 0.4);
+
+  --accent-blue: #0284c7;
+  --accent-blue-light: #38bdf8;
+  --accent-blue-gradient: linear-gradient(135deg, #0284c7, #38bdf8);
+
+  --accent-slate: #475569;
+  --accent-slate-gradient: linear-gradient(135deg, #64748b, #475569);
+
+  --accent-red: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-purple: #a855f7;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 26px;
+  --radius-pill: 9999px;
+
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  line-height: 1.4;
+}
+
+/* Telegram Native Container Frame */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  padding: 12px 16px 28px 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ==========================================================================
+   1. TOP PROFILE & NAVIGATION BAR
+   ========================================================================== */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0 14px 0;
+}
+
+.profile-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatar-box {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #1e293b;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 11px;
+  height: 11px;
+  background-color: var(--accent-green);
+  border: 2px solid var(--bg-main);
+  border-radius: 50%;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.role-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #facc15;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.role-badge span.arrow {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.15s ease;
+}
+
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+.notif-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--accent-red);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   2. STREAK & PROGRESS BAR WIDGET
+   ========================================================================== */
+.streak-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.streak-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.challenge-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.streak-days {
+  font-size: 13px;
+  font-weight: 700;
+  color: #facc15;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.streak-mid {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.progress-big-percent {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.stat-counters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stat-correct { color: var(--accent-green); }
+.stat-wrong { color: var(--accent-red); }
+.stat-skipped { color: var(--text-muted); }
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #1e293b;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #4ade80);
+  border-radius: var(--radius-pill);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+}
+
+/* ==========================================================================
+   3. ROW 1: QUICK PILLS (Barcha Testlar & Xatolarni Tuzatish)
+   ========================================================================== */
+.pills-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.pill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.pill-card:active {
+  transform: scale(0.97);
+  background: var(--bg-card-hover);
+}
+
+.pill-icon {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-count {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  margin-left: auto;
+}
+
+.badge-red {
+  background: var(--accent-red);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.badge-yellow {
+  background: #facc15;
+  color: #000;
+}
+
+/* ==========================================================================
+   4. ROW 2: FEATURED CARDS (Darslik & Prompt Lab)
+   ========================================================================== */
+.featured-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.darslik-card {
+  background: var(--accent-blue-gradient);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.darslik-card:active {
+  transform: scale(0.97);
+}
+
+.darslik-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.darslik-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.darslik-sub {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.darslik-progress-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.darslik-bar {
+  width: 70px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.darslik-bar-fill {
+  height: 100%;
+  width: 25%;
+  background: #ffffff;
+  border-radius: 99px;
+}
+
+.darslik-fraction {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.darslik-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.promptlab-card {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  border-radius: var(--radius-xl);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.25);
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.promptlab-card:active {
+  transform: scale(0.97);
+}
+
+.promptlab-visual {
+  font-size: 32px;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.promptlab-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   5. ROW 3: MAIN ACTION CARDS (Test Yechish & Oktagon)
+   ========================================================================== */
+.main-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.action-card-play {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.action-card-play:active {
+  transform: scale(0.97);
+}
+
+.play-circle {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--accent-green-dark);
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.action-card-sub {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.action-card-battle {
+  background: var(--accent-slate-gradient);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(71, 85, 105, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.action-card-battle:active {
+  transform: scale(0.97);
+}
+
+.battle-circle {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #334155;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   6. GRID ROWS (Mavzular, Biletlar, 50/100, Real Imtihon, Chalg'ituvchi, Saqlanganlar)
+   ========================================================================== */
+.nav-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.grid-item-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.grid-item-pill:active {
+  transform: scale(0.97);
+  background: var(--bg-card-hover);
+}
+
+.grid-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.grid-item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   7. MODAL / FULLSCREEN VIEWS
+   ========================================================================== */
+.view-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-main);
+  z-index: 2000;
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
+  animation: slideUp 0.25s ease-out;
+}
+
+.view-overlay > * {
+  flex-shrink: 0;
+}
+
+.view-overlay.active {
+  display: flex;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.view-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+}
+
+.view-header-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   8. QUIZ PLAYER SCREEN (Savol-Javob)
+   ========================================================================== */
+.quiz-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.quiz-progress-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.quiz-timer {
+  font-size: 14px;
+  font-weight: 800;
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.15);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 20px 18px;
+  margin-bottom: 16px;
+}
+
+.question-text {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.option-btn {
+  background: var(--bg-card-elev);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  text-align: left;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  word-break: break-word;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.option-btn:active {
+  transform: scale(0.98);
+}
+
+.option-letter {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.option-btn.correct {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--accent-green);
+  color: #fff;
+}
+.option-btn.correct .option-letter {
+  background: var(--accent-green);
+  color: #000;
+}
+
+.option-btn.wrong {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: var(--accent-red);
+  color: #fff;
+}
+.option-btn.wrong .option-letter {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+.option-btn.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Explanation Box */
+.explanation-box {
+  background: rgba(15, 23, 42, 0.8);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #cbd5e1;
+  display: none;
+  line-height: 1.5;
+}
+
+.explanation-box.active {
+  display: block;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--accent-green);
+  border: none;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   9. CERTIFICATE & RESULTS SCREEN
+   ========================================================================== */
+.results-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.results-badge-icon {
+  font-size: 54px;
+  margin-bottom: 8px;
+}
+
+.results-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.results-percent {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--accent-green);
+  margin-bottom: 12px;
+}
+
+.results-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+#certCanvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin: 12px auto;
+  display: block;
+}
+
+/* ==========================================================================
+   10. DARSLIK CURRICULUM LIST
+   ========================================================================== */
+.lesson-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lesson-item:active {
+  background: var(--bg-card-hover);
+}
+
+.lesson-num-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(2, 132, 199, 0.2);
+  color: var(--accent-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.lesson-content-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-title-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+
+.lesson-sub-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   11. PROMPT LAB INTERACTIVE PLAYGROUND
+   ========================================================================== */
+.prompt-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.prompt-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.prompt-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.prompt-copy-btn {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: var(--accent-green);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.prompt-body {
+  background: #0b0f19;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* ==========================================================================
+   11.2. FAQ ACCORDION & CTA BUTTONS
+   ========================================================================== */
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.faq-question {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.faq-arrow {
+  font-size: 14px;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.faq-item.open .faq-arrow {
+  transform: rotate(180deg);
+  color: var(--accent-green);
+}
+
+.faq-answer {
+  padding: 0 16px 14px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: none;
+}
+
+.faq-item.open .faq-answer {
+  display: block;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, rgba(29, 158, 117, 0.25), rgba(15, 23, 42, 0.8));
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.cta-banner-card > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.cta-banner-card > div:first-child > div {
+  word-break: break-word;
+}
+
+.cta-btn-telegram {
+  background: #24A1DE;
+  border: none;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   12. TOAST NOTIFICATION
+   ========================================================================== */
+.toast-msg {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--accent-green);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 3000;
+  transition: opacity 0.22s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.22s ease;
+  pointer-events: none;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   13. 4-TAB REDESIGN STYLES (EDTECH GAMIFIED DOCK & CARDS)
+   ========================================================================== */
+.header-streak-pill {
+  background: #151d2e;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 4px 10px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #facc15;
+}
+
+.tab-viewport {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  padding-bottom: 105px;
+  animation: fadeInTab 0.22s ease-out;
+}
+.tab-viewport > * {
+  flex-shrink: 0;
+}
+.tab-viewport.active {
+  display: flex;
+}
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom Glass Dock */
+.bottom-dock {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 28px);
+  max-width: 452px;
+  background: rgba(18, 24, 38, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 4px 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(16, 185, 129, 0.1);
+  z-index: 1000;
+}
+.dock-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px 0;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+.dock-btn .dock-icon {
+  font-size: 20px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dock-btn .dock-label {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.dock-btn.active {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+.dock-btn.active .dock-icon {
+  transform: scale(1.18) translateY(-1px);
+}
+
+/* Hero Mission Card */
+.hero-mission-card {
+  background: linear-gradient(135deg, #065f46, #042f2e);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(6, 95, 70, 0.3);
+}
+.mission-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.mission-tag {
+  background: rgba(0, 0, 0, 0.35);
+  color: #a7f3d0;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 1px solid rgba(52, 211, 153, 0.2);
+}
+.mission-time {
+  font-size: 11.5px;
+  color: #d1fae5;
+  font-weight: 700;
+}
+.mission-title {
+  font-size: 16.5px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+.mission-desc {
+  font-size: 12px;
+  color: #a7f3d0;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.mission-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mission-reward {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reward-xp {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #facc15;
+}
+.reward-progress {
+  color: #6ee7b7;
+  font-size: 11px;
+}
+.mission-start-btn {
+  background: #fff;
+  color: #064e3b;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 99px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Header Rows */
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-subtext {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Roadmap Stages List */
+.roadmap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.roadmap-stage-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.roadmap-stage-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+.roadmap-stage-card.active {
+  border: 1.5px solid var(--accent-green);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  background: linear-gradient(135deg, rgba(18, 24, 38, 0.95), rgba(16, 185, 129, 0.08));
+}
+.roadmap-stage-card.locked {
+  opacity: 0.65;
+}
+.stage-status-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1.5px solid #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #10b981;
+  flex-shrink: 0;
+}
+.stage-status-icon.current {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 2px solid #fff;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
+}
+.stage-status-icon.locked-icon {
+  background: #1a2333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #64748b;
+  font-size: 16px;
+}
+.stage-info {
+  flex: 1;
+  min-width: 0;
+}
+.stage-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #10b981;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stage-label.highlight {
+  color: #34d399;
+}
+.stage-name {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fff;
+  word-break: break-word;
+  line-height: 1.3;
+  margin: 2px 0 1px 0;
+}
+.stage-desc {
+  font-size: 11px;
+  color: #94a3b8;
+  word-break: break-word;
+  line-height: 1.35;
+}
+.stage-fraction {
+  font-size: 11px;
+  font-weight: 800;
+  color: #10b981;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.stage-fraction.in-progress {
+  color: #facc15;
+}
+.pro-tag-pill {
+  font-size: 10px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #facc15;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 99px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Practice Stats Card */
+.practice-stats-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.practice-stats-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.practice-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  text-align: center;
+}
+.pstat-item {
+  background: #172033;
+  padding: 8px;
+  border-radius: 12px;
+}
+.pstat-label {
+  font-size: 11px;
+  color: #94a3b8;
+}
+.pstat-value {
+  font-size: 17px;
+  font-weight: 900;
+}
+.pstat-value.green { color: #10b981; }
+.pstat-value.red { color: #ef4444; }
+.pstat-value.gold { color: #facc15; }
+
+/* Quick Modes Grid */
+.quick-modes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.mode-card {
+  border-radius: 20px;
+  padding: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.mode-card:active {
+  transform: scale(0.97);
+}
+.mode-card.blitz {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+}
+.mode-card.octagon {
+  background: linear-gradient(135deg, #475569, #334155);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.mode-icon-circle {
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #059669;
+  margin-bottom: 6px;
+}
+.mode-card.octagon .mode-icon-circle {
+  color: #334155;
+}
+.mode-card-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}
+.mode-card-sub {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Real Exam Card */
+.real-exam-card {
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(49, 46, 129, 0.35);
+}
+.exam-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.exam-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}
+.exam-sub {
+  font-size: 11px;
+  color: #c7d2fe;
+}
+.exam-arrow {
+  font-size: 20px;
+  color: #a5b4fc;
+  font-weight: 900;
+}
+
+/* Bank Chips Grid */
+.bank-chips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.bank-chip {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.bank-chip.mistakes { border: 1px solid rgba(239, 68, 68, 0.25); }
+.bank-chip.bookmarks { border: 1px solid rgba(245, 158, 11, 0.25); }
+
+/* Tickets Grid */
+.tickets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.ticket-card-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.ticket-card-item:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-card-hover);
+}
+
+/* Prompt Lab Filter Chips & List */
+.promptlab-header {
+  margin-bottom: 12px;
+}
+.filter-chips-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.filter-chips-bar::-webkit-scrollbar {
+  display: none;
+}
+.filter-chip {
+  white-space: nowrap;
+  padding: 7px 14px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: #141b2a;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.filter-chip.active {
+  background: var(--accent-green);
+  color: #042f1f;
+  border-color: var(--accent-green);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+.prompt-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Profile Card & Certificate Preview */
+.profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.profile-top-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.profile-avatar-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
+}
+.profile-avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+.profile-online-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  background: #10b981;
+  border: 2px solid #0a0e17;
+  border-radius: 50%;
+}
+.profile-info-block {
+  flex: 1;
+  min-width: 0;
+}
+.profile-name {
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  word-break: break-word;
+}
+.profile-badge-role {
+  font-size: 11px;
+  color: #34d399;
+  font-weight: 800;
+  word-break: break-word;
+}
+.profile-user-id {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-top: 1px;
+}
+.profile-edit-btn {
+  background: #1a2333;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 99px;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.profile-xp-box {
+  background: #0a0e17;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.xp-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.xp-level-title { color: #facc15; }
+.xp-numbers { color: #94a3b8; }
+.xp-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #1e293b;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #10b981);
+  border-radius: 99px;
+}
+
+/* Certificate Preview Section */
+.cert-card-preview {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.cert-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+.cert-card-head > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.cert-card-head > span:last-child {
+  flex-shrink: 0;
+}
+.cert-kicker {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.cert-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  word-break: break-word;
+}
+.cert-subtitle {
+  font-size: 11px;
+  color: #94a3b8;
+  word-break: break-word;
+}
+.canvas-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 10px;
+  background: #000;
+}
+.canvas-wrap canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 700 / 420;
+}
+.cert-download-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border: none;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+
+/* Leaderboard Mini */
+.leaderboard-mini-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.card-head-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.card-head-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.leaderboard-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* FAQ & Community Links */
+.faq-section {
+  margin-bottom: 14px;
+}
+.community-links-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.community-btn {
+  padding: 11px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.community-btn.telegram-admin {
+  background: #24A1DE;
+  color: #fff;
+}
+.community-btn.telegram-channel {
+  background: #151e2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}

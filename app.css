@@ -2398,3 +2398,169 @@ body {
   font-size: 12px;
 }
 
+/* ==========================================================================
+   15. 100+ PROMPT LAB SEARCH, 10-MIN DEEP LESSONS & CERTIFICATE VIEWER
+   ========================================================================== */
+
+/* Prompt Lab Search Box */
+.prompt-search-wrap {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+.prompt-search-wrap .search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 13px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+.prompt-search-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 12px 10px 34px;
+  color: #fff;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.prompt-search-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+.prompt-search-input::placeholder {
+  color: #64748b;
+  font-size: 11.5px;
+}
+
+/* 10-Min Lesson Cards on Slide 1 */
+.slide-read-time-pill {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.workflow-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.case-study-card {
+  background: linear-gradient(135deg, rgba(17, 34, 28, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.protips-card {
+  background: linear-gradient(135deg, rgba(43, 29, 14, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.rich-lesson-body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+.rich-lesson-body h3 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 10px 0 4px 0;
+}
+.rich-lesson-body h3:first-child {
+  margin-top: 0;
+}
+.rich-lesson-body b, .rich-lesson-body strong {
+  color: #fff;
+}
+.rich-lesson-body p {
+  margin-bottom: 8px;
+}
+.rich-lesson-body blockquote {
+  border-left: 3px solid #38bdf8;
+  padding-left: 10px;
+  margin: 8px 0;
+  color: #93c5fd;
+  font-style: italic;
+}
+
+/* Certificate Viewer Modal */
+.cert-viewer-overlay {
+  z-index: 1000;
+}
+.cert-modal-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.cert-image-frame {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+  border: 2px solid rgba(34, 197, 94, 0.4);
+  background: #000;
+}
+.cert-modal-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cert-save-guide-card {
+  width: 100%;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.cert-save-guide-card .guide-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.cert-save-guide-card .guide-text {
+  font-size: 11.5px;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+.cert-save-guide-card .guide-text b {
+  color: #34d399;
+}
+
+.cert-action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cert-action-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+

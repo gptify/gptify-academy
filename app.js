@@ -607,17 +607,6 @@ function renderCertificateCanvas(percent) {
   ctx.fillText("★ VERIFIED ★", w / 2, 362);
 }
 
-function downloadCertificate() {
-  triggerHaptic("medium");
-  const canvas = document.getElementById("certCanvas");
-  if (!canvas) return;
-  const link = document.createElement("a");
-  link.download = `GPTify_Sertifikat_${appState.userName.replace(/\s+/g, '_')}.png`;
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-  showToast("Sertifikat saqlandi!");
-}
-
 // =============================================================================
 // 7. DASHBOARD HARAKATLARI (NAV ACTIONS)
 // =============================================================================
@@ -998,6 +987,8 @@ function switchAppTab(tabName) {
 
   if (tabName === 'profile') {
     renderCanvasCertificate();
+  } else if (tabName === 'promptlab') {
+    applyPromptFilters();
   }
 }
 
@@ -1013,6 +1004,20 @@ let currentLegoState = {
 };
 let aiSimTypingTimer = null;
 
+function formatMarkdownToHtml(text) {
+  if (!text) return '';
+  return text
+    .replace(/^###\s+(.*$)/gim, '<h3>$1</h3>')
+    .replace(/^##\s+(.*$)/gim, '<h3>$1</h3>')
+    .replace(/^>\s+(.*$)/gim, '<blockquote>$1</blockquote>')
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.*?)\*/g, '<i>$1</i>')
+    .replace(/\n\n/g, '<p></p>')
+    .replace(/\n•\s+(.*)/g, '<div style="margin-left:6px; margin-bottom:4px;">• $1</div>')
+    .replace(/\n(\d+)\.\s+(.*)/g, '<div style="margin-left:6px; margin-bottom:4px;"><b>$1.</b> $2</div>')
+    .replace(/\n/g, '<br>');
+}
+
 function openLessonModal(lessonId) {
   triggerHaptic('light');
   const lesson = (QUIZ_DATA.lessons && QUIZ_DATA.lessons.find(l => l.id === lessonId)) || QUIZ_DATA.lessons[0];
@@ -1022,7 +1027,10 @@ function openLessonModal(lessonId) {
   if (titleEl) titleEl.textContent = `${lesson.num || lesson.id}-Dars`;
 
   const catEl = document.getElementById('lessonDetailCategory');
-  if (catEl) catEl.textContent = `${lesson.category || 'AI Ta\'lim'} · ⏱ ${lesson.duration || '10 daqiqa'}`;
+  if (catEl) catEl.textContent = `${lesson.category || 'AI Ta\'lim'} · ⏱ ${lesson.duration || '10-12 daqiqa'}`;
+
+  const durEl = document.getElementById('lessonDetailDuration');
+  if (durEl) durEl.textContent = `⏱ ${lesson.duration || '10-12 daqiqa'}`;
 
   const headEl = document.getElementById('lessonDetailHeading');
   if (headEl) headEl.textContent = lesson.title;
@@ -1031,7 +1039,37 @@ function openLessonModal(lessonId) {
   if (takeEl) takeEl.textContent = lesson.takeaway || lesson.summary || lesson.desc || "";
 
   const concEl = document.getElementById('lessonDetailConcept');
-  if (concEl) concEl.textContent = lesson.concept || lesson.summary || "";
+  if (concEl) concEl.innerHTML = formatMarkdownToHtml(lesson.concept || lesson.summary || "");
+
+  // 🛠️ Step-by-Step Workflow Card
+  const wfBox = document.getElementById('lessonWorkflowBox');
+  const wfEl = document.getElementById('lessonDetailWorkflow');
+  if (lesson.workflow && wfBox && wfEl) {
+    wfEl.innerHTML = formatMarkdownToHtml(lesson.workflow);
+    wfBox.style.display = 'block';
+  } else if (wfBox) {
+    wfBox.style.display = 'none';
+  }
+
+  // 🏢 Real Uzbekistan Case Study Card
+  const caseBox = document.getElementById('lessonCaseBox');
+  const caseEl = document.getElementById('lessonDetailCaseStudy');
+  if (lesson.caseStudy && caseBox && caseEl) {
+    caseEl.innerHTML = formatMarkdownToHtml(lesson.caseStudy);
+    caseBox.style.display = 'block';
+  } else if (caseBox) {
+    caseBox.style.display = 'none';
+  }
+
+  // ⚠️ Pro Tips & Fatal Mistakes Card
+  const tipsBox = document.getElementById('lessonProTipsBox');
+  const tipsEl = document.getElementById('lessonDetailProTips');
+  if (lesson.proTips && tipsBox && tipsEl) {
+    tipsEl.innerHTML = formatMarkdownToHtml(lesson.proTips);
+    tipsBox.style.display = 'block';
+  } else if (tipsBox) {
+    tipsBox.style.display = 'none';
+  }
 
   const badEl = document.getElementById('lessonDetailBadPrompt');
   if (badEl) badEl.textContent = lesson.bad_prompt || "Menga yordam ber (oddiy / noaniq so'rov)";
@@ -1373,28 +1411,38 @@ function updateDailyQuestsUI() {
   }
 }
 
-// Prompt Lab Tab Filtering
-function filterPromptsTab(category = 'all', btnEl = null) {
-  if (btnEl) {
-    document.querySelectorAll('#promptFilterChips .filter-chip').forEach(c => c.classList.remove('active'));
-    btnEl.classList.add('active');
-  }
+// Prompt Lab Tab Filtering & Search (115+ Prompts)
+let currentPromptCategory = 'all';
+let currentPromptSearch = '';
 
+function renderPromptCards(items) {
   const container = document.getElementById('promptTabCardsContainer');
   if (!container) return;
   container.innerHTML = '';
 
-  const items = (category === 'all')
-    ? (QUIZ_DATA.promptLab || [])
-    : (QUIZ_DATA.promptLab || []).filter(p => p.category === category || p.tag === category);
+  if (!items || items.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:35px 20px; color:#94a3b8;">
+        <div style="font-size:36px; margin-bottom:8px;">🔍</div>
+        <div style="font-size:14px; font-weight:800; color:#fff;">Mos keluvchi prompt topilmadi</div>
+        <div style="font-size:12px; margin-top:4px;">Boshqa kalit so'z yoki toifani tanlab ko'ring.</div>
+      </div>
+    `;
+    return;
+  }
 
   items.forEach(p => {
     const card = document.createElement('div');
     card.className = 'prompt-card';
+    const tagHtml = (p.tags || []).map(t => `<span style="font-size:10px; background:rgba(255,255,255,0.06); color:#94a3b8; padding:2px 6px; border-radius:4px;">#${t}</span>`).join(' ');
+    
     card.innerHTML = `
       <div class="prompt-card-header">
-        <div class="prompt-card-title">${p.title}</div>
-        <button class="prompt-copy-btn" onclick="copyText('${p.prompt.replace(/'/g, "\\'")}')">
+        <div>
+          <div class="prompt-card-title">${p.title}</div>
+          <div style="display:flex; gap:4px; margin-top:4px; flex-wrap:wrap;">${tagHtml}</div>
+        </div>
+        <button class="prompt-copy-btn" onclick="copyPromptCardText(this, '${p.prompt.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n')}')">
           📋 Nusxalash
         </button>
       </div>
@@ -1402,6 +1450,70 @@ function filterPromptsTab(category = 'all', btnEl = null) {
     `;
     container.appendChild(card);
   });
+}
+
+function filterPromptsTab(category = 'all', btnEl = null) {
+  if (btnEl) {
+    document.querySelectorAll('#promptFilterChips .filter-chip').forEach(c => c.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+  currentPromptCategory = category;
+  applyPromptFilters();
+}
+
+function handlePromptSearch(query) {
+  currentPromptSearch = (query || '').trim().toLowerCase();
+  applyPromptFilters();
+}
+
+function applyPromptFilters() {
+  let items = QUIZ_DATA.promptLab || [];
+  if (currentPromptCategory !== 'all') {
+    items = items.filter(p => p.category === currentPromptCategory || (p.tags && p.tags.some(t => t.toLowerCase() === currentPromptCategory.toLowerCase())));
+  }
+  if (currentPromptSearch) {
+    items = items.filter(p => 
+      (p.title && p.title.toLowerCase().includes(currentPromptSearch)) ||
+      (p.prompt && p.prompt.toLowerCase().includes(currentPromptSearch)) ||
+      (p.tags && p.tags.some(t => t.toLowerCase().includes(currentPromptSearch)))
+    );
+  }
+  renderPromptCards(items);
+}
+
+function copyPromptCardText(btn, text) {
+  triggerHaptic('success');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+
+  const origText = btn.innerHTML;
+  btn.innerHTML = '✓ Nusxalandi!';
+  btn.style.background = 'rgba(16, 185, 129, 0.25)';
+  btn.style.borderColor = '#10b981';
+  btn.style.color = '#34d399';
+
+  showToast('✓ Prompt xotiraga nusxalandi!');
+  setTimeout(() => {
+    btn.innerHTML = origText;
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }, 2000);
 }
 
 // Practice Tickets Grid (1-10 with stars)
@@ -1536,10 +1648,10 @@ function renderCanvasCertificate() {
   ctx.textAlign = 'left';
   ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
   ctx.fillStyle = '#e2e8f0';
-  ctx.fillText("Shuhrat", 80, 360);
+  ctx.fillText("Shuhrat Iskandarov", 80, 360);
   ctx.font = '11px "Plus Jakarta Sans", sans-serif';
   ctx.fillStyle = '#94a3b8';
-  ctx.fillText("GPTify Asoschisi & Bosh Murabbiy", 80, 378);
+  ctx.fillText("GPTify Asoschisi & Bosh Murabbiy (Berlin)", 80, 378);
 
   // Right Seal
   ctx.textAlign = 'right';
@@ -1549,16 +1661,86 @@ function renderCanvasCertificate() {
   ctx.font = '11px monospace';
   ctx.fillStyle = '#64748b';
   ctx.fillText("ID: VERIFIED-AUTHENTIC", w - 80, 378);
+
+  return canvas;
 }
 
+let currentCertDataUrl = null;
+let currentCertBlobUrl = null;
+
 function downloadCertificate() {
+  triggerHaptic('success');
+  const canvas = renderCanvasCertificate();
+  if (!canvas) return;
+
+  try {
+    const dataUrl = canvas.toDataURL('image/png');
+    currentCertDataUrl = dataUrl;
+
+    // 1. Set image in Certificate Modal for instant mobile view & long-press saving
+    const modalImg = document.getElementById('certModalImg');
+    if (modalImg) modalImg.src = dataUrl;
+
+    // 2. Try automatic browser file download
+    attemptFileDownload();
+
+    // 3. Open viewCertificateModal so mobile WebView users can immediately see & save to photos
+    openOverlay('viewCertificateModal');
+    showToast('🎓 Diplom tayyor! Rasmni bosib turib galereyaga saqlang!');
+  } catch (err) {
+    console.error('Certificate generation error:', err);
+    showToast('Sertifikat yaratishda xatolik yuz berdi');
+  }
+}
+
+function attemptFileDownload() {
+  triggerHaptic('medium');
   const canvas = document.getElementById('certCanvasProfile') || document.getElementById('certCanvas');
   if (!canvas) return;
-  const link = document.createElement('a');
-  link.download = `GPTify_Sertifikat_${appState.userName}.png`;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-  showToast('Sertifikat yuklab olindi! 🎓');
+
+  try {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        const blobUrl = URL.createObjectURL(blob);
+        currentCertBlobUrl = blobUrl;
+        const link = document.createElement('a');
+        link.download = `GPTify_Diplom_${(appState.userName || 'Oquvchi').replace(/\s+/g, '_')}.png`;
+        link.href = blobUrl;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+        }, 1000);
+      }
+    }, 'image/png');
+  } catch (e) {
+    const link = document.createElement('a');
+    link.download = `GPTify_Diplom_${(appState.userName || 'Oquvchi').replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+}
+
+function openCertInNewTab() {
+  triggerHaptic('light');
+  if (currentCertDataUrl) {
+    const win = window.open();
+    if (win) {
+      win.document.write('<html><head><title>GPTify Rasmiy Diplom</title><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body style="margin:0; background:#04070a; display:flex; align-items:center; justify-content:center; min-height:100vh;"><img src="' + currentCertDataUrl + '" style="max-width:100%; height:auto; box-shadow:0 10px 30px rgba(0,0,0,0.8);" alt="GPTify Diplom"/></body></html>');
+    }
+  }
+}
+
+function shareCertificateOnTelegram() {
+  triggerHaptic('medium');
+  const shareText = encodeURIComponent(`🎉 Men GPTify Academy'da AI va Professional Prompting rasmiy imtihonidan o'tib, rasmiy diplom oldim! Siz ham sun'iy intellektni o'rganing: @GPTify_Academy_bot`);
+  const shareUrl = `https://t.me/share/url?url=https://t.me/GPTify_Academy_bot&text=${shareText}`;
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+    window.Telegram.WebApp.openTelegramLink(shareUrl);
+  } else {
+    window.open(shareUrl, '_blank');
+  }
 }
 
 // =============================================================================

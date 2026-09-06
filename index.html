@@ -313,24 +313,33 @@
           <div style="font-size:18px; font-weight:900; color:#fff; display:flex; align-items:center; gap:6px;">
             <span>🤖</span> <span>Prompt Lab</span>
           </div>
-          <span style="font-size:11px; background:rgba(6,182,212,0.15); color:#38bdf8; font-weight:800; padding:2px 8px; border-radius:99px; border:1px solid rgba(6,182,212,0.3);">
-            Tayyor AI Qoliplari
+          <span style="font-size:11px; background:rgba(6,182,212,0.15); color:#38bdf8; font-weight:800; padding:2px 8px; border-radius:99px; border:1px solid rgba(6,182,212,0.3);" id="promptLabCountBadge">
+            115+ Tayyor Qolip
           </span>
         </div>
         <div style="font-size:11.5px; color:#94a3b8; margin-top:2px;">
           Ish, o'qish va biznes uchun 1-bosishda nusxalash mumkin bo'lgan professional promptlar to'plami.
         </div>
+
+        <!-- Real-time Search Input -->
+        <div class="prompt-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="promptSearchInput" class="prompt-search-input" placeholder="100+ promptlar orasidan qidirish (Excel, Uzum, B2B)..." oninput="handlePromptSearch(this.value)">
+        </div>
       </div>
 
       <!-- Horizontal Filter Chips -->
       <div class="filter-chips-bar" id="promptFilterChips">
-        <button class="filter-chip active" onclick="filterPromptsTab('all', this)">Barchasi (10)</button>
-        <button class="filter-chip" onclick="filterPromptsTab('visual', this)">🎨 Rasm & Video</button>
-        <button class="filter-chip" onclick="filterPromptsTab('office', this)">📝 Ofis & Xatlar</button>
-        <button class="filter-chip" onclick="filterPromptsTab('sales', this)">💰 Savdo & Mijoz</button>
-        <button class="filter-chip" onclick="filterPromptsTab('smm', this)">📱 SMM & Post</button>
-        <button class="filter-chip" onclick="filterPromptsTab('legal', this)">⚖️ Huquq & Soliq</button>
-        <button class="filter-chip" onclick="filterPromptsTab('study', this)">🌍 Til & O'qish</button>
+        <button class="filter-chip active" onclick="filterPromptsTab('all', this)">Barchasi (115)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('sales', this)">💰 Savdo & B2B (15)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('smm', this)">📱 SMM & Post (15)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('office', this)">📝 Ofis & Excel (15)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('ecom', this)">🛍️ Uzum & E-Com (12)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('legal', this)">⚖️ Huquq & Soliq (12)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('dev', this)">💻 IT & Kod (12)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('hr', this)">👥 Karyera & HR (12)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('study', this)">🌍 Ta'lim & Til (12)</button>
+        <button class="filter-chip" onclick="filterPromptsTab('visual', this)">🎨 Rasm & Video (10)</button>
       </div>
 
       <!-- Prompt Cards List -->
@@ -522,24 +531,47 @@
 
     <div class="story-slide-viewport">
       
-      <!-- SLIDE 1: Nazariya & Asosiy Xulosa -->
+      <!-- SLIDE 1: Nazariya & Asosiy Xulosa (10-Daqiqalik Chuqur Dars) -->
       <div class="story-slide active" id="lessonSlide1">
-        <div class="slide-badge-pill">🎯 1-QADAM: ASOSIY QOIDA</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="slide-badge-pill">🎯 1-QADAM: KONSEPSIYA & AMALIYOT</div>
+          <span class="slide-read-time-pill" id="lessonDetailDuration">⏱ 10-12 daqiqa</span>
+        </div>
         <h2 class="slide-main-title" id="lessonDetailHeading">Asboblar tanlovi</h2>
 
+        <!-- Takeaway Card -->
         <div class="takeaway-hero-card">
           <div class="card-icon-title">💡 Asosiy Oltin Qoida (Takeaway):</div>
           <div class="card-body-text" id="lessonDetailTakeaway"></div>
         </div>
 
+        <!-- Deep Concept Card -->
         <div class="concept-card">
-          <div class="card-icon-title">📖 Qanday ishlaydi? (Oddiy tilda):</div>
-          <div class="card-body-text" id="lessonDetailConcept"></div>
+          <div class="card-icon-title">📖 Chuqur Nazariya & Mohiyat:</div>
+          <div class="card-body-text rich-lesson-body" id="lessonDetailConcept"></div>
+        </div>
+
+        <!-- Step-by-Step Workflow Card -->
+        <div class="workflow-card" id="lessonWorkflowBox">
+          <div class="card-icon-title">🛠️ Qadam-baqadam Amaliy Algoritm:</div>
+          <div class="card-body-text rich-lesson-body" id="lessonDetailWorkflow"></div>
+        </div>
+
+        <!-- Real Uzbekistan Case Study Card -->
+        <div class="case-study-card" id="lessonCaseBox">
+          <div class="card-icon-title">🏢 O'zbekiston Bozoridagi Real Keys:</div>
+          <div class="card-body-text rich-lesson-body" id="lessonDetailCaseStudy"></div>
+        </div>
+
+        <!-- Pro Tips & Fatal Mistakes Card -->
+        <div class="protips-card" id="lessonProTipsBox">
+          <div class="card-icon-title">⚠️ Xatolar & Professional Tavsiyalar:</div>
+          <div class="card-body-text rich-lesson-body" id="lessonDetailProTips"></div>
         </div>
 
         <div class="slide-footer-nav">
           <button class="btn-primary" onclick="setLessonStep(2)">
-            Xato vs To'g'ri Misol ➔
+            Xato vs To'g'ri Misol (Battle) ➔
           </button>
         </div>
       </div>
@@ -903,6 +935,42 @@
       <button id="btnClaimPro" onclick="claimProReward()" disabled style="width:100%; background:#1e293b; border:1px solid rgba(255,255,255,0.1); color:#64748b; font-size:13.5px; font-weight:900; padding:13px; border-radius:15px; cursor:not-allowed; transition:all 0.25s ease;">
         🔒 Shartlarni bajaring (0/2)
       </button>
+    </div>
+  </div>
+
+  <!-- View J: Rasmiy Diplom & Sertifikat Ko'rish / Saqlash Modali -->
+  <div id="viewCertificateModal" class="view-overlay cert-viewer-overlay">
+    <div class="view-header">
+      <div class="view-header-title">🎓 Rasmiy Diplom & Sertifikat</div>
+      <button class="close-btn" onclick="closeOverlay('viewCertificateModal')">✕</button>
+    </div>
+    <div class="cert-modal-body">
+      <!-- HD Image Preview Frame -->
+      <div class="cert-image-frame">
+        <img id="certModalImg" class="cert-modal-img" alt="Rasmiy Diplom" src="">
+      </div>
+
+      <!-- Mobile Save Instructions Banner -->
+      <div class="cert-save-guide-card">
+        <div class="guide-icon">📱</div>
+        <div class="guide-text">
+          <b>Telefon galereyasiga saqlash:</b><br>
+          Yuqoridagi rasm ustiga barmog'ingizni 1-2 soniya bosib turing (Long Press) va <b>"Rasmni saqlash"</b> (yoki <i>"Сохранить изображение"</i>) ni tanlang.
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cert-action-buttons">
+        <button class="btn-primary cert-action-btn" onclick="openCertInNewTab()">
+          <span>🔍 Yangi Oynada Ochish (HD)</span>
+        </button>
+        <button class="btn-secondary cert-action-btn" onclick="shareCertificateOnTelegram()">
+          <span>📤 Telegramda Ulashish</span>
+        </button>
+        <button class="btn-secondary cert-action-btn" onclick="attemptFileDownload()">
+          <span>💾 Fayl Sifatida Yuklab Olish (PNG)</span>
+        </button>
+      </div>
     </div>
   </div>
 

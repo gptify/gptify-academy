@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
   <!-- App Styles -->
-  <link rel="stylesheet" href="app.css?v=2.5.0">
+  <link rel="stylesheet" href="app.css?v=2.6.0">
 </head>
 <body>
 
@@ -64,36 +64,37 @@
          ==================================================================== -->
     <main id="tabLearn" class="tab-viewport active">
 
-      <!-- Bugungi AI Missiyasi Hero Card -->
-      <section class="hero-mission-card">
+      <!-- Primary Hero CTA: Davom etish / Boshlash Card -->
+      <section class="hero-mission-card" id="heroCurrentLessonCard">
         <div class="mission-badge-row">
-          <span class="mission-tag">🎯 BUGUNGI MISSIYA</span>
-          <span class="mission-time">⏱ 10 daqiqa</span>
+          <span class="mission-tag" id="heroBadgeText">🚀 HOZIRGI DARSLIK</span>
+          <span class="mission-time" id="heroTimeText">⏱ 10-12 daqiqa</span>
         </div>
-        <div class="mission-title">2-Modul: Prompt Muhandisligi — Aniq Natija Olish San'ati</div>
-        <div class="mission-desc">AI ga oddiy gap emas, aniq topshiriq berishning 3 ta oltin qoidasi (Rol, Kontekst va Natija formati).</div>
+        <div class="mission-title" id="heroLessonTitle">1-Modul: Asboblar tanlovi — ChatGPT, Gemini va Claude</div>
+        <div class="mission-desc" id="heroLessonDesc">Sun'iy intellektning tub mohiyati, imkoniyatlari va qaysi vosita aynan sizning biznesingizga mosligini aniqlash.</div>
         <div class="mission-footer">
           <div class="mission-reward">
-            <span class="reward-xp">+50 XP</span>
-            <span class="reward-progress">· 3/14 yakunlandi</span>
+            <span class="reward-xp">+20 XP</span>
+            <span class="reward-progress" id="heroLessonProgress">· 0/14 yakunlandi</span>
           </div>
-          <button class="mission-start-btn" onclick="openLessonModal(2)">
-            <span>Boshlash</span> <span>➔</span>
+          <button class="hero-primary-cta-btn" id="heroPrimaryCtaBtn" onclick="continueCurrentLesson()">
+            <span id="heroPrimaryCtaLabel">Davom etish (1-Modul)</span> <span class="cta-arrow">➔</span>
           </button>
         </div>
       </section>
 
-      <!-- Bugungi 3 ta Kvest (Daily Quests) -->
-      <section class="daily-quests-card" id="dailyQuestsCard">
-        <div class="quests-header">
+      <!-- Tartibni soddalashtirish: Yig'iluvchan Kunlik Kvestlar (Collapsible Quests Accordion) -->
+      <section class="daily-quests-card collapsed" id="dailyQuestsCard">
+        <div class="quests-header" onclick="toggleQuestsAccordion()" style="cursor:pointer;">
           <div class="quests-title">
-            <span>🎯</span> <span>Bugungi 3 ta Kvest</span>
+            <span>🎯</span> <span>Kunlik Missiyalar</span>
+            <span id="questsToggleIcon" class="toggle-arrow">▼ Ochish</span>
           </div>
-          <span class="quests-progress-pill" id="questsProgressText">1 / 3 Bajarildi</span>
+          <span class="quests-progress-pill" id="questsProgressText">0 / 3 Bajarildi</span>
         </div>
-        <div class="quests-list">
-          <div class="quest-item completed" id="questItem1" onclick="openLessonModal(2)">
-            <div class="quest-check" id="questCheck1">✓</div>
+        <div class="quests-list" id="questsListContainer">
+          <div class="quest-item" id="questItem1" onclick="continueCurrentLesson()">
+            <div class="quest-check" id="questCheck1">○</div>
             <div class="quest-info">
               <div class="quest-name">Bugungi AI darsini o'rganish</div>
               <div class="quest-reward">+20 XP</div>
@@ -197,13 +198,15 @@
       </section>
 
       <!-- B2B Consulting Banner -->
-      <div class="cta-banner-card" onclick="openB2BInfo()" style="margin-top:14px;">
-        <div>
-          <div style="font-size:10.5px; font-weight:800; color:#38bdf8; text-transform:uppercase;">💼 Korxona va Biznes uchun</div>
-          <div style="font-size:14px; font-weight:800; color:#fff; margin-top:2px;">AI Trening va Konsalting</div>
-          <div style="font-size:11.5px; color:#94a3b8; margin-top:2px;">Kompaniyangiz jarayonlarini 90% avtomatlashtiring</div>
+      <div class="b2b-corporate-banner" onclick="openB2BInfo()" style="margin-top:16px;">
+        <div class="b2b-banner-left">
+          <span class="b2b-kicker">💼 BIZNES VA KORXONALAR UCHUN</span>
+          <div class="b2b-title">Kompaniyangiz uchun korporativ AI trening</div>
+          <div class="b2b-sub">Xodimlarni sun'iy intellektga o'rgatib, jarayonlarni avtomatlashtiring.</div>
         </div>
-        <div style="font-size:20px; color:#38bdf8; font-weight:800; padding-left:10px; flex-shrink:0;">➔</div>
+        <button class="b2b-banner-btn" type="button">
+          <span>Audit</span> <span>➔</span>
+        </button>
       </div>
 
     </main>
@@ -327,6 +330,83 @@
           <input type="text" id="promptSearchInput" class="prompt-search-input" placeholder="100+ promptlar orasidan qidirish (Excel, Uzum, B2B)..." oninput="handlePromptSearch(this.value)">
         </div>
       </div>
+
+      <!-- Lego Prompt Konstruktori (Rol + Kontekst + Cheklov + Format) -->
+      <section class="promptlab-lego-builder" id="promptLabLegoBuilder">
+        <div class="lego-builder-head">
+          <div class="lego-builder-title">
+            <span>🧩</span> <span>Lego Prompt Konstruktori</span>
+          </div>
+          <span class="lego-tag-pill">4 ta Blok</span>
+        </div>
+        <div class="lego-builder-desc">
+          O'z sohangizga mos professional promptni 4 ta blokdan yig'ing va 1 bosishda nusxa oling:
+        </div>
+
+        <!-- Lego Selector Rows -->
+        <div class="lego-selector-rows">
+          <!-- 1. ROL -->
+          <div class="lego-builder-row">
+            <div class="lego-row-label"><span>🎭</span> <b>1. ROL</b> (AI kimdek javob bersin?):</div>
+            <div class="lego-row-chips" id="legoRoleChips">
+              <button class="lego-part-chip active" onclick="setLegoPart('role', 'Tajribali B2B savdo eksperti', this)">Savdo Eksperti</button>
+              <button class="lego-part-chip" onclick="setLegoPart('role', 'Professional SMM kopirayter', this)">SMM Kopirayter</button>
+              <button class="lego-part-chip" onclick="setLegoPart('role', 'Senior Excel va moliya tahlilchisi', this)">Excel & Moliya</button>
+              <button class="lego-part-chip" onclick="setLegoPart('role', 'Korporativ yurist va shartnomalar tahlilchisi', this)">Yurist</button>
+            </div>
+          </div>
+
+          <!-- 2. KONTEKST -->
+          <div class="lego-builder-row">
+            <div class="lego-row-label"><span>🎯</span> <b>2. KONTEKST</b> (Vaziyat nima?):</div>
+            <div class="lego-row-chips" id="legoContextChips">
+              <button class="lego-part-chip active" onclick="setLegoPart('context', 'Toshkent bozoridagi B2B mijozga tijorat taklifi tayyorlash', this)">B2B Taklif</button>
+              <button class="lego-part-chip" onclick="setLegoPart('context', 'Uzum Marketda mahsulot kartochkasi SEO tavsifi', this)">Uzum Market</button>
+              <button class="lego-part-chip" onclick="setLegoPart('context', 'Qimmat degan mijoz e\'tirozini yopish', this)">Qimmat e'tirozi</button>
+              <button class="lego-part-chip" onclick="setLegoPart('context', 'Oylik tushum va xarajatlar farqi tahlili', this)">Oylik hisobot</button>
+            </div>
+          </div>
+
+          <!-- 3. CHEKLOV -->
+          <div class="lego-builder-row">
+            <div class="lego-row-label"><span>⚠️</span> <b>3. CHEKLOV</b> (Qoidalar qanday?):</div>
+            <div class="lego-row-chips" id="legoConstraintChips">
+              <button class="lego-part-chip active" onclick="setLegoPart('constraint', 'Oddiy o\'zbek tilida, suv so\'zlarsiz, faqat 3 ta aniq bandda', this)">Suv so'zlarsiz (3 band)</button>
+              <button class="lego-part-chip" onclick="setLegoPart('constraint', 'Raqamlar va aniq tejalgan so\'m bilan asoslab', this)">Raqamlar bilan asoslash</button>
+              <button class="lego-part-chip" onclick="setLegoPart('constraint', 'Maksimal 70 ta so\'zda, juda ixcham', this)">Maksimal 70 so'z</button>
+            </div>
+          </div>
+
+          <!-- 4. FORMAT -->
+          <div class="lego-builder-row">
+            <div class="lego-row-label"><span>📑</span> <b>4. FORMAT</b> (Natija ko'rinishi):</div>
+            <div class="lego-row-chips" id="legoFormatChips">
+              <button class="lego-part-chip active" onclick="setLegoPart('format', 'Jadval ko\'rinishida', this)">Jadval</button>
+              <button class="lego-part-chip" onclick="setLegoPart('format', 'Telegram xabar ssenariysi shaklida', this)">Telegram xabar</button>
+              <button class="lego-part-chip" onclick="setLegoPart('format', 'Qadam-baqadam algoritm ko\'rinishida', this)">Qadam-baqadam</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Generated Prompt Preview -->
+        <div class="lego-preview-box">
+          <div class="lego-preview-header">
+            <span>📋 Yig'ilgan Tayyor Prompt (Preview):</span>
+            <span class="preview-badge">✓ AI uchun tayyor</span>
+          </div>
+          <div class="lego-preview-text" id="legoPromptLivePreview">
+            Sen tajribali B2B savdo ekspertisan. Vazifang: Toshkent bozoridagi B2B mijozga tijorat taklifi tayyorlash. Qoidalar: Oddiy o'zbek tilida, suv so'zlarsiz, faqat 3 ta aniq bandda. Natijani jadval ko'rinishida taqdim et.
+          </div>
+          <div class="lego-preview-actions">
+            <button class="btn-primary copy-lego-btn" onclick="copyLegoPrompt()">
+              <span>📋 Tayyor Promptni Nusxalash</span>
+            </button>
+            <button class="btn-secondary reset-lego-btn" onclick="resetLegoBuilder()">
+              <span>🔄 Boshlang'ich</span>
+            </button>
+          </div>
+        </div>
+      </section>
 
       <!-- Horizontal Filter Chips -->
       <div class="filter-chips-bar" id="promptFilterChips">
@@ -717,6 +797,18 @@
             Bosh Sahifaga Qaytish
           </button>
         </div>
+
+        <!-- B2B Corporate Banner in Victory Slide -->
+        <div class="b2b-corporate-banner" onclick="openB2BInfo()" style="margin-top:14px;">
+          <div class="b2b-banner-left">
+            <span class="b2b-kicker">💼 BIZNES VA KORXONALAR UCHUN</span>
+            <div class="b2b-title">Kompaniyangiz uchun korporativ AI trening kerakmi?</div>
+            <div class="b2b-sub">Xodimlarni sun'iy intellektga o'rgatib, oyiga 100+ soat vaqtni tejang.</div>
+          </div>
+          <button class="b2b-banner-btn">
+            <span>B2B Audit</span> <span>➔</span>
+          </button>
+        </div>
       </div>
 
     </div>
@@ -755,6 +847,18 @@
         </button>
         <button class="btn-primary" onclick="retryLastQuiz()" style="flex:1;">
           Qayta topshirish
+        </button>
+      </div>
+
+      <!-- B2B Corporate Banner in Results -->
+      <div class="b2b-corporate-banner" onclick="openB2BInfo()" style="margin-top:16px;">
+        <div class="b2b-banner-left">
+          <span class="b2b-kicker">💼 BIZNES VA KORXONALAR UCHUN</span>
+          <div class="b2b-title">Kompaniyangiz uchun korporativ AI trening kerakmi?</div>
+          <div class="b2b-sub">Xodimlarni sun'iy intellektga o'rgatish va jarayonlarni 90% avtomatlashtirish.</div>
+        </div>
+        <button class="b2b-banner-btn">
+          <span>B2B Audit</span> <span>➔</span>
         </button>
       </div>
     </div>
@@ -857,11 +961,24 @@
       <div style="font-size:19px; font-weight:900; color:#fff;">VIP Bosqichlarni Bepul Ochish</div>
       <div style="font-size:12px; color:#94a3b8; margin:4px 0 14px 0;" id="paywallContextText">0 UZS evaziga to'liq kirish huquqi</div>
 
+      <!-- Telegram Stars Instant Option -->
+      <div class="stars-paywall-box">
+        <button class="btn-telegram-stars" onclick="payWithTelegramStars()">
+          <span class="stars-icon">⭐️</span>
+          <span class="stars-label">Telegram Stars bilan ochish (250 ⭐️)</span>
+          <span class="stars-instant-badge">Tezkor</span>
+        </button>
+      </div>
+
+      <div class="paywall-divider">
+        <span>yoki 100% BEPUL ochish (2 ta vazifa):</span>
+      </div>
+
       <!-- Free Promo Hero Banner -->
       <div style="background:linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,95,70,0.3)); border:1.5px solid #10b981; border-radius:16px; padding:12px 14px; margin-bottom:14px; text-align:left;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
           <span style="background:#10b981; color:#042f1f; font-size:9.5px; font-weight:900; padding:2px 8px; border-radius:99px;">
-            ⚡ 100% BEPUL AKSİYA
+            ⚡ 100% BEPUL AKSIYA
           </span>
           <span style="text-decoration:line-through; color:#94a3b8; font-size:12px; font-weight:700;">49,000 UZS</span>
         </div>
@@ -955,22 +1072,75 @@
         <div class="guide-icon">📱</div>
         <div class="guide-text">
           <b>Telefon galereyasiga saqlash:</b><br>
-          Yuqoridagi rasm ustiga barmog'ingizni 1-2 soniya bosib turing (Long Press) va <b>"Rasmni saqlash"</b> (yoki <i>"Сохранить изображение"</i>) ni tanlang.
+          Yuqoridagi rasm ustiga barmog'ingizni 1–2 soniya bosib turing (Long Press) va <b>"Rasmni saqlash"</b> (yoki <i>"Сохранить изображение"</i>) ni tanlang.
         </div>
       </div>
 
       <!-- Action Buttons -->
       <div class="cert-action-buttons">
-        <button class="btn-primary cert-action-btn" onclick="openCertInNewTab()">
+        <button class="btn-primary cert-action-btn story-btn" onclick="shareCertificateToStory()">
+          <span>📲 Telegram Story'ga Ulashish</span>
+        </button>
+        <button class="btn-secondary cert-action-btn" onclick="downloadCertificateImage()">
+          <span>📥 Instagram / Rasm Qilib Yuklab Olish (HD PNG)</span>
+        </button>
+        <button class="btn-secondary cert-action-btn" onclick="openCertInNewTab()">
           <span>🔍 Yangi Oynada Ochish (HD)</span>
         </button>
         <button class="btn-secondary cert-action-btn" onclick="shareCertificateOnTelegram()">
-          <span>📤 Telegramda Ulashish</span>
-        </button>
-        <button class="btn-secondary cert-action-btn" onclick="attemptFileDownload()">
-          <span>💾 Fayl Sifatida Yuklab Olish (PNG)</span>
+          <span>📤 Telegram Chatda Do'stlarga Ulashish</span>
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- View K: Yangi Foydalanuvchi "Aha! Moment" 15 Soniyalik AI Sinovi -->
+  <div id="ahaMomentModal" class="view-overlay aha-moment-overlay">
+    <div class="aha-modal-card">
+      <div class="aha-header">
+        <span class="aha-badge">⚡ 15 SONIYALIK AI SINOVI</span>
+        <h2 class="aha-title">Kasbingizni tanlang va 1 soniyada AI natijani ko'ring!</h2>
+        <p class="aha-subtitle">Sun'iy intellekt oddiy o'yinchoq emas — u kundalik ishingizda soatlab vaqtingizni tejovchi professional yordamchi.</p>
+      </div>
+
+      <!-- Profession chips -->
+      <div class="profession-chips-grid">
+        <button class="prof-chip active" id="ahaChip-sales" onclick="selectAhaProfession('sales', this)">
+          <span>💼</span> <span>Sotuvchi</span>
+        </button>
+        <button class="prof-chip" id="ahaChip-smm" onclick="selectAhaProfession('smm', this)">
+          <span>📱</span> <span>SMM</span>
+        </button>
+        <button class="prof-chip" id="ahaChip-office" onclick="selectAhaProfession('office', this)">
+          <span>📊</span> <span>Ofis & Excel</span>
+        </button>
+        <button class="prof-chip" id="ahaChip-study" onclick="selectAhaProfession('study', this)">
+          <span>🎓</span> <span>Talaba</span>
+        </button>
+      </div>
+
+      <!-- Live AI Interactive Playground -->
+      <div class="aha-simulator-box">
+        <div class="aha-sim-header">
+          <span class="sim-dot green"></span>
+          <span class="sim-title" id="ahaSimTitle">🎯 Mijoz: 'Sizning xizmatingiz juda qimmat!'</span>
+        </div>
+        <div class="aha-prompt-preview" id="ahaPromptPreview">
+          <b>Vazifa:</b> Narxni tushirmasdan, 2 oyda xarajat o'zini oqlashini hisoblab beruvchi javob tuz...
+        </div>
+        <div class="aha-result-view" id="ahaResultView">
+          <div class="aha-typing" id="ahaTypingIndicator">🤖 AI 1 soniyada professional natija bermoqda...</div>
+          <div class="aha-response-content" id="ahaResponseContent" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <button class="btn-primary aha-start-btn" onclick="finishAhaMoment()">
+        <span>Super! Kursni Boshlash (1-Modul) 🚀</span>
+      </button>
+      <button class="aha-skip-btn" onclick="closeOverlay('ahaMomentModal')">
+        Hozircha o'tkazib yuborish ➔
+      </button>
     </div>
   </div>
 
@@ -981,7 +1151,7 @@
   </div>
 
   <!-- Application Scripts -->
-  <script src="quiz_data.js?v=2.5.0"></script>
-  <script src="app.js?v=2.5.0"></script>
+  <script src="quiz_data.js?v=2.6.0"></script>
+  <script src="app.js?v=2.6.0"></script>
 </body>
 </html>

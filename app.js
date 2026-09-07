@@ -25,14 +25,27 @@ let appState = {
   targetFriendsCount: 3,
   mistakeIds: [3, 8, 13, 14, 15],
   bookmarkedIds: [8, 13],
-  completedLessons: [1],
+  completedLessons: [],
   currentQuiz: null
 };
 
-// LocalStorage yuklash
+function getUserStorageKey() {
+  try {
+    const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
+    return userId ? `${STORAGE_KEY}_user_${userId}` : STORAGE_KEY;
+  } catch (e) {
+    return STORAGE_KEY;
+  }
+}
+
+// Resilient State Loading (User-scoped + CloudStorage fallback)
 function loadState() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const key = getUserStorageKey();
+    let saved = localStorage.getItem(key);
+    if (!saved && key !== STORAGE_KEY) {
+      saved = localStorage.getItem(STORAGE_KEY);
+    }
     if (saved) {
       const parsed = JSON.parse(saved);
       appState = { ...appState, ...parsed };
@@ -40,16 +53,48 @@ function loadState() {
   } catch (e) {
     console.warn("Storage load error:", e);
   }
+
+  // Telegram CloudStorage asinxron zaxira
+  try {
+    const cloud = window.Telegram?.WebApp?.CloudStorage;
+    if (cloud && cloud.getItem) {
+      cloud.getItem(getUserStorageKey(), (err, value) => {
+        if (!err && value) {
+          try {
+            const cloudData = JSON.parse(value);
+            appState = { ...appState, ...cloudData };
+            updateDashboardUI();
+            if (typeof updateHeroCTA === 'function') updateHeroCTA();
+          } catch (pe) {}
+        }
+      });
+    }
+  } catch (e) {}
 }
 
-// LocalStorage saqlash
+// Resilient State Saving (LocalStorage + CloudStorage)
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-    updateDashboardUI();
+    const key = getUserStorageKey();
+    const dataStr = JSON.stringify(appState);
+    localStorage.setItem(key, dataStr);
+    if (key !== STORAGE_KEY) {
+      localStorage.setItem(STORAGE_KEY, dataStr);
+    }
+
+    // Telegram CloudStorage backup
+    const cloud = window.Telegram?.WebApp?.CloudStorage;
+    if (cloud && cloud.setItem) {
+      cloud.setItem(key, dataStr, (err) => {
+        if (err) console.warn("CloudStorage sync notice:", err);
+      });
+    }
   } catch (e) {
     console.warn("Storage save error:", e);
   }
+
+  updateDashboardUI();
+  if (typeof updateHeroCTA === 'function') updateHeroCTA();
 }
 
 // =============================================================================
@@ -163,13 +208,166 @@ function updateDashboardUI() {
   }
 
   // Darslik progress
-  const doneLessons = appState.completedLessons.length;
+  const doneLessons = (appState.completedLessons || []).length;
   const totalLessons = QUIZ_DATA.lessons.length;
   const dFraction = document.getElementById("darslikFraction");
   if (dFraction) dFraction.textContent = `${doneLessons}/${totalLessons}`;
 
   const dBar = document.getElementById("darslikBarFill");
   if (dBar) dBar.style.width = `${Math.round((doneLessons / totalLessons) * 100)}%`;
+
+  updateHeroCTA();
+}
+
+// =============================================================================
+// 3.1. PRIMARY HERO CTA & ACCORDION (Tab 1)
+// =============================================================================
+function updateHeroCTA() {
+  const lessons = QUIZ_DATA.lessons || [];
+  const completed = appState.completedLessons || [];
+
+  let targetLesson = lessons.find(l => !completed.includes(l.id));
+  if (!targetLesson && lessons.length > 0) {
+    targetLesson = lessons[lessons.length - 1];
+  }
+
+  const badgeEl = document.getElementById("heroBadgeText");
+  const timeEl = document.getElementById("heroTimeText");
+  const titleEl = document.getElementById("heroLessonTitle");
+  const descEl = document.getElementById("heroLessonDesc");
+  const progEl = document.getElementById("heroLessonProgress");
+  const labelEl = document.getElementById("heroPrimaryCtaLabel");
+
+  if (completed.length === 0) {
+    if (badgeEl) badgeEl.textContent = "🚀 HOZIR BOSHLA";
+    if (labelEl) labelEl.textContent = "Kursni Boshlash (1-Modul)";
+  } else if (completed.length >= lessons.length) {
+    if (badgeEl) badgeEl.textContent = "🏆 BARCHA DARSLAR TUGATILDI";
+    if (labelEl) labelEl.textContent = "Katta Imtihon Topshirish 🎓";
+  } else {
+    if (badgeEl) badgeEl.textContent = "🚀 HOZIRGI DARSLIK";
+    if (labelEl && targetLesson) labelEl.textContent = `Davom etish (${targetLesson.num || targetLesson.id}-Modul)`;
+  }
+
+  if (targetLesson) {
+    if (titleEl) titleEl.textContent = `${targetLesson.num || targetLesson.id}-Modul: ${targetLesson.title}`;
+    if (descEl) descEl.textContent = targetLesson.summary || targetLesson.takeaway || "Amaliy darslik va jonli AI simulyatori.";
+    if (timeEl) timeEl.textContent = `⏱ ${targetLesson.duration || '10-12 daq'}`;
+  }
+
+  if (progEl) {
+    progEl.textContent = `· ${completed.length}/${lessons.length} yakunlandi`;
+  }
+}
+
+function continueCurrentLesson() {
+  triggerHaptic('impact');
+  const lessons = QUIZ_DATA.lessons || [];
+  const completed = appState.completedLessons || [];
+
+  if (completed.length >= lessons.length) {
+    openTicketQuizModal(1);
+    return;
+  }
+
+  const targetLesson = lessons.find(l => !completed.includes(l.id));
+  const targetId = targetLesson ? targetLesson.id : 1;
+  openLessonModal(targetId);
+}
+
+function toggleQuestsAccordion() {
+  triggerHaptic('light');
+  const card = document.getElementById('dailyQuestsCard');
+  const icon = document.getElementById('questsToggleIcon');
+  if (!card) return;
+
+  const isCollapsed = card.classList.contains('collapsed');
+  if (isCollapsed) {
+    card.classList.remove('collapsed');
+    if (icon) icon.textContent = '▲ Yopish';
+    localStorage.setItem('gptify_quests_open', 'true');
+  } else {
+    card.classList.add('collapsed');
+    if (icon) icon.textContent = '▼ Ochish';
+    localStorage.setItem('gptify_quests_open', 'false');
+  }
+}
+
+// =============================================================================
+// 3.2. NEW USER "AHA! MOMENT" 15-SECOND SIMULATOR
+// =============================================================================
+const AHA_DATA = {
+  sales: {
+    title: "🎯 Mijoz: 'Sizning xizmatingiz juda qimmat!'",
+    prompt: "Vazifa: Narxni tushirmasdan, 2 oyda xarajat o'zini oqlashini hisoblab beruvchi javob tuz...",
+    response: "Hurmatli mijoz, narx muhimligini to'liq tushunamiz. Lekin bizning yechimimiz xatolarni 80% qisqartirib, o'rtacha 2 oyda 4.5 mln so'm tejab beradi. Keling, 10 daqiqalik qisqa demo ko'rsatay — o'zini oqlashiga ishonmasangiz, shartnoma tuzmaysiz. Qachon qulay?"
+  },
+  smm: {
+    title: "📱 1 Soniyada Virusli Reels G'oyasi",
+    prompt: "Vazifa: Diqqatni 3 soniyada to'xtatuvchi paradoksal Hook va AIDA ssenariysi...",
+    response: "🔥 Hook (1-3 sek): 'Nega 90% insonlar ChatGPT dan foydalanib hech narsaga erishmayapti?'\n\n📌 Muammo: Savolni noaniq berish.\n💡 Yechim: AIni 10 yillik tajribali mutaxassis roliga kiritish.\n🚀 CTA: 'Commentda BIZNES deb yozing, tayyor 15 ta savdo promptini Directga yuboraman!'"
+  },
+  office: {
+    title: "📊 Excelda XLOOKUP & SUMIFS 1 Soniyada",
+    prompt: "Vazifa: A ustunda Sana, B da Filial, C da Tushum. Chilonzor bo'yicha formula...",
+    response: "=SUMIFS(C2:C5000, B2:B5000, \"Chilonzor\")\n\n💡 AI Izohi: Ushbu formula 5000 qatorli jadvaldan faqat 'Chilonzor' filialidagi barcha tushumlarni 0.1 soniyada xatosiz jamlab beradi!"
+  },
+  study: {
+    title: "🎓 Feynman Texnikasi bilan Murakkab Mavzu",
+    prompt: "Vazifa: Iqtisodiyotdagi Inflyatsiya tushunchasini 10 yoshli bolaga tushuntir...",
+    response: "Tasavvur qil: Sinfda faqat 10 ta muzqaymoq bor va hammada 1000 so'm pul bor. Agar birdan hammaga 100,000 so'mdan tarqatilsa, muzqaymoq ko'payib qolmaydi — uning narxi 10,000 so'mga ko'tariladi. Pul ko'payib, narsalar narxi oshishi — bu Inflyatsiya!"
+  }
+};
+
+function selectAhaProfession(role, btnEl) {
+  triggerHaptic('light');
+  if (btnEl) {
+    document.querySelectorAll('.profession-chips-grid .prof-chip').forEach(c => c.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+
+  const data = AHA_DATA[role] || AHA_DATA.sales;
+  const titleEl = document.getElementById('ahaSimTitle');
+  const promptEl = document.getElementById('ahaPromptPreview');
+  const typingEl = document.getElementById('ahaTypingIndicator');
+  const respEl = document.getElementById('ahaResponseContent');
+
+  if (titleEl) titleEl.textContent = data.title;
+  if (promptEl) promptEl.innerHTML = `<b>Vazifa:</b> ${data.prompt}`;
+  if (typingEl) typingEl.style.display = 'block';
+  if (respEl) {
+    respEl.style.display = 'none';
+    respEl.textContent = '';
+  }
+
+  setTimeout(() => {
+    if (typingEl) typingEl.style.display = 'none';
+    if (respEl) {
+      respEl.style.display = 'block';
+      respEl.textContent = data.response;
+    }
+    triggerHaptic('success');
+  }, 400);
+}
+
+function checkAhaMoment() {
+  try {
+    const isShown = localStorage.getItem('gptify_aha_shown');
+    const completed = appState.completedLessons || [];
+    if (!isShown && completed.length === 0) {
+      setTimeout(() => {
+        openOverlay('ahaMomentModal');
+        selectAhaProfession('sales');
+      }, 750);
+    }
+  } catch (e) {}
+}
+
+function finishAhaMoment() {
+  triggerHaptic('success');
+  localStorage.setItem('gptify_aha_shown', 'true');
+  closeOverlay('ahaMomentModal');
+  openLessonModal(1);
 }
 
 // =============================================================================
@@ -1411,6 +1609,83 @@ function updateDailyQuestsUI() {
   }
 }
 
+// Clipboard Fallback Helper
+function copyFallbackText(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {}
+  document.body.removeChild(ta);
+}
+
+// =============================================================================
+// LEGO PROMPT BUILDER IN TAB 3 (PROMPT LAB)
+// =============================================================================
+let currentLegoBuilderState = {
+  role: "Tajribali B2B savdo eksperti",
+  context: "Toshkent bozoridagi B2B mijozga tijorat taklifi tayyorlash",
+  constraint: "Oddiy o'zbek tilida, suv so'zlarsiz, faqat 3 ta aniq bandda",
+  format: "Jadval ko'rinishida"
+};
+
+function setLegoPart(partType, value, btnEl) {
+  triggerHaptic('light');
+  if (btnEl) {
+    const parent = btnEl.parentElement;
+    if (parent) {
+      parent.querySelectorAll('.lego-part-chip').forEach(c => c.classList.remove('active'));
+      btnEl.classList.add('active');
+    }
+  }
+  currentLegoBuilderState[partType] = value;
+  updateLegoLivePreview();
+}
+
+function updateLegoLivePreview() {
+  const el = document.getElementById('legoPromptLivePreview');
+  if (!el) return;
+  const promptText = `Sen ${currentLegoBuilderState.role}san. Vazifang: ${currentLegoBuilderState.context}. Qoidalar: ${currentLegoBuilderState.constraint}. Natijani ${currentLegoBuilderState.format} taqdim et.`;
+  el.textContent = promptText;
+}
+
+function copyLegoPrompt() {
+  triggerHaptic('success');
+  const el = document.getElementById('legoPromptLivePreview');
+  const text = el ? el.textContent.trim() : "";
+  if (!text) return;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {
+      copyFallbackText(text);
+    });
+  } else {
+    copyFallbackText(text);
+  }
+
+  showToast("Lego Prompt nusxalandi! 📋");
+}
+
+function resetLegoBuilder() {
+  triggerHaptic('light');
+  currentLegoBuilderState = {
+    role: "Tajribali B2B savdo eksperti",
+    context: "Toshkent bozoridagi B2B mijozga tijorat taklifi tayyorlash",
+    constraint: "Oddiy o'zbek tilida, suv so'zlarsiz, faqat 3 ta aniq bandda",
+    format: "Jadval ko'rinishida"
+  };
+  document.querySelectorAll('#legoRoleChips .lego-part-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+  document.querySelectorAll('#legoContextChips .lego-part-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+  document.querySelectorAll('#legoConstraintChips .lego-part-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+  document.querySelectorAll('#legoFormatChips .lego-part-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+  updateLegoLivePreview();
+  showToast("Lego konstruktori yangilandi 🔄");
+}
+
 // Prompt Lab Tab Filtering & Search (115+ Prompts)
 let currentPromptCategory = 'all';
 let currentPromptSearch = '';
@@ -1517,6 +1792,19 @@ function copyPromptCardText(btn, text) {
 }
 
 // Practice Tickets Grid (1-10 with stars)
+function openTicket(ticketIndex) {
+  triggerHaptic('impact');
+  if (typeof QUIZ_DATA === 'undefined' || !QUIZ_DATA.tickets) return;
+  const ticket = QUIZ_DATA.tickets[ticketIndex - 1] || QUIZ_DATA.tickets.find(t => t.id === ticketIndex) || QUIZ_DATA.tickets[0];
+  if (!ticket) {
+    showToast("Bilet topilmadi!");
+    return;
+  }
+  const ticketQ = QUIZ_DATA.questions.filter(q => ticket.questionIds.includes(q.id));
+  startQuizWithQuestions(`🎫 ${ticket.name}`, ticketQ);
+}
+const openTicketQuizModal = openTicket;
+
 function renderPracticeTickets() {
   const container = document.getElementById('ticketsGridContainer');
   if (!container) return;
@@ -1743,9 +2031,76 @@ function shareCertificateOnTelegram() {
   }
 }
 
+function shareCertificateToStory() {
+  triggerHaptic('medium');
+  const tg = window.Telegram?.WebApp;
+  const shareText = "Men GPTify Academy'da AI va Prompt Muhandisligi bo'yicha rasmiy diplom oldim! 🎓";
+
+  if (tg?.shareToStory && currentCertDataUrl) {
+    try {
+      tg.shareToStory(currentCertDataUrl, { text: shareText });
+      showToast("Telegram Story ochilmoqda... 📲");
+      return;
+    } catch (e) {
+      console.warn("shareToStory error:", e);
+    }
+  }
+
+  // Fallback Telegram story / share URL
+  const shareUrl = `https://t.me/share/url?url=https://t.me/GPTify_Academy_bot&text=${encodeURIComponent(shareText + " Siz ham sun'iy intellektni o'rganing: @GPTify_Academy_bot")}`;
+  if (tg?.openTelegramLink) {
+    tg.openTelegramLink(shareUrl);
+  } else {
+    window.open(shareUrl, '_blank');
+  }
+  showToast("Telegram Story / Ulashish oynasi ochildi! 📲");
+}
+
+function downloadCertificateImage() {
+  triggerHaptic('medium');
+  attemptFileDownload();
+  showToast("Diplom rasmi yuklanmoqda / Galereyaga saqlashga tayyor! 📥");
+}
+
 // =============================================================================
-// 9. PAYWALL & VIRAL QUEST UNLOCK (3 FRIENDS + TELEGRAM CHANNEL)
+// 9. PAYWALL & MONETIZATION (TELEGRAM STARS + VIRAL UNLOCK)
 // =============================================================================
+function payWithTelegramStars() {
+  triggerHaptic('medium');
+  const tg = window.Telegram?.WebApp;
+  
+  // 1. Agar backend invoice URL taqdim etilgan bo'lsa
+  const testInvoiceUrl = ""; // Kelajakda bot orqali invoice URL generatsiya qilinadi
+  if (testInvoiceUrl && tg?.openInvoice) {
+    tg.openInvoice(testInvoiceUrl, (status) => {
+      if (status === "paid") {
+        appState.isVip = true;
+        saveState();
+        showToast("⭐️ To'lov muvaffaqiyatli! GPTify VIP ochildi! 👑");
+        closeOverlay('viewPaywall');
+        updateRoadmapVipUI();
+      } else if (status === "cancelled") {
+        showToast("To'lov bekor qilindi");
+      } else {
+        showToast("To'lov holati: " + status);
+      }
+    });
+    return;
+  }
+
+  // 2. Tushunarli va do'stona xabarnoma (Demo / Fallback rejimida)
+  const infoMsg = 
+    "⭐️ Telegram Stars (250 Stars):\n\n" +
+    "Telegram Stars to'lov tizimi ulanmoqda...\n\n" +
+    "🎁 Eslatma: Hozirgi sinov davrida siz '3 ta do'stni taklif qilish' yoki kanalga a'zo bo'lish orqali PRO darslarni 100% BEPUL (0 SO'MGA) ochishingiz mumkin!";
+
+  if (tg?.showAlert) {
+    tg.showAlert(infoMsg);
+  } else {
+    alert(infoMsg);
+  }
+}
+
 function openPaywall(contextTitle) {
   triggerHaptic('warning');
   const txt = document.getElementById('paywallContextText');
@@ -1796,15 +2151,16 @@ function verifyChannelSubscription() {
 
 function shareInviteLink() {
   triggerHaptic('impact');
-  const botUsername = 'gptify_academy_bot';
-  const shareText = encodeURIComponent("GPTify Academy — Sun'iy intellekt (AI) va ChatGPTni 0 dan professional darajada bepul o'rganing! 🚀");
-  const shareUrl = `https://t.me/share/url?url=https://t.me/${botUsername}?start=ref_${encodeURIComponent(appState.userName)}&text=${shareText}`;
+  const botUsername = 'GPTify_Academy_bot';
+  const userName = appState.userName || 'Oquvchi';
+  const shareText = encodeURIComponent("Do'stim, men GPTify Academy'da AI kursini boshladim 🚀 Mana bu havola orqali kirsang, ikkalamizga ham VIP darslar bepul ochiladi 🎁");
+  const shareUrl = `https://t.me/share/url?url=https://t.me/${botUsername}?start=ref_${encodeURIComponent(userName)}&text=${shareText}`;
   
   if (window.Telegram?.WebApp?.openTelegramLink) {
     window.Telegram.WebApp.openTelegramLink(shareUrl);
   } else {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(`https://t.me/${botUsername}?start=ref_${encodeURIComponent(appState.userName)}`);
+      navigator.clipboard.writeText(`https://t.me/${botUsername}?start=ref_${encodeURIComponent(userName)}`);
     }
     window.open(shareUrl, '_blank');
     showToast("Taklif havolasi nusxalandi va ulashish oynasi ochildi! 📲");
@@ -1936,11 +2292,30 @@ document.addEventListener("DOMContentLoaded", () => {
   loadState();
   initTelegram();
   updateDashboardUI();
+  if (typeof updateHeroCTA === 'function') updateHeroCTA();
   renderPracticeTickets();
   filterPromptsTab('all');
+  if (typeof updateLegoLivePreview === 'function') updateLegoLivePreview();
   renderMiniLeaderboard();
   renderFaqTab();
   renderCanvasCertificate();
   updateViralQuestUI();
   updateRoadmapVipUI();
+  if (typeof checkAhaMoment === 'function') checkAhaMoment();
+
+  // Restore quests accordion state if stored
+  try {
+    const questsOpen = localStorage.getItem('gptify_quests_open');
+    const questsCard = document.getElementById('dailyQuestsCard');
+    const questsIcon = document.getElementById('questsToggleIcon');
+    if (questsCard) {
+      if (questsOpen === 'true') {
+        questsCard.classList.remove('collapsed');
+        if (questsIcon) questsIcon.textContent = '▲ Yopish';
+      } else {
+        questsCard.classList.add('collapsed');
+        if (questsIcon) questsIcon.textContent = '▼ Ochish';
+      }
+    }
+  } catch (e) {}
 });

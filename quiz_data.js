@@ -59,321 +59,326 @@ const QUIZ_DATA = {
 
   // 2. Boshlovchilar va Amaliyotchilar uchun Savollar Banki,
 
-  // 2. 20 ta Imtihon va Trenajyor Savollari
+// 2. 20 ta Imtihon va Trenajyor Savollari (100% Amaliy Biznes Keyslar)
   questions: [
-    // --- 1. Noldan Boshlash ---
+    // --- 1-BILET: B2B Sotuv va E'tirozlarni Yopish ---
     {
       id: 1,
-      category: "get_started",
+      category: "sales",
       ticket: 1,
-      isTricky: false,
-      question: "Sun'iy intellektdan endi foydalanayotgan odam qaysi vositadan boshlagani eng ma'qul?",
+      isTricky: true,
+      question: "Mijoz: 'Sizning xizmatingiz qimmat, bozorda boshqalar 30% arzonroq taklif qilyapti' degan e'tiroz bildirdi. AI dan qanday prompt so'rash narxni tushirmasdan sotuvni yopishga yordam beradi?",
       options: [
-        "Murakkab dasturlash tillarini (Python, C++) 6 oy o'rganish",
-        "ChatGPT (OpenAI), Claude yoki Gemini kabi bepul chat-yordamchilardan birini ochib, kundalik savol bilan boshlash",
-        "O'ziga shaxsiy server xarid qilish",
-        "Faqat ingliz tilini mukammal o'rgangandan so'ng boshlash"
+        "Mijozga: 'Ular sifatsiz ishlaydi' deb boshqalarni yomonlash",
+        "AI dan: 'Mijoz e'tirozini qabul qilib, arzon variantlar keltiradigan xatarlarni tushuntiruvchi va bizning xizmat 2 oyda qanday qilib o'zini oqlashini hisoblab beruvchi 3 xil diplomatik javob yoz' deb so'rash",
+        "Mijozga darhol 30% chegirma berish",
+        "Mijozga boshqa yozmasdan aloqani uzish"
       ],
       correctIndex: 1,
-      explanation: "Hozirgi AI vositalari (ChatGPT, Gemini, Claude) o'zbek tilida bemalol tushunadi va javob beradi. Boshlash uchun dasturlash yoki texnik bilim shart emas — oddiy chat kabi yozishmasdan boshlash kifoya."
+      explanation: "Professional sotuvda narx bahslashilmaydi, balki mijozga qimmatroq yechim qanday qilib uning asabini, vaqtini va pulini asrab qolishi (ROI) hisob-kitoblar bilan ko'rsatiladi."
     },
     {
       id: 2,
-      category: "get_started",
+      category: "sales",
       ticket: 1,
       isTricky: false,
-      question: "Internetdagi eng so'nggi ma'lumotlar va manbalar bilan qidirish kerak bo'lganda qaysi AI eng yaxshi yordam beradi?",
+      question: "Toshkentdagi korxona rahbariga Telegram orqali sovuq xat (Cold pitch) yozishda 30 soniyada diqqatni tortuvchi AI prompti qanday tuziladi?",
       options: [
-        "Perplexity AI yoki Gemini (Search orqali yangilangan)",
-        "Faqat oflayn lug'atlar",
-        "Eski kalkulyator",
-        "Faqat rasm chizuvchi Midjourney"
-      ],
-      correctIndex: 0,
-      explanation: "Perplexity AI va Google Gemini real vaqtda internetdan ma'lumot qidirib, har bir ma'lumotning qaysi saytdan olinganini (havolasini) ko'rsatib beradi."
-    },
-
-    // --- 2. O'rganish & Muloqot ---
-    {
-      id: 3,
-      category: "learn_prompting",
-      ticket: 2,
-      isTricky: false,
-      question: "AI dan yuqori sifatli va aniq javob olishning 3 ta oltin ustuni qaysi?",
-      options: [
-        "Faqat juda uzun so'zlar ishlatish",
-        "1) Rol berish (Kimdek javob bersin); 2) Kontekst (Vaziyat nima); 3) Aniq format (Qanday ko'rinishda kerak)",
-        "Savolni 10 marta qayta-qayta yozish",
-        "Faqat bitta so'z yozish"
+        "Kompaniyangiz tarixi haqida 5 sahifalik uzun matn yozdirish",
+        "AI ga: 'Rahbar uchun: 1) Uning og'riqli muammosini ko'rsatuvchi 1 ta fakt; 2) Qanday yechim bera olishimiz; 3) 10 daqiqalik qisqa suhbatga chorlovchi 60 so'zdan oshmaydigan ixcham xat tuz' deb vazifa berish",
+        "Faqat narxlar ko'rsatilgan narxnoma (prays-list) tashlash",
+        "Internetdagi barcha kontaktlarga bir xil spamlarni yuborish"
       ],
       correctIndex: 1,
-      explanation: "Masalan: '[Rol]: Sen tajribali ingliz tili o'qituvchisisan. [Kontekst]: Boshlang'ich o'quvchiga tushuntiryapsan. [Format]: 3 ta misol bilan qisqa tushuntir'. Bu eng samarali formuladir."
+      explanation: "Band rahbarlar uzun maqtovlarni o'qimaydi. 60 so'z ichida aniq muammo, yechim va yumshoq taklif (Call to action) berilsa, javob qaytarish konversiyasi 4 barobarga oshadi."
+    },
+
+    // --- 2-BILET: Marketing, SMM & Kontent ---
+    {
+      id: 3,
+      category: "marketing",
+      ticket: 2,
+      isTricky: false,
+      question: "Instagramda biznes sahifasi uchun AIDA (Diqqat-Qiziqish-Istak-Harakat) formulasi bo'yicha sotuvchi post yaratishda eng to'g'ri AI prompti qaysi?",
+      options: [
+        "'Biz haqimizda chiroyli post yoz'",
+        "'Rol: Tajribali kopirayter. Vazifa: [Mahsulot] uchun AIDA formulasi bo'yicha Instagram post yoz. Diqqatni tortuvchi sarlavha, mijoz og'rig'i, mahsulot afzalligi va Directga yozishga undovchi CTA bo'lsin'",
+        "'Faqat emojilardan iborat matn chiqar'",
+        "'Inglizcha postni o'zbekchaga Google Translate qilib ber'"
+      ],
+      correctIndex: 1,
+      explanation: "AIDA formulasi orqali tuzilgan postlar mijozni befarq qoldirmaydi: Attention (Diqqat) to'xtatadi, Interest (Qiziqish) o'qitadi, Desire (Istak) xohish uyg'otadi, Action (Harakat) xaridga undaydi."
     },
     {
       id: 4,
-      category: "learn_prompting",
+      category: "marketing",
       ticket: 2,
       isTricky: true,
-      question: "Nega ko'pchilik odamlar AI dan 'foydasiz umumiy javob' olib hafsalasi pir bo'ladi?",
+      question: "Instagram Reels va TikTokda odamni dastlabki 3 soniyada to'xtatib qoluvchi kuchli 'Hook' ssenariysi tuzishda AI ga qanday cheklov qo'yiladi?",
       options: [
-        "Chunki AI umuman aqlli emas",
-        "Chunki ular savolni noaniq berishadi: masalan 'Menga biznes haqida gapir' deb kontekstsiz so'rashadi",
-        "Chunki internet sekin",
-        "Chunki AI faqat ingliz tilida biladi"
+        "Videoni sekin va sokin musiqa bilan boshlash",
+        "AI ga: 'Dastlabki 3 soniyada ekranda kutilmagan savol yoki paradoks ko'rsatuvchi, tomoshabinning odatiy fikrini sindiruvchi 5 xil provokatsion Hook taklif qil' deb cheklov qo'yish",
+        "Faqat logotipni 5 soniya ko'rsatish",
+        "Videoda umuman gapirmaslik"
       ],
       correctIndex: 1,
-      explanation: "Oltin qoida: 'Qanday so'rasangiz, shunday javob olasiz' (Garbage in, garbage out). Noaniq savolga umumiy kitobiy javob qaytadi. Aniq vaziyat berilsa, haqiqiy javob chiqadi."
+      explanation: "Lenta varaqlayotgan inson miyasi 3 soniyada qaror qabul qiladi. Kuchli vizual yoki matnli Hook bo'lmasa, foydali kontentingiz ham ko'rilmasdan o'tib ketadi."
     },
 
-    // --- 3. Hayot & O'qishda Qo'llash ---
+    // --- 3-BILET: Ofis & Excel Tahlili ---
     {
       id: 5,
-      category: "apply_life_study",
+      category: "office",
       ticket: 3,
       isTricky: false,
-      question: "Murakkab mavzuni (masalan, iqtisodiy qonun yoki ilmiy maqolani) AI yordamida tez tushunish siri nima?",
+      question: "Kompaniyaning 5000 qatorli savdo jadvalidan faqat 'Chilonzor' filialida 'Mebel' toifasi bo'yicha jami tushumni hisoblash uchun AI dan qanday formula so'raladi?",
       options: [
-        "Matnni yodlab olish",
-        "AI ga: 'Ushbu mavzuni 10 yoshli bolaga tushuntirgandek, hayotiy oddiy misollar bilan tushuntirib ber' deb so'rash (Feynman texnikasi)",
-        "Matnni o'qimasdan tashlab ketish",
-        "Faqat audio eshitish"
+        "Oddiy SUM formulasini so'rash",
+        "AI ga ustunlarni ko'rsatib (A: Filial, B: Toifa, C: Summa): 'Chilonzor va Mebel shartlarini qanoatlantiruvchi SUMIFS formulasini va uni qanday kiritish yo'riqnomasini ber' deb so'rash",
+        "Kalkulyatorda bittalab qo'shib chiqish",
+        "Barcha qatorlarni qo'lda saralash"
       ],
       correctIndex: 1,
-      explanation: "Bu 'Feynman texnikasi' deb ataladi. AI ga 'oddiy tilda tushuntir' desangiz, u barcha qiyin atamalarni kundalik misollarga aylantirib, 5 daqiqada tushunishingizni ta'minlaydi."
+      explanation: "SUMIFS formulasi bir nechta shart bo'yicha yig'indini avtomatik hisoblaydi. AI ga ustun harflari berilsa, u bir zumda tayyor formulani tuzib beradi."
     },
     {
       id: 6,
-      category: "apply_life_study",
+      category: "office",
       ticket: 3,
-      isTricky: false,
-      question: "Chet tilini (ingliz/rus) o'rganishda AI dan qanday qilib tekin repetitor sifatida foydalanish mumkin?",
+      isTricky: true,
+      question: "VLOOKUP dagi xatolardan (chapga qidirish cheklovi, ustun siljishi) qochish uchun zamonaviy Excelda qaysi yangi avlod formulasini AI dan talab qilish kerak?",
       options: [
-        "Faqat so'zlarni tarjima qilish",
-        "AI ga: 'Sen mening sabrli suhbatdoshimsan. Men bilan inglizcha A2 darajasida suhbatlash, xatolarimni muloyim tuzatib, to'g'ri variantini ko'rsat' deb buyurish",
-        "Har kuni faqat bitta so'z so'rash",
-        "Faqat lug'at o'qish"
+        "Faqat COUNTIF",
+        "XLOOKUP yoki INDEX+MATCH formulasi — chunki u ustun o'rnini o'zgartirganda buzilmaydi va ikkala yo'nalishda qidiradi",
+        "Faqat AVERAGE",
+        "Formulalar o'rniga faqat Word ishlatish"
       ],
       correctIndex: 1,
-      explanation: "AI hech qachon charchamaydi, uyalmasdan xato qilib o'rganish imkonini beradi va xatolaringizni darhol grammatik jihatdan tushuntirib beradi."
+      explanation: "XLOOKUP zamonaviy Excelning eng qudratli qidiruv formulasidir. U chapga ham, o'ngga ham qidiradi va ustun qo'shilganda formulani buzib qo'ymaydi."
     },
 
-    // --- 4. Ish & Biznesda Qo'llash ---
+    // --- 4-BILET: Uzum & E-Commerce ---
     {
       id: 7,
-      category: "apply_work_business",
+      category: "ecom",
       ticket: 4,
       isTricky: false,
-      question: "Ishga kirish uchun rezyume (CV) tayyorlayotganda AI dan qanday to'g'ri foydalaniladi?",
+      question: "Uzum Marketda mahsulot qidiruvda (SEO) 1-o'ringa chiqishi uchun sun'iy intellektdan qanday optimal sarlavha va tavsif tuzdiriladi?",
       options: [
-        "AI ga internetdagi soxta rezyumeni ko'chirib berishni aytish",
-        "O'zingizning tajribangizni yozib, so'ng AI ga: 'Ushbu rezyumeni maqsadli vakansiya talablariga moslab, kuchli fe'llar bilan professional tahrir qil' deb buyruq berish",
-        "Rezyumega rasm qo'ymaslik",
-        "Faqat 1 sahifalik bosh sahifa yuborish"
+        "Faqat bitta so'zdan iborat nom yozish",
+        "AI ga: 'Xaridorlar Uzumda eng ko'p qidiradigan o'zbek va ruscha kalit so'zlarni jamlab, tovar nomi, asosiy afzalligi va xususiyatlarini 80 belgida SEO talabiga moslab ber' deb topshiriq berish",
+        "Boshqa do'konning tavsifini nusxalash",
+        "Sarlavhaga narxni yozib qo'yish"
       ],
       correctIndex: 1,
-      explanation: "AI sizning haqiqiy yutuqlaringizni professional biznes tilida ifodalab beradi va HR mutaxassislarining e'tiborini tortuvchi ko'rinishga keltiradi."
+      explanation: "Uzum qidiruv algoritmlari sarlavha va tavsifdagi kalit so'zlarga tayanadi. To'g'ri tanlangan SEO kalit so'zlar organik ko'rishlar sonini 300% ga oshiradi."
     },
     {
       id: 8,
-      category: "apply_work_business",
+      category: "ecom",
       ticket: 4,
-      isTricky: false,
-      question: "Mijoz xizmatingizga 'Qimmat ekan' deb e'tiroz bildirdi. Amaliy savdoda AI sizga qanday yordam beradi?",
+      isTricky: true,
+      question: "Uzumda xaridor 1 yulduz qo'yib: 'Mahsulotda nuqson bor, umuman yoqmadi' deb salbiy sharh yozdi. Do'kon obro'sini saqlash uchun eng professional AI javob qanday bo'ladi?",
       options: [
-        "Mijoz bilan bahslashish",
-        "AI dan: 'Narxni tushirmasdan, mijozga bu xarajat 3 oyda qanday qilib o'zini oqlashi va foyda keltirishini ko'rsatuvchi 3 xil muloyim javob tuzib ber' deb so'rash",
-        "Darhol 50% chegirma berish",
-        "Mijozga boshqa yozmaslik"
+        "Xaridor bilan janjallashib, uni tuhmatchilikda ayblash",
+        "AI dan: 'Xaridordan samimiy uzr so'rab, mahsulotni bepul almashtirib berish taklifini beruvchi, boshqa yangi xaridorlarga do'kon mas'uliyatli ekanligini isbotlovchi diplomatik javob yoz' deb so'rash",
+        "Sharhga umuman e'tibor bermaslik",
+        "Do'konni yopib yuborish"
       ],
       correctIndex: 1,
-      explanation: "AI orqali siz mijozga 'narx' haqida emas, 'foyda va qiymat' haqida fikrlashga yordam beruvchi kuchli psixologik javob skriptini olasiz."
+      explanation: "Salbiy sharhlarga berilgan professional va g'amxo'r javob yangi kirgan 100 lab xaridorlarda ishonch uyg'otadi va sotuvni oshiradi."
     },
 
-    // --- 5. Xatolar & Xavfsizlik ---
+    // --- 5-BILET: Huquq, Shartnomalar & Tahlil ---
     {
       id: 9,
-      category: "ai_safety_habits",
+      category: "legal",
       ticket: 5,
       isTricky: true,
-      question: "AI ba'zida mavjud bo'lmagan kitob, qonun moddasi yoki faktni to'qib chiqarishi mumkin. Buni nima deyiladi va qanday oldi olinadi?",
+      question: "Didox orqali kelgan 25 sahifalik B2B pudrat shartnomasidagi yuqori penya va yashirin xatarlarni AI ga 10 soniyada qanday tekshirtirish mumkin?",
       options: [
-        "Bu kompyuter virusi, kompyuterni o'chirish kerak",
-        "Bu 'Gallyutsinatsiya' (Hallucination) deyiladi. Oldini olish uchun AI dan faqat berilgan matn/manba ichidan javob berishni so'rash va faktlarni tekshirish kerak",
-        "Bunday narsa bo'lmaydi, AI doim 100% haqiqatni aytadi",
-        "Faqat telefonni qayta yoqish kerak"
-      ],
-      correctIndex: 1,
-      explanation: "AI model bilmagan joyini tan olmasdan 'chiroyli to'qima' berishi mumkin. Muhim fakt, qonun yoki raqamlar bilan ishlaganda manba berishni (Grounding) so'rash shart."
-    },
-    {
-      id: 10,
-      category: "ai_safety_habits",
-      ticket: 5,
-      isTricky: true,
-      question: "Kompaniyangizning maxfiy moliyaviy hisobotini yoki mijozlar pasport ma'lumotlarini ochiq AI ga kiritish xavflimi?",
-      options: [
-        "Mutlaqo xavfsiz, hamma kiritadi",
-        "Ha, xavfli! Ochiq bepul modellar kiritilgan ma'lumotlarni o'rganish uchun ishlatishi mumkin. Maxfiy raqamlarni anonimlashtirish (ism va hisob raqamlarini o'zgartirib kiritish) shart",
-        "Faqat internet trafigi ketadi",
-        "AI pasport ma'lumotini tushunmaydi"
-      ],
-      correctIndex: 1,
-      explanation: "Korporativ yoki shaxsiy ma'lumotlar bilan ishlaganda har doim maxfiy ismlar va summalarni o'zgartirib (anonimlashtirib) kiritish eng xavfsiz qoidadir."
-    },
-
-    // --- 4. Uzum & Marketplace ---
-    {
-      id: 8,
-      category: "uzum_ecommerce",
-      ticket: 4,
-      isTricky: false,
-      question: "Uzum Marketda tovaringiz qidiruvda yuqoriga chiqishi uchun AI qanday yordam beradi?",
-      options: [
-        "Faqat chiroyli rasm chizib beradi",
-        "O'zbek va rus tillarida eng ko'p qidiriladigan SEO kalit so'zlarni aniqlab, mahsulot sarlavhasi va tavsifiga me'yorida joylashtiradi",
-        "Uzum adminlariga shikoyat xati yozadi",
-        "Barcha tovarlar narxini 1000 so'm qiladi"
-      ],
-      correctIndex: 1,
-      explanation: "Uzum algoritmlari qidiruv so'zlariga bog'langan. AI orqali tuzilgan to'g'ri SEO sarlavha va xususiyatlar tovar ko'rishlar sonini 3-5 barobarga oshiradi."
-    },
-    {
-      id: 9,
-      category: "uzum_ecommerce",
-      ticket: 4,
-      isTricky: true,
-      question: "Uzumda xaridor jahli chiqib 1 yulduz qo'ydi va salbiy sharh yozdi. Noto'g'ri harakat qaysi?",
-      options: [
-        "Mijoz bilan tortishib, uni yolg'onchilikda ayblash",
-        "AI yordamida uzr so'rab, nuqsonni almashtirib berish va do'kon obro'sini saqlovchi diplomatik javob yozish",
-        "Mijozga do'kon nomidan kichik bonus yoki kompensatsiya taklif qilish",
-        "Kelgusida bunday nuqson qaytarilmasligini ommaviy ko'rsatish"
-      ],
-      correctIndex: 0,
-      explanation: "Boshqa xaridorlar aynan salbiy sharhlarga sotuvchi qanday javob berganini o'qiydi. Diplomatik va g'amxo'r javob yangi xaridorlar ishonchini qozonadi."
-    },
-
-    // --- 5. Shartnoma & Xavfsizlik ---
-    {
-      id: 10,
-      category: "business_safety",
-      ticket: 5,
-      isTricky: true,
-      question: "Didox orqali kelgan 20 sahifalik yangi B2B shartnomani AI ga qanday tekshirtirish kerak?",
-      options: [
-        "Faqat oxirgi sahifasini o'qitish",
-        "AI ga: 'Faqat: 1) Har bir kun uchun penya miqdori; 2) Bir tomonlama bekor qilish huquqi; 3) To'lov muddati kechikkanidagi xatarlarni jadvalda ko'rsat' deb tekshirtirish",
+        "Faqat oxirgi sahifadagi imzolarni o'qitish",
+        "AI ga: 'Sen korporativ yuristisan. Matndan: 1) Bir tomonlama bekor qilish shartlari; 2) Har bir kechikkan kun uchun penya miqdori; 3) To'lov muddati buzilgandagi jarimalarni jadvalda ko'rsat va xatarlarni fosh et' deb buyruq berish",
         "Hujjatni o'qimasdan imzolash",
-        "Hujjatdagi barcha raqamlarni o'chirib tashlash"
+        "Shartnomani rasmga olib Instagramga joylash"
       ],
       correctIndex: 1,
-      explanation: "AI katta shartnomalardagi mayda harflar bilan yozilgan yuqori foizli penya tuzoqlarini (masalan, kunlik 0.5% yoki 1%) 10 soniyada fosh qilib, sizni millionlab so'm zarardan asraydi."
-    }
-  ,
+      explanation: "AI katta shartnomalardagi mayda yozuvli yuqori foizli penya (masalan, kunlik 0.5% yoki 1%) tuzoqlarini soniyalarda aniqlab, biznesni millionlab so'm zarardan asraydi."
+    },
+    {
+      id: 10,
+      category: "legal",
+      ticket: 5,
+      isTricky: false,
+      question: "Rahbar uchun oylik tushum va xarajatlar farqini 1 sahifalik tushunarli formatda taqdim etishda AI dan qanday tuzilma so'raladi?",
+      options: [
+        "Faqat 10 sahifalik quruq nazariy matn",
+        "AI ga: '1) Asosiy ko'rsatkichlar (KPI); 2) Eng katta 3 ta xarajat moddasi; 3) Kelasi oyda xarajatlarni 15% qisqartirish bo'yicha 3 ta amaliy taklif ko'rinishidagi ixcham boshqaruv xulosasi (Executive Summary) ber' deb talab qilish",
+        "Faqat bitta umumiy raqam ko'rsatish",
+        "Hisobotni kechiktirish"
+      ],
+      correctIndex: 1,
+      explanation: "Rahbarlarga (Executive) quruq raqamlar emas, raqamlar ortidagi muammo va aniq biznes takliflar kerak. Executive Summary formati eng qadrli hisoblanadi."
+    },
+
+    // --- 6-BILET: Karyera, HR & Mijozlar Servisi ---
+    {
+      id: 11,
+      category: "career",
+      ticket: 6,
+      isTricky: false,
+      question: "Xalqaro kompaniyalarga ishga topshirishda Google tan olgan 'XYZ formulasi' bo'yicha rezyumeni AI yordamida qanday kuchaytirish kerak?",
+      options: [
+        "'Men yaxshi va tirishqoq xodimman' deb umumiy gaplar yozish",
+        "AI ga: '[Yutuq]ni [O'lchanadigan natija, % yoki $] orqali [Amalga oshirilgan harakat] yordamida bajardim shaklida har bir bandni raqamlar bilan qayta shakllantir' deb topshiriq berish",
+        "Boshqa odamning CV sini to'liq ko'chirish",
+        "Faqat maktab baholarini kiritish"
+      ],
+      correctIndex: 1,
+      explanation: "Google XYZ formulasi: 'Accomplished [X] as measured by [Y], by doing [Z]'. Raqamlar bilan tasdiqlangan yutuqlar maosh taklifini 2 barobargacha oshiradi."
+    },
+    {
+      id: 12,
+      category: "career",
+      ticket: 6,
+      isTricky: true,
+      question: "Telegram bot orqali mijozlarga 24/7 avtomatik narx va katalog yuborishda AIni qanday xavfsiz 'Rol va Cheklov' bilan sozlash kerak?",
+      options: [
+        "AIdan mijoz bilan xohlagan mavzuda suhbatlashishni so'rash",
+        "AI ga qat'iy tizimli yo'riqnoma (System Prompt) berib: 'Sen faqat [Kompaniya] mahsulotlari bo'yicha ma'lumot berasan. Do'konda yo'q narsani to'qima, narxni o'zgartirma, begona mavzularga xushmuomalalik bilan rad javobini ber' deb chegaralash",
+        "AIni umuman tekshirmasdan qo'yib yuborish",
+        "Mijozlarning kartalarini so'rashga ruxsat berish"
+      ],
+      correctIndex: 1,
+      explanation: "Chatbotlarda 'Guardrails' (chegaralar) o'rnatilmasa, AI mavjud bo'lmagan chegirmalar va'da qilishi yoki do'konga tegishli bo'lmagan mavzularga chalg'ishi mumkin."
+    },
+
+    // --- 7-BILET: Ta'lim, Til & Feynman Texnikasi ---
+    {
+      id: 13,
+      category: "study",
+      ticket: 7,
+      isTricky: false,
+      question: "Murakkab iqtisodiy qonuniyat yoki texnik tushunchani 5 daqiqada o'zlashtirish uchun Feynman texnikasi qanday qo'llaniladi?",
+      options: [
+        "Kitobdagi barcha ta'riflarni yodlab olish",
+        "AI ga: 'Ushbu murakkab mavzuni 10 yoshli bolaga tushuntirgandek, hayotiy oddiy misollar (muzqaymoq yoki velosiped) bilan tushuntirib ber' deb buyurish",
+        "Mavzuni o'rganmasdan tashlab ketish",
+        "Faqat ilmiy maqolalarni qayta o'qish"
+      ],
+      correctIndex: 1,
+      explanation: "Feynman texnikasi: agar siz biror narsani bolaga oddiy so'zlar bilan tushuntirib bera olsangiz, demak uning tub mohiyatini haqiqatan tushungansiz."
+    },
     {
       id: 14,
-      category: "apply_work_business",
-      ticket: 4,
+      category: "study",
+      ticket: 7,
       isTricky: false,
-      question: "Didox yoki boshqa elektron hujjat aylanishidagi B2B shartnomalarni tekshirishda Claude 3.5 qanday yordam beradi?",
+      question: "Ingliz tilida erkin so'zlashuv darajasini (Speaking) oshirishda AIdan shaxsiy repetitor sifatida qanday foydalaniladi?",
       options: [
-        "Shartnomani avtomatik imzolab yuboradi",
-        "25-50 sahifalik shartnomadagi yuqori penya, noaniq to'lov muddatlari va bir tomonlama bekor qilish kabi yashirin xatarlarni 10 soniyada jadvalda chiqarib beradi",
-        "Faqat imlo xatolarini tekshiradi",
-        "Faqat inglizcha shartnomalarni tushunadi"
+        "Faqat so'zlarni o'zbekchaga tarjima qilib yurish",
+        "AI ga: 'Sen mening sabrli ingliz tili do'stimsan. Men bilan B1 darajasida mavzularda suhbatlash. Har safar mening xatoimni tuzatib, nega bunday ekanligini tushuntir va savol bilan davom et' deb aytish",
+        "Grammatika qoidalarini daftarga ko'chirish",
+        "Yiliga bitta so'z o'rganish"
       ],
       correctIndex: 1,
-      explanation: "Claude 3.5 Sonnet katta hajmdagi PDF hujjatlar va shartnomalarni tahlil qilishda eng kuchli model hisoblanadi. U barcha xatarlarni aniq ko'rsatib, xavfsiz tahrirni tavsiya qiladi."
+      explanation: "AI uyalmasdan, xato qilishdan qo'rqmasdan jonli muloqot qilish imkonini beruvchi 24/7 bepul sabrli repetitordir."
     },
+
+    // --- 8-BILET: AI Xavfsizligi & Gallyutsinatsiya ---
     {
       id: 15,
-      category: "apply_work_business",
-      ticket: 5,
-      isTricky: false,
-      question: "Excelda qiyin formulalarni (XLOOKUP, SUMIFS) AI orqali yozdirishning eng to'g'ri usuli qaysi?",
+      category: "safety",
+      ticket: 8,
+      isTricky: true,
+      question: "AI model to'qib chiqargan 'yolg'on fakt' (Hallucination) yoki noaniq statistikani fosh qilishning eng ishonchli usuli qaysi?",
       options: [
-        "Formulani o'zingiz yoddan bilishingiz shart",
-        "AI ga jadvaldagi ustun nomlarini (A: Sana, B: Filial, C: Summa) va qanday aniq natija kerakligini tushuntirib, tayyor formulani so'rash",
-        "Faqat kalkulyatordan foydalanish",
-        "Excel o'rniga faqat qog'ozda hisoblash"
+        "AI aytgan hamma narsaga ko'r-ko'rona ishonish",
+        "AI dan javobini tasdiqlovchi rasmiy manbalarni (havola, qonun raqami yoki tadqiqot muallifini) ko'rsatishni so'rash va muhim faktlarni Perplexity/Google orqali qayta tekshirish",
+        "Faqat telefonni o'chirib yoqish",
+        "AI ga: 'Rost aytyapsanmi?' deb yana bir bor so'rash"
       ],
       correctIndex: 1,
-      explanation: "AIdan Excel formulasi so'raganda unga ustun harflari va shartlarini bersangiz, u katakgacha moslangan tayyor formulani va kiritish yo'riqnomasini beradi."
+      explanation: "AI ba'zan ishonchli ohangda haqiqatga to'g'ri kelmaydigan ma'lumot to'qishi mumkin (Hallucination). Grounding (manba talab qilish) bu xatoni bartaraf etadi."
     },
     {
       id: 16,
-      category: "apply_work_business",
-      ticket: 6,
+      category: "safety",
+      ticket: 8,
       isTricky: true,
-      question: "Instagram va TikTok uchun diqqatni tortuvchi sarlavha (Hook) ning asosiy vazifasi nima?",
+      question: "Kompaniyangizning ichki moliyaviy hisobotini yoki mijozlar pasport ma'lumotlarini AI ga yuklashdan oldin qaysi xavfsizlik qoidasiga rioya qilish shart?",
       options: [
-        "Faqat videoni chiroyli qilish",
-        "Lentani varaqlayotgan foydalanuvchini dastlabki 3 soniyada to'xtatib qolish va keyingi kontentni ko'rishga undash",
-        "Faqat musiqa tanlash",
-        "Videoni 1 soat davom ettirish"
+        "Hamma ma'lumotlarni hech qanday o'zgarishsiz tashlash",
+        "Barcha shaxsiy ma'lumotlarni (F.I.SH., pasport raqamlari, karta raqamlari, aniq korxona nomini) 'Kompaniya A', 'Xodim B' kabi anonim belgilarga almashtirib kiritish",
+        "Faqat kechasi kiritish",
+        "Faqat audioda aytish"
       ],
       correctIndex: 1,
-      explanation: "E'tibor iqtisodiyotida dastlabki 3 soniya hal qiluvchi ahamiyatga ega. Agar Hook diqqatni tortmasa, kontent qanchalik foydali bo'lmasin, hech kim tomosha qilmaydi."
+      explanation: "Anonimlashtirish korporativ xavfsizlikning 1-qoidasidir. AI mantiqiy hisob-kitobni anonim ma'lumotlar bilan ham 100% to'g'ri bajara oladi."
     },
+
+    // --- 9-BILET: Vizual AI & Prompt Muhandisligi ---
     {
       id: 17,
-      category: "apply_work_business",
-      ticket: 7,
+      category: "visual",
+      ticket: 9,
       isTricky: false,
-      question: "Uzum Marketda mahsulot kartochkasi qidiruvda (SEO) yuqori o'ringa chiqishi uchun eng muhim omil nima?",
+      question: "Midjourney yoki Flux orqali brend mahsulotining fotorealistik 3D reklama renderini olish uchun promptda qaysi parametrlar berilishi shart?",
       options: [
-        "Faqat tovar narxini tushirish",
-        "Sarlavha va tavsifga xaridorlar eng ko'p qidiradigan aniq kalit so'zlarni va tovar afzalliklarini to'g'ri joylashtirish",
-        "Tovarni nomlamasdan qoldirish",
-        "Faqat 1 ta rasm qo'yish"
+        "Faqat 'chiroyli rasm chiz'",
+        "1) Mahsulot va material (shisha, metall, mato); 2) Yorug'lik (Studio lighting, soft shadows); 3) Kamera va burchak (Macro lens, 8k octane render, --ar 16:9)",
+        "Faqat rassomning ismini yozish",
+        "Harflar o'rniga faqat raqamlar yozish"
       ],
       correctIndex: 1,
-      explanation: "Marketplace algoritmlari xaridor so'rovi bilan mahsulot sarlavhasi va tavsifidagi kalit so'zlarni moslashtiradi. To'g'ri SEO sarlavha savdoni bir necha barobar oshiradi."
+      explanation: "Vizual AI yorug'lik, material va kamera burchagi ko'rsatilgandagina kinostudiya darajasidagi mukammal reklama tasvirini yaratadi."
     },
     {
       id: 18,
-      category: "apply_work_business",
-      ticket: 8,
-      isTricky: true,
-      question: "Mijoz 'Xizmatingiz qimmat' deb e'tiroz bildirsa, eng professional AI savdo strategiyasi qaysi?",
-      options: [
-        "Darhol 50% chegirma berish yoki janjallashish",
-        "Mijoz fikrini qabul qilib, xarajat emas, 2-3 oyda o'zini oqlovchi qadriyat va investitsiya ekanligini hisob-kitob bilan ko'rsatish",
-        "Mijozga boshqa javob yozmaslik",
-        "Mahsulot sifatini pasaytirish"
-      ],
-      correctIndex: 1,
-      explanation: "Professional sotuvchi narx bo'yicha bahslashmaydi, balki mijozga to'layotgan pulidan ko'proq foyda olishini raqamlar bilan asoslab beradi."
-    },
-    {
-      id: 19,
-      category: "master_future",
+      category: "prompt_eng",
       ticket: 9,
       isTricky: false,
-      question: "Korxonalarda sun'iy intellekt vositalarini (ChatGPT, Claude) joriy qilishda axborot xavfsizligining 1-qoidasi nima?",
+      question: "Professional Lego Promptning 4 ta tayanch bloki ([Rol] + [Kontekst] + [Cheklov] + [Format]) nima uchun oddiy bitta gapdan 10 barobar ustun?",
       options: [
-        "AIdan umuman foydalanmaslik",
-        "Ochiq bulutli AI tizimlariga mijozlarning maxfiy pasport, bank kartasi va tijorat sirlarini to'g'ridan-to'g'ri kiritmaslik",
-        "Kompyuterlarni o'chirib qo'yish",
-        "Faqat bitta xodimga ruxsat berish"
+        "Chunki u juda uzun",
+        "Chunki u AIni aniq mutaxassis pozitsiyasiga qo'yadi, keraksiz suv so'zlarni taqiqlaydi va tayyor ishlatish mumkin bo'lgan aniq tuzilmada javob berishga majbur qiladi",
+        "Chunki AI faqat shu so'zlarni tushunadi",
+        "Chunki bu dasturlash tilidir"
       ],
       correctIndex: 1,
-      explanation: "Kompaniyalar AI ishlatishda konfidensiallik qoidalariga amal qilishi va maxfiy ma'lumotlarni anonimlashtirib kiritishi shart."
+      explanation: "Lego formulasi noaniqlikni yo'q qiladi. AI o'zidan to'qimasdan, aynan sizning biznesingizga kerakli professional formatda natija beradi."
+    },
+
+    // --- 10-BILET: Korxonalarda AI Joriy Qilish & Kelajak ---
+    {
+      id: 19,
+      category: "business_ai",
+      ticket: 10,
+      isTricky: false,
+      question: "20-50 kishilik korxonada AIni joriy qilishda eng to'g'ri strategiya qaysi?",
+      options: [
+        "Darhol barcha xodimlarni ishdan bo'shatib, sun'iy intellektga topshirish",
+        "Kompaniyada eng ko'p vaqt yeydigan 1 ta jarayondan (masalan: bir xil mijoz savollari yoki Excel hisobotlar) pilot guruh orqali boshlab, tayyor promptlar bazasini yaratish",
+        "Hech narsani o'zgartirmaslik",
+        "Million dollarlik tushunarsiz dasturlar sotib olish"
+      ],
+      correctIndex: 1,
+      explanation: "To'g'ri AI transformatsiyasi eng ko'p vaqt sarflanadigan bitta bo'limdan boshlanadi. Natijani ko'rgan xodimlar AIni o'zlarining asosiy quroliga aylantiradilar."
     },
     {
       id: 20,
-      category: "master_future",
+      category: "master",
       ticket: 10,
       isTricky: false,
-      question: "Doimiy va yuqori unumdorlikka erishish uchun AI dan qanday foydalanish kundalik odatga aylantirilishi kerak?",
+      question: "Sun'iy intellekt davrida mehnat bozorida eng talabgir va yuqori daromad oluvchi mutaxassis kim bo'ladi?",
       options: [
-        "Faqat muammo chiqqanda eslash",
-        "Har kuni ertalab kunlik rejalarni Timeboxing qilish va qiyin vazifalarni AIdan 10 daqiqada optimallashtirib olish (Odatlar bog'liqligi)",
-        "Bir kunda 10 soat o'tirib, keyin 1 oy ishlatmaslik",
-        "Barcha ishlarni AIni o'ziga tashlab, tekshirmaslik"
+        "AIdan qo'rqib, undan umuman foydalanmaydigan inson",
+        "AI uning o'rnini egallashiga yo'l qo'ymay, o'z sohasida sun'iy intellektni professional qo'llab 10 kishining ishini 1 kunda bajara oladigan mutaxassis",
+        "Faqat qo'lda xat yozadigan inson",
+        "Kompyuter ishlatishni to'xtatgan inson"
       ],
       correctIndex: 1,
-      explanation: "Doimiy mikro-amaliyot (kuniga 10 daqiqa) AIni tish yuvishdek tabiiy odatga aylantiradi va inson samaradorligini 2-3 barobarga oshiradi."
+      explanation: "Sun'iy intellekt insonning o'rnini egallamaydi — lekin AIdan foydalanadigan mutaxassis AIdan foydalanmaydigan mutaxassisning o'rnini egallaydi!"
     }
   ],
 

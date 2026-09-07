@@ -2563,4 +2563,486 @@ body {
   justify-content: center;
   gap: 6px;
 }
+.cert-action-btn.story-btn {
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4);
+}
+.cert-action-btn.story-btn:active {
+  transform: scale(0.98);
+}
+
+/* =============================================================================
+   16. MODERN ENHANCEMENTS: HERO CTA, LEGO BUILDER, STARS, STORY, B2B, AHA MOMENT
+   ============================================================================= */
+
+/* 1. Primary Hero CTA */
+.hero-primary-cta-btn {
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
+  color: #ffffff;
+  border: none;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(6, 182, 212, 0.45);
+  transition: all 0.25s ease;
+  animation: heroPulse 2.8s infinite;
+}
+.hero-primary-cta-btn:active {
+  transform: scale(0.96);
+}
+@keyframes heroPulse {
+  0%, 100% {
+    box-shadow: 0 4px 18px rgba(6, 182, 212, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 26px rgba(37, 99, 235, 0.65);
+  }
+}
+.hero-primary-cta-btn .cta-arrow {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.hero-primary-cta-btn:hover .cta-arrow {
+  transform: translateX(3px);
+}
+
+/* 2. Collapsible Daily Quests */
+.daily-quests-card.collapsed .quests-list {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  pointer-events: none;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin-top 0.3s ease;
+}
+.daily-quests-card:not(.collapsed) .quests-list {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 10px;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.35s ease;
+}
+.daily-quests-card .toggle-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+.daily-quests-card:not(.collapsed) .toggle-arrow {
+  transform: rotate(180deg);
+}
+
+/* 3. Lego Prompt Builder in Tab 3 */
+.promptlab-lego-builder {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(8, 14, 26, 0.95));
+  border: 1.5px solid rgba(56, 189, 248, 0.3);
+  border-radius: 20px;
+  padding: 16px;
+  margin: 12px 0 16px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.lego-builder-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.lego-builder-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lego-tag-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+}
+.lego-builder-desc {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.lego-selector-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lego-builder-row {
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 9px 10px;
+}
+.lego-row-label {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.lego-row-label b {
+  color: #e2e8f0;
+}
+.lego-row-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.lego-row-chips::-webkit-scrollbar {
+  display: none;
+}
+.lego-part-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lego-part-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.lego-part-chip.active {
+  background: rgba(6, 182, 212, 0.22);
+  border-color: #06b6d4;
+  color: #38bdf8;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+/* Lego Preview Card */
+.lego-preview-box {
+  margin-top: 12px;
+  background: #020617;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+}
+.lego-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #38bdf8;
+  margin-bottom: 6px;
+}
+.lego-preview-header .preview-badge {
+  font-size: 9.5px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.lego-preview-text {
+  font-size: 11.5px;
+  color: #e2e8f0;
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  word-break: break-word;
+}
+.lego-preview-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.copy-lego-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.reset-lego-btn {
+  padding: 10px 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+/* 4. Telegram Stars Button */
+.stars-paywall-box {
+  margin-bottom: 14px;
+}
+.btn-telegram-stars {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border: 1.5px solid #fbbf24;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 900;
+  padding: 14px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-telegram-stars:active {
+  transform: scale(0.97);
+}
+.stars-icon {
+  font-size: 18px;
+}
+.stars-instant-badge {
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fef08a;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-left: 4px;
+}
+.paywall-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 12px 0;
+  position: relative;
+}
+.paywall-divider::before, .paywall-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.paywall-divider span {
+  padding: 0 10px;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+/* 5. B2B Corporate Banner */
+.b2b-corporate-banner {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(30, 27, 75, 0.4));
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.b2b-corporate-banner:hover {
+  border-color: #38bdf8;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(30, 27, 75, 0.5));
+}
+.b2b-corporate-banner:active {
+  transform: scale(0.98);
+}
+.b2b-banner-left {
+  flex: 1;
+  text-align: left;
+}
+.b2b-kicker {
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.b2b-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+}
+.b2b-sub {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+.b2b-banner-btn {
+  background: rgba(56, 189, 248, 0.2);
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* 6. Aha! Moment Interactive Modal */
+.aha-moment-overlay {
+  z-index: 2500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.aha-moment-overlay.active {
+  display: flex;
+}
+.aha-modal-card {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(160deg, #0f172a, #090d16);
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  border-radius: 24px;
+  padding: 20px 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(14, 165, 233, 0.15);
+  text-align: center;
+}
+.aha-badge {
+  font-size: 10px;
+  font-weight: 900;
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  padding: 3px 10px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.aha-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+.aha-subtitle {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+.profession-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.prof-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.prof-chip.active {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: #06b6d4;
+  color: #38bdf8;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+}
+.aha-simulator-box {
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: left;
+  margin-bottom: 16px;
+}
+.aha-sim-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.sim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.sim-dot.green {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+.sim-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #facc15;
+}
+.aha-prompt-preview {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+.aha-typing {
+  font-size: 11px;
+  color: #38bdf8;
+  font-weight: 700;
+  animation: blink 1.2s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.aha-response-content {
+  font-size: 11.5px;
+  color: #e2e8f0;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.aha-start-btn {
+  width: 100%;
+  padding: 13px;
+  font-size: 13.5px;
+  font-weight: 900;
+  border-radius: 14px;
+}
+.aha-skip-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 8px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.aha-skip-btn:hover {
+  color: #94a3b8;
+}
+
 

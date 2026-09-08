@@ -2248,6 +2248,90 @@
         display: block;
       }
     }
+
+    /* ==========================================================================
+       MOBILE CLASSROOM SWITCHER (Reader Mode vs Curriculum Syllabus)
+       Prevents lesson reader from being pushed down or hidden behind sidebar
+       ========================================================================== */
+    .mobile-cls-switch {
+      display: none;
+    }
+    .mobile-reader-banner {
+      display: none;
+    }
+
+    @media (max-width: 960px) {
+      .mobile-cls-switch {
+        display: flex !important;
+        background: var(--bg-subtle);
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        padding: 4px;
+        margin-bottom: 16px;
+        gap: 6px;
+      }
+      .mobile-switch-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 9px 12px;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .mobile-switch-btn.active {
+        background: #ffffff;
+        color: var(--brand-emerald);
+        font-weight: 800;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      }
+      .mobile-reader-banner {
+        display: flex !important;
+        cursor: pointer;
+        background: var(--brand-light);
+        border: 1.5px solid var(--border-accent);
+        border-radius: 14px;
+        padding: 10px 14px;
+        margin-bottom: 18px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .mobile-reader-banner .mobile-mod-count {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--brand-emerald);
+        background: #ffffff;
+        padding: 3px 10px;
+        border-radius: 99px;
+        border: 1px solid var(--border-accent);
+      }
+
+      /* When in READER mode on mobile (Default active lesson view): */
+      #viewClassroom.mob-reader-mode .curriculum-sidebar {
+        display: none !important;
+      }
+      #viewClassroom.mob-reader-mode .lesson-workspace {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      /* When in CURRICULUM mode on mobile: */
+      #viewClassroom.mob-curriculum-mode .curriculum-sidebar {
+        display: block !important;
+        width: 100% !important;
+      }
+      #viewClassroom.mob-curriculum-mode .lesson-workspace {
+        display: none !important;
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -2317,19 +2401,20 @@
     <div class="reading-progress-bar" id="readingProgressBar"></div>
   </div>
 
-  <!-- Mobile Curriculum Bar -->
-  <div class="mobile-curriculum-bar">
-    <button class="btn-mobile-drawer" onclick="toggleMobileSidebar()">
-      <span>📑</span> <span>Darslar Mundarijasi (14 ta dars)</span>
-    </button>
-    <span style="font-size:12px; font-weight:800; color:var(--brand-emerald);" id="mobileCurrentLessonBadge">3.1-Dars</span>
-  </div>
-
   <!-- Mobile Backdrop Overlay -->
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleMobileSidebar()"></div>
 
   <!-- 1. CLASSROOM MAIN VIEW -->
-  <div id="viewClassroom" class="main-layout tab-view active">
+  <div id="viewClassroom" class="main-layout tab-view active mob-reader-mode">
+    <!-- Mobile Classroom Mode Switcher -->
+    <div class="mobile-cls-switch" id="mobileClassroomSwitch">
+      <button id="btnMobileReader" class="mobile-switch-btn active" onclick="setMobileClassroomTab('reader')">
+        <span>📖</span> <span>Dars Mutolaasi</span>
+      </button>
+      <button id="btnMobileCurriculum" class="mobile-switch-btn" onclick="setMobileClassroomTab('curriculum')">
+        <span>📋</span> <span>Mundarija (14 Dars)</span>
+      </button>
+    </div>
     
     <!-- Left Curriculum Drawer (Accordion UX) -->
     <aside class="curriculum-sidebar">
@@ -2358,21 +2443,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item done" onclick="loadLesson(\'1_1\')">
+          <div class="lesson-item" onclick="loadLesson(\'1_1\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude)</span>
   </div>
   <span class="lesson-item-time">12 daq</span>
 </div>
-          <div class="lesson-item done" onclick="loadLesson(\'1_2\')">
+          <div class="lesson-item" onclick="loadLesson(\'1_2\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">1.2. Tokenlar, xotira va Context Window</span>
   </div>
   <span class="lesson-item-time">15 daq</span>
 </div>
-          <div class="lesson-item done" onclick="loadLesson(\'1_3\')">
+          <div class="lesson-item" onclick="loadLesson(\'1_3\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash</span>
@@ -2392,21 +2477,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item done" onclick="loadLesson(\'2_1\')">
+          <div class="lesson-item" onclick="loadLesson(\'2_1\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">2.1. Frameworklar: ROLE + TASK + CONSTRAINTS</span>
   </div>
   <span class="lesson-item-time">20 daq</span>
 </div>
-          <div class="lesson-item done" onclick="loadLesson(\'2_2\')">
+          <div class="lesson-item" onclick="loadLesson(\'2_2\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">2.2. Few-Shot va Chain-of-Thought texnikasi</span>
   </div>
   <span class="lesson-item-time">22 daq</span>
 </div>
-          <div class="lesson-item done" onclick="loadLesson(\'2_3\')">
+          <div class="lesson-item" onclick="loadLesson(\'2_3\')">
   <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
     <span class="lesson-icon">✓</span>
     <span class="lesson-item-title">2.3. Meta-Prompting: AI orqali prompt yozdirish</span>
@@ -2514,6 +2599,13 @@
 
     <!-- Center Active Lesson Workspace (Max-Width 900px Optimal Reading Container) -->
     <main class="lesson-workspace">
+      <!-- Mobile Quick Return to Curriculum Banner -->
+      <div class="mobile-reader-banner" onclick="setMobileClassroomTab('curriculum')">
+        <div style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:800; color:var(--brand-emerald);">
+          <span>📋</span> <span>Mundarija (Boshqa darsni tanlash)</span>
+        </div>
+        <span class="mobile-mod-count">14 Dars ➔</span>
+      </div>
       <div class="lesson-container" style="max-width:880px; margin:0 auto; padding:24px 16px 80px;">
 
         <!-- 1. First-Time User Onboarding & Course Roadmap Hero -->
@@ -2730,6 +2822,36 @@
     <!-- Official Certificate Card Preview (Spacious, Elegant, Uncluttered) -->
     <div id="certificateCardPreview" style="background: linear-gradient(180deg, #FFFFFF 0%, #FAF9F5 100%); border: 2px solid var(--brand-emerald); border-radius: 20px; padding: 44px 40px 36px; text-align: center; box-shadow: 0 12px 40px rgba(5, 150, 105, 0.08); position:relative; overflow:hidden;">
       
+      <!-- ==================================================================
+           PRESTIGIOUS CERTIFICATE LOCK OVERLAY (Active until 14/14 complete)
+           ================================================================== -->
+      <div id="certLockedOverlay" style="position:absolute; inset:0; background:rgba(255, 255, 255, 0.94); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:40; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px;">
+        <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, #F59E0B, #D97706); display:flex; align-items:center; justify-content:center; font-size:34px; box-shadow:0 8px 24px rgba(217, 119, 6, 0.35); margin-bottom:14px; animation:pulse 2s infinite;">
+          🔒
+        </div>
+        <span style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#B45309; background:#FEF3C7; padding:4px 14px; border-radius:99px; margin-bottom:8px; border:1px solid #FDE68A;">
+          SERTIFIKAT QULFLANGAN
+        </span>
+        <h3 style="font-size:22px; font-weight:900; color:var(--text); margin:0 0 8px; text-align:center;">
+          Rasmiy Malaka Sertifikati Qulfda
+        </h3>
+        <p style="font-size:13.5px; color:var(--text-secondary); max-width:480px; text-align:center; line-height:1.6; margin:0 0 18px;">
+          Rasmiy unikal ID (<code>GPT-UZ-2026-XXXXX</code>) va Ultra-HD sertifikatni ochish uchun barcha <strong>14 ta amaliy dars</strong>ni yakunlang va testlarni yeching.
+        </p>
+
+        <!-- Dynamic Progress Bar inside Lock -->
+        <div style="width:100%; max-width:380px; background:#E2E8F0; height:10px; border-radius:99px; overflow:hidden; margin-bottom:8px;">
+          <div id="certLockProgressBar" style="height:100%; background:var(--brand-emerald); width:0%; border-radius:99px; transition:width 0.4s ease;"></div>
+        </div>
+        <div id="certLockProgressLabel" style="font-size:12.5px; font-weight:800; color:var(--text); margin-bottom:20px;">
+          Siz 14 tadan 0 ta darsni yakunladingiz (0%)
+        </div>
+
+        <button id="certLockCtaBtn" onclick="switchPortalTab('classroom');" class="btn-cert-primary" style="padding:12px 28px; font-size:13.5px; border-radius:12px; box-shadow:0 4px 16px rgba(5,150,105,0.35);">
+          <span>🚀 Darslarni Boshlash & Ochish ➔</span>
+        </button>
+      </div>
+      
       <!-- Subtle Gold Corner Hairlines -->
       <div style="position:absolute; top:12px; left:12px; width:22px; height:22px; border-top:2px solid #D97706; border-left:2px solid #D97706; border-top-left-radius:6px;"></div>
       <div style="position:absolute; top:12px; right:12px; width:22px; height:22px; border-top:2px solid #D97706; border-right:2px solid #D97706; border-top-right-radius:6px;"></div>
@@ -2872,9 +2994,13 @@
         </div>
         <div style="font-size:11.5px; color:var(--text-muted); display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
           <span>Sinash uchun:</span>
-          <a href="javascript:void(0)" onclick="quickTestRegistry('GPT-UZ-2026-9812A')" style="color:var(--brand-emerald); font-weight:700; text-decoration:none;">🟢 Haqiqiy ID (Shukhrat I.)</a>
+          <a href="javascript:void(0)" onclick="quickTestRegistry('GPT-UZ-2026-9812A')" style="color:var(--brand-emerald); font-weight:700; text-decoration:none;">🟢 Haqiqiy ID</a>
           <span>·</span>
-          <a href="javascript:void(0)" onclick="quickTestRegistry('GPT-FAKE-001')" style="color:#DC2626; font-weight:700; text-decoration:none;">🔴 Soxta ID sinash</a>
+          <a href="javascript:void(0)" onclick="quickTestRegistry('GPT-FAKE-001')" style="color:#DC2626; font-weight:700; text-decoration:none;">🔴 Soxta ID</a>
+          <span>·</span>
+          <a href="javascript:void(0)" onclick="devUnlockAllLessons()" style="color:#D97706; font-weight:800; text-decoration:underline;">🔓 Sinov: 14/14 Yakunlash (Ochish)</a>
+          <span>·</span>
+          <a href="javascript:void(0)" onclick="devResetProgress()" style="color:#64748B; font-weight:600; text-decoration:underline;">🔒 Qulflash (0/14)</a>
         </div>
       </div>
 
@@ -2950,8 +3076,13 @@
       else if (tabKey === 'certificate') {
         document.getElementById('viewCertificate').classList.add('active');
         syncStudentNameUI();
-        launchConfetti({ count: 65, spread: 60 });
-        triggerHaptic('success');
+        updateCertificateLockState();
+        if (completedLessons.size >= 14) {
+          launchConfetti({ count: 65, spread: 60 });
+          triggerHaptic('success');
+        } else {
+          triggerHaptic('impact');
+        }
       }
       else if (tabKey === 'corporate') document.getElementById('viewCorporate').classList.add('active');
 
@@ -3437,6 +3568,11 @@
     }
 
     function downloadCertificatePng() {
+      if (completedLessons.size < 14) {
+        triggerHaptic('warning');
+        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        return;
+      }
       triggerHaptic('success');
       toast("🎨 Ultra-HD Sertifikat tayyorlanmoqda...", "⏳");
 
@@ -3467,6 +3603,11 @@
     }
 
     function printCertificate() {
+      if (completedLessons.size < 14) {
+        triggerHaptic('warning');
+        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        return;
+      }
       triggerHaptic('selection');
       switchPortalTab('certificate');
       toast("🖨️ Chop etish oynasi ochilmoqda...");
@@ -3476,6 +3617,11 @@
     }
 
     function shareCertificateTelegram() {
+      if (completedLessons.size < 14) {
+        triggerHaptic('warning');
+        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        return;
+      }
       triggerHaptic('success');
       const certId = "GPT-UZ-2026-9812A";
       const name = currentStudentName || "Shukhrat Iskandarov";
@@ -3882,6 +4028,11 @@
       if (!data) return;
 
       currentLessonId = id;
+
+      // On mobile devices, ensure we automatically switch to reader view and scroll to top
+      if (typeof setMobileClassroomTab === 'function') {
+        setMobileClassroomTab('reader');
+      }
 
       // Close mobile drawer if open
       closeMobileSidebar();
@@ -4618,7 +4769,110 @@
     function closeOfertaModalOnBackdrop(e) {
       if (e.target.id === 'ofertaModal') closeOfertaModal();
     }
-  </script>
+  
+    // =========================================================================
+    // MOBILE CLASSROOM CONTROLLER (Reader vs Curriculum toggle)
+    // =========================================================================
+    function setMobileClassroomTab(mode) {
+      const cls = document.getElementById('viewClassroom');
+      const btnReader = document.getElementById('btnMobileReader');
+      const btnCurriculum = document.getElementById('btnMobileCurriculum');
+      if (!cls) return;
+
+      if (mode === 'reader') {
+        cls.classList.remove('mob-curriculum-mode');
+        cls.classList.add('mob-reader-mode');
+        if (btnReader) btnReader.classList.add('active');
+        if (btnCurriculum) btnCurriculum.classList.remove('active');
+      } else {
+        cls.classList.remove('mob-reader-mode');
+        cls.classList.add('mob-curriculum-mode');
+        if (btnReader) btnReader.classList.remove('active');
+        if (btnCurriculum) btnCurriculum.classList.add('active');
+      }
+      triggerHaptic('selection');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // CERTIFICATE LOCK / UNLOCK CONTROLLER
+    // =========================================================================
+    function updateCertificateLockState() {
+      const count = completedLessons.size;
+      const total = 14;
+      const pct = Math.round((count / total) * 100);
+      const isUnlocked = count >= total;
+
+      const overlay = document.getElementById('certLockedOverlay');
+      const certCard = document.getElementById('certificateCardPreview');
+      const customizer = document.querySelector('.cert-customizer-box');
+      const progressBar = document.getElementById('certLockProgressBar');
+      const progressLabel = document.getElementById('certLockProgressLabel');
+      const ctaBtn = document.getElementById('certLockCtaBtn');
+
+      if (overlay) {
+        if (isUnlocked) {
+          overlay.style.display = 'none';
+          if (certCard) certCard.style.filter = 'none';
+          if (customizer) customizer.style.opacity = '1';
+        } else {
+          overlay.style.display = 'flex';
+          if (certCard) certCard.style.filter = 'blur(1.5px)';
+          if (customizer) customizer.style.opacity = '0.7';
+          if (progressBar) progressBar.style.width = `${pct}%`;
+          if (progressLabel) {
+            progressLabel.innerText = `Siz 14 tadan ${count} ta darsni yakunladingiz (${pct}%)`;
+          }
+          if (ctaBtn) {
+            if (count === 0) {
+              ctaBtn.innerHTML = `<span>🚀 1-Darsdan Boshlash (1.1) ➔</span>`;
+              ctaBtn.onclick = () => { switchPortalTab('classroom'); loadLesson('1_1'); };
+            } else {
+              const nextId = (typeof LESSON_SEQUENCE !== 'undefined' ? LESSON_SEQUENCE : ['1_1']).find(id => !completedLessons.has(id)) || '1_1';
+              ctaBtn.innerHTML = `<span>▶️ Kursni Davom Ettirish (${nextId.replace('_', '.')}-Dars) ➔</span>`;
+              ctaBtn.onclick = () => { switchPortalTab('classroom'); loadLesson(nextId); };
+            }
+          }
+        }
+      }
+
+      // Sync download buttons visual cues
+      document.querySelectorAll('.btn-cert-primary, .btn-cert-secondary, .btn-cert-telegram, .btn-cert-linkedin').forEach(btn => {
+        if (btn.innerText.includes('Bazadan Tekshirish') || btn.innerText.includes('Ommaviy Oferta') || btn.innerText.includes('Saqlash')) return;
+        if (isUnlocked) {
+          btn.style.opacity = '1';
+          btn.style.filter = 'none';
+        } else {
+          btn.style.opacity = '0.6';
+        }
+      });
+    }
+
+    // Developer / Owner simulation helpers
+    function devUnlockAllLessons() {
+      if (typeof LESSON_SEQUENCE !== 'undefined') {
+        LESSON_SEQUENCE.forEach(id => completedLessons.add(id));
+      }
+      saveAppState();
+      syncSidebarCompletedState();
+      syncPointsDisplay();
+      updateCertificateLockState();
+      launchConfetti({ count: 90, spread: 75 });
+      triggerHaptic('success');
+      toast("🎉 Barcha 14 ta dars yakunlandi! Sertifikat muvaffaqiyatli ochildi!", "🏆");
+    }
+
+    function devResetProgress() {
+      completedLessons.clear();
+      saveAppState();
+      syncSidebarCompletedState();
+      syncPointsDisplay();
+      updateCertificateLockState();
+      triggerHaptic('warning');
+      toast("🔒 Progress 0 ga qaytarildi. Sertifikat qayta qulflandi.", "🔒");
+    }
+
+</script>
 
 </body>
 </html>

@@ -4302,6 +4302,20 @@
       loadLesson(initialId);
       const dateEl = document.getElementById('certIssueDate');
       if (dateEl) dateEl.innerText = getFormattedTodayUzbek();
+
+      // Deep-linking support (?tab=certificate or Telegram start_param)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        let targetTab = urlParams.get('tab') || urlParams.get('tgWebAppStartParam');
+        if (!targetTab && window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
+          targetTab = window.Telegram.WebApp.initDataUnsafe.start_param;
+        }
+        if (targetTab && ['classroom', 'library', 'certificate', 'corporate'].includes(targetTab.toLowerCase())) {
+          setTimeout(() => switchPortalTab(targetTab.toLowerCase()), 150);
+        }
+      } catch (e) {
+        console.debug('Deep-link parse error:', e);
+      }
     });
     // Keyboard Left/Right Navigation
     window.addEventListener('keydown', (e) => {

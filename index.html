@@ -2356,7 +2356,10 @@
       <!-- Main Navigation Tabs (4 Clean Segments) -->
       <nav class="portal-tabs">
         <button class="portal-tab-btn active" onclick="switchPortalTab('classroom')">
-          <span>🎓</span> <span class="tab-txt-desktop">Kurs Darslari</span><span class="tab-txt-mobile">Darslar</span>
+          <span>🎓</span> <span class="tab-txt-desktop">AI Asoslari (Faol)</span><span class="tab-txt-mobile">Darslar</span>
+        </button>
+        <button class="portal-tab-btn" onclick="switchPortalTab('catalog')">
+          <span>📚</span> <span class="tab-txt-desktop">Barcha Kurslar</span><span class="tab-txt-mobile">Kurslar</span>
         </button>
         <button class="portal-tab-btn" onclick="switchPortalTab('library')">
           <span>📋</span> <span class="tab-txt-desktop">Promptlar (50+)</span><span class="tab-txt-mobile">Promptlar</span>
@@ -2420,7 +2423,7 @@
     <aside class="curriculum-sidebar">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:0 4px;">
         <span style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em;">
-          KURS MODULLARI (14 TA DARS)
+          AI ASOSLARI (14 TA DARS)
         </span>
         <span style="font-size:10px; color:var(--teal-light); font-weight:700;">100% Amaliy</span>
       </div>
@@ -2433,166 +2436,166 @@
         </div>
       </div>
 
-      <!-- Module 1 -->
+      <!-- Module 1: AI Anatomiyasi -->
       <div class="module-card" id="modCard_1">
         <div class="module-head" onclick="toggleModule('modCard_1')">
           <div style="display:flex; align-items:center; gap:6px;">
-            <span>1-Modul: AI Asoslari & Modellar Tanlovi</span>
+            <span>1-Modul: AI Anatomiyasi & Fikrlash</span>
             <span class="module-arrow">▼</span>
           </div>
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson(\'1_1\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude)</span>
-  </div>
-  <span class="lesson-item-time">12 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'1_2\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">1.2. Tokenlar, xotira va Context Window</span>
-  </div>
-  <span class="lesson-item-time">15 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'1_3\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash</span>
-  </div>
-  <span class="lesson-item-time">18 daq</span>
-</div>
+          <div class="lesson-item active" onclick="loadLesson('1_1')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">1.1</span>
+              <span class="lesson-item-title">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude vs Gemini)</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('1_2')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">1.2</span>
+              <span class="lesson-item-title">1.2. Tokenlar, xotira va Context Window</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('1_3')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">1.3</span>
+              <span class="lesson-item-title">1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
         </div>
       </div>
 
-      <!-- Module 2 -->
+      <!-- Module 2: Prompt Engineering -->
       <div class="module-card collapsed" id="modCard_2">
         <div class="module-head" onclick="toggleModule('modCard_2')">
           <div style="display:flex; align-items:center; gap:6px;">
-            <span>2-Modul: Professional Prompt Muhandisligi</span>
+            <span>2-Modul: Oltin Formula: Prompt Muhandisligi</span>
             <span class="module-arrow">▼</span>
           </div>
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson(\'2_1\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">2.1. Frameworklar: ROLE + TASK + CONSTRAINTS</span>
-  </div>
-  <span class="lesson-item-time">20 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'2_2\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">2.2. Few-Shot va Chain-of-Thought texnikasi</span>
-  </div>
-  <span class="lesson-item-time">22 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'2_3\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">✓</span>
-    <span class="lesson-item-title">2.3. Meta-Prompting: AI orqali prompt yozdirish</span>
-  </div>
-  <span class="lesson-item-time">16 daq</span>
-</div>
+          <div class="lesson-item" onclick="loadLesson('2_1')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">2.1</span>
+              <span class="lesson-item-title">2.1. Oltin Formula: ROL + KONTEKST + VAZIFA + FORMAT</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('2_2')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">2.2</span>
+              <span class="lesson-item-title">2.2. Few-Shot va Chain-of-Thought texnikasi</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('2_3')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">2.3</span>
+              <span class="lesson-item-title">2.3. Meta-Prompting: AI orqali prompt yozdirish</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
         </div>
       </div>
 
-      <!-- Module 3 -->
+      <!-- Module 3: Vositalar Ekotizimi -->
       <div class="module-card collapsed" id="modCard_3">
         <div class="module-head" onclick="toggleModule('modCard_3')">
           <div style="display:flex; align-items:center; gap:6px;">
-            <span>3-Modul: B2B Savdo & Telegram Botlar</span>
+            <span>3-Modul: Har Bir Vazifa Uchun To'g'ri Vosita</span>
             <span class="module-arrow">▼</span>
           </div>
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item active" onclick="loadLesson(\'3_1\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">▶</span>
-    <span class="lesson-item-title">3.1. Narx e'tirozlarini 100% yopuvchi skriptlar</span>
-  </div>
-  <span class="lesson-item-time">25 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'3_2\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">3.2. Telegram & Instagram AI savdo botini ulash</span>
-  </div>
-  <span class="lesson-item-time">30 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'3_3\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">3.3. Sovuq leadlarni isitish va CRM ga tushirish</span>
-  </div>
-  <span class="lesson-item-time">18 daq</span>
-</div>
+          <div class="lesson-item" onclick="loadLesson('3_1')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">3.1</span>
+              <span class="lesson-item-title">3.1. Matn va Qidiruv: ChatGPT vs Claude vs Perplexity</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('3_2')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">3.2</span>
+              <span class="lesson-item-title">3.2. Taqdimot va Vizual: Gamma App va Canva</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('3_3')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">3.3</span>
+              <span class="lesson-item-title">3.3. Ovoz va Tahrir: ElevenLabs va Descript</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
         </div>
       </div>
 
-      <!-- Module 4 -->
+      <!-- Module 4: Ish va Daromad -->
       <div class="module-card collapsed" id="modCard_4">
         <div class="module-head" onclick="toggleModule('modCard_4')">
           <div style="display:flex; align-items:center; gap:6px;">
-            <span>4-Modul: Excel, Moliya & Operatsiyalar</span>
+            <span>4-Modul: AI'ni Ish va Daromadga Aylantirish</span>
             <span class="module-arrow">▼</span>
           </div>
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson(\'4_1\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">4.1. Excel xom ma'lumotlaridan AI tahlili</span>
-  </div>
-  <span class="lesson-item-time">22 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'4_2\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">4.2. Oylik xarajatlar va daromad hisobotlari</span>
-  </div>
-  <span class="lesson-item-time">20 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'4_3\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">4.3. Soliq.uz va Didox hujjatlarini avtomatlashtirish</span>
-  </div>
-  <span class="lesson-item-time">25 daq</span>
-</div>
+          <div class="lesson-item" onclick="loadLesson('4_1')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">4.1</span>
+              <span class="lesson-item-title">4.1. 15 Daqiqalik Odat: Ertalab, Kunduzi, Kechqurun</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('4_2')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">4.2</span>
+              <span class="lesson-item-title">4.2. Xizmatlarni 10x Tezlashtirish: SMM & Reels</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('4_3')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">4.3</span>
+              <span class="lesson-item-title">4.3. Eyzenxauer Matritsasi: 10 Soat Tejash</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
         </div>
       </div>
 
-      <!-- Module 5 -->
+      <!-- Module 5: Sertifikat -->
       <div class="module-card collapsed" id="modCard_5">
         <div class="module-head" onclick="toggleModule('modCard_5')">
           <div style="display:flex; align-items:center; gap:6px;">
-            <span>5-Modul: Yakuniy Loyiha & Sertifikat</span>
+            <span>5-Modul: Yakuniy Loyiha & Rasmiy Sertifikat</span>
             <span class="module-arrow">▼</span>
           </div>
           <span class="tag">2 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson(\'5_1\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">5.1. Kompaniyangiz uchun to'liq AI arxitektura</span>
-  </div>
-  <span class="lesson-item-time">40 daq</span>
-</div>
-          <div class="lesson-item" onclick="loadLesson(\'5_2\')">
-  <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-    <span class="lesson-icon">🔒</span>
-    <span class="lesson-item-title">5.2. Yakuniy imtihon & Rasmiy Sertifikat</span>
-  </div>
-  <span class="lesson-item-time">Imtihon</span>
-</div>
+          <div class="lesson-item" onclick="loadLesson('5_1')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">5.1</span>
+              <span class="lesson-item-title">5.1. Shaxsiy AI Ishchi Tizimi (Portfolio Loyihasi)</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
+          <div class="lesson-item" onclick="loadLesson('5_2')">
+            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+              <span class="lesson-icon">5.2</span>
+              <span class="lesson-item-title">5.2. Yakuniy Imtihon & Rasmiy Sertifikatni Olish!</span>
+            </div>
+            <span class="lesson-item-time">15 daq</span>
+          </div>
         </div>
       </div>
     </aside>
@@ -2635,11 +2638,11 @@
               </div>
               <div class="milestone-box" id="milestone_3" onclick="loadLesson('3_1')" style="padding:10px 12px;">
                 <div class="milestone-num" style="font-size:9.5px;">3-MODUL</div>
-                <div class="milestone-name" style="font-size:11.5px;">B2B Savdo & Bot</div>
+                <div class="milestone-name" style="font-size:11.5px;">Vositalar</div>
               </div>
               <div class="milestone-box" id="milestone_4" onclick="loadLesson('4_1')" style="padding:10px 12px;">
                 <div class="milestone-num" style="font-size:9.5px;">4-MODUL</div>
-                <div class="milestone-name" style="font-size:11.5px;">Excel & Didox</div>
+                <div class="milestone-name" style="font-size:11.5px;">Ish & Daromad</div>
               </div>
               <div class="milestone-box" id="milestone_5" onclick="loadLesson('5_1')" style="padding:10px 12px;">
                 <div class="milestone-num" style="font-size:9.5px;">5-MODUL</div>
@@ -2766,6 +2769,236 @@
   </div>
 
   <!-- 2. PROMPT LIBRARY TAB -->
+  
+  <!-- 1.5. COURSES CATALOG TAB (New Feature: Flagship AI Foundations + Locked B2B Tracks) -->
+  <div id="viewCatalog" class="tab-view" style="max-width:1400px; margin:0 auto; width:100%; padding:20px 16px 80px;">
+    
+    <!-- Catalog Hero Banner -->
+    <div style="background:linear-gradient(135deg, #064E3B 0%, #0F172A 100%); border-radius:20px; padding:36px 32px; color:#ffffff; margin-bottom:32px; box-shadow:0 12px 36px rgba(6, 78, 59, 0.15); position:relative; overflow:hidden;">
+      <div style="position:absolute; right:-20px; bottom:-30px; font-size:160px; opacity:0.06; pointer-events:none; font-weight:900;">GPT</div>
+      <div style="max-width:760px; position:relative; z-index:2;">
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; background:rgba(255,255,255,0.15); color:#A7F3D0; padding:5px 14px; border-radius:99px; margin-bottom:12px; backdrop-filter:blur(8px);">
+          📚 GPTIFY ACADEMY KURSLAR EKOTIZIMI
+        </span>
+        <h2 style="font-size:28px; font-weight:900; margin:0 0 10px 0; letter-spacing:-0.02em; line-height:1.25;">
+          Amaliy B2B Sun'iy Intellekt & Avtomatlashtirish Katalogi
+        </h2>
+        <p style="font-size:14px; color:#E2E8F0; line-height:1.6; margin:0 0 18px 0;">
+          Ushbu platforma bosqichma-bosqich malaka oshirish tizimi asosida ishlaydi. Dastlab <strong>Sun'iy Intellekt Asoslari</strong> kursini yakunlab bazaviy rasmiy sertifikatga ega bo'ling, so'ngra professional ixtisoslashgan B2B kurslarga kirish imkoniyatini oching.
+        </p>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.12); padding:6px 14px; border-radius:10px; font-size:12.5px; border:1px solid rgba(255,255,255,0.1);">
+            <span style="color:#34D399; font-weight:900;">●</span> <span>Hozirgi faol kursingiz: <b>AI Asoslari</b></span>
+          </div>
+          <button onclick="switchPortalTab('classroom')" class="btn-cert-primary" style="padding:8px 18px; font-size:13px; border-radius:10px;">
+            <span>▶️ Darsxonaga O'tish</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses Grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+      
+      <!-- COURSE 1: AI FOUNDATIONS (ACTIVE & CERTIFIED) -->
+      <div style="background:var(--bg-surface); border:2px solid var(--brand-emerald); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 6px 24px rgba(5,150,105,0.08); position:relative; overflow:hidden;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#065F46; background:#D1FAE5; padding:4px 10px; border-radius:99px; border:1px solid #A7F3D0;">
+            🟢 FAOL / O'QILMOQDA
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">🧠</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--brand-emerald); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            1-BOSQICH · 5 MODUL · 14 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            Sun'iy Intellekt Asoslari (AI Foundations)
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Katta til modellari anatomiyasi, tokenlar xotirasi, 4 bosqichli Oltin Formula (ROL + KONTEKST + VAZIFA + FORMAT), Perplexity, Gamma, ElevenLabs va kundalik 15 daqiqalik fikrlash odati.
+          </p>
+
+          <div style="background:var(--bg-subtle); border-radius:10px; padding:12px; margin-bottom:16px; font-size:12px; border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-weight:700; color:var(--text);">Sizning o'zlashtirishingiz:</span>
+              <span id="catalogCourse1ProgressLabel" style="font-weight:800; color:var(--brand-emerald);">0%</span>
+            </div>
+            <div style="height:6px; background:var(--border); border-radius:99px; overflow:hidden;">
+              <div id="catalogCourse1ProgressBar" style="height:100%; width:0%; background:var(--brand-emerald); border-radius:99px; transition:width 0.3s;"></div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-secondary); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="color:var(--brand-emerald); font-weight:900;">✓</span> <span>Rasmiy tekshiriladigan Malaka Sertifikati</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="color:var(--brand-emerald); font-weight:900;">✓</span> <span>50+ tayyor Oltin promptlar kutubxonasi</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="switchPortalTab('classroom')" class="btn-cert-primary" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; border-radius:12px;">
+          <span>▶️ Darsxona (O'qishni Davom Ettirish)</span>
+        </button>
+      </div>
+
+      <!-- COURSE 2: B2B SALES & TELEGRAM BOTS (LOCKED) -->
+      <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
+            🔒 QULFLANGAN
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">💼</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            2-BOSQICH · 6 MODUL · 16 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            B2B Savdo & Telegram AI Botlar
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Narx e'tirozlarini 100% yopuvchi skriptlar, Telegram & Instagram AI savdo botlarini ulash (ManyChat), sovuq leadlarni isitish va AmoCRM ga avtomatik tushirish.
+          </p>
+
+          <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#92400E; line-height:1.45;">
+            🔒 <strong>Kirish sharti:</strong> Ushbu kursga yozilish uchun avval "Sun'iy Intellekt Asoslari" kursini yakunlab sertifikat oling.
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>ManyChat va Telegram Bot API integratsiyasi</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>Narx bo'yicha muzokaralar va savdo voronkasi</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="openCourseLockModal('B2B Savdo & Telegram AI Botlar')" class="btn-cert-secondary" style="width:100%; justify-content:center; padding:11px; font-size:13px; border-radius:12px; background:var(--bg-subtle);">
+          <span>🔒 Dastur Rejasini Ko'rish (Qulfda)</span>
+        </button>
+      </div>
+
+      <!-- COURSE 3: N8N AUTOMATION (LOCKED) -->
+      <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
+            🔒 QULFLANGAN
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">⚙️</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            3-BOSQICH · 6 MODUL · 18 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            Korporativ Avtomatlashtirish & n8n Workflows
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Kod yozmasdan biznes jarayonlarini avtomatlashtirish. n8n server, Webhooklar, Telegram + Google Sheets + OpenAI avtomatlashtirilgan tizimlari.
+          </p>
+
+          <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#92400E; line-height:1.45;">
+            🔒 <strong>Kirish sharti:</strong> "AI Asoslari" bitiruvchilari uchun tavsiya etiladi.
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>O'zbekistondagi xodimlarning 20 soat vaqtini tejash</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>Murakkab zanjirli avtomatlashtirish</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="openCourseLockModal('Korporativ Avtomatlashtirish & n8n Workflows')" class="btn-cert-secondary" style="width:100%; justify-content:center; padding:11px; font-size:13px; border-radius:12px; background:var(--bg-subtle);">
+          <span>🔒 Dastur Rejasini Ko'rish (Qulfda)</span>
+        </button>
+      </div>
+
+      <!-- COURSE 4: EXCEL & DIDOX MOLIYA (LOCKED) -->
+      <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
+            🔒 QULFLANGAN
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">📊</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            4-BOSQICH · 4 MODUL · 12 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            Excel, 1C & Didox Moliya AI Tahlilchi
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Ulkan CSV va Excel jadvallarini AI orqali audit qilish, Didox elektron schyot-fakturalarini tekshirish, keshflou va daromad hisobotlarini avtomatlashtirish.
+          </p>
+
+          <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#92400E; line-height:1.45;">
+            🔒 <strong>Kirish sharti:</strong> "AI Asoslari" sertifikatiga ega foydalanuvchilar uchun.
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>O'zbekiston soliq va schyot-faktura formati</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>P&L va keshflou bo'yicha tahliliy xulosalar</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="openCourseLockModal('Excel, 1C & Didox Moliya AI Tahlilchi')" class="btn-cert-secondary" style="width:100%; justify-content:center; padding:11px; font-size:13px; border-radius:12px; background:var(--bg-subtle);">
+          <span>🔒 Dastur Rejasini Ko'rish (Qulfda)</span>
+        </button>
+      </div>
+
+      <!-- COURSE 5: AUTONOMOUS AGENTS (LOCKED / VIP) -->
+      <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#581C87; background:#F3E8FF; padding:4px 10px; border-radius:99px; border:1px solid #E9D5FF;">
+            🔒 VIP KOHORTA
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">🤖</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            5-BOSQICH · 5 MODUL · 10 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            Avtonom AI Agentlar (Multi-Agent Systems & RAG)
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            MindStudio va Lindy platformalarida mustaqil ishlovchi agentlar, korxona ichki bilimlari (RAG) asosida ishlovchi aqlli yordamchilar yaratish.
+          </p>
+
+          <div style="background:#FAF5FF; border:1px solid #E9D5FF; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#581C87; line-height:1.45;">
+            ⭐ <strong>Tez kunda:</strong> Ilg'or tizim muhandislari uchun maxsus guruh.
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>Claude Computer Use va avtonom topshiriqlar</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>Vektor bazalar va korxona RAG arxitekturasi</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="openCourseLockModal('Avtonom AI Agentlar')" class="btn-cert-secondary" style="width:100%; justify-content:center; padding:11px; font-size:13px; border-radius:12px; background:var(--bg-subtle);">
+          <span>🔒 VIP Kutish Ro'yxatiga Yozilish</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <div id="viewLibrary" class="tab-view" style="max-width:1400px; margin:0 auto; width:100%;">
     <div style="margin-bottom:24px;">
       <h2 style="font-size:26px; font-weight:900;">📚 50+ B2B & O'zbekiston Biznesi Uchun Promptlar Kutubxonasi</h2>
@@ -3071,10 +3304,22 @@
       if (activeBtn) activeBtn.classList.add('active');
 
       document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
-      if (tabKey === 'classroom') document.getElementById('viewClassroom').classList.add('active');
-      else if (tabKey === 'library') document.getElementById('viewLibrary').classList.add('active');
+      if (tabKey === 'classroom') {
+        const cls = document.getElementById('viewClassroom');
+        if (cls) cls.classList.add('active');
+      }
+      else if (tabKey === 'catalog') {
+        const cat = document.getElementById('viewCatalog');
+        if (cat) cat.classList.add('active');
+        updateCatalogProgress();
+      }
+      else if (tabKey === 'library') {
+        const lib = document.getElementById('viewLibrary');
+        if (lib) lib.classList.add('active');
+      }
       else if (tabKey === 'certificate') {
-        document.getElementById('viewCertificate').classList.add('active');
+        const cert = document.getElementById('viewCertificate');
+        if (cert) cert.classList.add('active');
         syncStudentNameUI();
         updateCertificateLockState();
         if (completedLessons.size >= 14) {
@@ -3084,7 +3329,10 @@
           triggerHaptic('impact');
         }
       }
-      else if (tabKey === 'corporate') document.getElementById('viewCorporate').classList.add('active');
+      else if (tabKey === 'corporate') {
+        const corp = document.getElementById('viewCorporate');
+        if (corp) corp.classList.add('active');
+      }
 
       const readingBar = document.querySelector('.reading-progress-track');
       const mobileBar = document.querySelector('.mobile-curriculum-bar');
@@ -4024,8 +4272,11 @@
     }
 
     function loadLesson(id) {
-      const data = (window.COURSE_DATA && window.COURSE_DATA[id]) || null;
-      if (!data) return;
+      const data = (window.COURSE_DATA && window.COURSE_DATA[id]) || (typeof COURSE_DATA !== 'undefined' ? COURSE_DATA[id] : null);
+      if (!data) {
+        console.warn('Lesson data not found for id:', id);
+        return;
+      }
 
       currentLessonId = id;
 
@@ -4102,11 +4353,11 @@
       const wrap = document.getElementById('storyboardImageWrap');
 
       const MOD_VISUALS = {
-        '1': { icon: '🧠', badge: '1-MODUL: LLM MODELLARI VA ANATOMIYA', title: 'LLM Qanday Fikrlaydi: Tokenlar, Kontekst & Modellar Tanlovi', bg: 'radial-gradient(circle at 50% 30%, #0f766e 0%, #0f172a 80%)' },
-        '2': { icon: '⚙️', badge: '2-MODUL: PROFESSIONAL PROMPT MUHANDISLIGI', title: 'RTC Framework & Few-Shot Chain-of-Thought Texnikasi', bg: 'radial-gradient(circle at 50% 30%, #15803d 0%, #064e3b 80%)' },
-        '3': { icon: '💼', badge: '3-MODUL: B2B SAVDO & TELEGRAM BOTLAR', title: '100% Narx E\'tirozlarini Yopish va B2B Muzokara', bg: '#000000', img: 'assets/b2b_negotiation_cartoon.jpg' },
-        '4': { icon: '📊', badge: '4-MODUL: EXCEL, MOLIYA & OPERATSIYALAR', title: '1C, Didox va Soliq.uz Hujjatlarini AI Bilan Avtomatlashtirish', bg: 'radial-gradient(circle at 50% 30%, #1e40af 0%, #0f172a 80%)' },
-        '5': { icon: '🏆', badge: '5-MODUL: YAKUNIY LOYIHA & RASMIY SERTIFIKAT', title: 'Korxona Uchun To\'liq AI Arxitektura & Rasmiy Malaka Imtihoni', bg: 'radial-gradient(circle at 50% 30%, #7e22ce 0%, #0f172a 80%)' }
+        '1': { icon: '🧠', badge: '1-MODUL: AI ANATOMIYASI & FIKRLASH SHERIGI', title: 'LLM Qanday Fikrlaydi: Tokenlar, Kontekst & Kiberxavfsizlik', bg: 'radial-gradient(circle at 50% 30%, #0f766e 0%, #0f172a 80%)' },
+        '2': { icon: '⚙️', badge: '2-MODUL: PROFESSIONAL PROMPT MUHANDISLIGI', title: 'Oltin Formula: ROL + KONTEKST + VAZIFA + FORMAT & Few-Shot', bg: 'radial-gradient(circle at 50% 30%, #15803d 0%, #064e3b 80%)' },
+        '3': { icon: '🧰', badge: '3-MODUL: TO\'G\'RI VAZIFA UCHUN TO\'G\'RI VOSITA', title: 'ChatGPT, Claude, Perplexity, Gamma va Ovozli Vositalar', bg: 'radial-gradient(circle at 50% 30%, #0284c7 0%, #0f172a 80%)' },
+        '4': { icon: '📈', badge: '4-MODUL: AI\'NI ISH VA DAROMADGA AYLANTIRISH', title: '15 Daqiqalik Odat, SMM/Reels va Eyzenxauer Matritsasi', bg: 'radial-gradient(circle at 50% 30%, #b45309 0%, #0f172a 80%)' },
+        '5': { icon: '🏆', badge: '5-MODUL: YAKUNIY AMALIY LOYIHA & SERTIFIKAT', title: 'Shaxsiy AI Portfolio, Malaka Imtihoni & Rasmiy Sertifikat', bg: 'radial-gradient(circle at 50% 30%, #7e22ce 0%, #0f172a 80%)' }
       };
 
       const modVis = MOD_VISUALS[modId] || MOD_VISUALS['3'];
@@ -4449,7 +4700,7 @@
         console.debug('TMA Initialization info:', e);
       }
 
-      const initialId = currentLessonId || '3_1';
+      const initialId = currentLessonId || '1_1';
       loadLesson(initialId);
       const dateEl = document.getElementById('certIssueDate');
       if (dateEl) dateEl.innerText = getFormattedTodayUzbek();
@@ -4872,7 +5123,67 @@
       toast("🔒 Progress 0 ga qaytarildi. Sertifikat qayta qulflandi.", "🔒");
     }
 
+
+    function updateCatalogProgress() {
+      const count = completedLessons.size;
+      const pct = Math.round((count / 14) * 100);
+      const bar = document.getElementById('catalogCourse1ProgressBar');
+      const label = document.getElementById('catalogCourse1ProgressLabel');
+      if (bar) bar.style.width = `${pct}%`;
+      if (label) label.innerText = `${count}/14 dars (${pct}%)`;
+    }
+
+    function openCourseLockModal(courseTitle) {
+      triggerHaptic('warning');
+      const modal = document.getElementById('courseLockModal');
+      const titleEl = document.getElementById('lockModalCourseTitle');
+      if (titleEl) titleEl.innerText = courseTitle;
+      if (modal) modal.classList.add('show');
+    }
+
+    function closeCourseLockModal() {
+      const modal = document.getElementById('courseLockModal');
+      if (modal) modal.classList.remove('show');
+    }
+
 </script>
+
+
+  <!-- Course Locked Preview Modal -->
+  <div id="courseLockModal" class="prompt-modal-backdrop" onclick="if(event.target.id==='courseLockModal')closeCourseLockModal();">
+    <div class="prompt-modal-card" style="max-width:540px; text-align:center; padding:32px 24px;">
+      <div style="width:68px; height:68px; border-radius:50%; background:#FEF3C7; color:#D97706; font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:2px solid #FDE68A;">
+        🔒
+      </div>
+      <span style="font-size:11px; font-weight:800; color:#B45309; background:#FEF3C7; padding:4px 12px; border-radius:99px; text-transform:uppercase;">
+        KURS QULFLANGAN
+      </span>
+      <h3 id="lockModalCourseTitle" style="font-size:20px; font-weight:900; color:var(--text); margin:12px 0 8px 0;">
+        Kurs Nomi
+      </h3>
+      <p style="font-size:13.5px; color:var(--text-secondary); line-height:1.6; margin:0 0 20px 0;">
+        Ushbu ixtisoslashgan professional B2B dasturiga kirish uchun avval <strong>Sun'iy Intellekt Asoslari</strong> kursini to'liq yakunlab, bazaviy rasmiy malaka sertifikatiga ega bo'lishingiz kerak.
+      </p>
+      
+      <div style="background:var(--bg-subtle); border-radius:12px; padding:14px; text-align:left; margin-bottom:20px; font-size:12.5px; border:1px solid var(--border);">
+        <div style="font-weight:800; color:var(--text); margin-bottom:6px;">📋 Kurs talabi:</div>
+        <div style="color:var(--text-secondary); line-height:1.5;">
+          • Sun'iy Intellekt Asoslari (14/14 dars yakunlangan)<br>
+          • 4-bosqichli Oltin Prompt Formulani o'zlashtirganlik<br>
+          • Shaxsiy AI Portfolio topshirilgan bo'lishi lozim.
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button onclick="closeCourseLockModal()" class="btn-cert-secondary" style="padding:10px 20px; font-size:13px; border-radius:10px;">
+          <span>Yopish</span>
+        </button>
+        <button onclick="closeCourseLockModal(); switchPortalTab('classroom');" class="btn-cert-primary" style="padding:10px 22px; font-size:13px; border-radius:10px;">
+          <span>🚀 AI Asoslarini Boshlash ➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

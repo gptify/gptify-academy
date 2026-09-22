@@ -2836,9 +2836,6 @@
         <button class="portal-tab-btn" onclick="switchPortalTab('catalog')">
           <span>📚</span> <span>Kurslar</span>
         </button>
-        <button class="portal-tab-btn" onclick="switchPortalTab('library')">
-          <span>💡</span> <span>Promptlar</span>
-        </button>
         <button class="portal-tab-btn" onclick="switchPortalTab('certificate')">
           <span>📜</span> <span>Sertifikat</span>
         </button>
@@ -3375,7 +3372,7 @@
               <span style="color:var(--brand-emerald); font-weight:900;">✓</span> <span>Rasmiy tekshiriladigan Malaka Sertifikati</span>
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
-              <span style="color:var(--brand-emerald); font-weight:900;">✓</span> <span>50+ tayyor Oltin promptlar kutubxonasi</span>
+              <span style="color:var(--brand-emerald); font-weight:900;">✓</span> <span>14 ta amaliy B2B dars promptlari va shablonlar</span>
             </div>
           </div>
         </div>
@@ -3385,7 +3382,45 @@
         </button>
       </div>
 
-      <!-- COURSE 2: B2B SALES & TELEGRAM BOTS (LOCKED) -->
+      <!-- COURSE 2: ADVANCED PROMPT ENGINEERING & ENTERPRISE CONTEXT (LOCKED) -->
+      <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
+            🔒 QULFLANGAN
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">🎯</div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            2-BOSQICH · 6 MODUL · 16 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            Professional Prompt Muhandisligi & Kontekst Tizimlari
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Korporativ System Prompts, Few-Shot va Chain-of-Thought arxitekturasi, Claude XML teglari, JSON strukturali ma'lumotlar, gallyutsinatsiyani 0 ga tushirish va 50+ B2B Enterprise Prompt Vault.
+          </p>
+
+          <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#92400E; line-height:1.45;">
+            🔒 <strong>Kirish sharti:</strong> Ushbu ixtisoslashgan kursga yozilish uchun avval "Sun'iy Intellekt Asoslari" sertifikatiga ega bo'ling.
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>50+ B2B Enterprise Prompt Vault (tayyor biznes shablonlar)</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span>•</span> <span>Gallyutsinatsiyani yo'qotish va JSON sxemalar</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="openCourseLockModal('Professional Prompt Muhandisligi & Kontekst Tizimlari')" class="btn-cert-secondary" style="width:100%; justify-content:center; padding:11px; font-size:13px; border-radius:12px; background:var(--bg-subtle);">
+          <span>🔒 Dastur Rejasini Ko'rish (Qulfda)</span>
+        </button>
+      </div>
+
+      <!-- COURSE 3: B2B SALES & TELEGRAM BOTS (LOCKED) -->
       <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
         <div style="position:absolute; top:16px; right:16px;">
           <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
@@ -3395,7 +3430,7 @@
         <div>
           <div style="font-size:36px; margin-bottom:12px;">💼</div>
           <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
-            2-BOSQICH · 6 MODUL · 16 DARS
+            3-BOSQICH · 6 MODUL · 16 DARS
           </div>
           <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
             B2B Savdo & Telegram AI Botlar
@@ -3423,7 +3458,7 @@
         </button>
       </div>
 
-      <!-- COURSE 3: N8N AUTOMATION (LOCKED) -->
+      <!-- COURSE 4: N8N AUTOMATION (LOCKED) -->
       <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
         <div style="position:absolute; top:16px; right:16px;">
           <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
@@ -3433,7 +3468,7 @@
         <div>
           <div style="font-size:36px; margin-bottom:12px;">⚙️</div>
           <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
-            3-BOSQICH · 6 MODUL · 18 DARS
+            4-BOSQICH · 6 MODUL · 18 DARS
           </div>
           <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
             Korporativ Avtomatlashtirish & n8n Workflows
@@ -3461,7 +3496,7 @@
         </button>
       </div>
 
-      <!-- COURSE 4: EXCEL & DIDOX MOLIYA (LOCKED) -->
+      <!-- COURSE 5: EXCEL & DIDOX MOLIYA (LOCKED) -->
       <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
         <div style="position:absolute; top:16px; right:16px;">
           <span style="font-size:11px; font-weight:800; color:#92400E; background:#FEF3C7; padding:4px 10px; border-radius:99px; border:1px solid #FDE68A;">
@@ -3471,7 +3506,7 @@
         <div>
           <div style="font-size:36px; margin-bottom:12px;">📊</div>
           <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
-            4-BOSQICH · 4 MODUL · 12 DARS
+            5-BOSQICH · 4 MODUL · 12 DARS
           </div>
           <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
             Excel, 1C & Didox Moliya AI Tahlilchi
@@ -3499,7 +3534,7 @@
         </button>
       </div>
 
-      <!-- COURSE 5: AUTONOMOUS AGENTS (LOCKED / VIP) -->
+      <!-- COURSE 6: AUTONOMOUS AGENTS (LOCKED / VIP) -->
       <div style="background:var(--bg-surface); border:1.5px solid var(--border); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; position:relative; opacity:0.92;">
         <div style="position:absolute; top:16px; right:16px;">
           <span style="font-size:11px; font-weight:800; color:#581C87; background:#F3E8FF; padding:4px 10px; border-radius:99px; border:1px solid #E9D5FF;">
@@ -3509,13 +3544,13 @@
         <div>
           <div style="font-size:36px; margin-bottom:12px;">🤖</div>
           <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
-            5-BOSQICH · 5 MODUL · 10 DARS
+            6-BOSQICH · 5 MODUL · 10 DARS
           </div>
           <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
             Avtonom AI Agentlar (Multi-Agent Systems & RAG)
           </h3>
           <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
-            MindStudio va Lindy platformalarida mustaqil ishlovchi agentlar, korxona ichki bilimlari (RAG) asosida ishlovchi aqlli yordamchilar yaratish.
+            MindStudio va Lindy platformalarida mustaqil ishlovchi agentlar, korxona ichki bilimlari (RAG) asosida ishlovchi aqlli yordamchilar qurish.
           </p>
 
           <div style="background:#FAF5FF; border:1px solid #E9D5FF; border-radius:10px; padding:10px 12px; margin-bottom:16px; font-size:11.5px; color:#581C87; line-height:1.45;">
@@ -3537,36 +3572,6 @@
         </button>
       </div>
 
-    </div>
-  </div>
-
-  <div id="viewLibrary" class="tab-view" style="max-width:1400px; margin:0 auto; width:100%;">
-    <div style="margin-bottom:24px;">
-      <h2 style="font-size:26px; font-weight:900;">📚 50+ B2B & O'zbekiston Biznesi Uchun Promptlar Kutubxonasi</h2>
-      <p style="color:var(--text-muted); font-size:14px;">Har bir prompt tekshirilgan va real kompaniyalarda sinovdan o'tgan.</p>
-    </div>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:20px;">
-      <div class="notes-box" style="margin-bottom:0;">
-        <span style="font-size:10px; font-weight:800; color:var(--teal-light); background:rgba(29,158,117,0.15); padding:3px 8px; border-radius:6px;">B2B SAVDO</span>
-        <h4 style="font-size:15px; font-weight:800; margin:10px 0 6px;">Sovuq Mijozga Telegram Xati</h4>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Kompaniya direktoriga 3 jumla bilan qiziqish uyg'otuvchi xat shabloni.</p>
-        <button class="btn-download-res" style="width:100%; justify-content:center; padding:8px;" onclick="toast('Prompt buferga nusxalandi!')">📋 Nusxalash</button>
-      </div>
-
-      <div class="notes-box" style="margin-bottom:0;">
-        <span style="font-size:10px; font-weight:800; color:var(--lime); background:rgba(183,243,74,0.15); padding:3px 8px; border-radius:6px;">MOLIYA</span>
-        <h4 style="font-size:15px; font-weight:800; margin:10px 0 6px;">Excel Xarajatlarini Audit Qilish</h4>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Xom CSV/Excel jadvallaridan keshflou oqishlarini 10 soniyada topish.</p>
-        <button class="btn-download-res" style="width:100%; justify-content:center; padding:8px;" onclick="toast('Prompt buferga nusxalandi!')">📋 Nusxalash</button>
-      </div>
-
-      <div class="notes-box" style="margin-bottom:0;">
-        <span style="font-size:10px; font-weight:800; color:var(--tg-blue); background:rgba(36,161,222,0.15); padding:3px 8px; border-radius:6px;">MARKETPLACE</span>
-        <h4 style="font-size:15px; font-weight:800; margin:10px 0 6px;">Uzum SEO Tavsif Generatori</h4>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Qidiruv algoritmlarida yuqori o'ringa chiqish uchun kalit so'zlar bilan boyitilgan matn.</p>
-        <button class="btn-download-res" style="width:100%; justify-content:center; padding:8px;" onclick="toast('Prompt buferga nusxalandi!')">📋 Nusxalash</button>
-      </div>
     </div>
   </div>
 
@@ -3862,10 +3867,6 @@
         const cat = document.getElementById('viewCatalog');
         if (cat) cat.classList.add('active');
         updateCatalogProgress();
-      }
-      else if (tabKey === 'library') {
-        const lib = document.getElementById('viewLibrary');
-        if (lib) lib.classList.add('active');
       }
       else if (tabKey === 'certificate') {
         const cert = document.getElementById('viewCertificate');
@@ -5891,11 +5892,7 @@
     </button>
     <button class="mob-bottom-tab" data-tab="catalog" onclick="switchPortalTab('catalog')">
       <span class="mob-tab-icon">📚</span>
-      <span class="mob-tab-label">Katalog</span>
-    </button>
-    <button class="mob-bottom-tab" data-tab="library" onclick="switchPortalTab('library')">
-      <span class="mob-tab-icon">💡</span>
-      <span class="mob-tab-label">Promptlar</span>
+      <span class="mob-tab-label">Kurslar</span>
     </button>
     <button class="mob-bottom-tab" data-tab="certificate" onclick="switchPortalTab('certificate')">
       <span class="mob-tab-icon">📜</span>

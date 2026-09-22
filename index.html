@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>GPTify Academy — Amaliy Sun'iy Intellekt Kursi & B2B Trening</title>
   <!-- Telegram WebApp SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script async src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -2335,333 +2335,416 @@
     }
 
     /* ==========================================================================
-       EDTECH GAMIFICATION DASHBOARD (MAKON.AI & ENGLIFY.UZ DESIGN SYSTEM)
-       Tactile 3D buttons, Streak & XP counters, Level badges & Micro-animations
+       MAKON.AI EDTECH BENTO SYSTEM & SQUIRCLE CARD GEOMETRY
+       Generous rounded curves (24px-28px), soft mint pastel daylight, zero harsh borders
        ========================================================================== */
-    .gamify-dashboard-card {
+    .makon-bento-hero {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 960px) {
+      .makon-bento-hero {
+        grid-template-columns: 1fr 1fr;
+      }
+      .bento-card-main {
+        grid-column: span 2;
+      }
+    }
+    @media (max-width: 540px) {
+      .makon-bento-hero {
+        grid-template-columns: 1fr;
+      }
+      .bento-card-main {
+        grid-column: span 1;
+      }
+    }
+
+    .bento-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 22px 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1.5px solid rgba(16, 185, 129, 0.14);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
       overflow: hidden;
-      margin-bottom: 24px;
-      transition: all 0.25s ease;
-    }
-    body.warm-paper .gamify-dashboard-card {
-      background: #FAF9F5;
-      border-color: #E8E5DC;
-    }
-    .gamify-header-row {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 18px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
     }
-    .gamify-user-info {
+    .bento-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(5, 150, 105, 0.08);
+      border-color: rgba(16, 185, 129, 0.32);
+    }
+    body.warm-paper .bento-card {
+      background: #FAF9F5;
+      border-color: #E5E2D9;
+    }
+
+    /* Main Welcome Bento Card */
+    .bento-card-main {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      padding: 24px 26px;
+    }
+    body.warm-paper .bento-card-main {
+      background: linear-gradient(135deg, #FAF9F5 0%, #F5F3EB 100%);
+    }
+    .bento-header-cluster {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      margin-bottom: 20px;
     }
-    .gamify-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand-emerald), #10b981);
+    .bento-mascot-orb {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 2px solid #a7f3d0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      font-weight: 900;
-      font-size: 15px;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
+      animation: mascotFloat 3s ease-in-out infinite;
     }
-    .gamify-welcome {
-      font-size: 15px;
+    @keyframes mascotFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .bento-greeting-title {
+      font-size: 16.5px;
+      font-weight: 800;
       color: var(--text);
-      font-weight: 700;
+      line-height: 1.25;
     }
-    .gamify-welcome strong {
+    .bento-greeting-title strong {
       color: var(--brand-emerald);
       font-weight: 900;
     }
-    .gamify-level-badge {
+    .bento-level-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid rgba(16, 185, 129, 0.25);
       padding: 3px 10px;
       border-radius: 99px;
       font-size: 11.5px;
       font-weight: 700;
       color: var(--text-secondary);
-      margin-top: 4px;
-    }
-    .gamify-stats-cluster {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .gamify-stat-pill {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      border-radius: 14px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      transition: all 0.2s;
-    }
-    .gamify-stat-pill.streak-pill {
-      background: rgba(245, 158, 11, 0.08);
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-    .gamify-stat-pill.xp-pill {
-      background: rgba(5, 150, 105, 0.08);
-      border-color: rgba(5, 150, 105, 0.25);
-    }
-    .flame-icon {
-      font-size: 20px;
-      animation: flamePulse 2s infinite ease-in-out;
-      display: inline-block;
-    }
-    @keyframes flamePulse {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.18) rotate(4deg); }
-    }
-    .star-icon {
-      font-size: 19px;
-      color: #eab308;
-    }
-    .stat-meta {
-      display: flex;
-      flex-direction: column;
-    }
-    .stat-number {
-      font-size: 14.5px;
-      font-weight: 900;
-      color: var(--text);
-      line-height: 1.2;
-    }
-    .stat-caption {
-      font-size: 10.5px;
-      color: var(--text-muted);
-      font-weight: 600;
+      margin-top: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
 
-    /* Middle Action Row */
-    .gamify-action-row {
+    /* Progress & Action Button in Bento Main */
+    .bento-action-area {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 20px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 20px;
+      flex-direction: column;
+      gap: 12px;
     }
-    .gamify-progress-block {
-      flex: 1;
-      min-width: 240px;
-    }
-    .gamify-progress-labels {
+    .bento-progress-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 12.5px;
-      margin-bottom: 8px;
     }
-    .progress-title {
-      font-weight: 700;
+    .bento-course-name {
+      font-weight: 800;
       color: var(--text);
     }
-    .progress-ratio {
+    .bento-course-count {
       font-weight: 800;
       color: var(--brand-emerald);
     }
-    .gamify-bar-track {
+    .bento-bar-track {
       width: 100%;
-      height: 10px;
-      background: var(--border);
+      height: 9px;
+      background: rgba(226, 232, 240, 0.7);
       border-radius: 99px;
       overflow: hidden;
     }
-    .gamify-bar-fill {
+    .bento-bar-fill {
       height: 100%;
       background: linear-gradient(90deg, #10b981, #059669);
       border-radius: 99px;
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    .bento-resume-btn {
+      width: 100%;
+      padding: 13px 22px;
+      font-size: 14.5px;
+      border-radius: 14px;
+    }
 
-    /* Tactile 3D Button Components (Makon & Englify Style) */
-    .btn-3d {
-      display: inline-flex;
+    /* Streak Bento Card */
+    .bento-card-streak {
+      background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+      border-color: rgba(245, 158, 11, 0.25);
+      text-align: center;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #ffffff !important;
-      font-weight: 800;
-      font-size: 13.5px;
-      border-radius: 12px;
-      padding: 12px 22px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #047857, 0 8px 16px rgba(5, 150, 105, 0.28);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-      user-select: none;
-      white-space: nowrap;
-      text-decoration: none;
+      padding: 22px 18px;
     }
-    .btn-3d:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 0 #047857, 0 10px 20px rgba(5, 150, 105, 0.35);
+    body.warm-paper .bento-card-streak {
+      background: linear-gradient(135deg, #FAF9F5 0%, #FEF3C7 30%, #FAF9F5 100%);
     }
-    .btn-3d:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #047857, 0 2px 4px rgba(5, 150, 105, 0.2);
-    }
-    .btn-3d-secondary {
-      display: inline-flex;
+    .bento-flame-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1.5px solid rgba(245, 158, 11, 0.3);
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      background: var(--bg-surface);
-      color: var(--text) !important;
-      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 8px;
+      animation: flamePulse 2s ease-in-out infinite;
+    }
+    .bento-stat-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .bento-stat-label {
       font-size: 13px;
-      border-radius: 12px;
-      padding: 10px 18px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      box-shadow: 0 3px 0 var(--border), 0 4px 10px rgba(0, 0, 0, 0.04);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-      user-select: none;
-      text-decoration: none;
-    }
-    .btn-3d-secondary:hover {
-      transform: translateY(-1px);
-      background: var(--bg-subtle);
-      box-shadow: 0 4px 0 var(--border), 0 6px 14px rgba(0, 0, 0, 0.06);
-    }
-    .btn-3d-secondary:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 var(--border);
-    }
-    .btn-3d-amber {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
-      color: #ffffff !important;
       font-weight: 800;
-      font-size: 13.5px;
-      border-radius: 12px;
-      padding: 12px 22px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #b45309, 0 8px 18px rgba(217, 119, 6, 0.3);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-      user-select: none;
+      color: #b45309;
+      margin-top: 4px;
     }
-    .btn-3d-amber:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 0 #b45309, 0 10px 22px rgba(217, 119, 6, 0.4);
-    }
-    .btn-3d-amber:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #b45309, 0 3px 6px rgba(217, 119, 6, 0.2);
+    .bento-stat-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    /* Roadmap Milestones Grid */
-    .gamify-milestones-row .roadmap-milestones-grid {
+    /* XP Bento Card */
+    .bento-card-xp {
+      background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);
+      border-color: rgba(5, 150, 105, 0.22);
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 18px;
+    }
+    body.warm-paper .bento-card-xp {
+      background: linear-gradient(135deg, #FAF9F5 0%, #D1FAE5 30%, #FAF9F5 100%);
+    }
+    .bento-star-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1.5px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .bento-xp-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .bento-xp-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #047857;
+      margin-top: 4px;
+    }
+
+    /* 5-Step Connected Learning Path (Makon.ai / Duolingo Style) */
+    .makon-path-card {
+      background: var(--bg-surface);
+      border: 1.5px solid rgba(16, 185, 129, 0.14);
+      border-radius: 24px;
+      padding: 18px 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      margin-bottom: 24px;
+    }
+    body.warm-paper .makon-path-card {
+      background: #FAF9F5;
+      border-color: #E5E2D9;
+    }
+    .makon-path-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+    .makon-path-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .makon-path-sub {
+      font-size: 11.5px;
+      color: var(--brand-emerald);
+      font-weight: 700;
+    }
+    .makon-path-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 10px;
     }
     @media (max-width: 768px) {
-      .gamify-milestones-row .roadmap-milestones-grid {
+      .makon-path-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .gamify-header-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .gamify-stats-cluster {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .gamify-action-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-3d {
-        width: 100%;
-      }
     }
-    .milestone-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
+    .path-step-tile {
+      background: var(--bg-subtle);
+      border: 1.5px solid transparent;
+      border-radius: 16px;
+      padding: 12px 14px;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
     }
-    .milestone-box:hover {
+    .path-step-tile:hover {
+      background: #ffffff;
+      border-color: var(--brand-emerald);
       transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.08);
+    }
+    .path-step-tile.active {
+      background: #ffffff;
       border-color: var(--brand-emerald);
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.08);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
     }
-    .milestone-box.active {
-      border-color: var(--brand-emerald);
-      background: var(--brand-light);
-      box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+    .path-step-tile.completed {
+      background: rgba(240, 253, 244, 0.85);
+      border-color: rgba(5, 150, 105, 0.35);
     }
-    .milestone-box.completed {
-      border-color: rgba(5, 150, 105, 0.4);
-      background: rgba(240, 253, 244, 0.6);
-    }
-    .milestone-header {
+    .path-step-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 4px;
     }
-    .milestone-num {
+    .path-step-num {
       font-size: 10px;
       font-weight: 800;
       color: var(--text-muted);
-      letter-spacing: 0.04em;
     }
-    .milestone-box.active .milestone-num {
+    .path-step-tile.active .path-step-num {
       color: var(--brand-emerald);
     }
-    .milestone-check {
-      font-size: 11px;
-    }
-    .milestone-name {
+    .path-step-title {
       font-size: 12px;
       font-weight: 800;
       color: var(--text);
       line-height: 1.3;
       margin-bottom: 2px;
     }
-    .milestone-sub {
+    .path-step-meta {
       font-size: 10.5px;
       color: var(--text-muted);
     }
 
-    /* Native Mobile Bottom Navigation Bar (Makon & Englify UI) */
+    /* Tactile 3D Buttons (Makon & Englify Design) */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: #ffffff !important;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      border-radius: 14px;
+      padding: 12px 22px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #047857, 0 8px 18px rgba(5, 150, 105, 0.3);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      user-select: none;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-3d:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5.5px 0 #047857, 0 11px 22px rgba(5, 150, 105, 0.38);
+    }
+    .btn-3d:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #047857, 0 2px 4px rgba(5, 150, 105, 0.2);
+    }
+
+    /* Minimalist Navbar Stat Chips */
+    .nav-stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .nav-stat-chip.streak-chip {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.25);
+      color: #b45309;
+    }
+    .nav-stat-chip.xp-chip {
+      background: rgba(5, 150, 105, 0.08);
+      border-color: rgba(5, 150, 105, 0.2);
+      color: #047857;
+    }
+    .nav-avatar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-emerald), #10b981);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+      transition: transform 0.15s ease;
+    }
+    .nav-avatar-btn:hover {
+      transform: scale(1.05);
+    }
+    .btn-warm-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .btn-warm-icon:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Native Mobile Bottom Navigation Bar */
     .mobile-bottom-nav {
       display: none;
     }
@@ -2721,7 +2804,7 @@
       .mob-bottom-tab.active .mob-tab-label {
         font-weight: 900;
       }
-      /* Extra bottom spacing on mobile views to ensure full visibility above bottom nav */
+      /* Extra bottom spacing on mobile views */
       .lesson-workspace, #viewCatalog, #viewLibrary, #viewCertificate, #viewCorporate {
         padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px)) !important;
       }
@@ -2731,65 +2814,55 @@
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
+  <!-- Top Navigation Header (Makon.ai Minimalist Standard) -->
   <header class="top-nav">
     <div class="top-nav-inner">
       <!-- Brand -->
       <a href="javascript:void(0)" onclick="switchPortalTab('classroom')" class="brand">
-        <img src="assets/gptify_logo.jpg" alt="GPTify" style="width:36px; height:36px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(5,150,105,0.25); border:1.5px solid var(--border-accent);">
+        <img src="assets/gptify_logo.jpg" alt="GPTify" style="width:36px; height:36px; border-radius:12px; object-fit:cover; box-shadow:0 3px 10px rgba(5,150,105,0.25); border:1.5px solid rgba(16,185,129,0.25);">
         <div>
-          <div style="font-weight:900; font-size:15.5px; letter-spacing:-0.02em; display:flex; align-items:center; gap:6px; color:var(--text);">
+          <div style="font-weight:900; font-size:16px; letter-spacing:-0.03em; display:flex; align-items:center; gap:6px; color:var(--text);">
             <span>GPTify Academy</span>
-            <span class="badge-b2b">B2B AI</span>
-          </div>
-          <div style="font-size:11px; color:var(--text-muted); font-weight:600;">
-            Berlin & Tashkent
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981; box-shadow:0 0 8px #10b981;" title="Faol platforma"></span>
           </div>
         </div>
       </a>
 
-      <!-- Main Navigation Tabs (4 Clean Segments) -->
+      <!-- Main Navigation Tabs (Clean Capsule Segments) -->
       <nav class="portal-tabs">
         <button class="portal-tab-btn active" onclick="switchPortalTab('classroom')">
-          <span>🎓</span> <span class="tab-txt-desktop">AI Asoslari (Faol)</span><span class="tab-txt-mobile">Darslar</span>
+          <span>🎓</span> <span>Darslar</span>
         </button>
         <button class="portal-tab-btn" onclick="switchPortalTab('catalog')">
-          <span>📚</span> <span class="tab-txt-desktop">Barcha Kurslar</span><span class="tab-txt-mobile">Kurslar</span>
+          <span>📚</span> <span>Kurslar</span>
         </button>
         <button class="portal-tab-btn" onclick="switchPortalTab('library')">
-          <span>📋</span> <span class="tab-txt-desktop">Promptlar (50+)</span><span class="tab-txt-mobile">Promptlar</span>
+          <span>💡</span> <span>Promptlar</span>
         </button>
         <button class="portal-tab-btn" onclick="switchPortalTab('certificate')">
-          <span>🏆</span> <span>Sertifikat</span>
-        </button>
-        <button class="portal-tab-btn" onclick="switchPortalTab('corporate')">
-          <span>🏢</span> <span class="tab-txt-desktop">Korporativ</span><span class="tab-txt-mobile">B2B</span>
+          <span>📜</span> <span>Sertifikat</span>
         </button>
       </nav>
 
       <!-- Right Utilities & Profile -->
       <div class="nav-right-cluster">
-        <!-- Course Progress Pill -->
-        <div class="nav-progress-pill" title="Umumiy kurs o'zlashtirish ko'rsatkichi">
-          <div class="nav-progress-track">
-            <div class="nav-progress-fill" id="courseProgressFill" style="width:0%;"></div>
-          </div>
-          <span id="progressText">0 / 14 dars (0%)</span>
+        <!-- Quick Streak Badge -->
+        <div class="nav-stat-chip streak-chip" title="Muntazam o'qish striti">
+          <span>🔥</span> <strong id="topStreakVal">1</strong>
         </div>
 
-        <!-- Warm Paper Mode -->
-        <button class="btn-warm-toggle" id="btnWarmPaper" onclick="toggleWarmPaper()" title="Iliq Qog'oz Rejimi (Substack Warm Paper)">
-          <span>📖</span> <span id="warmPaperLabel">Iliq Qog'oz</span>
+        <!-- Quick XP Badge -->
+        <div class="nav-stat-chip xp-chip" title="To'plangan XP ballar">
+          <span>⭐</span> <strong id="topScoreValue">600</strong>
+        </div>
+
+        <!-- Warm Paper Toggle -->
+        <button class="btn-warm-icon" id="btnWarmPaper" onclick="toggleWarmPaper()" title="Iliq Qog'oz Rejimi">
+          <span>📖</span>
         </button>
 
-        <!-- Student Profile & Score -->
-        <div class="nav-profile-pill" onclick="switchPortalTab('certificate')" title="Sertifikat va profilingizni ko'rish">
-          <div class="nav-avatar" id="topStudentAvatar">SI</div>
-          <div class="nav-user-text">
-            <div class="nav-user-name" id="topStudentName">Shukhrat I.</div>
-            <div class="nav-user-score" id="topScoreValue">⭐ 0 ball</div>
-          </div>
-        </div>
+        <!-- Student Avatar Circle -->
+        <div class="nav-avatar-btn" id="topStudentAvatar" onclick="switchPortalTab('certificate')" title="Profilingiz & Sertifikat">SI</div>
       </div>
     </div>
   </header>
@@ -3006,101 +3079,117 @@
       </div>
       <div class="lesson-container" style="max-width:880px; margin:0 auto; padding:24px 16px 80px;">
 
-        <!-- 1. Gamified Student Dashboard Hero (EdTech Makon & Englify Style) -->
-        <div id="courseRoadmapHero" class="gamify-dashboard-card">
-          <!-- Top Row: Student Avatar, Greeting, Level Badge, Streak & XP Counters -->
-          <div class="gamify-header-row">
-            <div class="gamify-user-info">
-              <div class="gamify-avatar" id="gamifyUserAvatar">SI</div>
-              <div>
-                <div class="gamify-welcome">Xush kelibsiz, <strong id="gamifyStudentName">Shukhrat</strong>! 👋</div>
-                <div class="gamify-level-badge">
-                  <span id="gamifyLevelIcon">🌱</span>
-                  <span id="gamifyLevelText">Level 1 · AI Boshlang'ich</span>
+        <!-- 1. Makon.ai EdTech Bento Grid Hero -->
+        <div id="courseRoadmapHero">
+          <div class="makon-bento-hero">
+            <!-- Bento Card 1: Mascot, Greeting, Progress & 3D CTA -->
+            <div class="bento-card bento-card-main">
+              <div class="bento-header-cluster">
+                <div class="bento-mascot-orb">
+                  <!-- Custom AI Holographic Robot Avatar SVG -->
+                  <svg width="42" height="42" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="22" fill="url(#botGrad)" stroke="#10b981" stroke-width="2"/>
+                    <rect x="13" y="15" width="22" height="18" rx="7" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+                    <circle cx="19" cy="23" r="2.5" fill="#34d399"/>
+                    <circle cx="29" cy="23" r="2.5" fill="#34d399"/>
+                    <path d="M21 28C22.5 29.5 25.5 29.5 27 28" stroke="#34d399" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="24" y1="15" x2="24" y2="10" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="24" cy="9" r="2.5" fill="#10b981"/>
+                    <defs>
+                      <linearGradient id="botGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#065f46"/>
+                        <stop offset="1" stop-color="#022c22"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
+                <div>
+                  <div class="bento-greeting-title">Salom, <strong id="gamifyStudentName">Shukhrat</strong>! 👋</div>
+                  <div class="bento-level-pill">
+                    <span id="gamifyLevelIcon">🌱</span>
+                    <span id="gamifyLevelText">Level 1 · AI Boshlang'ich</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-action-area">
+                <div class="bento-progress-row">
+                  <span class="bento-course-name">🎯 Sun'iy Intellekt Asoslari</span>
+                  <span class="bento-course-count" id="gamifyProgressText">0 / 14 dars (0%)</span>
+                </div>
+                <div class="bento-bar-track">
+                  <div class="bento-bar-fill" id="gamifyProgressFill" style="width: 0%;"></div>
+                </div>
+                <button class="btn-3d bento-resume-btn" id="btnResumeCourse" onclick="startOrResumeCourse()">
+                  <span id="btnResumeIcon">🚀</span>
+                  <span id="btnResumeCourseText">1.1-Darsdan Boshlash</span>
+                </button>
               </div>
             </div>
-            
-            <div class="gamify-stats-cluster">
-              <!-- Streak Pill -->
-              <div class="gamify-stat-pill streak-pill" title="Ketma-ket dars o'qish kunlari">
-                <span class="flame-icon">🔥</span>
-                <div class="stat-meta">
-                  <div class="stat-number"><span id="gamifyStreakCount">1</span> kun</div>
-                  <div class="stat-caption">Muntazam streak</div>
-                </div>
-              </div>
-              <!-- XP Points Pill -->
-              <div class="gamify-stat-pill xp-pill" title="Darslar va testlardan to'plangan jami tajriba ballari">
-                <span class="star-icon">⭐</span>
-                <div class="stat-meta">
-                  <div class="stat-number"><span id="gamifyXpCount">0</span> XP</div>
-                  <div class="stat-caption">Jami ballar</div>
-                </div>
-              </div>
+
+            <!-- Bento Card 2: Streak -->
+            <div class="bento-card bento-card-streak" title="Har kuni muntazam o'qish striti">
+              <div class="bento-flame-orb">🔥</div>
+              <div class="bento-stat-num" id="gamifyStreakCount">1</div>
+              <div class="bento-stat-label">Kunlik Streak</div>
+              <div class="bento-stat-desc">Muntazam o'rganish</div>
+            </div>
+
+            <!-- Bento Card 3: Total XP -->
+            <div class="bento-card bento-card-xp" title="Dars va testlardan to'plangan jami ballar">
+              <div class="bento-star-orb">⭐</div>
+              <div class="bento-xp-num" id="gamifyXpCount">600</div>
+              <div class="bento-xp-label">XP Tajriba</div>
+              <div class="bento-stat-desc">Jami ballar</div>
             </div>
           </div>
 
-          <!-- Middle Row: Course Progress Bar & Tactile 3D Action Button -->
-          <div class="gamify-action-row">
-            <div class="gamify-progress-block">
-              <div class="gamify-progress-labels">
-                <span class="progress-title">🎯 Flagship Kurs: Sun'iy Intellekt Asoslari</span>
-                <span class="progress-ratio" id="gamifyProgressText">0 / 14 dars (0%)</span>
-              </div>
-              <div class="gamify-bar-track">
-                <div class="gamify-bar-fill" id="gamifyProgressFill" style="width: 0%;"></div>
-              </div>
+          <!-- Connected 5-Step Learning Roadmap -->
+          <div class="makon-path-card">
+            <div class="makon-path-header">
+              <div class="makon-path-title">🗺️ O'quv Yo'lagi · 5 Ta Asosiy Bosqich</div>
+              <div class="makon-path-sub">14 ta amaliy dars</div>
             </div>
-            
-            <button class="btn-3d" id="btnResumeCourse" onclick="startOrResumeCourse()">
-              <span id="btnResumeIcon">▶️</span>
-              <span id="btnResumeCourseText">1.1-Darsdan Boshlash</span>
-            </button>
-          </div>
-
-          <!-- Bottom Row: 5 Modules Roadmap Milestones -->
-          <div class="gamify-milestones-row">
-            <div class="roadmap-milestones-grid">
-              <div class="milestone-box active" id="milestone_1" onclick="loadLesson('1_1')">
-                <div class="milestone-header">
-                  <span class="milestone-num">1-MODUL</span>
-                  <span class="milestone-check" id="modCheck_1">⚪</span>
+            <div class="makon-path-grid">
+              <div class="path-step-tile active" id="milestone_1" onclick="loadLesson('1_1')">
+                <div class="path-step-head">
+                  <span class="path-step-num">1-BOSQICH</span>
+                  <span class="path-step-check" id="modCheck_1">⚪</span>
                 </div>
-                <div class="milestone-name">AI Anatomiyasi</div>
-                <div class="milestone-sub">3 ta dars</div>
+                <div class="path-step-title">AI Anatomiyasi</div>
+                <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="milestone-box" id="milestone_2" onclick="loadLesson('2_1')">
-                <div class="milestone-header">
-                  <span class="milestone-num">2-MODUL</span>
-                  <span class="milestone-check" id="modCheck_2">⚪</span>
+              <div class="path-step-tile" id="milestone_2" onclick="loadLesson('2_1')">
+                <div class="path-step-head">
+                  <span class="path-step-num">2-BOSQICH</span>
+                  <span class="path-step-check" id="modCheck_2">⚪</span>
                 </div>
-                <div class="milestone-name">Prompting</div>
-                <div class="milestone-sub">3 ta dars</div>
+                <div class="path-step-title">Oltin Prompting</div>
+                <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="milestone-box" id="milestone_3" onclick="loadLesson('3_1')">
-                <div class="milestone-header">
-                  <span class="milestone-num">3-MODUL</span>
-                  <span class="milestone-check" id="modCheck_3">⚪</span>
+              <div class="path-step-tile" id="milestone_3" onclick="loadLesson('3_1')">
+                <div class="path-step-head">
+                  <span class="path-step-num">3-BOSQICH</span>
+                  <span class="path-step-check" id="modCheck_3">⚪</span>
                 </div>
-                <div class="milestone-name">AI Vositalar</div>
-                <div class="milestone-sub">3 ta dars</div>
+                <div class="path-step-title">AI Vositalar</div>
+                <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="milestone-box" id="milestone_4" onclick="loadLesson('4_1')">
-                <div class="milestone-header">
-                  <span class="milestone-num">4-MODUL</span>
-                  <span class="milestone-check" id="modCheck_4">⚪</span>
+              <div class="path-step-tile" id="milestone_4" onclick="loadLesson('4_1')">
+                <div class="path-step-head">
+                  <span class="path-step-num">4-BOSQICH</span>
+                  <span class="path-step-check" id="modCheck_4">⚪</span>
                 </div>
-                <div class="milestone-name">Ish & Daromad</div>
-                <div class="milestone-sub">3 ta dars</div>
+                <div class="path-step-title">Ish & Daromad</div>
+                <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="milestone-box" id="milestone_5" onclick="loadLesson('5_1')">
-                <div class="milestone-header">
-                  <span class="milestone-num">5-MODUL</span>
-                  <span class="milestone-check" id="modCheck_5">🔒</span>
+              <div class="path-step-tile" id="milestone_5" onclick="loadLesson('5_1')">
+                <div class="path-step-head">
+                  <span class="path-step-num">5-BOSQICH</span>
+                  <span class="path-step-check" id="modCheck_5">🔒</span>
                 </div>
-                <div class="milestone-name">Sertifikat</div>
-                <div class="milestone-sub">2 ta dars</div>
+                <div class="path-step-title">Sertifikat</div>
+                <div class="path-step-meta">2 ta dars</div>
               </div>
             </div>
           </div>
@@ -3116,24 +3205,22 @@
               <span class="bc-sep">/</span>
               <span class="bc-curr" id="lessonBreadcrumbNum">1.1-Dars</span>
             </div>
-            <h1 class="lesson-main-title" id="activeLessonTitle">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude)</h1>
+            <h1 class="lesson-main-title" id="activeLessonTitle">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude 3.5 Sonnet vs Gemini)</h1>
             
             <div class="lesson-meta-bar">
               <div class="meta-left">
-                <span class="meta-item" id="activeLessonDuration">⏱️ 12 daqiqa mutolaa</span>
+                <span class="meta-item" id="activeLessonDuration">⏱️ 15 daqiqa mutolaa</span>
                 <span class="meta-dot">•</span>
-                <span class="meta-item" id="activeLessonInstructors">👨‍🏫 <b>Davlatbek & Shukhrat Iskandarov</b></span>
-                <span class="meta-dot">•</span>
-                <span class="meta-pill">O'zbekiston B2B Amaliyoti</span>
+                <span class="meta-item" id="activeLessonInstructors">👨‍🏫 <b>Shukhrat Iskandarov</b></span>
               </div>
               <div class="meta-right">
                 <button class="btn-copy-prompt-pill" onclick="copyLessonPrompt()" title="Ushbu darsning asosiy B2B prompt shablonini ko'rish">
                   <span>📋</span> <span>Dars Prompti</span>
                 </button>
                 <div class="font-zoom-pills">
-                  <button onclick="adjustFontSize(-1)" title="Kichikroq">A-</button>
+                  <button onclick="adjustFontSize(-1)" title="Kichikroq shrift">A-</button>
                   <button onclick="adjustFontSize(0)" title="Standart">100%</button>
-                  <button onclick="adjustFontSize(1)" title="Kattaroq">A+</button>
+                  <button onclick="adjustFontSize(1)" title="Kattaroq shrift">A+</button>
                 </div>
               </div>
             </div>
@@ -4041,11 +4128,10 @@
     }
 
     function syncPointsDisplay() {
-      // Calculate points dynamically if needed: lessons * 100 + quizzes * 50
-      const calculatedPoints = (completedLessons.size * 100) + (Object.keys(solvedQuizzes).length * 50);
+      const calculatedPoints = typeof calculateTotalXP === 'function' ? calculateTotalXP() : (completedLessons.size * 100) + (Object.keys(solvedQuizzes).length * 50);
       totalPoints = Math.max(totalPoints, calculatedPoints);
       const scoreVal = document.getElementById('topScoreValue');
-      if (scoreVal) scoreVal.innerText = `${totalPoints} ball`;
+      if (scoreVal) scoreVal.innerText = totalPoints;
       if (typeof updateGamificationUI === 'function') updateGamificationUI();
     }
 
@@ -4612,9 +4698,11 @@
     }
 
     function updateAudioDisplay() {
-      document.getElementById('audioCurrentTime').innerText = formatTime(audioSeconds);
+      const curTime = document.getElementById('audioCurrentTime');
+      if (curTime) curTime.innerText = formatTime(audioSeconds);
       const pct = (audioSeconds / audioTotalSeconds) * 100;
-      document.getElementById('audioProgressFill').style.width = `${pct}%`;
+      const fill = document.getElementById('audioProgressFill');
+      if (fill) fill.style.width = `${pct}%`;
     }
 
     function seekAudio(event) {
@@ -4630,7 +4718,8 @@
       const speeds = [1.0, 1.25, 1.5, 2.0];
       let idx = speeds.indexOf(audioSpeed);
       audioSpeed = speeds[(idx + 1) % speeds.length];
-      document.getElementById('audioSpeedBtn').innerText = `${audioSpeed.toFixed(1)}x`;
+      const speedBtn = document.getElementById('audioSpeedBtn');
+      if (speedBtn) speedBtn.innerText = `${audioSpeed.toFixed(1)}x`;
       toast(`Ovoz tezligi: ${audioSpeed}x`);
     }
 
@@ -4763,6 +4852,8 @@
 
       const userAv = document.getElementById('gamifyUserAvatar');
       if (userAv) userAv.innerText = initials;
+      const topAv = document.getElementById('topStudentAvatar');
+      if (topAv) topAv.innerText = initials;
 
       const nameEl = document.getElementById('gamifyStudentName');
       if (nameEl) nameEl.innerText = parts[0] || "Shukhrat";
@@ -4776,9 +4867,13 @@
       // Streak & XP
       const streakEl = document.getElementById('gamifyStreakCount');
       if (streakEl) streakEl.innerText = streak;
+      const topStreak = document.getElementById('topStreakVal');
+      if (topStreak) topStreak.innerText = streak;
 
       const xpEl = document.getElementById('gamifyXpCount');
       if (xpEl) xpEl.innerText = xp;
+      const topScore = document.getElementById('topScoreValue');
+      if (topScore) topScore.innerText = xp;
 
       // Progress bar & text
       const progText = document.getElementById('gamifyProgressText');
@@ -4911,11 +5006,9 @@
       if (durEl) durEl.innerText = `⏱️ ${data.duration} mutolaa`;
       updateRoadmapMilestones();
 
-      // 4. Update time budget
-      if (data.timeBudget) {
-        document.getElementById('lessonTimeBudgetBar').style.display = 'flex';
-        document.getElementById('lessonTimeBudgetText').innerHTML = data.timeBudget;
-      }
+      // 4. Update time budget (stored cleanly without polluting header)
+      const tbBar = document.getElementById('lessonTimeBudgetBar');
+      if (tbBar) tbBar.style.display = 'none';
 
       // 5. Update deep dive reading
       const deepDiveCard = document.getElementById('lessonDeepDiveCard');
@@ -4964,20 +5057,9 @@
       };
 
       const modVis = MOD_VISUALS[modId] || MOD_VISUALS['3'];
-      if (modVis.img) {
-        if (storyImg) { storyImg.style.display = 'block'; storyImg.src = modVis.img; }
-        if (placeholder) placeholder.style.display = 'none';
-        if (wrap) wrap.style.background = '#000000';
-      } else {
-        if (storyImg) storyImg.style.display = 'none';
-        if (placeholder) {
-          placeholder.style.display = 'flex';
-          document.getElementById('moduleHeroIcon').innerText = modVis.icon;
-          document.getElementById('moduleHeroBadge').innerText = modVis.badge;
-          document.getElementById('moduleHeroTitle').innerText = modVis.title;
-        }
-        if (wrap) wrap.style.background = modVis.bg;
-      }
+      if (storyImg) storyImg.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
+      if (wrap) wrap.style.display = 'none';
 
       if (data.storyboard && data.storyboard.length) {
         currentLessonStorySteps = data.storyboard;
@@ -5052,11 +5134,16 @@
       // Update progress
       const count = completedLessons.size;
       const pct = Math.round((count / 14) * 100);
-      document.getElementById('courseProgressFill').style.width = `${pct}%`;
-      document.getElementById('progressText').innerText = `${count} / 14 dars (${pct}%)`;
+      const progFill = document.getElementById('courseProgressFill') || document.getElementById('gamifyProgressFill');
+      if (progFill) progFill.style.width = `${pct}%`;
+      const progText = document.getElementById('progressText') || document.getElementById('gamifyProgressText');
+      if (progText) progText.innerText = `${count} / 14 dars (${pct}%)`;
 
       totalPoints += 100;
       syncPointsDisplay();
+      if (typeof updateGamificationUI === 'function') updateGamificationUI();
+      if (typeof updateRoadmapMilestones === 'function') updateRoadmapMilestones();
+      if (typeof updateCertificateLockState === 'function') updateCertificateLockState();
       saveAppState();
       launchConfetti({ count: 70, spread: 60 });
       triggerHaptic('success');
@@ -5234,14 +5321,22 @@
         // Update progress
         const count = completedLessons.size;
         const pct = Math.round((count / 14) * 100);
-        document.getElementById('hwResultBadge').innerText = `✓ Topshirildi: ${score} / 100 ball (${score >= 90 ? "A'lo" : "Yaxshi"})`;
-        document.getElementById('hwResultBadge').style.color = "var(--brand-emerald)";
-        document.getElementById('courseProgressFill').style.width = `${pct}%`;
-        document.getElementById('progressText').innerText = `${count} / 14 dars (${pct}%)`;
+        const hwBadge = document.getElementById('hwResultBadge');
+        if (hwBadge) {
+          hwBadge.innerText = `✓ Topshirildi: ${score} / 100 ball (${score >= 90 ? "A'lo" : "Yaxshi"})`;
+          hwBadge.style.color = "var(--brand-emerald)";
+        }
+        const progFill = document.getElementById('courseProgressFill') || document.getElementById('gamifyProgressFill');
+        if (progFill) progFill.style.width = `${pct}%`;
+        const progText = document.getElementById('progressText') || document.getElementById('gamifyProgressText');
+        if (progText) progText.innerText = `${count} / 14 dars (${pct}%)`;
 
         userScores[currentLessonId] = score;
         totalPoints += score;
         syncPointsDisplay();
+        if (typeof updateGamificationUI === 'function') updateGamificationUI();
+        if (typeof updateRoadmapMilestones === 'function') updateRoadmapMilestones();
+        if (typeof updateCertificateLockState === 'function') updateCertificateLockState();
         saveAppState();
         launchConfetti({ count: 95, spread: 75 });
         triggerHaptic('success');

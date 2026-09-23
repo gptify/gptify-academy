@@ -1122,33 +1122,33 @@
     }
     .btn-cert-primary {
       background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
+      color: #ffffff !important;
+      border: 1px solid rgba(4, 120, 87, 0.35);
+      border-radius: 14px;
       padding: 12px 24px;
       font-size: 13.5px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 0 #047857, 0 8px 16px rgba(5, 150, 105, 0.28);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 6px 20px rgba(16, 185, 129, 0.22);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
     }
     .btn-cert-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 5px 0 #047857, 0 10px 20px rgba(5, 150, 105, 0.35);
+      box-shadow: 0 2px 4px rgba(18, 17, 30, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.36), 0 10px 24px rgba(16, 185, 129, 0.3);
     }
     .btn-cert-primary:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #047857, 0 2px 4px rgba(5, 150, 105, 0.2);
+      transform: scale(0.975);
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
     .btn-cert-secondary {
       background: var(--bg-surface);
       color: var(--text);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px 20px;
       font-size: 13.5px;
       font-weight: 700;
@@ -1156,18 +1156,18 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 3px 0 var(--border), 0 4px 10px rgba(0, 0, 0, 0.04);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
     }
     .btn-cert-secondary:hover {
       transform: translateY(-1px);
       background: var(--bg-subtle);
-      box-shadow: 0 4px 0 var(--border), 0 6px 14px rgba(0, 0, 0, 0.06);
+      border-color: #cbd5e1;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
     }
     .btn-cert-secondary:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 var(--border);
+      transform: scale(0.975);
     }
     .btn-cert-telegram {
       background: linear-gradient(135deg, #229ED9, #0088cc);
@@ -1830,7 +1830,7 @@
       background: var(--bg-surface);
       color: var(--text-secondary);
       border: 1px solid var(--border);
-      border-radius: var(--radius-full);
+      border-radius: 14px;
       padding: 10px 20px;
       font-size: 13px;
       font-weight: 700;
@@ -1838,39 +1838,53 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-nav-prev:hover:not(:disabled) {
-      border-color: var(--text);
+      border-color: #cbd5e1;
       color: var(--text);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    }
+    .btn-nav-prev:active:not(:disabled) {
+      transform: scale(0.975);
     }
     .btn-nav-prev:disabled {
       opacity: 0.4;
       cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
     }
     .btn-nav-next {
       background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
+      color: #ffffff !important;
+      border: 1px solid rgba(4, 120, 87, 0.35);
+      border-radius: 14px;
       padding: 12px 24px;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 0 #047857, 0 8px 16px rgba(5, 150, 105, 0.28);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 6px 20px rgba(16, 185, 129, 0.22);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
     }
     .btn-nav-next:hover:not(:disabled) {
       transform: translateY(-1px);
-      box-shadow: 0 5px 0 #047857, 0 10px 20px rgba(5, 150, 105, 0.35);
+      box-shadow: 0 2px 4px rgba(18, 17, 30, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.36), 0 10px 24px rgba(16, 185, 129, 0.3);
     }
     .btn-nav-next:active:not(:disabled) {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #047857, 0 2px 4px rgba(5, 150, 105, 0.2);
+      transform: scale(0.975);
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.1);
+    }
+    .btn-nav-next:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
     }
     .btn-nav-next:disabled {
       opacity: 0.5;
@@ -2000,20 +2014,119 @@
        Transforms clunky accordion cards into a unified, seamless modern sidebar
        ========================================================================== */
     .curriculum-sidebar {
-      width: 300px !important;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
+      width: 310px !important;
+      height: calc(100vh - 104px) !important;
       position: sticky !important;
-      top: 80px !important;
-      max-height: calc(100vh - 100px) !important;
+      top: 84px !important;
       overflow-y: auto !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px 14px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
     }
     body.warm-paper .curriculum-sidebar {
-      background: #FAF9F5;
+      background: rgba(250, 249, 245, 0.95);
       border-color: #E8E5DC;
+    }
+    .curriculum-sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .curriculum-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .curriculum-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.35);
+      border-radius: 99px;
+    }
+    .curriculum-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.6);
+    }
+
+    /* Reader Focus Mode Top Action Bar (Makon.ai & Linear Standard) */
+    .reader-top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.9));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+    }
+    body.warm-paper .reader-top-action-bar {
+      background: rgba(245, 243, 235, 0.95);
+      border-color: #E8E5DC;
+    }
+    .btn-back-dashboard {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      transition: all 0.15s ease;
+    }
+    body.warm-paper .btn-back-dashboard {
+      background: #FAF9F5;
+      border-color: #E2DFD6;
+    }
+    .btn-back-dashboard:hover {
+      background: var(--bg-subtle);
+      color: var(--text);
+      border-color: #cbd5e1;
+      transform: translateX(-2px);
+    }
+    .reader-mode-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .reader-mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--brand-emerald);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .pulse-emerald-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .reader-xp-pill {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(5, 150, 105, 0.25);
     }
     
     .sidebar-header-row {
@@ -2178,9 +2291,17 @@
       padding: 0 16px 80px !important;
     }
     .lesson-reading-card {
-      border-radius: 16px !important;
+      border-radius: 24px !important;
       padding: 36px 40px !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 12px 36px rgba(18, 17, 30, 0.04) !important;
+      scroll-margin-top: 84px;
+    }
+    @media (max-width: 640px) {
+      .lesson-reading-card {
+        padding: 22px 18px !important;
+        border-radius: 20px !important;
+      }
     }
 
 
@@ -2295,7 +2416,7 @@
         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       }
       .mobile-reader-banner {
-        display: flex !important;
+        display: none !important;
         cursor: pointer;
         background: var(--brand-light);
         border: 1.5px solid var(--border-accent);
@@ -2662,26 +2783,26 @@
       gap: 10px;
       background: linear-gradient(180deg, #10b981 0%, #059669 100%);
       color: #ffffff !important;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 14px;
       letter-spacing: -0.01em;
       border-radius: 14px;
       padding: 12px 22px;
-      border: none;
+      border: 1px solid rgba(4, 120, 87, 0.35);
       cursor: pointer;
-      box-shadow: 0 4px 0 #047857, 0 8px 18px rgba(5, 150, 105, 0.3);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 6px 20px rgba(16, 185, 129, 0.22);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
       white-space: nowrap;
       text-decoration: none;
     }
     .btn-3d:hover {
-      transform: translateY(-1.5px);
-      box-shadow: 0 5.5px 0 #047857, 0 11px 22px rgba(5, 150, 105, 0.38);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(18, 17, 30, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.36), 0 10px 24px rgba(16, 185, 129, 0.3);
     }
     .btn-3d:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #047857, 0 2px 4px rgba(5, 150, 105, 0.2);
+      transform: scale(0.975);
+      box-shadow: 0 1px 2px rgba(18, 17, 30, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     /* Minimalist Navbar Stat Chips */
@@ -2911,21 +3032,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item active" onclick="loadLesson('1_1')">
+          <div class="lesson-item active" onclick="loadLesson('1_1', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">1.1</span>
               <span class="lesson-item-title">1.1. LLM qanday fikrlaydi? (GPT-4o vs Claude vs Gemini)</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('1_2')">
+          <div class="lesson-item" onclick="loadLesson('1_2', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">1.2</span>
               <span class="lesson-item-title">1.2. Tokenlar, xotira va Context Window</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('1_3')">
+          <div class="lesson-item" onclick="loadLesson('1_3', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">1.3</span>
               <span class="lesson-item-title">1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash</span>
@@ -2945,21 +3066,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('2_1')">
+          <div class="lesson-item" onclick="loadLesson('2_1', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">2.1</span>
               <span class="lesson-item-title">2.1. Oltin Formula: ROL + KONTEKST + VAZIFA + FORMAT</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('2_2')">
+          <div class="lesson-item" onclick="loadLesson('2_2', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">2.2</span>
               <span class="lesson-item-title">2.2. Few-Shot va Chain-of-Thought texnikasi</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('2_3')">
+          <div class="lesson-item" onclick="loadLesson('2_3', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">2.3</span>
               <span class="lesson-item-title">2.3. Meta-Prompting: AI orqali prompt yozdirish</span>
@@ -2979,21 +3100,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('3_1')">
+          <div class="lesson-item" onclick="loadLesson('3_1', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">3.1</span>
               <span class="lesson-item-title">3.1. Matn va Qidiruv: ChatGPT vs Claude vs Perplexity</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('3_2')">
+          <div class="lesson-item" onclick="loadLesson('3_2', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">3.2</span>
               <span class="lesson-item-title">3.2. Taqdimot va Vizual: Gamma App va Canva</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('3_3')">
+          <div class="lesson-item" onclick="loadLesson('3_3', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">3.3</span>
               <span class="lesson-item-title">3.3. Ovoz va Tahrir: ElevenLabs va Descript</span>
@@ -3013,21 +3134,21 @@
           <span class="tag">3 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('4_1')">
+          <div class="lesson-item" onclick="loadLesson('4_1', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">4.1</span>
               <span class="lesson-item-title">4.1. 15 Daqiqalik Odat: Ertalab, Kunduzi, Kechqurun</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('4_2')">
+          <div class="lesson-item" onclick="loadLesson('4_2', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">4.2</span>
               <span class="lesson-item-title">4.2. Xizmatlarni 10x Tezlashtirish: SMM & Reels</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('4_3')">
+          <div class="lesson-item" onclick="loadLesson('4_3', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">4.3</span>
               <span class="lesson-item-title">4.3. Eyzenxauer Matritsasi: 10 Soat Tejash</span>
@@ -3047,14 +3168,14 @@
           <span class="tag">2 dars</span>
         </div>
         <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('5_1')">
+          <div class="lesson-item" onclick="loadLesson('5_1', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">5.1</span>
               <span class="lesson-item-title">5.1. Shaxsiy AI Ishchi Tizimi (Portfolio Loyihasi)</span>
             </div>
             <span class="lesson-item-time">15 daq</span>
           </div>
-          <div class="lesson-item" onclick="loadLesson('5_2')">
+          <div class="lesson-item" onclick="loadLesson('5_2', true)">
             <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
               <span class="lesson-icon">5.2</span>
               <span class="lesson-item-title">5.2. Yakuniy Imtihon & Rasmiy Sertifikatni Olish!</span>
@@ -3063,12 +3184,24 @@
           </div>
         </div>
       </div>
+
+      <!-- Pinned Dock Footer (Makon.ai Executive Standard) -->
+      <div class="sidebar-dock-footer" style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border);">
+        <div style="background:var(--bg-subtle); border:1px solid var(--border); border-radius:12px; padding:10px 12px; margin-bottom:8px;">
+          <div style="font-size:10px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Kurs Jarayoni</div>
+          <div style="font-size:12px; font-weight:800; color:var(--brand-emerald); margin-top:2px;" id="sidebarDockProgress">0 / 14 dars (0%)</div>
+        </div>
+        <a href="https://t.me/GPTify_UZ" target="_blank" style="display:flex; align-items:center; justify-content:space-between; font-size:11.5px; font-weight:700; color:var(--tg-blue); text-decoration:none; padding:4px 2px;">
+          <span>💬 B2B Jamiyat (Telegram)</span>
+          <span style="font-size:10px;">➔</span>
+        </a>
+      </div>
     </aside>
 
     <!-- Center Active Lesson Workspace (Max-Width 900px Optimal Reading Container) -->
     <main class="lesson-workspace">
-      <!-- Mobile Quick Return to Curriculum Banner -->
-      <div class="mobile-reader-banner" onclick="setMobileClassroomTab('curriculum')">
+      <!-- Mobile Quick Return to Curriculum Banner (Integrated cleanly) -->
+      <div class="mobile-reader-banner" onclick="setMobileClassroomTab('curriculum')" style="display:none;">
         <div style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:800; color:var(--brand-emerald);">
           <span>📋</span> <span>Mundarija (Boshqa darsni tanlash)</span>
         </div>
@@ -3148,7 +3281,7 @@
               <div class="makon-path-sub">14 ta amaliy dars</div>
             </div>
             <div class="makon-path-grid">
-              <div class="path-step-tile active" id="milestone_1" onclick="loadLesson('1_1')">
+              <div class="path-step-tile active" id="milestone_1" onclick="loadLesson('1_1', true)">
                 <div class="path-step-head">
                   <span class="path-step-num">1-BOSQICH</span>
                   <span class="path-step-check" id="modCheck_1">⚪</span>
@@ -3156,7 +3289,7 @@
                 <div class="path-step-title">AI Anatomiyasi</div>
                 <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="path-step-tile" id="milestone_2" onclick="loadLesson('2_1')">
+              <div class="path-step-tile" id="milestone_2" onclick="loadLesson('2_1', true)">
                 <div class="path-step-head">
                   <span class="path-step-num">2-BOSQICH</span>
                   <span class="path-step-check" id="modCheck_2">⚪</span>
@@ -3164,7 +3297,7 @@
                 <div class="path-step-title">Oltin Prompting</div>
                 <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="path-step-tile" id="milestone_3" onclick="loadLesson('3_1')">
+              <div class="path-step-tile" id="milestone_3" onclick="loadLesson('3_1', true)">
                 <div class="path-step-head">
                   <span class="path-step-num">3-BOSQICH</span>
                   <span class="path-step-check" id="modCheck_3">⚪</span>
@@ -3172,7 +3305,7 @@
                 <div class="path-step-title">AI Vositalar</div>
                 <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="path-step-tile" id="milestone_4" onclick="loadLesson('4_1')">
+              <div class="path-step-tile" id="milestone_4" onclick="loadLesson('4_1', true)">
                 <div class="path-step-head">
                   <span class="path-step-num">4-BOSQICH</span>
                   <span class="path-step-check" id="modCheck_4">⚪</span>
@@ -3180,7 +3313,7 @@
                 <div class="path-step-title">Ish & Daromad</div>
                 <div class="path-step-meta">3 ta dars</div>
               </div>
-              <div class="path-step-tile" id="milestone_5" onclick="loadLesson('5_1')">
+              <div class="path-step-tile" id="milestone_5" onclick="loadLesson('5_1', true)">
                 <div class="path-step-head">
                   <span class="path-step-num">5-BOSQICH</span>
                   <span class="path-step-check" id="modCheck_5">🔒</span>
@@ -3195,6 +3328,20 @@
         <!-- 2. Active Lesson Reading View -->
         <article class="lesson-reading-card" id="lessonArticleCard">
           
+          <!-- Reader Focus Mode Top Action Bar (Makon & Linear Standard) -->
+          <div class="reader-top-action-bar" id="readerTopActionBar" style="display:none;">
+            <button class="btn-back-dashboard" onclick="setClassroomMode('dashboard')" title="Boshqaruv paneliga qaytish">
+              <span style="font-size:14px;">←</span> <span>Boshqaruv Paneli</span>
+            </button>
+            <div class="reader-mode-meta">
+              <span class="reader-mode-pill">
+                <span class="pulse-emerald-dot"></span>
+                <span>Fokus Mutolaa</span>
+              </span>
+              <span class="reader-xp-pill">+50 XP</span>
+            </div>
+          </div>
+
           <!-- Lesson Header -->
           <header class="lesson-article-header">
             <div class="lesson-breadcrumbs">
@@ -4882,6 +5029,8 @@
 
       const progFill = document.getElementById('gamifyProgressFill');
       if (progFill) progFill.style.width = `${pct}%`;
+      const dockProg = document.getElementById('sidebarDockProgress');
+      if (dockProg) dockProg.innerText = `${count} / 14 dars (${pct}%)`;
 
       // CTA button text & icon
       const btnResumeText = document.getElementById('btnResumeCourseText');
@@ -4945,32 +5094,53 @@
       }
     }
 
+    let currentClassroomMode = 'dashboard';
+
+    function setClassroomMode(mode) {
+      currentClassroomMode = mode;
+      const hero = document.getElementById('courseRoadmapHero');
+      const readerBar = document.getElementById('readerTopActionBar');
+      if (mode === 'reader') {
+        if (hero) hero.style.display = 'none';
+        if (readerBar) readerBar.style.display = 'flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const workspace = document.querySelector('.lesson-workspace');
+        if (workspace) workspace.scrollTop = 0;
+      } else {
+        if (hero) hero.style.display = 'block';
+        if (readerBar) readerBar.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const cls = document.getElementById('viewClassroom');
+        if (cls) cls.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     function startOrResumeCourse() {
       if (typeof completedLessons !== 'undefined' && completedLessons.size >= 14) {
         switchPortalTab('certificate');
         return;
       }
+      let targetId = '1_1';
       if (typeof LESSON_SEQUENCE !== 'undefined') {
         for (const id of LESSON_SEQUENCE) {
           if (!completedLessons || !completedLessons.has(id)) {
-            loadLesson(id);
-            if (window.innerWidth <= 960 && typeof setMobileClassroomTab === 'function') {
-              setMobileClassroomTab('reader');
-            }
-            const el = document.getElementById('lessonArticleCard');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            return;
+            targetId = id;
+            break;
           }
         }
       }
-      loadLesson('1_1');
+      loadLesson(targetId, true);
+      setClassroomMode('reader');
+      if (window.innerWidth <= 960 && typeof setMobileClassroomTab === 'function') {
+        setMobileClassroomTab('reader');
+      }
     }
 
     function updateRoadmapMilestones() {
       updateGamificationUI();
     }
 
-    function loadLesson(id) {
+    function loadLesson(id, userTriggered = false) {
       const data = (window.COURSE_DATA && window.COURSE_DATA[id]) || (typeof COURSE_DATA !== 'undefined' ? COURSE_DATA[id] : null);
       if (!data) {
         console.warn('Lesson data not found for id:', id);
@@ -4978,6 +5148,9 @@
       }
 
       currentLessonId = id;
+      if (userTriggered) {
+        setClassroomMode('reader');
+      }
 
       // On mobile devices, ensure we automatically switch to reader view and scroll to top
       if (typeof setMobileClassroomTab === 'function') {
@@ -5076,7 +5249,7 @@
       if (workspace) workspace.scrollTop = 0;
       document.getElementById('readingProgressBar').style.width = '0%';
 
-      toast(`📖 "${data.title}" darsiga o'tildi`);
+      // Lesson switch is seamless; no intrusive toast needed
       saveAppState();
     }
 
@@ -5111,14 +5284,14 @@
     function goToPrevLesson() {
       const idx = LESSON_SEQUENCE.indexOf(currentLessonId);
       if (idx > 0) {
-        loadLesson(LESSON_SEQUENCE[idx - 1]);
+        loadLesson(LESSON_SEQUENCE[idx - 1], true);
       }
     }
 
     function goToNextLesson() {
       const idx = LESSON_SEQUENCE.indexOf(currentLessonId);
       if (idx < LESSON_SEQUENCE.length - 1) {
-        loadLesson(LESSON_SEQUENCE[idx + 1]);
+        loadLesson(LESSON_SEQUENCE[idx + 1], true);
       }
     }
 
@@ -5537,7 +5710,7 @@
           <p style="margin:0;">
             3.1. Har bir rasmiy sertifikat unikal seriya raqami (`GPT-UZ-2026-XXXXX`) va kriptografik QR-kod bilan ta'minlanadi.<br>
             3.2. Sertifikatning haqiqiyligi `gptify.uz/verify` manzili orqali istalgan ish beruvchi, hamkor yoki nazorat qiluvchi shaxs tomonidan real vaqtda tekshirilishi mumkin.<br>
-            3.3. Sertifikat ma'lumotlarini ruxsatsiz o'zgartirish, qalbaki seriya raqamlarini yaratish O'zbekiston Respublikasi qonunchiligiga binoan javobgarlikka sabab bo'ladi.
+            3.3. Sertifikat ma'lumotlarini ruxsatsiz o'zgartirish, qalbaki seriya raqamlarini ishlab chiqish O'zbekiston Respublikasi qonunchiligiga binoan javobgarlikka sabab bo'ladi.
           </p>
         </div>
 

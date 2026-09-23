@@ -4079,6 +4079,32 @@
       }
     }
 
+    // --- EVERGREEN MODEL ADVISOR WIDGET HANDLER ---
+    window.selectModelAdvisor = function(type, btn) {
+      if (btn && btn.parentElement) {
+        const btns = btn.parentElement.querySelectorAll('button');
+        btns.forEach(b => {
+          b.style.background = 'rgba(255,255,255,0.06)';
+          b.style.color = 'var(--text-secondary)';
+          b.style.border = '1px solid var(--border)';
+        });
+        btn.style.background = 'var(--brand-emerald)';
+        btn.style.color = '#fff';
+        btn.style.border = 'none';
+      }
+      const out = document.getElementById('modelAdvisorOutput');
+      if (!out) return;
+      const advices = {
+        b2b: '<b style="color:var(--brand-emerald);">Tavsiya: Anthropic Claude Oilasi (Claude Fable / Sonnet)</b><br>B2B shartnomalar, rasmiy xatlar va nozik hisobotlar uchun Anthropic Claude tili eng tabiiy, professional va xatosiz ishlaydi. Halutsinatsiya xavfi minimal.',
+        reasoning: '<b style="color:#f59e0b;">Tavsiya: Deep Reasoning Modellari (OpenAI o3 / DeepSeek-R1)</b><br>Murakkab mantiq, moliyaviy hisob-kitoblar va dasturlash uchun Chain-of-Thought (ichki fikrlash zanjiri) yurituvchi modellarni tanlang. Ular javobdan oldin o\'z mulohazasini tekshiradi.',
+        massive: '<b style="color:#38bdf8;">Tavsiya: Google Gemini Oilasi (Gemini 3.8 Flash / 3.1 Pro)</b><br>500–1000 betlik ulkan korxona arxivlari, bir yillik moliya hisobotlari yoki video darsliklarni tahlil qilishda 1M–2M+ tokenlik ulkan kontekst oynasiga ega Gemini tengsizdir.',
+        fast: '<b style="color:#10b981;">Tavsiya: Tejamkor Ishchi Modellar (Gemini Flash / Claude Sonnet / GPT-mini)</b><br>Kundalik savol-javoblar, matnlarni qisqartirish, formatlash va tezkor elektron xatlar uchun flagmanlardan foydalanmang. Workhorse toifasidagi modellar 10 barobar tez va 10 barobar arzon ishlaydi.',
+        private: '<b style="color:#a78bfa;">Tavsiya: Ochiq Veb Modellar (DeepSeek V4 / Meta Llama 4)</b><br>Kompaniyangizning maxfiy moliyaviy va mijozlar ma\'lumotlarini bulutga chiqarmasdan, korxona ichki serverida (On-Premises / Ollama) xavfsiz va bepul ishlatish uchun ideal tanlov.'
+      };
+      out.innerHTML = advices[type] || advices.b2b;
+      triggerHaptic('selection');
+    };
+
     // --- ZERO-DEPENDENCY PARTICLES CONFETTI ENGINE ---
     function launchConfetti(options = {}) {
       const canvas = document.getElementById('confettiCanvas');
@@ -5757,7 +5783,7 @@
           "B2B Prompt Engineering & LLM Context Architecture",
           "Avtonom AI Agentlar va Ish Oqimlari (n8n, Make, Webhooks)",
           "RAG (Retrieval-Augmented Generation) & Vektor Baza Integratsiyasi",
-          "OpenAI (o1/GPT-4o), Anthropic (Claude 3.7) & DeepSeek API Ulanishi",
+          "OpenAI (GPT-6/o-Series), Anthropic (Claude Frontier) & DeepSeek API Ulanishi",
           "Maxfiy Lokal LLMlar (Ollama & Privacy-First On-Premises AI)"
         ]
       }

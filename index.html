@@ -1225,11 +1225,15 @@
 
       <!-- Tier 2 -->
       <div class="price-card featured">
-        <div class="featured-ribbon">Eng Ommabop</div>
+        <div class="featured-ribbon">🔥 60% Launch Chegirmasi</div>
         <div>
           <span class="preview-tag">SHAXSIY KABINET (PRO)</span>
-          <div class="price-amount">490 000 <span style="font-size:15px; font-weight:600; color:var(--text-muted);">so'm</span></div>
-          <p style="font-size:13px; color:var(--text-muted);">Bir martalik to'lov · Doimiy yangilanuvchi kabinet</p>
+          <div class="price-amount" style="display:flex; align-items:baseline; gap:10px; margin:14px 0 6px;">
+            <span style="font-size:20px; text-decoration:line-through; color:var(--text-muted); font-weight:600;">490 000</span>
+            <span style="font-size:36px; font-weight:900; color:#059669;">199 000</span>
+            <span style="font-size:15px; font-weight:700; color:var(--text-secondary);">so'm</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-muted);">Ilk 100 ta ishtirokchi uchun bir martalik to'lov · Doimiy yangilanuvchi kabinet</p>
           <ul class="price-features">
             <li>✅ <b>Barcha 5 ta modul va 14 ta amaliy dars</b></li>
             <li>✅ Har bir darsda interaktiv AI vazifa tekshiruvi</li>
@@ -1238,7 +1242,7 @@
             <li>✅ Kelajakdagi yangi modellar darslariga bepul kirish</li>
           </ul>
         </div>
-        <button type="button" onclick="openAppLogin()" class="btn btn-primary" style="width:100%;">🔒 To'liq Kabinetni Ochish →</button>
+        <button type="button" onclick="openAppLogin()" class="btn btn-primary" style="width:100%;">🚀 199 000 so'mga To'liq Kirish →</button>
       </div>
 
       <!-- Tier 3 -->
@@ -1327,29 +1331,28 @@
     </div>
   </footer>
 
-  <!-- App Login Modal -->
+  <!-- App Login Modal (Telegram-First Lead Capture) -->
   <div class="modal-backdrop" id="appLoginModal" onclick="if(event.target===this) closeAppLogin()">
     <div class="login-modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-        <span class="preview-tag">🔒 ACADEMY.GPTIFY.UZ — AVTORIZATSIYA</span>
+        <span class="preview-tag">✈️ TELEGRAM ORQALI BEPUL KIRISH</span>
         <button type="button" onclick="closeAppLogin()" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-muted);">&times;</button>
       </div>
-      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Shaxsiy Kabinetga Kirish</h3>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:18px;">
-        Progressingizni saqlash, uyga vazifalarni tekshirtirish va rasmiy sertifikat olish uchun tizimga kiring:
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Darslarni Bepul Sinab Ko'rish</h3>
+      <p style="font-size:13.5px; color:var(--text-secondary); margin-bottom:16px;">
+        1.1-Dars, Evergreen modellar bo'yicha maslahatchi va interaktiv testlardan foydalanish uchun rasmiy Telegram botimiz orqali kiring:
       </p>
 
-      <button type="button" onclick="loginAndRedirect('Telegram Foydalanuvchi')" class="btn btn-primary" style="width:100%; background:#0284C7; margin-bottom:14px; padding:12px;">
-        ✈️ Telegram orqali 1 soniyada kirish
-      </button>
+      <div style="background:#F0FDF4; border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:12px 14px; margin-bottom:18px; font-size:12.5px; color:#064E3B;">
+        🎁 <b>100% Bepul Tanishuv:</b> Botga ulanishingiz bilan platforma kabineti siz uchun darhol faollashadi.
+      </div>
 
-      <div style="text-align:center; font-size:11.5px; color:var(--text-muted); margin-bottom:14px;">— YOKI TELEFON RAQAM ORQALI —</div>
+      <a href="https://t.me/GPTify_uz_bot?start=academy_free" target="_blank" onclick="loginAndRedirect('Telegram O\'quvchi')" class="btn btn-primary" style="width:100%; background:#0284C7; margin-bottom:12px; padding:14px; font-size:14px; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(2,132,199,0.35);">
+        <span>✈️</span> <span>Telegram orqali 1 soniyada kirish (@GPTify_uz_bot)</span>
+      </a>
 
-      <input type="text" id="loginUserName" class="input-field" placeholder="Ism va familiyangiz (Sertifikat uchun)" >
-      <input type="tel" id="loginUserPhone" class="input-field" placeholder="Telefon raqamingiz (+998 90 ...)" >
-
-      <button type="button" onclick="loginAndRedirect(document.getElementById('loginUserName').value)" class="btn btn-primary" style="width:100%; padding:12px;">
-        🔓 Kabinetni Ochish va Darsga Kirish →
+      <button type="button" onclick="loginAndRedirect('Mehmon O\'quvchi')" class="btn btn-ghost" style="width:100%; font-size:12.5px; padding:10px;">
+        To'g'ridan-to'g'ri darsga o'tish (Saytda davom etish) →
       </button>
     </div>
   </div>

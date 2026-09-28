@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPTify Academy — Rasmiy Logo Kit & Redizayn</title>
+  <link rel="icon" type="image/png" href="assets/logo-kit/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border: #E2E8F0;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --brand-teal: #087F6A;
+      --brand-lime: #B7F34A;
+      --brand-dark: #172B2A;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 36px -4px rgba(15, 23, 42, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-main);
+      padding: 40px 24px 80px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #047857;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .header-title {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: #0F172A;
+    }
+    .header-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 36px;
+    }
+
+    /* Kit Overview Hero */
+    .overview-hero {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .overview-hero-img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+
+    /* 4 Logo Formats Grid */
+    .grid-formats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .format-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .format-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: #CBD5E1;
+    }
+    .card-top {
+      padding: 28px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-top.dark-bg {
+      background: #0F172A;
+      border-bottom-color: #1E293B;
+    }
+    .badge-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .badge-pill.active {
+      background: #ECFDF5;
+      border-color: #A7F3D0;
+      color: #047857;
+    }
+    .logo-display {
+      max-width: 220px;
+      max-height: 110px;
+      object-fit: contain;
+    }
+    .avatar-display {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(8, 127, 106, 0.25);
+    }
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .format-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .format-meta {
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #047857;
+      background: #ECFDF5;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .format-desc {
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .asset-file-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #0F172A;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .file-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #E2E8F0;
+      color: #334155;
+    }
+
+    /* Live Context Simulator (Telegram & Web) */
+    .simulator-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .simulator-grid { grid-template-columns: 1fr; }
+    }
+    .tg-phone-frame {
+      background: #F0F2F5;
+      border-radius: 20px;
+      border: 2px solid #E2E8F0;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    .tg-chat-bar {
+      background: #FFFFFF;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .tg-avatar-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #087F6A;
+    }
+    .tg-info h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tg-info span {
+      font-size: 12px;
+      color: #059669;
+      font-weight: 600;
+    }
+    .tg-messages {
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .tg-bubble {
+      background: #FFFFFF;
+      padding: 12px 14px;
+      border-radius: 14px 14px 14px 4px;
+      font-size: 13px;
+      color: #0F172A;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      max-width: 85%;
+      line-height: 1.45;
+    }
+    .tg-tma-btn {
+      background: #087F6A;
+      color: #FFFFFF;
+      border-radius: 10px;
+      padding: 11px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 800;
+      margin-top: 6px;
+      cursor: pointer;
+    }
+
+    /* Web App Navbar Simulation */
+    .web-frame {
+      background: #FFFFFF;
+      border-radius: 18px;
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .browser-top {
+      background: #0F172A;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #94A3B8;
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .browser-dots { display: flex; gap: 5px; }
+    .browser-dots i { width: 9px; height: 9px; border-radius: 50%; }
+    .browser-nav-demo {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      background: #FFFFFF;
+    }
+    .browser-nav-brand {
+      height: 38px;
+      object-fit: contain;
+    }
+
+    /* Integration Action Banner */
+    .integration-banner {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 28px 36px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .integration-banner h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .integration-banner p {
+      font-size: 13.5px;
+      color: #94A3B8;
+    }
+    .btn-apply-all {
+      background: #10B981;
+      color: #FFFFFF;
+      border: none;
+      padding: 13px 26px;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-apply-all:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-badge">✦ GPTify Academy Official Logo Kit</div>
+    <h1 class="header-title">GPTify Academy — Rasmiy Logo To'plami & Integratsiya</h1>
+    <p class="header-desc">
+      Siz taqdim etgan rasmiy <b>GPTify-Academy-Logo-Kit_1.zip</b> to'plami to'liq arxivdan chiqarildi va tizimga integratsiya qilindi. Ushbu sahifada barcha formatlar va ularning turli muhitlardagi ko'rinishi keltirilgan:
+    </p>
+
+    <!-- OVERVIEW HERO CARD -->
+    <div class="overview-hero">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <span style="font-size:14px; font-weight:800; color:#0F172A;">🖼️ Logo To'plamining To'liq Umumiy Ko'rinishi (Master Overview):</span>
+        <span style="font-size:12px; font-weight:700; color:#047857; background:#ECFDF5; padding:4px 10px; border-radius:6px;">27 ta Asset (SVG, PNG, ICO)</span>
+      </div>
+      <img src="assets/logo-kit/academy-logo-overview.png" alt="Logo Overview" class="overview-hero-img">
+    </div>
+
+    <!-- 4 CORE LOGO ASSETS & APPLICATIONS -->
+    <div class="grid-formats">
+
+      <!-- 1. HORIZONTAL LIGHT LOGO (FOR NAVBAR & HEADER) -->
+      <div class="format-card" style="border: 2px solid #087F6A;">
+        <div class="card-top">
+          <span class="badge-pill active">★ Sayt & WebApp Bosh Qismi</span>
+          <img src="assets/logo-kit/gptify-academy-logo.svg" alt="GPTify Academy Logo" class="logo-display">
+        </div>
+        <div class="card-body">
+          <h2 class="format-title">1. Asosiy Gorizontal Logo</h2>
+          <span class="format-meta">Navbar · Header · Light Surfaces</span>
+          <p class="format-desc">
+            Toza oq va och kulrang fonlar uchun mo'ljallangan to'liq brend yozuvi: Zumrad/Teal akademik qalpoqli <b>"G"</b> belgisi, to'q slanes <b>GPTify</b> va zumrad <b>Academy</b> so'zi.
+          </p>
+          <div class="asset-file-box">
+            <span>assets/logo-kit/gptify-academy-logo.svg</span>
+            <span class="file-tag">SVG (7.3 KB)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. CIRCULAR BOT AVATAR (TELEGRAM BOT & SOCIALS) -->
+      <div class="format-card" style="border: 2px solid #087F6A;">
+        <div class="card-top">
+          <span class="badge-pill active">★ Telegram Bot & Avatar</span>
+          <img src="assets/logo-kit/gptify-academy-avatar-640.png" alt="Telegram Avatar" class="avatar-display">
+        </div>
+        <div class="card-body">
+          <h2 class="format-title">2. Telegram Bot Doira Avatar</h2>
+          <span class="format-meta">@GPTify_uz_bot · 640x640 Avatar Badge</span>
+          <p class="format-desc">
+            Telegram profillari va ijtimoiy tarmoqlar uchun maxsus tayyorlangan 640x640 doira nishon. Markazda oq qalpoqli "G" belgisi va kontrastli "GPTify ACADEMY" yozuvi.
+          </p>
+          <div class="asset-file-box">
+            <span>assets/logo-kit/gptify-academy-avatar-640.png</span>
+            <span class="file-tag">PNG (640x640)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SQUIRCLE APP ICON (TELEGRAM MINI APP & MOBILE) -->
+      <div class="format-card">
+        <div class="card-top">
+          <span class="badge-pill">Mini App Tile</span>
+          <img src="assets/logo-kit/gptify-academy-favicon-512.png" alt="App Icon" style="width:96px; height:96px; border-radius:24px; box-shadow:0 8px 24px rgba(8,127,106,0.2);">
+        </div>
+        <div class="card-body">
+          <h2 class="format-title">3. Squircle App Icon (TMA)</h2>
+          <span class="format-meta">Telegram Mini App · Mobile Launcher · 512px</span>
+          <p class="format-desc">
+            Apple va Android standartidagi yumaloq burchakli (squircle) ilova belgisi. Telegram Mini App ochilganda, iOS Home Screen va PWA sifatida o'rnatilganda ishlatiladi.
+          </p>
+          <div class="asset-file-box">
+            <span>assets/logo-kit/gptify-academy-favicon-512.png</span>
+            <span class="file-tag">PNG (512x512)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. REVERSED LOGO (FOR DARK SURFACES & FOOTERS) -->
+      <div class="format-card">
+        <div class="card-top dark-bg">
+          <span class="badge-pill" style="background:#1E293B; color:#94A3B8; border-color:#334155;">Dark Mode / Footer</span>
+          <img src="assets/logo-kit/gptify-academy-logo-reversed.svg" alt="Reversed Logo" class="logo-display">
+        </div>
+        <div class="card-body">
+          <h2 class="format-title">4. To'q Fonli Logo (Reversed)</h2>
+          <span class="format-meta">Footer · Dark Backgrounds · Pres</span>
+          <p class="format-desc">
+            Veb-saytning to'q slanes fonga ega pastki qismi (Footer `#0F172A`) yoki qora taqdimot slaydlari uchun oq va yorqin firuza rangli kontrastli variant.
+          </p>
+          <div class="asset-file-box">
+            <span>assets/logo-kit/gptify-academy-logo-reversed.svg</span>
+            <span class="file-tag">SVG (7.3 KB)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIVE CONTEXT SIMULATOR -->
+    <div class="simulator-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="font-size:22px; font-weight:800; letter-spacing:-0.02em;">Real Muhitlarda Sinovi (Live Context Simulation)</h2>
+          <p style="font-size:13.5px; color:var(--text-muted); margin-top:4px;">Ushbu logotiplar Telegram botida va veb-platforma navbarida aynan qanday aks etadi:</p>
+        </div>
+        <span style="font-size:12px; font-weight:800; background:#ECFDF5; color:#047857; padding:6px 14px; border-radius:999px;">
+          ✓ Piksel-Aynan Muvofiqlik
+        </span>
+      </div>
+
+      <div class="simulator-grid">
+        <!-- Telegram In-Chat Live View -->
+        <div class="tg-phone-frame">
+          <div class="tg-chat-bar">
+            <img src="assets/logo-kit/gptify-academy-avatar-640.png" alt="Avatar" class="tg-avatar-img">
+            <div class="tg-info">
+              <h4>GPTify Uzbekistan <span style="color:#0284C7;">✓</span></h4>
+              <span>bot · onlayn</span>
+            </div>
+          </div>
+          <div class="tg-messages">
+            <div class="tg-bubble">
+              👋 <b>Assalomu alaykum!</b><br>
+              <b>GPTify AI Academy</b> bepul darslari va amaliy trenajyoriga xush kelibsiz!
+            </div>
+            <div class="tg-bubble" style="background:#ECFDF5; border:1px solid #A7F3D0;">
+              🎉 <b>Tabriklaymiz!</b> Kanal a'zoligingiz tasdiqlandi. 1-Modul darslari ochildi.
+              <div class="tg-tma-btn">🚀 GPTify AI Academy'ni Ochish 📱</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Web App Navbar Live View -->
+        <div class="web-frame">
+          <div class="browser-top">
+            <div class="browser-dots">
+              <i style="background:#EF4444;"></i>
+              <i style="background:#F59E0B;"></i>
+              <i style="background:#10B981;"></i>
+            </div>
+            <span>https://academy.gptify.uz/app.html</span>
+            <span>🔒 SSL Active</span>
+          </div>
+          <div class="browser-nav-demo">
+            <img src="assets/logo-kit/gptify-academy-logo.svg" alt="GPTify Academy" class="browser-nav-brand">
+            <div style="display:flex; gap:8px;">
+              <span style="font-size:11.5px; font-weight:700; background:#F1F5F9; color:#475569; padding:6px 12px; border-radius:8px;">14 ta Dars</span>
+              <span style="font-size:11.5px; font-weight:700; background:#ECFDF5; color:#047857; padding:6px 12px; border-radius:8px;">QR Sertifikat</span>
+            </div>
+          </div>
+          <div style="padding:28px 24px; background:#F8FAFC; text-align:center;">
+            <p style="font-size:13.5px; color:#64748B; line-height:1.6;">
+              Oq va yorug' navbarda logotip to'liq o'qiladi, zumrad rang va to'q slanes harflar eng yuqori darajada nufuzli va rasmiy ta'lim brendi qiyofasini ta'minlaydi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM ACTION CTA -->
+    <div class="integration-banner">
+      <div>
+        <h3>Ushbu rasmiy logotip to'plami sayt va botga to'liq o'rnatilsinmi?</h3>
+        <p>Barcha navbarlar, footerlar, favikonlar va sertifikat muhri ushbu yangi brend bilan darhol yangilanadi.</p>
+      </div>
+      <div>
+        <span style="background:#10B981; color:#fff; font-size:14px; font-weight:800; padding:10px 18px; border-radius:8px; display:inline-block;">
+          ✓ To'plam to'liq integratsiyaga tayyor
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -805,6 +805,560 @@ const COURSE_DATA = {
     "homeworkTitle": "Yakuniy Imtihon: Butun kurs bo'yicha o'z xulosangizni yozib, sertifikatni oching",
     "homeworkDefault": "Men GPTify Academy ning 'Sun'iy Intellekt Asoslari' (AI Foundations) kursining barcha 14 ta darsini to'liq o'zlashtirdim. Oltin formula, vositalar ekotizimi va kundalik odat tizimini o'z amaliyotimga joriy qildim. Rasmiy sertifikat berilishi uchun tasdiqlayman."
   }
+,
+  "c1_1": {
+  "id": "c1_1",
+  "module": "1-Modul: AI Matn & Viral Ssenariylar",
+  "lessonNum": "1.1",
+  "title": "1.1. O'zbekcha 'AI shabloni'dan qutulish: Claude va ChatGPT'ni jonli tilda yozdirish",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Jonli Til Sirlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Amaliy Prompt: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM: SHABLON XATOSI",
+      "avatar": "🤖",
+      "name": "Sun'iy Til Muammosi:",
+      "quote": "Oddiy ChatGPT o'zbek tilida 'Biz sizga taqdim etishdan mamnunmiz...' deb kitobiy, quruq va zerikarli yozadi. Bunday postlarni hech kim o'qimaydi.",
+      "tip": "💡 <b>Oltin Qoida:</b> Modelga quruq buyruq emas, aniq shaxsiyat, ohang va taqiqlangan so'zlar ro'yxatini bering."
+    },
+    {
+      "tag": "2 / 4-QADAM: CLAUDE USTUNLIGI",
+      "avatar": "🎯",
+      "name": "Nega Claude?",
+      "quote": "Anthropic Claude tili ChatGPT ga qaraganda 3 barobar tabiiyroq, nozikroq va samimiy o'zbekcha matn yozadi. B2B va marketing uchun eng zo'r tanlov.",
+      "tip": "💎 <b>Sirlar:</b> Claude ga 'Do'stona, samimiy va lo'nda tilda gapir' deb ko'rsatma bering."
+    },
+    {
+      "tag": "3 / 4-QADAM: TAQIQLAR RO'YXATI",
+      "avatar": "🚫",
+      "name": "Negative Constraints:",
+      "quote": "Modelga 'Bizning kompaniya', 'Xursandmiz', 'Zamonaviy dunyoda' kabi klishe jumlalarni ishlatishni qat'iy taqiqlang.",
+      "tip": "⚠️ <b>Natija:</b> Matn xuddi tirik inson yozgandek o'qimishli bo'ladi."
+    },
+    {
+      "tag": "4 / 4-QADAM: AMALIY FORMULA",
+      "avatar": "🚀",
+      "name": "Jonli Matn Formulari:",
+      "quote": "ROL + AUDIRORIYA + TAQIQLANGAN SO'ZLAR + EMOTSIONAL OHANG.",
+      "tip": "🏆 <b>Yutuq:</b> Reklama va postlarning o'qilish darajasi keskin oshadi."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><div class=\"case-callout\"><h4 style=\"color:var(--brand-emerald); margin-top:0;\">✍️ 1-Qism: Nega Oddiy AI Matnini Hamma Tanib Qoladi?</h4><p>Ko'p odamlar ChatGPT dan post yozishni so'raganda, AI <i>'Bugungi tez rivojlanayotgan dunyoda...'</i> yoki <i>'Biz sizga ajoyib imkoniyatni taqdim etamiz'</i> degan sun'iy so'zlarni ishlatadi. O'zbek kitobxoni bunday matnlardan darhol zerikadi.</p><p><b>Yechim:</b> Modelga aniq personaj va so'zlashuv ohangini singdirish kerak. Claude 3.5 Sonnet yoki ChatGPT 4o bepul versiyasida ham ushbu cheklovlar bilan 100% insoniy matn olish mumkin.</p></div></div>",
+  "quiz": {
+    "question": "AI tomonidan yozilgan o'zbekcha matnni samimiy va jonli qilishning eng samarali usuli qaysi?",
+    "options": [
+      "A) Unga ko'proq kitobiy va murakkab so'zlar ishlatishni aytish.",
+      "B) 'Biz xursandmiz', 'Zamonaviy dunyoda' kabi klishe so'zlarni taqiqlab, do'stona va jonli so'zlashuv ohangini kiritish.",
+      "C) Matnni rus tilidan tarjima qildirish."
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Klishe so'zlarni taqiqlash va jonli ohang berish matnni inson darajasiga olib chiqadi."
+  },
+  "notes": [
+    "<b>Claude ustunligi:</b> O'zbek tilida eng tabiiy va nozik ohangni Anthropic Claude beradi.",
+    "<b>Taqiqlangan so'zlar:</b> AIga qaysi so'zlarni ishlatmaslik kerakligini aytish juda muhim."
+  ],
+  "downloadablePrompt": "Sen o'zbekcha marketing bo'yicha mahoratli kopiraytersan.\nVAZIFA: [Mavzu] bo'yicha ijtimoiy tarmoqlar uchun 1 ta jonli post yoz.\nQAT'IY QOIDALAR:\n1. 'Bugungi kunda', 'Zamonaviy dunyoda', 'Biz taqdim etamiz' kabi klishelarni ISHLATMA.\n2. Go'yo tajribali do'stingiz bilan qahvaxonada suhbatlashayotgandek samimiy, lo'nda va hayotiy yoz.",
+  "homeworkTitle": "Topshiriq: Klishelardan xoli jonli sotuvchi post promptini tuzing",
+  "homeworkDefault": "Men Claude va ChatGPT yordamida o'z biznesim uchun klishelardan xoli, jonli o'zbek tilidagi birinchi marketing postimni yozdim."
+},
+  "c1_2": {
+  "id": "c1_2",
+  "module": "1-Modul: AI Matn & Viral Ssenariylar",
+  "lessonNum": "1.2",
+  "title": "1.2. 3 soniyalik 'Hook'lar va Reels ssenariylari jadvali",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Hook Sirlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Ssenariy Jadvali: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "⏱️",
+      "name": "3 Soniyalik Qoida:",
+      "quote": "Reels yoki TikTok videosining taqdiri birinchi 3 soniyada hal bo'ladi. Agar hook bo'lmasa, tomoshabin barmoq bilan surib yuboradi.",
+      "tip": "💡 Birinchi 3 soniyada kutilmagan savol yoki vizual harakat bo'lishi shart."
+    },
+    {
+      "tag": "2 / 4-QADAM",
+      "avatar": "🎬",
+      "name": "3 Ustunli Jadval:",
+      "quote": "[Vizual kadr] + [Ovozli matn] + [Ekrandagi sarlavha] — har bir soniya rejissura qilinadi.",
+      "tip": "🎯 AI ga ssenariyni matn emas, aynan jadval qilib chiqarishni buyuring."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>ChatGPT va Claude orqali professional 3 ustunli Reels ssenariysi tuzish texnikasi.</p></div>",
+  "quiz": {
+    "question": "Reels videosining birinchi 3 soniyasidagi asosiy vazifa nima?",
+    "options": [
+      "A) Salomlashish va o'zini tanishtirish",
+      "B) Tomoshabin e'tiborini mahkam ushlab, barmoqni to'xtatish (Hook)",
+      "C) Kompaniya tarixini aytish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'ppa-to'g'ri! Hook — tomoshabin barmog'ini to'xtatuvchi yagona triggerdir."
+  },
+  "notes": [
+    "3 soniyalik qoida",
+    "3 ustunli rejissura"
+  ],
+  "downloadablePrompt": "Sen professional viral Reels rejissyorisan. [Mavzu] bo'yicha 30 soniyalik rolik ssenariysini 3 ustunli jadval ko'rinishida yoz: 1. Kadr (Visual) | 2. Spiker gapi (Audio) | 3. Ekrandagi yozuv.",
+  "homeworkTitle": "Topshiriq: 3 ustunli viral ssenariy jadvali tuzing",
+  "homeworkDefault": "Reels ssenariysi jadval ko'rinishida muvaffaqiyatli tayyorlandi."
+},
+  "c1_3": {
+  "id": "c1_3",
+  "module": "1-Modul: AI Matn & Viral Ssenariylar",
+  "lessonNum": "1.3",
+  "title": "1.3. Sotuvchi Karusellar va Telegram postlari formulasi",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Karusel Psixologiyasi: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Slaydlar: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "📑",
+      "name": "Karusel kuchi:",
+      "quote": "Instagramda karusellar bitta rasmga qaraganda 3 barobar ko'proq saqlanadi (Save) va ulashiladi (Share).",
+      "tip": "💡 Har bir slayd keyingi slaydga o'tishga majbur qilishi kerak."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>AIDA va PAS psixologik formulasi orqali 7-10 slayddan iborat karusel matnlarini yozish.</p></div>",
+  "quiz": {
+    "question": "Instagram karuselining oxirgi slaydida nima bo'lishi shart?",
+    "options": [
+      "A) Bo'sh joy",
+      "B) Aniq Call-to-Action (Saqlab oling yoki Izohda yozing)",
+      "C) Faqat rasm"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Oxirgi slayd harakatga chorlovchi (CTA) bo'lishi shart."
+  },
+  "notes": [
+    "Karusel psixologiyasi",
+    "AIDA formulasi"
+  ],
+  "downloadablePrompt": "Menga [Mavzu] bo'yicha 7 slaydlik Instagram karuseli matnini yozib ber. 1-slayd kuchli sarlavha, 2-6 slaydlar amaliy maslahatlar, 7-slayd aniq CTA bo'lsin.",
+  "homeworkTitle": "Topshiriq: 7 slaydlik karusel matnini tayyorlang",
+  "homeworkDefault": "7 slaydlik sotuvchi karusel tayyorlandi."
+},
+  "c2_1": {
+  "id": "c2_1",
+  "module": "2-Modul: Bepul Professional Rasm Generatsiyasi",
+  "lessonNum": "2.1",
+  "title": "2.1. Google Gemini (Imagen 3) bilan fotorealistik rasm olish (0$ Midjourney)",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Imagen 3 Sirlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Rasm Prompti: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "🖼️",
+      "name": "Bepul Imagen 3:",
+      "quote": "Google Gemini bepul interfeysida dunyoning eng ilg'or fotorealistik modeli — Imagen 3 ishlaydi. 0$ xarajat bilan studiya darajasidagi rasmlar olish mumkin.",
+      "tip": "💡 Kamera burchagi (Shot type) va yorug'lik (Lighting) ko'rsatmalarini aniq bering."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Midjourney oyiga $30 turadi. Gemini Imagen 3 esa mutlaqo bepul va o'zbek tilini ham tushunadi. Mahsulot va inson fotorealizmini olish bo'yicha masterklas.</p></div>",
+  "quiz": {
+    "question": "Imagen 3 da professional fotosurat olish uchun qaysi parametrlar eng muhim?",
+    "options": [
+      "A) Faqat 'chiroyli rasm' deb yozish",
+      "B) Kamera linzasi (85mm), yorug'lik turi (soft studio light) va kompozitsiya",
+      "C) Ruscha so'kishlar ishlatish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Professional fotografiya parametrlari AI ga realistik surat chiqarishga yordam beradi."
+  },
+  "notes": [
+    "Gemini Imagen 3 bepul",
+    "Fotografiya parametrlari"
+  ],
+  "downloadablePrompt": "Professional studio product photography of [mahsulot], centered, 85mm f/1.4 lens, cinematic soft studio lighting, ultra-detailed textures, clean background, 8k resolution, award-winning advertising visual.",
+  "homeworkTitle": "Topshiriq: Gemini Imagen 3 orqali birinchi mahsulot fotosessiyangizni oling",
+  "homeworkDefault": "Gemini Imagen 3 orqali 8k sifatdagi fotorealistik mahsulot surati generatsiya qilindi."
+},
+  "c2_2": {
+  "id": "c2_2",
+  "module": "2-Modul: Bepul Professional Rasm Generatsiyasi",
+  "lessonNum": "2.2",
+  "title": "2.2. Grok va Flux orqali brend vizuallari va mahsulot fotosessiyasi",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Flux Imkoniyatlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Vizuallar: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "⚡",
+      "name": "Flux Modeli:",
+      "quote": "Black Forest Labs tomonidan ishlab chiqilgan Flux 1.0 modeli bugungi kunda dunyodagi eng realistik ochiq modeldir.",
+      "tip": "💡 Grok platformasida Flux bepul ishlaydi."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Flux modeli orqali avtomobillar, mebellar va kiyim-kechak fotosessiyalarini virtual tayyorlash.</p></div>",
+  "quiz": {
+    "question": "Flux modelining asosiy ustunligi nimada?",
+    "options": [
+      "A) U faqat matn yozadi",
+      "B) Inson qo'llari, teri fakturasi va yorug'likni g'ayritabiiy darajada realistik chizadi",
+      "C) U pul talab qiladi"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Flux inson anatomiyasi va fakturalarni xatosiz chizish bo'yicha yetakchi."
+  },
+  "notes": [
+    "Flux modeli kuchi",
+    "Grok orqali bepul kirish"
+  ],
+  "downloadablePrompt": "High-end commercial photography of [obyekt], shot on 35mm film, natural rim lighting, sharp focus, hyperrealistic, magazine cover quality.",
+  "homeworkTitle": "Topshiriq: Flux orqali brend vizualini sinab ko'ring",
+  "homeworkDefault": "Flux yordamida fotorealistik reklama vizuali olindi."
+},
+  "c2_3": {
+  "id": "c2_3",
+  "module": "2-Modul: Bepul Professional Rasm Generatsiyasi",
+  "lessonNum": "2.3",
+  "title": "2.3. ChatGPT (DALL-E 3) bilan to'g'ri yozuvli bannerlar",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 DALL-E 3 Matnlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Banner: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "🔤",
+      "name": "Matnli Rasmlar:",
+      "quote": "Ko'p AI modellar rasm ichida harflarni xato yozadi. DALL-E 3 esa qisqa sarlavhalarni to'g'ri joylashtira oladi.",
+      "tip": "💡 Matnni qo'shtirnoq ichida bering: 'SAVE 50%' deb."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>ChatGPT bepul interfeysidagi DALL-E 3 bilan ijtimoiy tarmoq bannerlari, piktogrammalar va tipografik plakatlar yaratish.</p></div>",
+  "quiz": {
+    "question": "DALL-E 3 da rasm ichiga matn yozdirishning to'g'ri qoidasi qaysi?",
+    "options": [
+      "A) Matnni aytmaslik",
+      "B) Matnni qo'shtirnoq ichida aniq ko'rsatish: The text \"AKSIYA\" written in bold",
+      "C) Harflarni alohida aytish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Qo'shtirnoq ichidagi qisqa so'zlar eng aniq chiqadi."
+  },
+  "notes": [
+    "Matnli bannerlar",
+    "DALL-E 3 tipografiyasi"
+  ],
+  "downloadablePrompt": "Modern advertising poster for [brend]. Minimalist layout, bold typography reading \"[SO'Z]\", vibrant palette, sleek composition.",
+  "homeworkTitle": "Topshiriq: To'g'ri matnli reklama posteri oling",
+  "homeworkDefault": "To'g'ri yozuvli reklama banneri muvaffaqiyatli olindi."
+},
+  "c2_4": {
+  "id": "c2_4",
+  "module": "2-Modul: Bepul Professional Rasm Generatsiyasi",
+  "lessonNum": "2.4",
+  "title": "2.4. Barcha rasmlarda bitta qahramon va brend uslubini saqlash",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Consistency Sirlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Qahramon: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "👤",
+      "name": "Bitta qahramon siri:",
+      "quote": "Har safar yangi odam chiqmasligi uchun unga aniq kiyim, yosh, soch rangi va doimiy nishonlar beriladi.",
+      "tip": "💡 Referens rasmni keyingi buyruqqa qo'shib yuborish (Image-to-Image)."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>ShopirGo'dagi Shokir aka misolida ko'rganimizdek, bitta qahramonni barcha vaziyatlarda o'zgartirmasdan olib yurish formulasi.</p></div>",
+  "quiz": {
+    "question": "AI rasmida bitta xarakterni saqlab qolish uchun nima qilish kerak?",
+    "options": [
+      "A) Har safar har xil yozish",
+      "B) Birinchi rasmni referens sifatida kiritib, bir xil xususiyatlar (kiyim, yosh, ko'zoynak)ni takrorlash",
+      "C) Boshqa modelga o'tish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Aniq parametrlar va referens surat qahramon yuzini saqlab qoladi."
+  },
+  "notes": [
+    "Character consistency",
+    "Brend uslubi yaxlitligi"
+  ],
+  "downloadablePrompt": "The exact same character as reference: [tavsif]. Same facial structure, same clothing, but now in [yangi vaziyat]. Maintain 100% visual consistency.",
+  "homeworkTitle": "Topshiriq: 1 ta qahramonning 2 xil emotsiyasini oling",
+  "homeworkDefault": "Bir xil qahramonning 2 ta uzviy rasmi olindi."
+},
+  "c3_1": {
+  "id": "c3_1",
+  "module": "3-Modul: Taqdimot va Slaydlar (Canva & Gammasiz)",
+  "lessonNum": "3.1",
+  "title": "3.1. Claude Artifacts: 1 daqiqada brauzerda animatsiyali slaydlar",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Claude Slaydlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Prezentatsiya: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "📊",
+      "name": "Gamma sotib olmang:",
+      "quote": "Claude Artifacts orqali brauzerda to'g'ridan-to'g'ri interaktiv, tugmali, zamonaviy HTML taqdimot slaydlarini olish mumkin.",
+      "tip": "💡 Har qanday brauzerda ochiladi va proyektorda ko'rsatsa bo'ladi."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Canva Pro yoki Gamma oylik obunasini to'lamasdan, Claude orqali yuqori darajadagi boshqaruv taqdimotlarini yig'ish sirlari.</p></div>",
+  "quiz": {
+    "question": "Claude Artifacts orqali qanday taqdimot olish mumkin?",
+    "options": [
+      "A) Faqat matnli fayl",
+      "B) To'liq interaktiv, slaydlari o'tadigan, animatsiyali veb-taqdimot",
+      "C) Hech qanday"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Claude Artifacts jonli veb-slaydlar generatsiya qiladi."
+  },
+  "notes": [
+    "Claude Artifacts kuchi",
+    "0$ taqdimot ekotizimi"
+  ],
+  "downloadablePrompt": "Menga [Mavzu] bo'yicha 10 slayddan iborat interaktiv HTML taqdimot yaratib ber. Zamonaviy yorug' dizayn, slaydlar chap/o'ng tugmalar bilan o'tsin, grafiklar chiroyli chiqsin.",
+  "homeworkTitle": "Topshiriq: Claude orqali birinchi jonli taqdimotingizni oling",
+  "homeworkDefault": "Claude Artifacts yordamida interaktiv taqdimot olindi."
+},
+  "c3_2": {
+  "id": "c3_2",
+  "module": "3-Modul: Taqdimot va Slaydlar (Canva & Gammasiz)",
+  "lessonNum": "3.2",
+  "title": "3.2. ChatGPT + Marp / Markdown: 15 ta slaydni PowerPoint ga o'girish",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Marp Texnikasi: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ PPTX: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "📑",
+      "name": "Markdown dan PPTX ga:",
+      "quote": "ChatGPT ga slaydlar tuzilmasini Markdown formatida yozdirib, uni 1 soniyada PowerPoint (.pptx) ga o'tkazish mumkin.",
+      "tip": "💡 Soatlab Powerpointda qo'lda matn ko'chirib o'tirishga chek qo'ying."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Buxgalteriya va hisobot taqdimotlarini avtomatlashtirish texnikasi.</p></div>",
+  "quiz": {
+    "question": "Marp/Markdown orqali slayd qilishning asosiy ustunligi nima?",
+    "options": [
+      "A) Qimmat pullik servis",
+      "B) 10 barobar tezroq, soatlab nusxalamasdan to'g'ridan-to'g'ri PPTX ga o'tish",
+      "C) Faqat bitta rang bo'lishi"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Bu taqdimot tayyorlash vaqtini 80% ga qisqartiradi."
+  },
+  "notes": [
+    "Markdown to PowerPoint",
+    "Tezkor B2B slaydlar"
+  ],
+  "downloadablePrompt": "Ushbu ma'lumotlar asosida 12 ta slayd uchun Marp Markdown formatida taqdimot kodi yozib ber. Har bir slayd '---' bilan ajratilsin.",
+  "homeworkTitle": "Topshiriq: Markdown dan PowerPoint tayyorlang",
+  "homeworkDefault": "Markdown asosida PPTX slaydlar olindi."
+},
+  "c3_3": {
+  "id": "c3_3",
+  "module": "3-Modul: Taqdimot va Slaydlar (Canva & Gammasiz)",
+  "lessonNum": "3.3",
+  "title": "3.3. B2B Tijoriy Taklif (Pitch Deck) va Mijoz taqdimotlari",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Pitch Deck Formulari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Taklif: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "💼",
+      "name": "B2B Taklif:",
+      "quote": "Mijoz sizdan narx va taklif so'raganda 10 daqiqada uning muammosiga mos taklifnoma yuborish.",
+      "tip": "💡 Muammo -> Yechim -> ROI -> Narx -> Keyingi qadam."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Kompaniyalarga xizmat va mahsulot sotishda 10 sahifalik g'olib tijoriy taklif tuzilmasi.</p></div>",
+  "quiz": {
+    "question": "B2B tijoriy taklifda eng birinchi nima ko'rsatilishi kerak?",
+    "options": [
+      "A) Kompaniyangiz qachon ochilgani",
+      "B) Mijozning og'riqli muammosi va uni hal qilishning moliyaviy foydasi (ROI)",
+      "C) Hisob raqami"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Mijoz o'z muammosini va foydasini birinchi ko'rishi kerak."
+  },
+  "notes": [
+    "B2B Pitch Deck",
+    "Sotuvchi tuzilma"
+  ],
+  "downloadablePrompt": "Menga [Kompaniya nomi] uchun B2B tijoriy taklifnomasi tuzilmasini yozib ber. Mijoz muammosi: [Muammo], Bizning yechim: [Yechim].",
+  "homeworkTitle": "Topshiriq: Mijoz uchun B2B tijoriy taklif loyihasini tuzing",
+  "homeworkDefault": "B2B tijoriy taklifnoma loyihasi tayyorlandi."
+},
+  "c4_1": {
+  "id": "c4_1",
+  "module": "4-Modul: AI Video Kontent va Montaj",
+  "lessonNum": "4.1",
+  "title": "4.1. Gemini Multimodal Video: Raqobatchilar videosini dekonstruksiya qilish",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Video Tahlil: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Dekonstruksiya: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "👁️",
+      "name": "Gemini Ko'zlari:",
+      "quote": "Google Gemini butun videoni soniyama-soniya tushuna oladi. Unga viral videoni yuklab, nega ko'rilganini tahlil qildirishingiz mumkin.",
+      "tip": "💡 2M tokenlik kontekst butun videoni qamrab oladi."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Raqobatchining eng zo'r videosini olib, uning ritmi, kadrlar almashishi va matnini tahlil qilib, o'z brendingizga moslashtirish.</p></div>",
+  "quiz": {
+    "question": "Gemini multimodal imkoniyatidan video uchun qanday foydalaniladi?",
+    "options": [
+      "A) Faqat rasm yuklab",
+      "B) Videoni yuklab, uning har bir soniyasidagi harakatlar, ovoz va psixologik usullarini tahlil qildirish",
+      "C) Qo'shiq aytish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Gemini videoni to'liq ko'rib, tahlil qilib bera oladi."
+  },
+  "notes": [
+    "Multimodal video tahlil",
+    "Raqobatchilardan o'rganish"
+  ],
+  "downloadablePrompt": "Ushbu videoni to'liq tahlil qil. Birinchi 3 soniyada nima qilingan? Nega tomoshabin oxirigacha ko'rgan? Ssenariyning qaysi qismlarini o'z biznesimga qo'llasak bo'ladi?",
+  "homeworkTitle": "Topshiriq: 1 ta viral videoni Gemini bilan tahlil qiling",
+  "homeworkDefault": "Viral video tahlil qilindi va o'zbekcha formatga moslandi."
+},
+  "c4_2": {
+  "id": "c4_2",
+  "module": "4-Modul: AI Video Kontent va Montaj",
+  "lessonNum": "4.2",
+  "title": "4.2. Rasmdan video (Image-to-Video): Kling va Luma bepul imkoniyatlari",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 AI Video Sirlari: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Harakat: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "🎥",
+      "name": "Statik rasmni harakatlantirish:",
+      "quote": "Oddiy mahsulot yoki inson rasmini Kling AI va Luma orqali jonli cinematic videoga aylantirish.",
+      "tip": "💡 Kamera harakati: Slow cinematic zoom-in, drone shot."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Bepul kreditlardan oqilona foydalanib, 5 soniyalik dinamik roliklar generatsiya qilish.</p></div>",
+  "quiz": {
+    "question": "Image-to-Video da eng yaxshi natijaga qanday erishiladi?",
+    "options": [
+      "A) Rasm sifati past bo'lsa ham bo'laveradi",
+      "B) Avval yuqori sifatli toza rasm tanlanib, unga aniq kamera harakati ko'rsatiladi",
+      "C) Hech narsa yozmaslik"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Boshlang'ich rasm sifati va kamera buyrug'i hal qiladi."
+  },
+  "notes": [
+    "Kling AI",
+    "Luma Dream Machine"
+  ],
+  "downloadablePrompt": "Slow cinematic drone flight backwards, subtle camera motion, natural sunlight passing through, 4k quality, seamless motion.",
+  "homeworkTitle": "Topshiriq: 1 ta statik rasmdan jonli video oling",
+  "homeworkDefault": "Rasmdan video generatsiya qilindi."
+},
+  "c4_3": {
+  "id": "c4_3",
+  "module": "4-Modul: AI Video Kontent va Montaj",
+  "lessonNum": "4.3",
+  "title": "4.3. CapCut Konveyeri: AI materiallarni telefonda 5 daqiqada yig'ish",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 CapCut Konveyeri: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Montaj: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "📱",
+      "name": "Telefonda yakunlash:",
+      "quote": "Generatsiya qilingan AI rasmlar + AI ovoz + bepul CapCut da avtomatik dinamik subtitrlar.",
+      "tip": "💡 Barcha ish 5 daqiqada telefonda bitadi."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Tayyor kontent konveyerini yo'lga qo'yish: haftasiga 10 ta rolikni oson chiqarish.</p></div>",
+  "quiz": {
+    "question": "CapCut dagi avtomatik subtitrlar nima uchun muhim?",
+    "options": [
+      "A) Odamlar ovozsiz ko'rganda ham matnni o'qib, videoda qolishi uchun",
+      "B) Shunchaki bezak uchun",
+      "C) Qoidalar talab qilgani uchun"
+    ],
+    "correctIndex": 0,
+    "explanation": "To'g'ri! 70% odamlar ijtimoiy tarmoqda videolarni ovozsiz tomosha qiladi."
+  },
+  "notes": [
+    "CapCut avtomatik subtitrlar",
+    "Tezkor mobil konveyer"
+  ],
+  "downloadablePrompt": "Ushbu video uchun dinamik, qisqa 2-3 so'zli subtitrlar ro'yxatini va ovoz urg'ularini tayyorlab ber.",
+  "homeworkTitle": "Topshiriq: AI rasm va subtitr bilan birinchi to'liq rolikni yig'ing",
+  "homeworkDefault": "CapCut da to'liq 30 soniyalik video montaj qilindi."
+},
+  "c5_1": {
+  "id": "c5_1",
+  "module": "5-Modul: Monetizatsiya & Sertifikat",
+  "lessonNum": "5.1",
+  "title": "5.1. Oyiga $300-$1000 lik SMM / Kontent xizmati ko'rsatish yo'l xaritasi",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Frilans Xaritasi: 7 daqiqa · 🧠 Bilim tekshiruvi: 2 daqiqa · ⚡ Mijoz topish: 6 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "💰",
+      "name": "Xizmat sotish:",
+      "quote": "Kompaniyalarga 'Men AI bilan haftasiga 5 ta Reels, 10 ta post va karusel tayyorlab beraman' deb aniq paket sotish.",
+      "tip": "💡 Siz ularga texnologiya emas, vaqt va yangi mijoz sotasiz."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>O'zbekistonda kafe, restoran, xususiy klinikalar va o'quv markazlariga AI kontent paketlarini taklif qilish strategiyasi.</p></div>",
+  "quiz": {
+    "question": "Mijozga xizmat taklif qilganda asosiy urg'u nima bo'lishi kerak?",
+    "options": [
+      "A) 'Men qanday qiyin prompt yozaman'",
+      "B) 'Men sizning biznesingizga yangi mijozlar olib keluvchi muntazam professional kontentni tez yetkazaman'",
+      "C) Faqat chegirma berish"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Mijozni sizning promptlaringiz emas, o'zining biznes natijasi qiziqtiradi."
+  },
+  "notes": [
+    "B2B mijoz topish",
+    "Paket narxlar belgilash"
+  ],
+  "downloadablePrompt": "Kichik biznes egasiga yo'llanadigan sovuq taklif xati: 'Salom, [Kompaniya]. Sizning sahifangizni ko'rib chiqdim va mijozlar oqimini oshiruvchi 3 ta video g'oyani tayyorlab qo'ydim...'",
+  "homeworkTitle": "Topshiriq: O'z xizmatingiz uchun narx va xizmat paketi tuzing",
+  "homeworkDefault": "AI kontent xizmatlari paketi tayyorlandi."
+},
+  "c5_2": {
+  "id": "c5_2",
+  "module": "5-Modul: Monetizatsiya & Sertifikat",
+  "lessonNum": "5.2",
+  "title": "5.2. Yakuniy Portfolio Loyihasi & Malaka Sertifikati",
+  "duration": "15 daqiqa",
+  "timeBudget": "📖 Xulosa: 5 daqiqa · 🧠 Imtihon: 5 daqiqa · 🏆 Sertifikat: 5 daqiqa",
+  "storyboard": [
+    {
+      "tag": "1 / 4-QADAM",
+      "avatar": "🎓",
+      "name": "Tabriklaymiz!",
+      "quote": "Siz AI Kontent Fabrikasi kursining barcha 15 ta darsini to'liq o'rganib chiqdingiz!",
+      "tip": "🏆 Siz endi 0$ qo'shimcha xarajat bilan to'liq marketing media ishlab chiqara olasiz."
+    }
+  ],
+  "deepDive": "<div class=\"deep-dive-article\"><p>Yakuniy portfolio tekshiruvi va rasmiy SHA-256 QR-Sertifikatini yuklab olish.</p></div>",
+  "quiz": {
+    "question": "AI bilan sifatli kontent ishlab chiqarishning oltin formulasiga nimalar kiradi?",
+    "options": [
+      "A) Faqat bitta modelga cheklanish",
+      "B) Matn (Claude/GPT) + Fotorealistik rasm (Gemini Imagen 3/Flux) + Video rejissura + Mobil montaj",
+      "C) Hech narsa"
+    ],
+    "correctIndex": 1,
+    "explanation": "To'g'ri! Multimodal yondashuv to'liq kontent fabrikasini qurish imkonini beradi."
+  },
+  "notes": [
+    "To'liq media kompetentsiya",
+    "Rasmiy sertifikat"
+  ],
+  "downloadablePrompt": "Sen Bosh Kontent Strategisan. Kompaniyaning 1 oylik media rejasini tasdiqla.",
+  "homeworkTitle": "Yakuniy Imtihon: Butun kurs bo'yicha xulosa va sertifikatni tasdiqlang",
+  "homeworkDefault": "Men 'AI Kontent Fabrikasi' kursining barcha 15 ta darsini to'liq o'zlashtirdim. Sertifikatni tasdiqlayman."
+}
 };
 
 // Ensure global attachment for both standard scripts and modules
@@ -814,3 +1368,273 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = COURSE_DATA;
 }
+
+
+const COURSES_CONFIG = {
+  "ai_foundations": {
+    "id": "ai_foundations",
+    "title": "Sun'iy Intellekt Asoslari",
+    "badge": "AI ASOSLARI (14 TA DARS)",
+    "subBadge": "100% Amaliy",
+    "totalLessons": 14,
+    "firstLessonId": "1_1",
+    "modules": [
+      {
+        "id": "modCard_1",
+        "title": "1-Modul: AI Anatomiyasi & Fikrlash",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "1_1",
+            "num": "1.1",
+            "title": "1.1. LLM qanday fikrlaydi? (GPT vs Claude vs Gemini vs Fikrlovchi Modellar)",
+            "dur": "15 daq"
+          },
+          {
+            "id": "1_2",
+            "num": "1.2",
+            "title": "1.2. Tokenlar, xotira va Context Window",
+            "dur": "15 daq"
+          },
+          {
+            "id": "1_3",
+            "num": "1.3",
+            "title": "1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "modCard_2",
+        "title": "2-Modul: Oltin Formula: Prompt Muhandisligi",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "2_1",
+            "num": "2.1",
+            "title": "2.1. Oltin Formula: ROL + KONTEKST + VAZIFA + FORMAT",
+            "dur": "15 daq"
+          },
+          {
+            "id": "2_2",
+            "num": "2.2",
+            "title": "2.2. Few-Shot va Chain-of-Thought texnikasi",
+            "dur": "15 daq"
+          },
+          {
+            "id": "2_3",
+            "num": "2.3",
+            "title": "2.3. Meta-Prompting: AI orqali prompt yozdirish",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "modCard_3",
+        "title": "3-Modul: Har Bir Vazifa Uchun To'g'ri Vosita",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "3_1",
+            "num": "3.1",
+            "title": "3.1. Matn va Qidiruv: ChatGPT vs Claude vs Perplexity",
+            "dur": "15 daq"
+          },
+          {
+            "id": "3_2",
+            "num": "3.2",
+            "title": "3.2. Taqdimot va Vizual: Gamma App va Canva",
+            "dur": "15 daq"
+          },
+          {
+            "id": "3_3",
+            "num": "3.3",
+            "title": "3.3. Ovoz va Tahrir: ElevenLabs va Descript",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "modCard_4",
+        "title": "4-Modul: AI'ni Ish va Daromadga Aylantirish",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "4_1",
+            "num": "4.1",
+            "title": "4.1. 15 Daqiqalik Odat: Ertalab, Kunduzi, Kechqurun",
+            "dur": "15 daq"
+          },
+          {
+            "id": "4_2",
+            "num": "4.2",
+            "title": "4.2. Xizmatlarni 10x Tezlashtirish: SMM & Reels",
+            "dur": "15 daq"
+          },
+          {
+            "id": "4_3",
+            "num": "4.3",
+            "title": "4.3. Eyzenxauer Matritsasi: 10 Soat Tejash",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "modCard_5",
+        "title": "5-Modul: Yakuniy Loyiha & Rasmiy Sertifikat",
+        "tag": "2 dars",
+        "lessons": [
+          {
+            "id": "5_1",
+            "num": "5.1",
+            "title": "5.1. Shaxsiy AI Ishchi Tizimi (Portfolio Loyihasi)",
+            "dur": "15 daq"
+          },
+          {
+            "id": "5_2",
+            "num": "5.2",
+            "title": "5.2. Yakuniy Imtihon & Rasmiy Sertifikatni Olish!",
+            "dur": "15 daq"
+          }
+        ]
+      }
+    ]
+  },
+  "content_creator": {
+    "id": "content_creator",
+    "title": "AI Kontent Fabrikasi: Rasm, Video & Matn",
+    "badge": "AI KONTENT FABRIKASI (15 TA DARS)",
+    "subBadge": "0$ Obunalar",
+    "totalLessons": 15,
+    "firstLessonId": "c1_1",
+    "modules": [
+      {
+        "id": "cmodCard_1",
+        "title": "1-Modul: AI Matn & Viral Ssenariylar",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "c1_1",
+            "num": "1.1",
+            "title": "1.1. O'zbekcha 'AI shabloni'dan qutulish: Claude va ChatGPT",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c1_2",
+            "num": "1.2",
+            "title": "1.2. 3 soniyalik 'Hook'lar va Reels ssenariylari jadvali",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c1_3",
+            "num": "1.3",
+            "title": "1.3. Sotuvchi Karusellar va Telegram postlari formulasi",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "cmodCard_2",
+        "title": "2-Modul: Bepul Professional Rasm Generatsiyasi",
+        "tag": "4 dars",
+        "lessons": [
+          {
+            "id": "c2_1",
+            "num": "2.1",
+            "title": "2.1. Google Gemini (Imagen 3) bilan fotorealizm (0$ Midjourney)",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c2_2",
+            "num": "2.2",
+            "title": "2.2. Grok va Flux orqali brend vizuallari va mahsulot fotosessiyasi",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c2_3",
+            "num": "2.3",
+            "title": "2.3. ChatGPT (DALL-E 3) bilan to'g'ri yozuvli bannerlar",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c2_4",
+            "num": "2.4",
+            "title": "2.4. Barcha rasmlarda bitta qahramon va brend uslubini saqlash",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "cmodCard_3",
+        "title": "3-Modul: Taqdimot va Slaydlar (Canva & Gammasiz)",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "c3_1",
+            "num": "3.1",
+            "title": "3.1. Claude Artifacts: 1 daqiqada brauzerda animatsiyali slaydlar",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c3_2",
+            "num": "3.2",
+            "title": "3.2. ChatGPT + Marp / Markdown: 15 ta slaydni PowerPoint ga o'girish",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c3_3",
+            "num": "3.3",
+            "title": "3.3. B2B Tijoriy Taklif (Pitch Deck) va Mijoz taqdimotlari",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "cmodCard_4",
+        "title": "4-Modul: AI Video Kontent va Montaj",
+        "tag": "3 dars",
+        "lessons": [
+          {
+            "id": "c4_1",
+            "num": "4.1",
+            "title": "4.1. Gemini Multimodal Video: Raqobatchilar videosini dekonstruksiya qilish",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c4_2",
+            "num": "4.2",
+            "title": "4.2. Rasmdan video (Image-to-Video): Kling va Luma bepul imkoniyatlari",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c4_3",
+            "num": "4.3",
+            "title": "4.3. CapCut Konveyeri: AI materiallarni telefonda 5 daqiqada yig'ish",
+            "dur": "15 daq"
+          }
+        ]
+      },
+      {
+        "id": "cmodCard_5",
+        "title": "5-Modul: Monetizatsiya & Sertifikat",
+        "tag": "2 dars",
+        "lessons": [
+          {
+            "id": "c5_1",
+            "num": "5.1",
+            "title": "5.1. Oyiga $300-$1000 lik SMM / Kontent xizmati ko'rsatish yo'l xaritasi",
+            "dur": "15 daq"
+          },
+          {
+            "id": "c5_2",
+            "num": "5.2",
+            "title": "5.2. Yakuniy Portfolio Loyihasi & Malaka Sertifikati",
+            "dur": "15 daq"
+          }
+        ]
+      }
+    ]
+  }
+};
+
+if (typeof window !== 'undefined') { window.COURSES_CONFIG = COURSES_CONFIG; }

@@ -2134,6 +2134,25 @@
       border: 1px solid rgba(5, 150, 105, 0.25);
     }
     
+    .sidebar-course-select {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text);
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+    .sidebar-course-select:focus, .sidebar-course-select:hover {
+      border-color: var(--brand-emerald);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+    }
     .sidebar-header-row {
       display: flex;
       justify-content: space-between;
@@ -3027,6 +3046,88 @@
       from { opacity: 0; transform: translateY(12px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+
+    /* --- STUDENT ONBOARDING & SIGNUP MODAL --- */
+    .onboard-modal-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      max-width: 480px;
+      width: 92%;
+      padding: 32px 28px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+      position: relative;
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+    }
+    .onboard-input-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .onboard-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .onboard-hint {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+    .onboard-input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-card);
+      color: var(--text);
+      transition: all 0.2s ease;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .onboard-input:focus {
+      outline: none;
+      border-color: var(--brand-emerald);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+    .onboard-select {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-card);
+      color: var(--text);
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .profile-dropdown-card {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: 290px;
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      padding: 16px;
+      z-index: 1000;
+      display: none;
+      text-align: left;
+      animation: fadeInDown 0.2s ease;
+      box-sizing: border-box;
+    }
+    .profile-dropdown-card.show {
+      display: block;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 </head>
 <body>
@@ -3112,7 +3213,54 @@
         </button>
 
         <!-- Student Avatar Circle -->
-        <div class="nav-avatar-btn" id="topStudentAvatar" onclick="switchPortalTab('certificate')" title="Profilingiz & Sertifikat">SI</div>
+                <!-- Student Avatar Circle & Dropdown -->
+        <div style="position:relative; display:flex; align-items:center; gap:8px;">
+          <span id="topStudentName" onclick="toggleProfileDropdown()" style="font-size:12.5px; font-weight:700; color:var(--text); cursor:pointer; display:inline-block;" title="Profil sozlamalari">Talaba</span>
+          <div class="nav-avatar-btn" id="topStudentAvatar" onclick="toggleProfileDropdown()" title="Profilingiz & Sozlamalar">SI</div>
+
+          <div id="studentProfileDropdown" class="profile-dropdown-card">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+              <div id="dropdownAvatarInitial" style="width:40px; height:40px; border-radius:50%; background:var(--brand-emerald); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px;">
+                SI
+              </div>
+              <div style="overflow:hidden; flex:1;">
+                <div id="dropdownStudentName" style="font-weight:900; font-size:14px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  Talaba
+                </div>
+                <div id="dropdownStudentRole" style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;">
+                  🏢 Tadbirkor / Biznes egasi
+                </div>
+              </div>
+            </div>
+
+            <div style="background:var(--bg-subtle); border-radius:10px; padding:10px 12px; margin-bottom:12px; font-size:12px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="color:var(--text-secondary);">Faol kurs:</span>
+                <b id="dropdownActiveCourseName" style="color:var(--text);">Sun'iy Intellekt Asoslari</b>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="color:var(--text-secondary);">O'zlashtirish:</span>
+                <b id="dropdownCompletedCount" style="color:var(--brand-emerald);">0 / 14 dars (0%)</b>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-secondary);">To'plangan XP:</span>
+                <b id="dropdownPoints" style="color:#D97706;">0 XP</b>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button onclick="switchPortalTab('certificate'); closeProfileDropdown();" class="btn-cert-secondary" style="width:100%; justify-content:flex-start; padding:8px 12px; font-size:12px; border-radius:8px;">
+                <span>🎓</span> <span>Mening Sertifikatim</span>
+              </button>
+              <button onclick="openOnboardingModal(true); closeProfileDropdown();" class="btn-cert-secondary" style="width:100%; justify-content:flex-start; padding:8px 12px; font-size:12px; border-radius:8px;">
+                <span>✏️</span> <span>Profilni Tahrirlash</span>
+              </button>
+              <button onclick="confirmResetUser(); closeProfileDropdown();" style="width:100%; display:flex; align-items:center; gap:8px; background:none; border:none; color:#DC2626; padding:8px 12px; font-size:11.5px; font-weight:700; cursor:pointer; text-align:left; border-radius:8px; transition:background 0.2s;">
+                <span>🔄</span> <span>Yangi Talaba (Qayta boshlash)</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -3137,14 +3285,22 @@
       </button>
     </div>
     
-    <!-- Left Curriculum Drawer (Accordion UX) -->
+    <!-- Left Curriculum Drawer (Dynamic Course-Scoped Sidebar) -->
     <aside class="curriculum-sidebar">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:0 4px;">
-        <span style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em;">
-          AI ASOSLARI (14 TA DARS)
-        </span>
-        <span style="font-size:10px; color:var(--teal-light); font-weight:700;">100% Amaliy</span>
+      <!-- Course Switcher & Header -->
+      <div style="margin-bottom:12px; padding:0 2px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:10.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em;" id="sidebarCourseBadge">
+            AI ASOSLARI (14 TA DARS)
+          </span>
+          <span style="font-size:10px; color:var(--teal-light); font-weight:700;" id="sidebarCourseSubBadge">100% Amaliy</span>
+        </div>
+        <select id="sidebarCourseSelect" class="sidebar-course-select" onchange="switchActiveCourse(this.value)">
+          <option value="ai_foundations">🧠 Sun'iy Intellekt Asoslari (14 Dars)</option>
+          <option value="content_creator">🎨 AI Kontent Fabrikasi (15 Dars)</option>
+        </select>
       </div>
+
       <!-- Sticky Quick Search & Filter -->
       <div class="sidebar-search-wrap">
         <div style="position:relative;">
@@ -3154,170 +3310,12 @@
         </div>
       </div>
 
-      <!-- Module 1: AI Anatomiyasi -->
-      <div class="module-card" id="modCard_1">
-        <div class="module-head" onclick="toggleModule('modCard_1')">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span>1-Modul: AI Anatomiyasi & Fikrlash</span>
-            <span class="module-arrow">▼</span>
-          </div>
-          <span class="tag">3 dars</span>
-        </div>
-        <div class="module-body">
-          <div class="lesson-item active" onclick="loadLesson('1_1', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">1.1</span>
-              <span class="lesson-item-title">1.1. LLM qanday fikrlaydi? (GPT vs Claude vs Gemini vs Fikrlovchi Modellar)</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('1_2', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">1.2</span>
-              <span class="lesson-item-title">1.2. Tokenlar, xotira va Context Window</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('1_3', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">1.3</span>
-              <span class="lesson-item-title">1.3. Maxfiylik: Korporativ ma'lumotlarni himoyalash</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-        </div>
+      <!-- Dynamic Modules List (Populated only for active course) -->
+      <div id="sidebarModulesList" style="display:flex; flex-direction:column; gap:6px;">
+        <!-- Injected via renderCourseSidebar() -->
       </div>
 
-      <!-- Module 2: Prompt Engineering -->
-      <div class="module-card collapsed" id="modCard_2">
-        <div class="module-head" onclick="toggleModule('modCard_2')">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span>2-Modul: Oltin Formula: Prompt Muhandisligi</span>
-            <span class="module-arrow">▼</span>
-          </div>
-          <span class="tag">3 dars</span>
-        </div>
-        <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('2_1', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">2.1</span>
-              <span class="lesson-item-title">2.1. Oltin Formula: ROL + KONTEKST + VAZIFA + FORMAT</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('2_2', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">2.2</span>
-              <span class="lesson-item-title">2.2. Few-Shot va Chain-of-Thought texnikasi</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('2_3', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">2.3</span>
-              <span class="lesson-item-title">2.3. Meta-Prompting: AI orqali prompt yozdirish</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Module 3: Vositalar Ekotizimi -->
-      <div class="module-card collapsed" id="modCard_3">
-        <div class="module-head" onclick="toggleModule('modCard_3')">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span>3-Modul: Har Bir Vazifa Uchun To'g'ri Vosita</span>
-            <span class="module-arrow">▼</span>
-          </div>
-          <span class="tag">3 dars</span>
-        </div>
-        <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('3_1', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">3.1</span>
-              <span class="lesson-item-title">3.1. Matn va Qidiruv: ChatGPT vs Claude vs Perplexity</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('3_2', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">3.2</span>
-              <span class="lesson-item-title">3.2. Taqdimot va Vizual: Gamma App va Canva</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('3_3', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">3.3</span>
-              <span class="lesson-item-title">3.3. Ovoz va Tahrir: ElevenLabs va Descript</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Module 4: Ish va Daromad -->
-      <div class="module-card collapsed" id="modCard_4">
-        <div class="module-head" onclick="toggleModule('modCard_4')">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span>4-Modul: AI'ni Ish va Daromadga Aylantirish</span>
-            <span class="module-arrow">▼</span>
-          </div>
-          <span class="tag">3 dars</span>
-        </div>
-        <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('4_1', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">4.1</span>
-              <span class="lesson-item-title">4.1. 15 Daqiqalik Odat: Ertalab, Kunduzi, Kechqurun</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('4_2', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">4.2</span>
-              <span class="lesson-item-title">4.2. Xizmatlarni 10x Tezlashtirish: SMM & Reels</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('4_3', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">4.3</span>
-              <span class="lesson-item-title">4.3. Eyzenxauer Matritsasi: 10 Soat Tejash</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Module 5: Sertifikat -->
-      <div class="module-card collapsed" id="modCard_5">
-        <div class="module-head" onclick="toggleModule('modCard_5')">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span>5-Modul: Yakuniy Loyiha & Rasmiy Sertifikat</span>
-            <span class="module-arrow">▼</span>
-          </div>
-          <span class="tag">2 dars</span>
-        </div>
-        <div class="module-body">
-          <div class="lesson-item" onclick="loadLesson('5_1', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">5.1</span>
-              <span class="lesson-item-title">5.1. Shaxsiy AI Ishchi Tizimi (Portfolio Loyihasi)</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-          <div class="lesson-item" onclick="loadLesson('5_2', true)">
-            <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
-              <span class="lesson-icon">5.2</span>
-              <span class="lesson-item-title">5.2. Yakuniy Imtihon & Rasmiy Sertifikatni Olish!</span>
-            </div>
-            <span class="lesson-item-time">15 daq</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pinned Dock Footer (Makon.ai Executive Standard) -->
+      <!-- Pinned Dock Footer -->
       <div class="sidebar-dock-footer" style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border);">
         <div style="background:var(--bg-subtle); border:1px solid var(--border); border-radius:12px; padding:10px 12px; margin-bottom:8px;">
           <div style="font-size:10px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Kurs Jarayoni</div>
@@ -3551,7 +3549,7 @@
                 <button class="btn-copy-prompt-pill" onclick="copyLessonPrompt()">
                   <span>📋 Dars Prompt Shablonini Joylash</span>
                 </button>
-                <button class="btn-cert-primary" onclick="submitHomework()" style="padding:10px 20px; font-size:13px;">
+                <button id="btnSubmitHw" class="btn-cert-primary" onclick="submitHomework()" style="padding:10px 20px; font-size:13px;">
                   <span>✨ Tekshirish & Ball Olish</span>
                 </button>
               </div>
@@ -3561,10 +3559,8 @@
               <div style="display:flex; align-items:center; gap:10px;">
                 <span style="font-size:22px;">🎯</span>
                 <div>
-                  <div style="font-weight:900; font-size:14.5px; color:var(--brand-emerald);">AI Murabbiy Baholash Kartasi: 96 / 100 Ball (A'lo)</div>
-                  <div style="font-size:12.5px; color:var(--text-secondary); margin-top:2px;">
-                    Promptingizda rol, vazifa va shartlar professional tarzda tuzilgan. B2B amaliyotiga to'liq mos.
-                  </div>
+                  <div id="scorecardBannerTitle" style="font-weight:900; font-size:14.5px; color:var(--brand-emerald);">AI Murabbiy Baholash Kartasi: 96 / 100 Ball (A\'lo)</div>
+                  <div id="scorecardBannerDetail" style="font-size:12.5px; color:var(--text-secondary); margin-top:2px;">Promptingizda rol, vazifa va shartlar professional tarzda tuzilgan. B2B amaliyotiga to\'liq mos.</div>
                 </div>
               </div>
             </div>
@@ -3618,9 +3614,9 @@
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
       
       <!-- COURSE 1: AI FOUNDATIONS (ACTIVE & CERTIFIED) -->
-      <div style="background:var(--bg-surface); border:2px solid var(--brand-emerald); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 6px 24px rgba(5,150,105,0.08); position:relative; overflow:hidden;">
+      <div style="background:var(--bg-surface); border:2px solid var(--brand-emerald); border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 6px 24px rgba(5,150,105,0.08); position:relative; overflow:hidden;" id="catalogCard_ai_foundations">
         <div style="position:absolute; top:16px; right:16px;">
-          <span style="font-size:11px; font-weight:800; color:#065F46; background:#D1FAE5; padding:4px 10px; border-radius:99px; border:1px solid #A7F3D0;">
+          <span id="catalogBadge_ai_foundations" style="font-size:11px; font-weight:800; color:#065F46; background:#D1FAE5; padding:4px 10px; border-radius:99px; border:1px solid #A7F3D0;">
             🟢 FAOL / O'QILMOQDA
           </span>
         </div>
@@ -3656,8 +3652,52 @@
           </div>
         </div>
 
-        <button onclick="switchPortalTab('classroom')" class="btn-cert-primary" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; border-radius:12px;">
-          <span>▶️ Darsxona (O'qishni Davom Ettirish)</span>
+        <button onclick="switchActiveCourse('ai_foundations', '1_1'); switchPortalTab('classroom');" class="btn-cert-primary" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; border-radius:12px;" id="catalogBtn_ai_foundations">
+          <span>▶️ O'qishni Boshlash / Davom Ettirish</span>
+        </button>
+      </div>
+
+      <!-- COURSE 2: AI KONTENT FABRIKASI (NEW STANDALONE COURSE) -->
+      <div style="background:var(--bg-surface); border:2px solid #8B5CF6; border-radius:18px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 6px 24px rgba(139,92,246,0.08); position:relative; overflow:hidden;" id="catalogCard_content_creator">
+        <div style="position:absolute; top:16px; right:16px;">
+          <span id="catalogBadge_content_creator" style="font-size:11px; font-weight:800; color:#6B21A8; background:#F3E8FF; padding:4px 10px; border-radius:99px; border:1px solid #D8B4FE;">
+            🔥 YANGI · 0$ OBUNA
+          </span>
+        </div>
+        <div>
+          <div style="font-size:36px; margin-bottom:12px;">🎨</div>
+          <div style="font-size:11.5px; font-weight:800; color:#7C3AED; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">
+            MUSTAQIL KURS · 5 MODUL · 15 DARS
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text); margin:0 0 8px 0;">
+            AI Kontent Fabrikasi: Rasm, Video & Matn
+          </h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px 0;">
+            Canva, Gamma yoki Midjourney sotib olmasdan, faqat ChatGPT, Claude, Gemini (Imagen 3) va Grok (Flux) orqali professional fotorealistik rasm, video ssenariy va slaydlar ishlab chiqish.
+          </p>
+
+          <div style="background:var(--bg-subtle); border-radius:10px; padding:12px; margin-bottom:16px; font-size:12px; border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-weight:700; color:var(--text);">Sizning o'zlashtirishingiz:</span>
+              <span id="catalogCourseContentProgressLabel" style="font-weight:800; color:#7C3AED;">0%</span>
+            </div>
+            <div style="height:6px; background:var(--border); border-radius:99px; overflow:hidden;">
+              <div id="catalogCourseContentProgressBar" style="height:100%; width:0%; background:#7C3AED; border-radius:99px; transition:width 0.3s;"></div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-secondary); margin-bottom:18px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="color:#7C3AED; font-weight:900;">✓</span> <span>0 so'm qo'shimcha xarajat · Faqat bepul modellar</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="color:#7C3AED; font-weight:900;">✓</span> <span>15 ta amaliy dars, promptlar va tayyor shablonlar</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="switchActiveCourse('content_creator', 'c1_1'); switchPortalTab('classroom');" class="btn-cert-primary" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; border-radius:12px; background:linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); border-color:#7C3AED;" id="catalogBtn_content_creator">
+          <span>🚀 Ushbu Kursga O'tish (O'qish)</span>
         </button>
       </div>
 
@@ -3894,7 +3934,7 @@
           Rasmiy Malaka Sertifikati Qulfda
         </h3>
         <p style="font-size:13.5px; color:var(--text-secondary); max-width:480px; text-align:center; line-height:1.6; margin:0 0 18px;">
-          Rasmiy unikal ID (<code>GPT-UZ-2026-XXXXX</code>) va Ultra-HD sertifikatni ochish uchun barcha <strong>14 ta amaliy dars</strong>ni yakunlang va testlarni yeching.
+          Rasmiy unikal ID (<code>GPT-UZ-2026-XXXXX</code>) va Ultra-HD sertifikatni ochish uchun barcha <strong id="certOverlayReqLessons">14 ta amaliy dars</strong>ni yakunlang va testlarni yeching.
         </p>
 
         <!-- Dynamic Progress Bar inside Lock -->
@@ -3944,12 +3984,8 @@
       <div style="width:120px; height:2px; background:linear-gradient(90deg, transparent, #D97706, transparent); margin:0 auto 14px;"></div>
 
       <!-- Course Title & Concise Achievement -->
-      <div style="font-size:15px; font-weight:800; color:var(--brand-emerald); margin-bottom:6px;">
-        Amaliy Sun'iy Intellekt va B2B Avtomatlashtirish
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); max-width:580px; margin:0 auto 28px; line-height:1.55;">
-        14 ta amaliy dars va korporativ keyslarni muvaffaqiyatli yakunlab, biznes jarayonlarini AI yordamida avtomatlashtirish malakasini tasdiqladi.
-      </p>
+      <div id="certCardCourseTitle" style="font-size:15px; font-weight:800; color:var(--brand-emerald); margin-bottom:6px;">Amaliy Sun\'iy Intellekt va B2B Avtomatlashtirish</div>
+      <p id="certCardCourseDesc" style="font-size:13px; color:var(--text-secondary); max-width:580px; margin:0 auto 28px; line-height:1.55;">14 ta amaliy dars va korporativ keyslarni muvaffaqiyatli yakunlab, biznes jarayonlarini AI yordamida avtomatlashtirish malakasini tasdiqladi.</p>
 
       <!-- Instructors & Signatures (Clean 2-Column + Center Verification) -->
       <div class="cert-signatures-row" style="display:flex; justify-content:space-between; align-items:flex-end; border-top:1px solid var(--border); padding-top:20px; margin-bottom:18px; flex-wrap:wrap; gap:16px;">
@@ -4152,7 +4188,10 @@
         if (cert) cert.classList.add('active');
         syncStudentNameUI();
         updateCertificateLockState();
-        if (completedLessons.size >= 14) {
+        const tabCfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+        const tabTotal = (tabCfg && tabCfg.totalLessons) ? tabCfg.totalLessons : 14;
+        const tabCount = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+        if (tabCount >= tabTotal) {
           launchConfetti({ count: 65, spread: 60 });
           triggerHaptic('success');
         } else {
@@ -4191,10 +4230,188 @@
     // COMMERCIAL SUITE: PERSISTENCE, CERTIFICATE, CONFETTI & TMA
     // ============================================================
 
+
+    // =========================================================================
+    // STUDENT ONBOARDING & AUTH STATE (Zero-Data Start for New Visitors)
+    // =========================================================================
+    let currentStudentName = "Talaba";
+    let studentRole = "🏢 Tadbirkor / Biznes egasi";
+    let studentContact = "";
+    let hasOnboarded = false;
+    let userScores = {};
+    let totalPoints = 0;
+
+    function openOnboardingModal(isEditing = false) {
+      const modal = document.getElementById('onboardingModal');
+      if (!modal) return;
+
+      const nameInput = document.getElementById('onboardNameInput');
+      const roleSelect = document.getElementById('onboardRoleSelect');
+      const contactInput = document.getElementById('onboardContactInput');
+      const btnClose = document.getElementById('btnCloseOnboardModal');
+      const skipWrap = document.getElementById('onboardSkipWrap');
+      const submitText = document.getElementById('onboardSubmitBtnText');
+      const tgNotice = document.getElementById('onboardTgNotice');
+
+      if (isEditing) {
+        if (nameInput) nameInput.value = (currentStudentName !== 'Talaba' && currentStudentName !== 'Mehmon') ? currentStudentName : '';
+        if (roleSelect) roleSelect.value = studentRole || "🏢 Tadbirkor / Biznes egasi";
+        if (contactInput) contactInput.value = studentContact || '';
+        if (btnClose) btnClose.style.display = 'block';
+        if (skipWrap) skipWrap.style.display = 'none';
+        if (submitText) submitText.innerText = "💾 O'zgarishlarni Saqlash";
+      } else {
+        // Auto-check Telegram data if available
+        let tgPrefill = false;
+        try {
+          if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+            const u = window.Telegram.WebApp.initDataUnsafe.user;
+            const tgName = [u.first_name, u.last_name].filter(Boolean).join(' ');
+            if (tgName && nameInput && !nameInput.value) {
+              nameInput.value = tgName;
+              tgPrefill = true;
+            }
+            if (u.username && contactInput && !contactInput.value) {
+              contactInput.value = `@${u.username}`;
+              tgPrefill = true;
+            }
+          }
+        } catch(e) {}
+
+        if (tgNotice) tgNotice.style.display = tgPrefill ? 'block' : 'none';
+        if (btnClose) btnClose.style.display = hasOnboarded ? 'block' : 'none';
+        if (skipWrap) skipWrap.style.display = hasOnboarded ? 'none' : 'block';
+        if (submitText) submitText.innerText = "🚀 O'quv Kabinetini Ochish (Bepul) ➔";
+      }
+
+      modal.classList.add('show');
+      if (nameInput) nameInput.focus();
+    }
+
+    function closeOnboardingModal() {
+      const modal = document.getElementById('onboardingModal');
+      if (modal) modal.classList.remove('show');
+    }
+
+    function submitOnboarding() {
+      const nameInput = document.getElementById('onboardNameInput');
+      const roleSelect = document.getElementById('onboardRoleSelect');
+      const contactInput = document.getElementById('onboardContactInput');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      if (!name) {
+        toast("⚠️ Iltimos, ism va familiyangizni kiriting", "⚠️");
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      currentStudentName = name;
+      studentRole = roleSelect ? roleSelect.value : "🏢 Tadbirkor / Biznes egasi";
+      studentContact = contactInput ? contactInput.value.trim() : "";
+      hasOnboarded = true;
+      try {
+        localStorage.setItem('gptify_auth_user', name);
+      } catch(e) {}
+      if (typeof setGatedDemoState === 'function') {
+        setGatedDemoState(false);
+      }
+
+      syncStudentNameUI();
+      saveAppState();
+      closeOnboardingModal();
+      launchConfetti({ count: 80, spread: 70 });
+      triggerHaptic('success');
+      toast(`🎉 Xush kelibsiz, ${name}! O'quv kabinetingiz faollashtirildi.`, "✨");
+    }
+
+    function skipOnboardingGuest() {
+      hasOnboarded = true;
+      currentStudentName = "Mehmon Talaba";
+      syncStudentNameUI();
+      saveAppState();
+      closeOnboardingModal();
+      toast("📖 1.1-Dars bilan tanishishingiz mumkin. Natijani saqlash uchun profilingizni to'ldiring.", "ℹ️");
+    }
+
+    function toggleProfileDropdown() {
+      const dd = document.getElementById('studentProfileDropdown');
+      if (!dd) return;
+      dd.classList.toggle('show');
+      if (dd.classList.contains('show')) {
+        updateDropdownInfo();
+        triggerHaptic('selection');
+      }
+    }
+
+    function closeProfileDropdown() {
+      const dd = document.getElementById('studentProfileDropdown');
+      if (dd) dd.classList.remove('show');
+    }
+
+    // Close dropdown on click outside
+    document.addEventListener('click', (e) => {
+      const avatarBtn = document.getElementById('topStudentAvatar');
+      const dd = document.getElementById('studentProfileDropdown');
+      if (dd && dd.classList.contains('show')) {
+        if (!dd.contains(e.target) && !avatarBtn.contains(e.target)) {
+          closeProfileDropdown();
+        }
+      }
+    });
+
+    function updateDropdownInfo() {
+      const nameEl = document.getElementById('dropdownStudentName');
+      if (nameEl) nameEl.innerText = currentStudentName || "Talaba";
+
+      const roleEl = document.getElementById('dropdownStudentRole');
+      if (roleEl) roleEl.innerText = studentRole || "🏢 Tadbirkor / Biznes egasi";
+
+      const avatarInit = document.getElementById('dropdownAvatarInitial');
+      if (avatarInit) {
+        const parts = (currentStudentName || 'Talaba').split(' ');
+        avatarInit.innerText = parts.map(p => p[0] || '').join('').slice(0, 2).toUpperCase() || 'TL';
+      }
+
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const courseNameEl = document.getElementById('dropdownActiveCourseName');
+      if (courseNameEl && cfg) courseNameEl.innerText = cfg.shortTitle || cfg.title;
+
+      const compEl = document.getElementById('dropdownCompletedCount');
+      if (compEl && cfg) {
+        const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+        const total = cfg.totalLessons || 14;
+        const pct = Math.round((count / total) * 100);
+        compEl.innerText = `${count} / ${total} dars (${pct}%)`;
+      }
+
+      const ptsEl = document.getElementById('dropdownPoints');
+      if (ptsEl) ptsEl.innerText = `${totalPoints} XP`;
+    }
+
+    function confirmResetUser() {
+      if (confirm("Haqiqatan ham yangi foydalanuvchi sifatida qayta boshlamoqchimisiz? Joriy natijalar va progress tozalanadi.")) {
+        localStorage.removeItem(STORAGE_KEY);
+        hasOnboarded = false;
+        currentStudentName = "Talaba";
+        studentRole = "🏢 Tadbirkor / Biznes egasi";
+        studentContact = "";
+        completedLessons.clear();
+        userScores = {};
+        totalPoints = 0;
+        syncSidebarCompletedState();
+        syncPointsDisplay();
+        syncStudentNameUI();
+        if (typeof updateCertificateLockState === 'function') updateCertificateLockState();
+        if (typeof updateCatalogProgress === 'function') updateCatalogProgress();
+        triggerHaptic('warning');
+        toast("🔄 Profil tozalandi. Yangi o'quvchi ro'yxatdan o'tishi mumkin.", "ℹ️");
+        setTimeout(() => {
+          openOnboardingModal(false);
+        }, 400);
+      }
+    }
+
     const STORAGE_KEY = 'gptify_academy_progress_v1';
-    let currentStudentName = "Shukhrat Iskandarov";
-    let userScores = { '1_1': 90, '1_2': 94, '1_3': 88, '2_1': 95, '2_2': 92, '2_3': 96 };
-    let totalPoints = 850;
 
     // --- TMA HAPTIC FEEDBACK READY ---
     function triggerHaptic(type = 'success') {
@@ -4311,7 +4528,11 @@
     function saveAppState() {
       try {
         const state = {
+          hasOnboarded: hasOnboarded,
           studentName: currentStudentName,
+          studentRole: studentRole,
+          studentContact: studentContact,
+          activeCourseId: (typeof activeCourseId !== 'undefined') ? activeCourseId : 'ai_foundations',
           currentLessonId: currentLessonId,
           completedLessons: Array.from(completedLessons),
           solvedQuizzes: solvedQuizzes,
@@ -4331,7 +4552,13 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const state = JSON.parse(raw);
+          hasOnboarded = !!state.hasOnboarded;
           if (state.studentName) currentStudentName = state.studentName;
+          if (state.studentRole) studentRole = state.studentRole;
+          if (state.studentContact) studentContact = state.studentContact;
+          if (state.activeCourseId && (state.activeCourseId === 'ai_foundations' || state.activeCourseId === 'content_creator')) {
+            activeCourseId = state.activeCourseId;
+          }
           if (Array.isArray(state.completedLessons)) {
             completedLessons = new Set(state.completedLessons);
           }
@@ -4403,7 +4630,21 @@
       saveAppState();
     }
 
+    function getActiveCourseCompletedCount(courseId = activeCourseId) {
+      const seq = getCourseLessonSequence(courseId);
+      let count = 0;
+      seq.forEach(id => {
+        if (completedLessons.has(id)) count++;
+      });
+      return count;
+    }
+
     function syncSidebarCompletedState() {
+      const cfg = getActiveCourseConfig(activeCourseId);
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = getActiveCourseCompletedCount(activeCourseId);
+      const pct = Math.round((count / total) * 100);
+
       document.querySelectorAll('.lesson-item').forEach(item => {
         const onclickAttr = item.getAttribute('onclick') || '';
         const match = onclickAttr.match(/'([^']+)'/);
@@ -4417,20 +4658,19 @@
             item.classList.remove('done');
             const icon = item.querySelector('.lesson-icon');
             if (icon) {
-              const num = lId.replace('_', '.');
+              const num = lId.replace('c', '').replace('_', '.');
               icon.innerText = num;
             }
           }
         }
       });
 
-      const count = completedLessons.size;
-      const pct = Math.round((count / 14) * 100);
       const fill = document.getElementById('courseProgressFill');
       if (fill) fill.style.width = `${pct}%`;
       const text = document.getElementById('progressText');
-      if (text) text.innerText = `${count} / 14 dars (${pct}%)`;
+      if (text) text.innerText = `${count} / ${total} dars (${pct}%)`;
       if (typeof updateGamificationUI === 'function') updateGamificationUI();
+      if (typeof updateCatalogProgress === 'function') updateCatalogProgress();
     }
 
     function syncPointsDisplay() {
@@ -4561,15 +4801,20 @@
       ctx.lineTo(cX + 240, 680);
       ctx.stroke();
 
-      // 6. Course & Concise Qualification
-      ctx.font = '800 28px "Plus Jakarta Sans", sans-serif';
+      // 6. Course & Concise Qualification (Dynamic per Active Course)
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const certTitle = (cfg && cfg.title) ? cfg.title : "Amaliy Sun'iy Intellekt va B2B Avtomatlashtirish";
+      const totalLessonsCount = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const certId = (typeof activeCourseId !== 'undefined' && activeCourseId === 'content_creator') ? "GPT-UZ-2026-CC77A" : "GPT-UZ-2026-9812A";
+
+      ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#059669';
-      ctx.fillText("Amaliy Sun'iy Intellekt va B2B Avtomatlashtirish", cX, 750);
+      ctx.fillText(certTitle, cX, 750);
 
       ctx.font = '500 22px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#334155';
-      ctx.fillText("14 ta amaliy dars va korporativ keyslarni muvaffaqiyatli yakunlab,", cX, 810);
-      ctx.fillText("biznes jarayonlarini AI yordamida avtomatlashtirish malakasini tasdiqladi.", cX, 846);
+      ctx.fillText(`${totalLessonsCount} ta amaliy dars va korporativ keyslarni muvaffaqiyatli yakunlab,`, cX, 810);
+      ctx.fillText(activeCourseId === 'content_creator' ? "AI kontent ishlab chiqish va avtomatlashtirish malakasini tasdiqladi." : "biznes jarayonlarini AI yordamida avtomatlashtirish malakasini tasdiqladi.", cX, 846);
 
       // 7. Signatures & Verification Section
       const sigBaseY = 1200;
@@ -4620,7 +4865,8 @@
 
       ctx.font = '800 18px "JetBrains Mono", monospace';
       ctx.fillStyle = '#059669';
-      ctx.fillText("VERIFIKATSIYA ID: GPT-UZ-2026-9812A", cX, sigBaseY + 6);
+      const canvasCertId = (typeof activeCourseId !== 'undefined' && activeCourseId === 'content_creator') ? "GPT-UZ-2026-CC77A" : "GPT-UZ-2026-9812A";
+      ctx.fillText(`VERIFIKATSIYA ID: ${canvasCertId}`, cX, sigBaseY + 6);
 
       ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#64748B';
@@ -4664,7 +4910,8 @@
       // 8. Bottom Online Verification URL
       ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#94A3B8';
-      ctx.fillText("Onlayn tekshirish: gptify.uz/verify/GPT-UZ-2026-9812A · Toshkent — Berlin", cX, 1475);
+      const canvasVerifyId = (typeof activeCourseId !== 'undefined' && activeCourseId === 'content_creator') ? "GPT-UZ-2026-CC77A" : "GPT-UZ-2026-9812A";
+      ctx.fillText(`Onlayn tekshirish: gptify.uz/verify/${canvasVerifyId} · Toshkent — Berlin`, cX, 1475);
 
       // 9. Mandatory Legal Disclaimer
       ctx.font = 'italic 13.5px "Plus Jakarta Sans", sans-serif';
@@ -4673,9 +4920,12 @@
     }
 
     function downloadCertificatePng() {
-      if (completedLessons.size < 14) {
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+      if (count < total) {
         triggerHaptic('warning');
-        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        toast(`🔒 Sertifikat qulflangan! Avval barcha ${total} ta darsni yakunlang (Hozirda: ${count}/${total})`, "⚠️");
         return;
       }
       triggerHaptic('success');
@@ -4708,9 +4958,12 @@
     }
 
     function printCertificate() {
-      if (completedLessons.size < 14) {
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+      if (count < total) {
         triggerHaptic('warning');
-        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        toast(`🔒 Sertifikat qulflangan! Avval barcha ${total} ta darsni yakunlang (Hozirda: ${count}/${total})`, "⚠️");
         return;
       }
       triggerHaptic('selection');
@@ -4722,16 +4975,20 @@
     }
 
     function shareCertificateTelegram() {
-      if (completedLessons.size < 14) {
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+      if (count < total) {
         triggerHaptic('warning');
-        toast(`🔒 Sertifikat qulflangan! Avval barcha 14 ta darsni yakunlang (Hozirda: ${completedLessons.size}/14)`, "⚠️");
+        toast(`🔒 Sertifikat qulflangan! Avval barcha ${total} ta darsni yakunlang (Hozirda: ${count}/${total})`, "⚠️");
         return;
       }
       triggerHaptic('success');
-      const certId = "GPT-UZ-2026-9812A";
+      const certId = (typeof activeCourseId !== 'undefined' && activeCourseId === 'content_creator') ? "GPT-UZ-2026-CC77A" : "GPT-UZ-2026-9812A";
+      const courseTitle = (cfg && cfg.title) ? cfg.title : "Amaliy Sun'iy Intellekt va B2B Avtomatlashtirish";
       const name = currentStudentName || "Shukhrat Iskandarov";
       const verifyUrl = `https://gptify.uz/verify/${certId}`;
-      const message = `🏆 Men GPTify Academy'da "Amaliy Sun'iy Intellekt va B2B Avtomatlashtirish" professional kursini yakunlab, rasmiy malaka sertifikatini oldim! 🌟\n\n🎓 Sertifikat egasi: ${name}\n🔑 Verifikatsiya ID: ${certId}\n🔗 Tasdiqlash: ${verifyUrl}`;
+      const message = `🏆 Men GPTify Academy'da "${courseTitle}" professional kursini yakunlab, rasmiy malaka sertifikatini oldim! 🌟\n\n🎓 Sertifikat egasi: ${name}\n🔑 Verifikatsiya ID: ${certId}\n🔗 Tasdiqlash: ${verifyUrl}`;
       const shareUrl = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/GPTify_Academy_bot')}&text=${encodeURIComponent(message)}`;
       
       try {
@@ -4755,16 +5012,8 @@
       toast("💼 LinkedIn ulashish oynasi ochildi!");
     }
 
-    const LESSON_SEQUENCE = ['1_1', '1_2', '1_3', '2_1', '2_2', '2_3', '3_1', '3_2', '3_3', '4_1', '4_2', '4_3', '5_1', '5_2'];
-
-    const LESSON_MODULE_MAP = {
-      '1_1': 'modCard_1', '1_2': 'modCard_1', '1_3': 'modCard_1',
-      '2_1': 'modCard_2', '2_2': 'modCard_2', '2_3': 'modCard_2',
-      '3_1': 'modCard_3', '3_2': 'modCard_3', '3_3': 'modCard_3',
-      '4_1': 'modCard_4', '4_2': 'modCard_4', '4_3': 'modCard_4',
-      '5_1': 'modCard_5', '5_2': 'modCard_5'
-    };
-
+    // --- DYNAMIC COURSE & LESSON STATE MANAGEMENT ---
+    let activeCourseId = localStorage.getItem('gptify_active_course') || 'ai_foundations';
     let currentLessonId = '1_1';
     let currentStoryStep = 0;
     let currentLessonStorySteps = [];
@@ -4778,9 +5027,61 @@
     let audioTotalSeconds = 465; // ~7:45
     let audioSpeed = 1.0;
 
-
     // Solved Quizzes Persistent Cache
     const solvedQuizzes = {};
+
+    function getActiveCourseConfig(courseId = activeCourseId) {
+      if (window.COURSES_CONFIG && window.COURSES_CONFIG[courseId]) {
+        return window.COURSES_CONFIG[courseId];
+      }
+      return (window.COURSES_CONFIG && window.COURSES_CONFIG['ai_foundations']) || null;
+    }
+
+    function getCourseLessonSequence(courseId = activeCourseId) {
+      const cfg = getActiveCourseConfig(courseId);
+      if (!cfg || !cfg.modules) return ['1_1', '1_2', '1_3', '2_1', '2_2', '2_3', '3_1', '3_2', '3_3', '4_1', '4_2', '4_3', '5_1', '5_2'];
+      const seq = [];
+      cfg.modules.forEach(m => {
+        (m.lessons || []).forEach(l => seq.push(l.id));
+      });
+      return seq;
+    }
+
+    function getCourseLessonModuleMap(courseId = activeCourseId) {
+      const cfg = getActiveCourseConfig(courseId);
+      const map = {};
+      if (cfg && cfg.modules) {
+        cfg.modules.forEach(m => {
+          (m.lessons || []).forEach(l => {
+            map[l.id] = m.id;
+          });
+        });
+      }
+      return map;
+    }
+
+    // Dynamic getters
+    function getCurrentLessonSequence() {
+      return getCourseLessonSequence(activeCourseId);
+    }
+    const LESSON_SEQUENCE = new Proxy([], {
+      get(target, prop) {
+        const actual = getCurrentLessonSequence();
+        if (prop === 'length') return actual.length;
+        if (prop in actual) {
+          const val = actual[prop];
+          return typeof val === 'function' ? val.bind(actual) : val;
+        }
+        return actual[prop];
+      }
+    });
+
+    const LESSON_MODULE_MAP = new Proxy({}, {
+      get(target, prop) {
+        const actual = getCourseLessonModuleMap(activeCourseId);
+        return actual[prop];
+      }
+    });
 
     // --- MOBILE DRAWER CONTROLLER ---
     function toggleMobileSidebar() {
@@ -4881,6 +5182,138 @@
         closePromptModal();
         toast("⚡ Prompt amaliy vazifa maydoniga joylandi!");
       }
+    }
+
+    // --- DYNAMIC COURSE SIDEBAR RENDERER ---
+    function renderCourseSidebar(courseId = activeCourseId) {
+      const cfg = getActiveCourseConfig(courseId);
+      if (!cfg) return;
+
+      activeCourseId = cfg.id;
+      try {
+        localStorage.setItem('gptify_active_course', activeCourseId);
+      } catch(e) {}
+
+      // Update Top Badge & Select Dropdown
+      const badgeEl = document.getElementById('sidebarCourseBadge');
+      if (badgeEl) badgeEl.innerText = cfg.badge || cfg.title;
+
+      const subBadgeEl = document.getElementById('sidebarCourseSubBadge');
+      if (subBadgeEl) subBadgeEl.innerText = cfg.subBadge || "100% Amaliy";
+
+      const selectEl = document.getElementById('sidebarCourseSelect');
+      if (selectEl && selectEl.value !== activeCourseId) {
+        selectEl.value = activeCourseId;
+      }
+
+      // Update Bento Hero Course Name
+      const bentoCourseEl = document.querySelector('.bento-course-name');
+      if (bentoCourseEl) {
+        const emoji = activeCourseId === 'content_creator' ? '🎨' : '🎯';
+        bentoCourseEl.innerText = `${emoji} ${cfg.title}`;
+      }
+
+      // Update Mobile Drawer Count
+      const mobCountEl = document.querySelector('.mobile-mod-count');
+      if (mobCountEl) mobCountEl.innerText = `${cfg.totalLessons} Dars ➔`;
+
+      const mobCurricBtn = document.getElementById('btnMobileCurriculum');
+      if (mobCurricBtn) {
+        mobCurricBtn.innerHTML = `<span>📋</span> <span>Mundarija (${cfg.totalLessons} Dars)</span>`;
+      }
+
+      // Render Modules List into #sidebarModulesList
+      const listContainer = document.getElementById('sidebarModulesList');
+      if (!listContainer) return;
+
+      const currentParentMod = getCourseLessonModuleMap(activeCourseId)[currentLessonId] || (cfg.modules[0] && cfg.modules[0].id);
+
+      listContainer.innerHTML = cfg.modules.map((mod, modIdx) => {
+        const isCollapsed = mod.id !== currentParentMod;
+        const lessonsHtml = (mod.lessons || []).map(l => {
+          const isActive = l.id === currentLessonId;
+          const isDone = completedLessons.has(l.id);
+          const iconText = isDone ? '✓' : l.num;
+          return `
+            <div class="lesson-item ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}" data-id="${l.id}" onclick="loadLesson('${l.id}', true)">
+              <div style="display:flex; align-items:center; overflow:hidden; gap:6px;">
+                <span class="lesson-icon">${iconText}</span>
+                <span class="lesson-item-title">${l.title}</span>
+              </div>
+              <span class="lesson-item-time">${l.dur || '15 daq'}</span>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="module-card ${isCollapsed ? 'collapsed' : ''}" id="${mod.id}">
+            <div class="module-head" onclick="toggleModule('${mod.id}')">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span>${mod.title}</span>
+                <span class="module-arrow">▼</span>
+              </div>
+              <span class="tag">${mod.tag || (mod.lessons.length + ' dars')}</span>
+            </div>
+            <div class="module-body">
+              ${lessonsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      renderCourseRoadmap(activeCourseId);
+      syncSidebarCompletedState();
+    }
+
+    function renderCourseRoadmap(courseId = activeCourseId) {
+      const cfg = getActiveCourseConfig(courseId);
+      if (!cfg || !cfg.modules) return;
+
+      const pathGrid = document.querySelector('.makon-path-grid');
+      const pathSub = document.querySelector('.makon-path-sub');
+      if (pathSub) pathSub.innerText = `${cfg.totalLessons} ta amaliy dars`;
+
+      if (pathGrid) {
+        pathGrid.innerHTML = cfg.modules.map((mod, idx) => {
+          const mNum = idx + 1;
+          const firstL = mod.lessons && mod.lessons[0] ? mod.lessons[0].id : '';
+          const shortTitle = mod.title.split(':')[1] ? mod.title.split(':')[1].trim() : mod.title;
+          return `
+            <div class="path-step-tile" id="milestone_${mNum}" onclick="loadLesson('${firstL}', true)">
+              <div class="path-step-head">
+                <span class="path-step-num">${mNum}-BOSQICH</span>
+                <span class="path-step-check" id="modCheck_${mNum}">⚪</span>
+              </div>
+              <div class="path-step-title">${shortTitle}</div>
+              <div class="path-step-meta">${mod.lessons.length} ta dars</div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function switchActiveCourse(courseId, targetLessonId = null) {
+      if (!window.COURSES_CONFIG || !window.COURSES_CONFIG[courseId]) {
+        courseId = 'ai_foundations';
+      }
+      activeCourseId = courseId;
+      try {
+        localStorage.setItem('gptify_active_course', activeCourseId);
+      } catch(e) {}
+
+      const cfg = getActiveCourseConfig(courseId);
+      let nextLesson = targetLessonId;
+      if (!nextLesson) {
+        const seq = getCourseLessonSequence(courseId);
+        nextLesson = seq.find(id => !completedLessons.has(id)) || cfg.firstLessonId || seq[0];
+      }
+
+      renderCourseSidebar(courseId);
+      if (nextLesson) {
+        loadLesson(nextLesson, true);
+      }
+      triggerHaptic('selection');
+      toast(`📚 Faol kurs: ${cfg.title}`);
     }
 
     // --- ACCORDION NAVIGATION ---
@@ -5147,8 +5580,10 @@
     function updateGamificationUI() {
       const streak = getOrUpdateStreak();
       const xp = calculateTotalXP();
-      const count = (typeof completedLessons !== 'undefined' && completedLessons) ? completedLessons.size : 0;
-      const pct = Math.round((count / 14) * 100);
+      const cfg = getActiveCourseConfig(activeCourseId);
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = getActiveCourseCompletedCount(activeCourseId);
+      const pct = Math.round((count / total) * 100);
       const lvl = calculateStudentLevel(xp, count);
 
       // Student Avatar & Greeting
@@ -5183,12 +5618,12 @@
 
       // Progress bar & text
       const progText = document.getElementById('gamifyProgressText');
-      if (progText) progText.innerText = `${count} / 14 dars (${pct}%)`;
+      if (progText) progText.innerText = `${count} / ${total} dars (${pct}%)`;
 
       const progFill = document.getElementById('gamifyProgressFill');
       if (progFill) progFill.style.width = `${pct}%`;
       const dockProg = document.getElementById('sidebarDockProgress');
-      if (dockProg) dockProg.innerText = `${count} / 14 dars (${pct}%)`;
+      if (dockProg) dockProg.innerText = `${count} / ${total} dars (${pct}%)`;
 
       // CTA button text & icon
       const btnResumeText = document.getElementById('btnResumeCourseText');
@@ -5196,59 +5631,42 @@
       if (btnResumeText) {
         if (count === 0) {
           if (btnResumeIcon) btnResumeIcon.innerText = "🚀";
-          btnResumeText.innerText = "1.1-Darsdan Boshlash";
-        } else if (count >= 14) {
+          const firstL = (cfg && cfg.firstLessonId) ? cfg.firstLessonId.replace('c','').replace('_','.') : "1.1";
+          btnResumeText.innerText = `${firstL}-Darsdan Boshlash`;
+        } else if (count >= total) {
           if (btnResumeIcon) btnResumeIcon.innerText = "🏆";
           btnResumeText.innerText = "Sertifikatni Olish";
         } else {
-          let nextId = '1_1';
-          if (typeof LESSON_SEQUENCE !== 'undefined') {
-            for (const id of LESSON_SEQUENCE) {
-              if (!completedLessons.has(id)) {
-                nextId = id;
-                break;
-              }
-            }
-          }
+          const seq = getCourseLessonSequence(activeCourseId);
+          let nextId = seq.find(id => !completedLessons.has(id)) || seq[0];
           if (btnResumeIcon) btnResumeIcon.innerText = "▶️";
-          btnResumeText.innerText = `Davom Etish (${nextId.replace('_', '.')}-Dars)`;
+          btnResumeText.innerText = `Davom Etish (${nextId.replace('c','').replace('_', '.')}-Dars)`;
         }
       }
 
       // Update module checkmarks in roadmap
-      const modMap = {
-        1: ['1_1', '1_2', '1_3'],
-        2: ['2_1', '2_2', '2_3'],
-        3: ['3_1', '3_2', '3_3'],
-        4: ['4_1', '4_2', '4_3'],
-        5: ['5_1', '5_2']
-      };
-      const curMod = (typeof currentLessonId === 'string') ? currentLessonId.split('_')[0] : '1';
-      for (let m = 1; m <= 5; m++) {
-        const box = document.getElementById(`milestone_${m}`);
-        const check = document.getElementById(`modCheck_${m}`);
-        const allDone = modMap[m].every(id => completedLessons && completedLessons.has(id));
-        if (box) {
-          if (allDone) {
-            box.classList.add('completed');
-          } else {
-            box.classList.remove('completed');
+      if (cfg && cfg.modules) {
+        cfg.modules.forEach((mod, idx) => {
+          const m = idx + 1;
+          const box = document.getElementById(`milestone_${m}`);
+          const check = document.getElementById(`modCheck_${m}`);
+          const modLessons = (mod.lessons || []).map(l => l.id);
+          const allDone = modLessons.length > 0 && modLessons.every(id => completedLessons && completedLessons.has(id));
+          const currentParentMod = getCourseLessonModuleMap(activeCourseId)[currentLessonId];
+          const isModActive = mod.id === currentParentMod;
+
+          if (box) {
+            if (allDone) box.classList.add('completed');
+            else box.classList.remove('completed');
+
+            if (isModActive) box.classList.add('active');
+            else box.classList.remove('active');
           }
-          if (String(m) === curMod) {
-            box.classList.add('active');
-          } else {
-            box.classList.remove('active');
+          if (check) {
+            if (allDone) check.innerText = '✅';
+            else check.innerText = '⚪';
           }
-        }
-        if (check) {
-          if (allDone) {
-            check.innerText = '✅';
-          } else if (m === 5 && count < 12) {
-            check.innerText = '🔒';
-          } else {
-            check.innerText = '⚪';
-          }
-        }
+        });
       }
     }
 
@@ -5362,7 +5780,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const isAuth = urlParams.get('auth') === '1' || urlParams.get('demo') === 'unlocked' || !!localStorage.getItem('gptify_auth_user');
+      const isAuth = urlParams.get('auth') === '1' || urlParams.get('demo') === 'unlocked' || !!localStorage.getItem('gptify_auth_user') || !!hasOnboarded;
 
       if (isAuth) {
         setGatedDemoState(false);
@@ -5377,7 +5795,15 @@
     });
 
     function loadLesson(id, userTriggered = false) {
-      if (window.isFreemiumGated && id !== '1_1' && userTriggered) {
+      // Determine which course owns this lesson
+      if (id.startsWith('c') && activeCourseId !== 'content_creator') {
+        activeCourseId = 'content_creator';
+        renderCourseSidebar('content_creator');
+      } else if (!id.startsWith('c') && activeCourseId !== 'ai_foundations') {
+        activeCourseId = 'ai_foundations';
+        renderCourseSidebar('ai_foundations');
+      }
+      if (window.isFreemiumGated && id !== '1_1' && id !== 'c1_1' && userTriggered) {
         openFreemiumGateModal(id);
         return;
       }
@@ -5547,12 +5973,11 @@
       });
 
       // Update progress
-      const count = completedLessons.size;
-      const pct = Math.round((count / 14) * 100);
+      const cfg = getActiveCourseConfig(activeCourseId); const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14; const count = getActiveCourseCompletedCount(activeCourseId); const pct = Math.round((count / total) * 100);
       const progFill = document.getElementById('courseProgressFill') || document.getElementById('gamifyProgressFill');
       if (progFill) progFill.style.width = `${pct}%`;
       const progText = document.getElementById('progressText') || document.getElementById('gamifyProgressText');
-      if (progText) progText.innerText = `${count} / 14 dars (${pct}%)`;
+      if (progText) progText.innerText = `${count} / ${total} dars (${pct}%)`;
 
       totalPoints += 100;
       syncPointsDisplay();
@@ -5702,16 +6127,17 @@
 
       toast("AI murabbiy promptingizni tahlil qilmoqda...", "⏳");
 
-      // Dynamic scoring based on prompt composition
-      let score = 84;
-      const hasRole = /sen|rol|mutaxassis|ekspert|rahbar|menejer|agent/i.test(input);
-      const hasConstraint = /agar|faqat|shart|narx|chegirma|mumkin emas|saqla|kafolat/i.test(input);
-      const hasAction = /yoz|tushuntir|taklif|bonus|sovg'a|imzo|didox|soliq|telegram/i.test(input);
+      // Dynamic scoring based on prompt composition and criteria
+      let score = 82;
+      const hasRole = /sen|rol|mutaxassis|ekspert|rahbar|menejer|agent|assistent|dasturchi|kopirayter/i.test(input);
+      const hasConstraint = /agar|faqat|shart|narx|chegirma|mumkin emas|saqla|kafolat|uslub|format|chegarala/i.test(input);
+      const hasAction = /yoz|tushuntir|taklif|bonus|sovg'a|imzo|didox|soliq|telegram|tahlil|jadval|skript|video|tasvir/i.test(input);
 
-      if (hasRole) score += 5;
-      if (hasConstraint) score += 5;
-      if (hasAction) score += 4;
-      if (input.length > 90) score = Math.min(100, score + 2);
+      const criteria = [];
+      if (hasRole) { score += 6; criteria.push("Rol va maqsad aniq belgilangan (+6)"); }
+      if (hasConstraint) { score += 6; criteria.push("Cheklov va qoidalar kiritilgan (+6)"); }
+      if (hasAction) { score += 4; criteria.push("Aniq harakat va natija talab qilingan (+4)"); }
+      if (input.length > 90) { score = Math.min(100, score + 2); criteria.push("Kengaytirilgan kontekst (+2)"); }
 
       setTimeout(() => {
         completedLessons.add(currentLessonId);
@@ -5723,19 +6149,29 @@
           if (icon) icon.innerText = '✓';
         });
 
-        // Show Scorecard Banner with dynamic score
+        // Show Scorecard Banner with dynamic score and detailed criteria
         const scorecard = document.getElementById('scorecardBanner');
-        scorecard.classList.add('show');
-        scorecard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (scorecard) {
+          scorecard.classList.add('show');
+          scorecard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        const titleEl = scorecard.querySelector('div:first-child div:first-child span:last-child');
-        if (titleEl) {
-          titleEl.innerText = `AI Murabbiy Baholash Kartasi: ${score} / 100 Ball (${score >= 90 ? "A'lo" : "Qabul qilindi"})`;
+          const titleEl = document.getElementById('scorecardBannerTitle') || scorecard.querySelector('div:first-child div:first-child span:last-child');
+          if (titleEl) {
+            titleEl.innerText = `AI Murabbiy Baholash Kartasi: ${score} / 100 Ball (${score >= 90 ? "A'lo darajada" : "Qabul qilindi"})`;
+          }
+          const detailEl = document.getElementById('scorecardBannerDetail');
+          if (detailEl) {
+            const criteriaText = criteria.length > 0 ? criteria.join(', ') : "Prompt qabul qilindi";
+            detailEl.innerText = `Sizning yechimingiz tahlili: ${criteriaText}. Amaliy B2B ish jarayoniga to'liq mos.`;
+          }
         }
 
-        // Update progress
-        const count = completedLessons.size;
-        const pct = Math.round((count / 14) * 100);
+        // Update progress dynamically
+        const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+        const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+        const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
+        const pct = Math.round((count / total) * 100);
+
         const hwBadge = document.getElementById('hwResultBadge');
         if (hwBadge) {
           hwBadge.innerText = `✓ Topshirildi: ${score} / 100 ball (${score >= 90 ? "A'lo" : "Yaxshi"})`;
@@ -5744,7 +6180,7 @@
         const progFill = document.getElementById('courseProgressFill') || document.getElementById('gamifyProgressFill');
         if (progFill) progFill.style.width = `${pct}%`;
         const progText = document.getElementById('progressText') || document.getElementById('gamifyProgressText');
-        if (progText) progText.innerText = `${count} / 14 dars (${pct}%)`;
+        if (progText) progText.innerText = `${count} / ${total} dars (${pct}%)`;
 
         userScores[currentLessonId] = score;
         totalPoints += score;
@@ -5752,6 +6188,7 @@
         if (typeof updateGamificationUI === 'function') updateGamificationUI();
         if (typeof updateRoadmapMilestones === 'function') updateRoadmapMilestones();
         if (typeof updateCertificateLockState === 'function') updateCertificateLockState();
+        if (typeof updateCatalogProgress === 'function') updateCatalogProgress();
         saveAppState();
         launchConfetti({ count: 95, spread: 75 });
         triggerHaptic('success');
@@ -5780,6 +6217,16 @@
       }
 
       loadAppState();
+      renderCourseSidebar(activeCourseId);
+
+      // Check onboarding trigger: new user without onboarding or ?signup=1 in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const forceSignup = urlParams.get('signup') === 'true' || urlParams.get('signup') === '1' || urlParams.get('auth') === '1';
+      if (!hasOnboarded || forceSignup) {
+        setTimeout(() => {
+          openOnboardingModal(false);
+        }, 500);
+      }
 
       // Telegram WebApp Initialization & Native User Auto-detection
       try {
@@ -6001,6 +6448,28 @@
           "OpenAI ChatGPT, Anthropic Claude & DeepSeek API Ulanishi",
           "Maxfiy Lokal LLMlar (Ollama & Privacy-First On-Premises AI)"
         ]
+      },
+      'GPT-UZ-2026-CC77A': {
+        valid: true,
+        id: 'GPT-UZ-2026-CC77A',
+        studentName: 'Shukhrat Iskandarov',
+        course: "AI Kontent Fabrikasi: Matn, Rasm, Video va Avtomatlashtirish",
+        status: "TASDIQLANGAN (VERIFIED)",
+        modulesPassed: "15 / 15 Amaliy Modul",
+        grade: "99% (A'lo / Distinction)",
+        date: "2026-03-09",
+        instructor: "Shukhrat Iskandarov (Bosh AI Strateg, Berlin)",
+        scientificLead: "Davlatbek Iskandarov, PhD (TDIU Dotsenti)",
+        issuer: "GPTify Academy (Toshkent — Berlin)",
+        sha256: "9c5b20d4e9f83e260b71f53a4c0d8e2f3b6a914c02b85e36d9f0c7b24e13f6e8",
+        legalNote: "Ommaviy Oferta talablari asosidagi xususiy amaliy malaka hujjati.",
+        competencies: [
+          "B2B & SMM AI Kontent Arxitekturasi (ChatGPT & Claude)",
+          "Professional AI Tasvir Generatsiyasi (Midjourney & Flux)",
+          "AI Video & Animatsiya Ishlab Chiqish (Runway & Kling)",
+          "AI Avatarlar & Ovoz Klonlash (HeyGen & ElevenLabs)",
+          "Avtomatlashtirilgan Ko'p Kanalli Kontent Quvurlari"
+        ]
       }
     };
 
@@ -6045,7 +6514,7 @@
       
       // Dynamic sync with currently edited student name if querying primary ID
       let cert = GPTIFY_CREDENTIAL_REGISTRY[normId];
-      if (normId === 'GPT-UZ-2026-9812A' && window.currentStudentName) {
+      if ((normId === 'GPT-UZ-2026-9812A' || normId === 'GPT-UZ-2026-CC77A') && window.currentStudentName) {
         cert = { ...cert, studentName: window.currentStudentName };
       }
 
@@ -6162,8 +6631,9 @@
     // CERTIFICATE LOCK / UNLOCK CONTROLLER
     // =========================================================================
     function updateCertificateLockState() {
-      const count = completedLessons.size;
-      const total = 14;
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      const count = (typeof getActiveCourseCompletedCount === 'function') ? getActiveCourseCompletedCount(activeCourseId) : completedLessons.size;
       const pct = Math.round((count / total) * 100);
       const isUnlocked = count >= total;
 
@@ -6173,6 +6643,16 @@
       const progressBar = document.getElementById('certLockProgressBar');
       const progressLabel = document.getElementById('certLockProgressLabel');
       const ctaBtn = document.getElementById('certLockCtaBtn');
+
+      // Update Preview Card Course Title & Description Dynamically
+      const cardTitle = document.getElementById('certCardCourseTitle');
+      if (cardTitle && cfg) cardTitle.innerText = cfg.title;
+      const cardDesc = document.getElementById('certCardCourseDesc');
+      if (cardDesc && cfg) {
+        cardDesc.innerText = `${total} ta amaliy dars va korporativ keyslarni muvaffaqiyatli yakunlab, ${cfg.id === 'content_creator' ? 'AI kontent ishlab chiqish va avtomatlashtirish' : 'biznes jarayonlarini AI yordamida avtomatlashtirish'} malakasini tasdiqladi.`;
+      }
+      const overlayReq = document.getElementById('certOverlayReqLessons');
+      if (overlayReq) overlayReq.innerText = `${total} ta amaliy dars`;
 
       if (overlay) {
         if (isUnlocked) {
@@ -6185,14 +6665,16 @@
           if (customizer) customizer.style.opacity = '0.7';
           if (progressBar) progressBar.style.width = `${pct}%`;
           if (progressLabel) {
-            progressLabel.innerText = `Siz 14 tadan ${count} ta darsni yakunladingiz (${pct}%)`;
+            progressLabel.innerText = `Siz ${total} tadan ${count} ta darsni yakunladingiz (${pct}%)`;
           }
           if (ctaBtn) {
+            const seq = (typeof getActiveCourseLessonSequence === 'function') ? getActiveCourseLessonSequence(activeCourseId) : (typeof LESSON_SEQUENCE !== 'undefined' ? LESSON_SEQUENCE : ['1_1']);
+            const firstId = seq[0] || '1_1';
+            const nextId = seq.find(id => !completedLessons.has(id)) || firstId;
             if (count === 0) {
-              ctaBtn.innerHTML = `<span>🚀 1-Darsdan Boshlash (1.1) ➔</span>`;
-              ctaBtn.onclick = () => { switchPortalTab('classroom'); loadLesson('1_1'); };
+              ctaBtn.innerHTML = `<span>🚀 1-Darsdan Boshlash (${firstId.replace('_', '.')}) ➔</span>`;
+              ctaBtn.onclick = () => { switchPortalTab('classroom'); loadLesson(firstId); };
             } else {
-              const nextId = (typeof LESSON_SEQUENCE !== 'undefined' ? LESSON_SEQUENCE : ['1_1']).find(id => !completedLessons.has(id)) || '1_1';
               ctaBtn.innerHTML = `<span>▶️ Kursni Davom Ettirish (${nextId.replace('_', '.')}-Dars) ➔</span>`;
               ctaBtn.onclick = () => { switchPortalTab('classroom'); loadLesson(nextId); };
             }
@@ -6214,32 +6696,35 @@
 
     // Developer / Owner simulation helpers
     function devUnlockAllLessons() {
-      if (typeof LESSON_SEQUENCE !== 'undefined') {
-        LESSON_SEQUENCE.forEach(id => completedLessons.add(id));
-      }
+      const seq = (typeof getActiveCourseLessonSequence === 'function') ? getActiveCourseLessonSequence(activeCourseId) : (typeof LESSON_SEQUENCE !== 'undefined' ? LESSON_SEQUENCE : []);
+      seq.forEach(id => completedLessons.add(id));
       saveAppState();
       syncSidebarCompletedState();
       syncPointsDisplay();
       updateCertificateLockState();
+      if (typeof updateCatalogProgress === 'function') updateCatalogProgress();
       launchConfetti({ count: 90, spread: 75 });
       triggerHaptic('success');
-      toast("🎉 Barcha 14 ta dars yakunlandi! Sertifikat muvaffaqiyatli ochildi!", "🏆");
+      const cfg = (typeof getActiveCourseConfig === 'function') ? getActiveCourseConfig(activeCourseId) : null;
+      const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14;
+      toast(`🎉 Barcha ${total} ta dars yakunlandi! Sertifikat muvaffaqiyatli ochildi!`, "🏆");
     }
 
     function devResetProgress() {
-      completedLessons.clear();
+      const seq = (typeof getActiveCourseLessonSequence === 'function') ? getActiveCourseLessonSequence(activeCourseId) : (typeof LESSON_SEQUENCE !== 'undefined' ? LESSON_SEQUENCE : []);
+      seq.forEach(id => completedLessons.delete(id));
       saveAppState();
       syncSidebarCompletedState();
       syncPointsDisplay();
       updateCertificateLockState();
+      if (typeof updateCatalogProgress === 'function') updateCatalogProgress();
       triggerHaptic('warning');
-      toast("🔒 Progress 0 ga qaytarildi. Sertifikat qayta qulflandi.", "🔒");
+      toast("🔒 Tanlangan kurs progressi 0 ga qaytarildi. Sertifikat qayta qulflandi.", "🔒");
     }
 
 
     function updateCatalogProgress() {
-      const count = completedLessons.size;
-      const pct = Math.round((count / 14) * 100);
+      const cfg = getActiveCourseConfig(activeCourseId); const total = (cfg && cfg.totalLessons) ? cfg.totalLessons : 14; const count = getActiveCourseCompletedCount(activeCourseId); const pct = Math.round((count / total) * 100);
       const bar = document.getElementById('catalogCourse1ProgressBar');
       const label = document.getElementById('catalogCourse1ProgressLabel');
       if (bar) bar.style.width = `${pct}%`;
@@ -6314,5 +6799,71 @@
     </button>
   </nav>
 
+  <!-- =========================================================================
+       SMART STUDENT ONBOARDING / SIGN-UP MODAL (Clean Zero-Data Slate)
+       ========================================================================= -->
+  <div id="onboardingModal" class="prompt-modal-backdrop" onclick="if(event.target===this && hasOnboarded) closeOnboardingModal();">
+    <div class="onboard-modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <span style="font-size:10.5px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:#ECFDF5; color:var(--brand-emerald); border:1px solid #A7F3D0; padding:4px 12px; border-radius:99px;">
+          🎓 XUSH KELIBSIZ · GPTIFY ACADEMY
+        </span>
+        <button id="btnCloseOnboardModal" type="button" onclick="closeOnboardingModal()" style="display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-muted); line-height:1;">&times;</button>
+      </div>
+
+      <h3 style="font-size:21px; font-weight:900; color:var(--text); margin:0 0 6px 0; letter-spacing:-0.02em;">
+        O'quv Kabinetingizni Faollashtiring
+      </h3>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.55; margin:0 0 16px 0;">
+        Amaliy B2B sun'iy intellekt darslari, topshiriqlar va rasmiy malaka sertifikatini olish uchun ma'lumotlaringizni kiriting.
+      </p>
+
+      <!-- Telegram Auto-detected Banner -->
+      <div id="onboardTgNotice" style="display:none; background:#EFF6FF; border:1px solid #BFDBFE; color:#1E40AF; border-radius:10px; padding:8px 12px; font-size:12px; margin-bottom:14px; font-weight:600;">
+        ✈️ Telegram profilingiz orqali ma'lumotlar avtomatik to'ldirildi!
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitOnboarding();">
+        <div class="onboard-input-group">
+          <label class="onboard-label">
+            Ism va Familiyangiz <span style="color:#DC2626;">*</span>
+            <span class="onboard-hint">(Sertifikatda qayd etiladi)</span>
+          </label>
+          <input type="text" id="onboardNameInput" class="onboard-input" placeholder="Masalan: Sardor Rahimov" required autocomplete="name">
+        </div>
+
+        <div class="onboard-input-group">
+          <label class="onboard-label">
+            Faoliyat sohangiz / Maqsadingiz
+          </label>
+          <select id="onboardRoleSelect" class="onboard-select">
+            <option value="🏢 Tadbirkor / Biznes egasi">🏢 Tadbirkor / Biznes egasi</option>
+            <option value="📈 Marketing, SMM & Kontent mutaxassisi">📈 Marketing, SMM & Kontent mutaxassisi</option>
+            <option value="💼 B2B Savdo & Mijozlar bilan ishlash">💼 B2B Savdo & Mijozlar bilan ishlash</option>
+            <option value="💻 Dasturchi / IT mutaxassis">💻 Dasturchi / IT mutaxassis</option>
+            <option value="🎓 Boshlovchi / Frilanser">🎓 Boshlovchi / Frilanser</option>
+          </select>
+        </div>
+
+        <div class="onboard-input-group">
+          <label class="onboard-label">
+            Aloqa vositasi
+            <span class="onboard-hint">(Telegram yoki Telefon raqam)</span>
+          </label>
+          <input type="text" id="onboardContactInput" class="onboard-input" placeholder="Masalan: @sardor_ai yoki +998 90 123-45-67">
+        </div>
+
+        <button type="submit" class="btn-cert-primary" style="width:100%; justify-content:center; padding:13px 20px; font-size:14px; border-radius:12px; margin-top:6px; box-shadow:0 4px 16px rgba(5,150,105,0.3);">
+          <span id="onboardSubmitBtnText">🚀 O'quv Kabinetini Ochish (Bepul) ➔</span>
+        </button>
+      </form>
+
+      <div id="onboardSkipWrap" style="text-align:center; margin-top:14px;">
+        <a href="javascript:void(0)" onclick="skipOnboardingGuest()" style="font-size:12px; color:var(--text-muted); text-decoration:none; font-weight:600;">
+          Hozircha mehmon sifatida 1.1-darsni ko'rish ➔
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
